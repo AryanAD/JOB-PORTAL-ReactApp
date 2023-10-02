@@ -4,7 +4,6 @@ import {
 	Button,
 	CssBaseline,
 	Grid,
-	Link,
 	TextField,
 	ThemeProvider,
 	Typography,
@@ -16,6 +15,7 @@ import LockPersonIcon from "@mui/icons-material/LockPerson";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
+import { Link } from "react-router-dom";
 
 function Copyright(props) {
 	return (
@@ -26,8 +26,8 @@ function Copyright(props) {
 			{...props}>
 			{"Copyright © "}
 			<Link
-				color="inherit"
-				href="/">
+				style={{ textDecoration: "none", color: "#555" }}
+				to="/">
 				React Job Portal
 			</Link>{" "}
 			{new Date().getFullYear()}
@@ -182,8 +182,12 @@ const SignupPage = () => {
 							<Grid container>
 								<Grid item>
 									<Link
-										href="/signin"
-										variant="body2">
+										style={{
+											textDecoration: "none",
+											color: "indianred",
+											fontWeight: "bold",
+										}}
+										to="/signin">
 										{"↼ Back"}
 									</Link>
 								</Grid>

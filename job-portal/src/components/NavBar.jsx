@@ -5,7 +5,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import HailRoundedIcon from "@mui/icons-material/HailRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
 
 const NavBar = () => {
 	return (
@@ -78,6 +80,22 @@ const NavBar = () => {
 								Sign Up
 							</Link>
 						</Button>
+					</Box>
+					<Box>
+						<Link
+							style={{
+								textDecoration: "none",
+							}}
+							to="/">
+							<IconButton size="large">
+								<HomeRoundedIcon
+									style={{
+										color: "white",
+									}}
+									fontSize="inherit"
+								/>
+							</IconButton>
+						</Link>
 					</Box>
 				</Toolbar>
 			</Container>
