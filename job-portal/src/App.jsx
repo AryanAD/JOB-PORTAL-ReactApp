@@ -2,8 +2,8 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./layout/HomePage";
-import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
+import NavBar from "./components/NavBar";
+import SigninPage from "./components/SigninPage";
 
 function App() {
 	return (
@@ -21,18 +21,15 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
+				<NavBar />
 				<Routes>
 					<Route
 						path="/"
 						element={<HomePage />}
 					/>
 					<Route
-						path="/login"
-						element={<LoginPage />}
-					/>
-					<Route
-						path="/register"
-						element={<RegisterPage />}
+						path="/signin"
+						element={<SigninPage />}
 					/>
 				</Routes>
 			</BrowserRouter>
