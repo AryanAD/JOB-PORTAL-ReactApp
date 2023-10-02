@@ -5,6 +5,7 @@ import HomePage from "./layout/HomePage";
 import NavBar from "./components/NavBar";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
+// import SideDrawer from "./components/SideDrawer";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 					theme="light"
 				/>
 				<NavBar />
+				{/* <SideDrawer /> */}
 				<Routes>
 					<Route
 						path="/"
