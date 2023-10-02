@@ -2,10 +2,10 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./layout/HomePage";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
-// import SideDrawer from "./components/SideDrawer";
+import SideDrawer from "./components/SideDrawer";
 
 function App() {
 	return (
@@ -23,8 +23,8 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
-				<NavBar />
-				{/* <SideDrawer /> */}
+				{/* <NavBar /> */}
+				<SideDrawer />
 				<Routes>
 					<Route
 						path="/"

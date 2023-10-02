@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import HailRoundedIcon from "@mui/icons-material/HailRounded";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -18,6 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import React from "react";
+import DashBoard from "../layout/DashBoard";
 
 const drawerWidth = 240;
 
@@ -117,10 +119,18 @@ const SideDrawer = () => {
 						<MenuIcon />
 					</IconButton>
 					<Typography
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							gap: 2,
+							fontSize: "28px",
+							fontWeight: "bold",
+						}}
 						variant="h6"
 						noWrap
 						component="div">
-						Mini variant drawer
+						<HailRoundedIcon />
+						React Job Portal
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -199,6 +209,7 @@ const SideDrawer = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
+				<DashBoard />
 			</Box>
 		</Box>
 	);
