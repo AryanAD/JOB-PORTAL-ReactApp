@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -12,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import { InputAdornment } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Copyright(props) {
 	return (
@@ -22,8 +22,11 @@ function Copyright(props) {
 			{...props}>
 			{"Copyright © "}
 			<Link
-				color="inherit"
-				href="/">
+				style={{
+					textDecoration: "none",
+					color: "#555",
+				}}
+				to="/">
 				React Job Portal
 			</Link>{" "}
 			{new Date().getFullYear()}
@@ -142,8 +145,12 @@ const SigninPage = () => {
 							<Grid container>
 								<Grid item>
 									<Link
-										href="/signup"
-										variant="body2">
+										style={{
+											textDecoration: "none",
+											color: "indianred",
+											fontWeight: "bold",
+										}}
+										to="/signup">
 										{"Don't have an account? Sign Up"}
 									</Link>
 								</Grid>
