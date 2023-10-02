@@ -5,11 +5,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import HailRoundedIcon from "@mui/icons-material/HailRounded";
-import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-	const nav = useNavigate();
-
 	return (
 		<AppBar position="static">
 			<Container maxWidth="xl">
@@ -17,22 +15,28 @@ const NavBar = () => {
 					<HailRoundedIcon
 						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
 					/>
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="/"
-						sx={{
-							mr: 2,
-							display: { xs: "none", md: "flex" },
-							fontFamily: "monospace",
-							fontWeight: 700,
-							letterSpacing: ".3rem",
-							color: "inherit",
+					<Link
+						to="/"
+						style={{
+							color: "white",
 							textDecoration: "none",
 						}}>
-						REACT JOB PORTAL
-					</Typography>
+						<Typography
+							variant="h6"
+							noWrap
+							component="a"
+							sx={{
+								mr: 2,
+								display: { xs: "none", md: "flex" },
+								fontFamily: "monospace",
+								fontWeight: 700,
+								letterSpacing: ".3rem",
+								color: "inherit",
+								textDecoration: "none",
+							}}>
+							REACT JOB PORTAL
+						</Typography>
+					</Link>
 
 					<Box
 						sx={{
@@ -43,16 +47,36 @@ const NavBar = () => {
 							gap: 2,
 						}}>
 						<Button
-							onClick={nav("/signin")}
 							sx={{ my: 2, color: "white", display: "flex" }}
 							color="info">
-							Sign In
+							<Link
+								style={{
+									margin: "auto 10px",
+									color: "white",
+									display: "flex",
+									textDecoration: "none",
+								}}
+								to="/signin">
+								Sign In
+							</Link>
 						</Button>
 						<Button
-							onClick={nav("/signup")}
-							sx={{ my: 2, color: "white", display: "flex" }}
+							sx={{
+								my: 2,
+								color: "white",
+								display: "flex",
+							}}
 							color="info">
-							Sign Up
+							<Link
+								style={{
+									margin: "auto 10px",
+									color: "white",
+									display: "flex",
+									textDecoration: "none",
+								}}
+								to="/signup">
+								Sign Up
+							</Link>
 						</Button>
 					</Box>
 				</Toolbar>
