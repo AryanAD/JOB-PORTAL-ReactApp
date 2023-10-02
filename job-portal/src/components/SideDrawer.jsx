@@ -22,6 +22,9 @@ import React from "react";
 import DashBoard from "../layout/DashBoard";
 import { CTooltip } from "@coreui/react";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
+import { Button } from "@mui/material";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { IoLogOut } from "react-icons/fa";
 
 const drawerWidth = 240;
 
@@ -101,7 +104,6 @@ const SideDrawer = () => {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
-
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -161,12 +163,8 @@ const SideDrawer = () => {
 									<PeopleAltRoundedIcon />
 								</ListItemIcon>
 							</CTooltip>
-							<ListItemText primary="Categories" />
+							<ListItemText primary="Vendors" />
 						</ListItemButton>
-					</ListItem>
-					<ListItem
-						disablePadding
-						sx={{ display: "block" }}>
 						<ListItemButton>
 							<CTooltip
 								content="Categories"
@@ -188,7 +186,48 @@ const SideDrawer = () => {
 							<ListItemText primary="Banners" />
 						</ListItemButton>
 					</ListItem>
+					<Divider />
 				</List>
+
+				{open === false ? (
+					<List>
+						<ListItem
+							disablePadding
+							sx={{ display: "block" }}>
+							<ListItemButton>
+								<CTooltip
+									content="Banners"
+									placement="right">
+									<ListItemIcon>
+										<IoLogOut />
+										{/* <LogoutRoundedIcon color="error" /> */}
+										{/* <ListItemText primary="         " /> */}
+									</ListItemIcon>
+								</CTooltip>
+							</ListItemButton>
+						</ListItem>
+					</List>
+				) : (
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							justifyContent: "end",
+							height: "100%",
+							width: "100%",
+							padding: "20px auto",
+							// marginBottom: 1,
+						}}>
+						<Button
+							size="large"
+							fullWidth
+							color="error"
+							variant="contained">
+							LOG OUT
+						</Button>
+					</Box>
+				)}
 			</Drawer>
 			<Box
 				component="main"
