@@ -57,8 +57,7 @@ const SigninPage = () => {
 					sm={4}
 					md={7}
 					sx={{
-						backgroundImage:
-							"url(https://source.unsplash.com/random?wallpapers)",
+						backgroundImage: "",
 						backgroundRepeat: "no-repeat",
 						backgroundColor: (t) =>
 							t.palette.mode === "light"
