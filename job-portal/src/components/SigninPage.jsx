@@ -89,7 +89,7 @@ const SigninPage = () => {
 						<Typography
 							component="h1"
 							variant="h4">
-							Sign in
+							Sign In
 						</Typography>
 						<Box
 							component="form"
@@ -126,7 +126,7 @@ const SigninPage = () => {
 							<Grid container>
 								<Grid item>
 									<Link
-										href="#"
+										href="/signup"
 										variant="body2">
 										{"Don't have an account? Sign Up"}
 									</Link>

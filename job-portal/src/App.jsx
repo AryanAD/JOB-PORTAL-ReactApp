@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import HomePage from "./layout/HomePage";
 import NavBar from "./components/NavBar";
 import SigninPage from "./components/SigninPage";
+import SignupPage from "./components/SignupPage";
 
 function App() {
 	return (
@@ -30,6 +31,10 @@ function App() {
 					<Route
 						path="/signin"
 						element={<SigninPage />}
+					/>
+					<Route
+						path="/signup"
+						element={<SignupPage />}
 					/>
 				</Routes>
 			</BrowserRouter>
