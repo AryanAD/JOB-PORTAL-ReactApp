@@ -18,8 +18,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
+import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
 import React from "react";
 import DashBoard from "../layout/DashBoard";
+import { CTooltip } from "@coreui/react";
 
 const drawerWidth = 240;
 
@@ -177,32 +180,30 @@ const SideDrawer = () => {
 				</List>
 				<Divider />
 				<List>
-					{["All mail", "Trash", "Spam"].map((text, index) => (
-						<ListItem
-							key={text}
-							disablePadding
-							sx={{ display: "block" }}>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: open ? "initial" : "center",
-									px: 2.5,
-								}}>
-								<ListItemIcon
-									sx={{
-										minWidth: 0,
-										mr: open ? 3 : "auto",
-										justifyContent: "center",
-									}}>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+					<ListItem
+						disablePadding
+						sx={{ display: "block" }}>
+						<ListItemButton>
+							<CTooltip
+								content="Categories"
+								placement="right">
+								<ListItemIcon>
+									<TableChartRoundedIcon />
 								</ListItemIcon>
-								<ListItemText
-									primary={text}
-									sx={{ opacity: open ? 1 : 0 }}
-								/>
-							</ListItemButton>
-						</ListItem>
-					))}
+							</CTooltip>
+							<ListItemText primary="Categories" />
+						</ListItemButton>
+						<ListItemButton>
+							<CTooltip
+								content="Banners"
+								placement="right">
+								<ListItemIcon>
+									<InsertPhotoRoundedIcon />
+								</ListItemIcon>
+							</CTooltip>
+							<ListItemText primary="Banners" />
+						</ListItemButton>
+					</ListItem>
 				</List>
 			</Drawer>
 			<Box
