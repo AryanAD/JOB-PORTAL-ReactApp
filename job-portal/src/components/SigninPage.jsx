@@ -9,6 +9,9 @@ import Grid from "@mui/material/Grid";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import { InputAdornment } from "@mui/material";
 
 function Copyright(props) {
 	return (
@@ -97,6 +100,13 @@ const SigninPage = () => {
 							onSubmit={handleSubmit}
 							sx={{ mt: 1 }}>
 							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<EmailIcon />
+										</InputAdornment>
+									),
+								}}
 								margin="normal"
 								required
 								fullWidth
@@ -107,6 +117,13 @@ const SigninPage = () => {
 								autoFocus
 							/>
 							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<LockIcon />
+										</InputAdornment>
+									),
+								}}
 								margin="normal"
 								required
 								fullWidth
