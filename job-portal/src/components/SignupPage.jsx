@@ -10,8 +10,12 @@ import {
 	Typography,
 	Paper,
 	createTheme,
+	InputAdornment,
 } from "@mui/material";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
 
 function Copyright(props) {
 	return (
@@ -100,6 +104,13 @@ const SignupPage = () => {
 							onSubmit={handleSubmit}
 							sx={{ mt: 1 }}>
 							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<PersonIcon />
+										</InputAdornment>
+									),
+								}}
 								type="text"
 								margin="normal"
 								required
@@ -111,6 +122,13 @@ const SignupPage = () => {
 								autoFocus
 							/>
 							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<EmailIcon />
+										</InputAdornment>
+									),
+								}}
 								type="email"
 								margin="normal"
 								required
@@ -122,6 +140,13 @@ const SignupPage = () => {
 								autoFocus
 							/>
 							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<LockIcon />
+										</InputAdornment>
+									),
+								}}
 								margin="normal"
 								required
 								fullWidth
@@ -132,6 +157,13 @@ const SignupPage = () => {
 								autoComplete="current-password"
 							/>
 							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<LockIcon />
+										</InputAdornment>
+									),
+								}}
 								margin="normal"
 								required
 								fullWidth
