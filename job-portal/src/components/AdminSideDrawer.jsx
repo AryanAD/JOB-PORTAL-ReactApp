@@ -24,7 +24,7 @@ import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./AdminVendors";
-import AdminVendors from "./AdminVendors";
+import AdminUsers from "./AdminUsers";
 
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
@@ -125,7 +125,7 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-const SideDrawerAdmin = () => {
+const AdminSideDrawer = () => {
 	const nav = useNavigate();
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
@@ -304,10 +304,10 @@ const SideDrawerAdmin = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
-				<AdminVendors />
+				<AdminUsers />
 			</Box>
 		</Box>
 	);
 };
 
-export default SideDrawerAdmin;
+export default AdminSideDrawer;

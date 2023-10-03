@@ -1,9 +1,9 @@
-import SideDrawerAdmin from "../components/SideDrawerAdmin";
+import AdminSideDrawer from "../components/AdminSideDrawer";
 
 const AdminLayout = () => {
 	return (
 		<>
-			<SideDrawerAdmin />
+			<AdminSideDrawer />
 		</>
 	);
 };

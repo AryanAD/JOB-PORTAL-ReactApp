@@ -2,7 +2,7 @@ import { Table, Sheet, Button } from "@mui/joy";
 import { Box, Divider, Typography } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
-const AdminVendors = () => {
+const AdminUsers = () => {
 	return (
 		<Box
 			sx={{
@@ -21,12 +21,14 @@ const AdminVendors = () => {
 						textAlign: "center",
 					}}
 					variant="h4">
-					Vendors
+					Users
 				</Typography>
 			</Divider>
 
 			<Sheet
 				sx={{
+					display: "flex",
+					width: "50%",
 					borderRadius: "11px",
 					bgcolor: "#29a2f3",
 				}}>
@@ -44,30 +46,22 @@ const AdminVendors = () => {
 						}}>
 						<tr>
 							<th style={{ width: "50px" }}>ID</th>
-							<th>Name</th>
-							<th>Services</th>
-							<th>Designation</th>
-							<th>Email</th>
-							<th>Contact</th>
-							<th>Address</th>
-							<th style={{ width: "150px" }}>Status</th>
-							<th style={{ textAlign: "center", width: "180px" }}>Action</th>
+							<th style={{ width: "200px" }}>Name</th>
+							<th style={{ width: "250px" }}>Email</th>
+							<th style={{ width: "80px" }}>Role</th>
+							<th style={{ textAlign: "center" }}>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>1</td>
 							<td>David Gilmore</td>
-							<td>Guitarist</td>
-							<td>Guitarist</td>
 							<td>gilmore.floyd@wmail.com</td>
-							<td>9877927103</td>
-							<td>House - 4, HouseHouse</td>
-							<td style={{ color: "#138113" }}>Approved</td>
-							<td style={{ textAlign: "center" }}>
+							<td>User</td>
+							<td style={{ textAlign: "right" }}>
 								<Button
 									sx={{ gap: 1 }}
-									color="danger"
+									color="success"
 									onClick={function () {}}
 									size="sm"
 									variant="solid">
@@ -76,7 +70,7 @@ const AdminVendors = () => {
 											fontSize: "20px",
 										}}
 									/>
-									Delete Vendor
+									Approve User
 								</Button>
 							</td>
 						</tr>
@@ -87,4 +81,4 @@ const AdminVendors = () => {
 	);
 };
 
-export default AdminVendors;
+export default AdminUsers;
