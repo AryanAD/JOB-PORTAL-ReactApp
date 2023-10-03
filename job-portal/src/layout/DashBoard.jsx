@@ -1,11 +1,7 @@
-import Categories from "../components/Categories";
+// import Vendors from "../components/Vendors";
 
 const DashBoard = () => {
-	return (
-		<>
-			<Categories />
-		</>
-	);
+	return <>{/* <Vendors /> */}</>;
 };
 
 export default DashBoard;

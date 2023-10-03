@@ -25,6 +25,7 @@ import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link } from "react-router-dom";
+import Vendors from "./Vendors";
 // import { IoLogOut } from "react-icons/fa";
 
 const drawerWidth = 240;
@@ -254,7 +255,7 @@ const SideDrawer = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
-				<DashBoard />
+				<Vendors />
 			</Box>
 		</Box>
 	);
