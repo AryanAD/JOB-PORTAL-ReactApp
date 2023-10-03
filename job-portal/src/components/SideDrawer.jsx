@@ -19,14 +19,45 @@ import ListItemText from "@mui/material/ListItemText";
 import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
 import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
 import React from "react";
-import { CTooltip } from "@coreui/react";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
-import { Button } from "@mui/material";
+import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./Vendors";
 import Banners from "./Banners";
 // import { IoLogOut } from "react-icons/fa";
+
+const CustomToolTip = styled(({ className, ...props }) => (
+	<Tooltip
+		{...props}
+		classes={{ popper: className }}
+	/>
+))(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		backgroundColor: "gray",
+		color: "white",
+		maxWidth: 220,
+		fontSize: theme.typography.pxToRem(18),
+		border: "1px solid #dadde9",
+		borderRadius: "7px",
+	},
+}));
+
+const LogoutTooltip = styled(({ className, ...props }) => (
+	<Tooltip
+		{...props}
+		classes={{ popper: className }}
+	/>
+))(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		backgroundColor: "crimson",
+		color: "white",
+		maxWidth: 220,
+		fontSize: theme.typography.pxToRem(18),
+		border: "1px solid #dadde9",
+		borderRadius: "7px",
+	},
+}));
 
 const drawerWidth = 240;
 
@@ -169,13 +200,13 @@ const SideDrawer = () => {
 							}}
 							to={"/dashboard/vendors"}>
 							<ListItemButton onClick={vendor}>
-								<CTooltip
-									content="Vendors"
+								<CustomToolTip
+									title="Vendors"
 									placement="right">
 									<ListItemIcon>
 										<PeopleAltRoundedIcon />
 									</ListItemIcon>
-								</CTooltip>
+								</CustomToolTip>
 								<ListItemText primary="Vendors" />
 							</ListItemButton>
 						</Link>
@@ -186,13 +217,13 @@ const SideDrawer = () => {
 							}}
 							to={"/dashboard/categories"}>
 							<ListItemButton>
-								<CTooltip
-									content="Categories"
+								<CustomToolTip
+									title="Categories"
 									placement="right">
 									<ListItemIcon>
 										<TableChartRoundedIcon />
 									</ListItemIcon>
-								</CTooltip>
+								</CustomToolTip>
 								<ListItemText primary="Categories" />
 							</ListItemButton>
 						</Link>
@@ -203,13 +234,13 @@ const SideDrawer = () => {
 							}}
 							to={"/dashboard/banners"}>
 							<ListItemButton>
-								<CTooltip
-									content="Banners"
+								<CustomToolTip
+									title="Banners"
 									placement="right">
 									<ListItemIcon>
 										<InsertPhotoRoundedIcon />
 									</ListItemIcon>
-								</CTooltip>
+								</CustomToolTip>
 								<ListItemText primary="Banners" />
 							</ListItemButton>
 						</Link>
@@ -218,32 +249,38 @@ const SideDrawer = () => {
 				</List>
 
 				{open === false ? (
-					<Box
+					<ListItem
+						disablePadding
 						sx={{
 							display: "flex",
 							flexDirection: "column",
-							alignItems: "center",
-							padding: theme.spacing(0, 6),
-							// necessary for content to be below app bar
-							...theme.mixins.toolbar,
+							flexGrow: 1,
+							alignItems: "flex-start",
 						}}>
-						<List>
-							<ListItem
-								disablePadding
-								sx={{ display: "block" }}>
-								<ListItemButton>
-									<CTooltip
-										content="Log Out"
-										placement="right">
-										<ListItemIcon>
-											{/* <IoLogOut /> */}
-											<LogoutRoundedIcon color="error" />
-										</ListItemIcon>
-									</CTooltip>
-								</ListItemButton>
-							</ListItem>
-						</List>
-					</Box>
+						<ListItemButton
+							sx={{
+								"&:hover": {
+									backgroundColor: "rgb(220, 20, 60, 0.6)",
+								},
+							}}>
+							<LogoutTooltip
+								title="Log Out"
+								placement="right">
+								<ListItemIcon>
+									{/* <IoLogOut /> */}
+									<LogoutRoundedIcon
+										sx={{
+											fontSize: "30px",
+											color: "red",
+											"&:hover": {
+												color: "white",
+											},
+										}}
+									/>
+								</ListItemIcon>
+							</LogoutTooltip>
+						</ListItemButton>
+					</ListItem>
 				) : (
 					<Box
 						sx={{
