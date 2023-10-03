@@ -1,8 +1,25 @@
+import { Box } from "@mui/material";
+import Cards from "../components/Cards";
+
 const DashBoard = () => {
 	return (
-		<div>
-			<h1>Hello World</h1>
-		</div>
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				gap: 2,
+			}}>
+			<Cards />
+			<Cards />
+			<Cards />
+			<Cards />
+			<Cards />
+			<Cards />
+			<Cards />
+			<Cards />
+			<Cards />
+		</Box>
 	);
 };
 

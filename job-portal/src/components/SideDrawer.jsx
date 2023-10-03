@@ -24,7 +24,7 @@ import { CTooltip } from "@coreui/react";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { IoLogOut } from "react-icons/fa";
+// import { IoLogOut } from "react-icons/fa";
 
 const drawerWidth = 240;
 
@@ -196,12 +196,11 @@ const SideDrawer = () => {
 							sx={{ display: "block" }}>
 							<ListItemButton>
 								<CTooltip
-									content="Banners"
+									content="Log Out"
 									placement="right">
 									<ListItemIcon>
-										<IoLogOut />
-										{/* <LogoutRoundedIcon color="error" /> */}
-										{/* <ListItemText primary="         " /> */}
+										{/* <IoLogOut /> */}
+										<LogoutRoundedIcon color="error" />
 									</ListItemIcon>
 								</CTooltip>
 							</ListItemButton>
