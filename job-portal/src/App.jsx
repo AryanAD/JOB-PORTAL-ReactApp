@@ -6,11 +6,11 @@ import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
 import Modal from "./components/Modal";
 import DashBoard from "./layout/DashBoard";
-import Categories from "./components/AdminCategories";
-import Vendors from "./components/AdminVendors";
 // import VendorLayout from "./layout/VendorLayout";
 import AdminBanners from "./components/Admin/AdminBanners";
 import AdminLayout from "./layout/AdminLayout";
+import AdminCategories from "./components/Admin/AdminCategories";
+import AdminVendors from "./components/Admin/AdminVendors";
 
 function App() {
 	return (
@@ -39,11 +39,11 @@ function App() {
 						element={<DashBoard />}>
 						<Route
 							path="/dashboard/vendors"
-							element={<Vendors />}
+							element={<AdminVendors />}
 						/>
 						<Route
 							path="/dashboard/categories"
-							element={<Categories />}
+							element={<AdminCategories />}
 						/>
 						<Route
 							path="/dashboard/banners"
