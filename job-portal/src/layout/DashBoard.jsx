@@ -5,10 +5,9 @@ const DashBoard = () => {
 	return (
 		<Box
 			sx={{
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-				gap: 2,
+				display: "grid",
+				gridTemplateColumns: "repeat(5, 5fr)",
+				gridGap: 30,
 			}}>
 			<Cards />
 			<Cards />

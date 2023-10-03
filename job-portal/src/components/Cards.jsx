@@ -16,7 +16,7 @@ const Cards = () => {
 			<Card
 				sx={{
 					maxWidth: 345,
-					boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+					boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
 					borderRadius: "12px",
 				}}>
 				<CardMedia
@@ -29,15 +29,8 @@ const Cards = () => {
 					<Typography
 						gutterBottom
 						variant="h5"
-						br
 						component="div">
 						Lizard
-					</Typography>
-					<Typography
-						variant="body2"
-						color="text.secondary">
-						Lizards are a widespread group of squamate reptiles, with over 6,000
-						species, ranging across all continents except Antarctica
 					</Typography>
 				</CardContent>
 				<CardActions
