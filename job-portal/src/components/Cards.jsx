@@ -15,6 +15,7 @@ const Cards = () => {
 		<Box>
 			<Card
 				sx={{
+					margin: "20px",
 					maxWidth: 345,
 					boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
 					borderRadius: "12px",
@@ -30,7 +31,7 @@ const Cards = () => {
 						gutterBottom
 						variant="h5"
 						component="div">
-						Lizard
+						Banner Title
 					</Typography>
 				</CardContent>
 				<CardActions

@@ -7,6 +7,10 @@ import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
 import SideDrawer from "./components/SideDrawer";
 import Modal from "./components/Modal";
+import DashBoard from "./layout/DashBoard";
+import Banners from "./components/Banners";
+import Categories from "./components/Categories";
+import Vendors from "./components/Vendors";
 
 function App() {
 	return (
@@ -31,6 +35,22 @@ function App() {
 						path="/"
 						element={<HomePage />}
 					/>
+					<Route
+						path="/dashboard"
+						element={<DashBoard />}>
+						<Route
+							path="/dashboard/vendors"
+							element={<Vendors />}
+						/>
+						<Route
+							path="/dashboard/categories"
+							element={<Categories />}
+						/>
+						<Route
+							path="/dashboard/banners"
+							element={<Banners />}
+						/>
+					</Route>
 					<Route
 						path="/signin"
 						element={<SigninPage />}

@@ -24,6 +24,7 @@ import { CTooltip } from "@coreui/react";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { Link } from "react-router-dom";
 // import { IoLogOut } from "react-icons/fa";
 
 const drawerWidth = 240;
@@ -155,36 +156,57 @@ const SideDrawer = () => {
 					<ListItem
 						disablePadding
 						sx={{ display: "block" }}>
-						<ListItemButton>
-							<CTooltip
-								content="Vendors"
-								placement="right">
-								<ListItemIcon>
-									<PeopleAltRoundedIcon />
-								</ListItemIcon>
-							</CTooltip>
-							<ListItemText primary="Vendors" />
-						</ListItemButton>
-						<ListItemButton>
-							<CTooltip
-								content="Categories"
-								placement="right">
-								<ListItemIcon>
-									<TableChartRoundedIcon />
-								</ListItemIcon>
-							</CTooltip>
-							<ListItemText primary="Categories" />
-						</ListItemButton>
-						<ListItemButton>
-							<CTooltip
-								content="Banners"
-								placement="right">
-								<ListItemIcon>
-									<InsertPhotoRoundedIcon />
-								</ListItemIcon>
-							</CTooltip>
-							<ListItemText primary="Banners" />
-						</ListItemButton>
+						<Link
+							style={{
+								color: "#272727	",
+								textDecoration: "none",
+							}}
+							to={"/dashboard/vendors"}>
+							<ListItemButton>
+								<CTooltip
+									content="Vendors"
+									placement="right">
+									<ListItemIcon>
+										<PeopleAltRoundedIcon />
+									</ListItemIcon>
+								</CTooltip>
+								<ListItemText primary="Vendors" />
+							</ListItemButton>
+						</Link>
+						<Link
+							style={{
+								color: "#272727	",
+								textDecoration: "none",
+							}}
+							to={"/dashboard/categories"}>
+							<ListItemButton>
+								<CTooltip
+									content="Categories"
+									placement="right">
+									<ListItemIcon>
+										<TableChartRoundedIcon />
+									</ListItemIcon>
+								</CTooltip>
+								<ListItemText primary="Categories" />
+							</ListItemButton>
+						</Link>
+						<Link
+							style={{
+								color: "#272727	",
+								textDecoration: "none",
+							}}
+							to={"/dashboard/banners"}>
+							<ListItemButton>
+								<CTooltip
+									content="Banners"
+									placement="right">
+									<ListItemIcon>
+										<InsertPhotoRoundedIcon />
+									</ListItemIcon>
+								</CTooltip>
+								<ListItemText primary="Banners" />
+							</ListItemButton>
+						</Link>
 					</ListItem>
 					<Divider />
 				</List>
