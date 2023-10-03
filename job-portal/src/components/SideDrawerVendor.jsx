@@ -22,8 +22,8 @@ import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
-import Vendors from "./Vendors";
-import Banners from "./Banners";
+import Vendors from "./AdminVendors";
+import Banners from "./AdminBanners";
 
 // import { IoLogOut } from "react-icons/fa";
 

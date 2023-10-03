@@ -2,16 +2,15 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./layout/HomePage";
-// import NavBar from "./components/NavBar";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
 import Modal from "./components/Modal";
 import DashBoard from "./layout/DashBoard";
-import Banners from "./components/Banners";
-import Categories from "./components/Categories";
-import Vendors from "./components/Vendors";
-// import AdminLayout from "./layout/AdminLayout";
-import VendorLayout from "./layout/VendorLayout";
+import Categories from "./components/AdminCategories";
+import Vendors from "./components/AdminVendors";
+// import VendorLayout from "./layout/VendorLayout";
+import AdminBanners from "./components/AdminBanners";
+import AdminLayout from "./layout/AdminLayout";
 
 function App() {
 	return (
@@ -29,8 +28,7 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
-				{/* <NavBar /> */}
-				<VendorLayout />
+				<AdminLayout />
 				<Routes>
 					<Route
 						path="/"
@@ -49,7 +47,7 @@ function App() {
 						/>
 						<Route
 							path="/dashboard/banners"
-							element={<Banners />}
+							element={<AdminBanners />}
 						/>
 					</Route>
 					<Route

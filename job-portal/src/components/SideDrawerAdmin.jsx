@@ -23,9 +23,8 @@ import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
-import Vendors from "./Vendors";
-import Banners from "./Banners";
-// import { IoLogOut } from "react-icons/fa";
+import Vendors from "./AdminVendors";
+import AdminVendors from "./AdminVendors";
 
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
@@ -267,7 +266,6 @@ const SideDrawerAdmin = () => {
 								title="Log Out"
 								placement="right">
 								<ListItemIcon>
-									{/* <IoLogOut /> */}
 									<LogoutRoundedIcon
 										sx={{
 											fontSize: "30px",
@@ -291,7 +289,6 @@ const SideDrawerAdmin = () => {
 							height: "100%",
 							width: "100%",
 							padding: "20px auto",
-							// marginBottom: 1,
 						}}>
 						<Button
 							size="large"
@@ -307,7 +304,7 @@ const SideDrawerAdmin = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
-				<Banners />
+				<AdminVendors />
 			</Box>
 		</Box>
 	);

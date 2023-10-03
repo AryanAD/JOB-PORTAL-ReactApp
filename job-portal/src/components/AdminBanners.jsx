@@ -11,7 +11,7 @@ import {
 import LaunchIcon from "@mui/icons-material/Launch";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
-const Banners = () => {
+const AdminBanners = () => {
 	return (
 		<Box>
 			<Divider
@@ -78,4 +78,4 @@ const Banners = () => {
 	);
 };
 
-export default Banners;
+export default AdminBanners;

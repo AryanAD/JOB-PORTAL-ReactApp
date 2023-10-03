@@ -11,7 +11,7 @@ import {
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-const Categories = () => {
+const AdminCategories = () => {
 	return (
 		<Box>
 			<Divider
@@ -78,4 +78,4 @@ const Categories = () => {
 	);
 };
 
-export default Categories;
+export default AdminCategories;

@@ -1,7 +1,7 @@
 import { Table, Sheet } from "@mui/joy";
 import { Box, Divider, Typography } from "@mui/material";
 
-const Vendors = () => {
+const AdminVendors = () => {
 	return (
 		<Box
 			sx={{
@@ -70,4 +70,4 @@ const Vendors = () => {
 	);
 };
 
-export default Vendors;
+export default AdminVendors;
