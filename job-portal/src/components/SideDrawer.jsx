@@ -19,12 +19,11 @@ import ListItemText from "@mui/material/ListItemText";
 import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
 import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
 import React from "react";
-import DashBoard from "../layout/DashBoard";
 import { CTooltip } from "@coreui/react";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./Vendors";
 // import { IoLogOut } from "react-icons/fa";
 
@@ -96,6 +95,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const SideDrawer = () => {
+	const nav = useNavigate();
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -105,6 +105,10 @@ const SideDrawer = () => {
 
 	const handleDrawerClose = () => {
 		setOpen(false);
+	};
+
+	const vendor = () => {
+		nav(<Vendors />);
 	};
 	return (
 		<Box sx={{ display: "flex" }}>
@@ -163,7 +167,7 @@ const SideDrawer = () => {
 								textDecoration: "none",
 							}}
 							to={"/dashboard/vendors"}>
-							<ListItemButton>
+							<ListItemButton onClick={vendor}>
 								<CTooltip
 									content="Vendors"
 									placement="right">
