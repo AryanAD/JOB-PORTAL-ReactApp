@@ -5,12 +5,12 @@ import HomePage from "./layout/HomePage";
 // import NavBar from "./components/NavBar";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
-import SideDrawer from "./components/SideDrawer";
 import Modal from "./components/Modal";
 import DashBoard from "./layout/DashBoard";
 import Banners from "./components/Banners";
 import Categories from "./components/Categories";
 import Vendors from "./components/Vendors";
+import AdminLayout from "./layout/AdminLayout";
 
 function App() {
 	return (
@@ -29,7 +29,7 @@ function App() {
 					theme="light"
 				/>
 				{/* <NavBar /> */}
-				<SideDrawer />
+				<AdminLayout />
 				<Routes>
 					<Route
 						path="/"

@@ -25,6 +25,7 @@ import { Button } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./Vendors";
+import Banners from "./Banners";
 // import { IoLogOut } from "react-icons/fa";
 
 const drawerWidth = 240;
@@ -217,22 +218,32 @@ const SideDrawer = () => {
 				</List>
 
 				{open === false ? (
-					<List>
-						<ListItem
-							disablePadding
-							sx={{ display: "block" }}>
-							<ListItemButton>
-								<CTooltip
-									content="Log Out"
-									placement="right">
-									<ListItemIcon>
-										{/* <IoLogOut /> */}
-										<LogoutRoundedIcon color="error" />
-									</ListItemIcon>
-								</CTooltip>
-							</ListItemButton>
-						</ListItem>
-					</List>
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							padding: theme.spacing(0, 6),
+							// necessary for content to be below app bar
+							...theme.mixins.toolbar,
+						}}>
+						<List>
+							<ListItem
+								disablePadding
+								sx={{ display: "block" }}>
+								<ListItemButton>
+									<CTooltip
+										content="Log Out"
+										placement="right">
+										<ListItemIcon>
+											{/* <IoLogOut /> */}
+											<LogoutRoundedIcon color="error" />
+										</ListItemIcon>
+									</CTooltip>
+								</ListItemButton>
+							</ListItem>
+						</List>
+					</Box>
 				) : (
 					<Box
 						sx={{
@@ -259,7 +270,7 @@ const SideDrawer = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
-				<Vendors />
+				<Banners />
 			</Box>
 		</Box>
 	);

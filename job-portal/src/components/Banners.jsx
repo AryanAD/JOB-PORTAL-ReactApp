@@ -5,6 +5,7 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
+	Divider,
 	Typography,
 } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -13,6 +14,22 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 const Banners = () => {
 	return (
 		<Box>
+			<Divider
+				variant="inset"
+				textAlign="left">
+				<Typography
+					sx={{
+						color: "black",
+						fontFamily: "nunito",
+						letterSpacing: "6px",
+						marginBottom: "5px",
+						fontWeight: "bold",
+						textAlign: "center",
+					}}
+					variant="h4">
+					Banners
+				</Typography>
+			</Divider>
 			<Card
 				sx={{
 					margin: "20px",
