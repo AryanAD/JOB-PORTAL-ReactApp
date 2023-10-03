@@ -1,5 +1,7 @@
-import { Table, Sheet } from "@mui/joy";
+import { Table, Sheet, Button } from "@mui/joy";
 import { Box, Divider, Typography } from "@mui/material";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 
 const AdminVendors = () => {
 	return (
@@ -50,6 +52,7 @@ const AdminVendors = () => {
 							<th>Contact</th>
 							<th>Address</th>
 							<th style={{ width: "150px" }}>Status</th>
+							<th style={{ textAlign: "center", width: "250px" }}>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,7 +64,35 @@ const AdminVendors = () => {
 							<td>gilmore.floyd@wmail.com</td>
 							<td>9877927103</td>
 							<td>House - 4, HouseHouse</td>
-							<td>Approved</td>
+							<td style={{ color: "#138113" }}>Approved</td>
+							<td style={{ display: "flex", justifyContent: "space-evenly" }}>
+								<Button
+									sx={{ gap: 1 }}
+									color="success"
+									onClick={function () {}}
+									size="sm"
+									variant="solid">
+									<DoneRoundedIcon
+										sx={{
+											fontSize: "20px",
+										}}
+									/>
+									Approve
+								</Button>
+								<Button
+									sx={{ gap: 1 }}
+									color="danger"
+									onClick={function () {}}
+									size="sm"
+									variant="solid">
+									<CloseRoundedIcon
+										sx={{
+											fontSize: "20px",
+										}}
+									/>
+									Reject
+								</Button>
+							</td>
 						</tr>
 					</tbody>
 				</Table>
