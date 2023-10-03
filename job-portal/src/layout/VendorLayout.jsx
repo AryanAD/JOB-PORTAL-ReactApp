@@ -1,5 +1,11 @@
+import SideDrawerVendor from "../components/SideDrawerVendor";
+
 const VendorLayout = () => {
-	return <div></div>;
+	return (
+		<>
+			<SideDrawerVendor />
+		</>
+	);
 };
 
 export default VendorLayout;

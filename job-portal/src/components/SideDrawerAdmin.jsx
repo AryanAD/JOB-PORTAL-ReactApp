@@ -126,7 +126,7 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-const SideDrawer = () => {
+const SideDrawerAdmin = () => {
 	const nav = useNavigate();
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
@@ -313,4 +313,4 @@ const SideDrawer = () => {
 	);
 };
 
-export default SideDrawer;
+export default SideDrawerAdmin;

@@ -10,7 +10,8 @@ import DashBoard from "./layout/DashBoard";
 import Banners from "./components/Banners";
 import Categories from "./components/Categories";
 import Vendors from "./components/Vendors";
-import AdminLayout from "./layout/AdminLayout";
+// import AdminLayout from "./layout/AdminLayout";
+import VendorLayout from "./layout/VendorLayout";
 
 function App() {
 	return (
@@ -29,7 +30,7 @@ function App() {
 					theme="light"
 				/>
 				{/* <NavBar /> */}
-				<AdminLayout />
+				<VendorLayout />
 				<Routes>
 					<Route
 						path="/"
