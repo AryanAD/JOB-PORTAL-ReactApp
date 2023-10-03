@@ -7,8 +7,8 @@ import {
 	CardMedia,
 	Typography,
 } from "@mui/material";
-import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
-import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const Cards = () => {
 	return (
@@ -23,12 +23,13 @@ const Cards = () => {
 					component="img"
 					alt="green iguana"
 					height="140"
-					image="/static/images/cards/contemplative-reptile.jpg"
+					image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
 				/>
 				<CardContent>
 					<Typography
 						gutterBottom
 						variant="h5"
+						br
 						component="div">
 						Lizard
 					</Typography>
@@ -45,20 +46,20 @@ const Cards = () => {
 						justifyContent: "space-around",
 					}}>
 					<Button
-						startIcon={<VerifiedRoundedIcon />}
-						color="success"
+						startIcon={<LaunchIcon />}
+						color="info"
 						fullWidth
 						variant="contained"
 						size="small">
-						Approve
+						View
 					</Button>
 					<Button
-						startIcon={<CancelRoundedIcon />}
+						startIcon={<DeleteRoundedIcon />}
 						color="error"
 						fullWidth
 						variant="contained"
 						size="small">
-						Reject
+						Delete
 					</Button>
 				</CardActions>
 			</Card>

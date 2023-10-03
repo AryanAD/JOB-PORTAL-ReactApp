@@ -6,6 +6,7 @@ import HomePage from "./layout/HomePage";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
 import SideDrawer from "./components/SideDrawer";
+import Modal from "./components/Modal";
 
 function App() {
 	return (
@@ -37,6 +38,10 @@ function App() {
 					<Route
 						path="/signup"
 						element={<SignupPage />}
+					/>
+					<Route
+						path="/modal"
+						element={<Modal />}
 					/>
 				</Routes>
 			</BrowserRouter>
