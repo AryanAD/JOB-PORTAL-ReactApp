@@ -9,7 +9,7 @@ import DashBoard from "./layout/DashBoard";
 import Categories from "./components/AdminCategories";
 import Vendors from "./components/AdminVendors";
 // import VendorLayout from "./layout/VendorLayout";
-import AdminBanners from "./components/AdminBanners";
+import AdminBanners from "./components/Admin/AdminBanners";
 import AdminLayout from "./layout/AdminLayout";
 
 function App() {
