@@ -22,6 +22,7 @@ import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link } from "react-router-dom";
+import VendorJobModal from "./VendorJobModal";
 
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
@@ -219,23 +220,6 @@ const VendorSideDrawer = () => {
 								<ListItemText primary="Applications" />
 							</ListItemButton>
 						</Link>
-						{/* <Link
-							style={{
-								color: "#272727	",
-								textDecoration: "none",
-							}}
-							to={"/dashboard/banners"}>
-							<ListItemButton>
-								<CustomToolTip
-									title="Banners"
-									placement="right">
-									<ListItemIcon>
-										<InsertPhotoRoundedIcon />
-									</ListItemIcon>
-								</CustomToolTip>
-								<ListItemText primary="Banners" />
-							</ListItemButton>
-						</Link> */}
 					</ListItem>
 					<Divider />
 				</List>
@@ -299,6 +283,7 @@ const VendorSideDrawer = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
+				<VendorJobModal />
 			</Box>
 		</Box>
 	);

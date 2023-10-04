@@ -11,6 +11,7 @@ import AdminBanners from "./components/Admin/AdminBanners";
 // import AdminLayout from "./layout/AdminLayout";
 import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
+import VendorJobModal from "./components/Vendor/VendorJobModal";
 
 function App() {
 	return (
@@ -61,6 +62,10 @@ function App() {
 					<Route
 						path="/modal"
 						element={<Modal />}
+					/>
+					<Route
+						path="/vendorjobmodal"
+						element={<VendorJobModal />}
 					/>
 				</Routes>
 			</BrowserRouter>
