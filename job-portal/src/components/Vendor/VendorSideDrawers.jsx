@@ -21,9 +21,7 @@ import React from "react";
 import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { Link, useNavigate } from "react-router-dom";
-import Vendors from "./AdminVendors";
-import Banners from "./Admin/AdminBanners";
+import { Link } from "react-router-dom";
 
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
@@ -125,7 +123,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const SideDrawerVendor = () => {
-	const nav = useNavigate();
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -137,9 +134,6 @@ const SideDrawerVendor = () => {
 		setOpen(false);
 	};
 
-	const vendor = () => {
-		nav(<Vendors />);
-	};
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -197,7 +191,7 @@ const SideDrawerVendor = () => {
 								textDecoration: "none",
 							}}
 							to={"/dashboard/vendors"}>
-							<ListItemButton onClick={vendor}>
+							<ListItemButton>
 								<CustomToolTip
 									title="Jobs"
 									placement="right">
@@ -305,7 +299,6 @@ const SideDrawerVendor = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
-				<Banners />
 			</Box>
 		</Box>
 	);
