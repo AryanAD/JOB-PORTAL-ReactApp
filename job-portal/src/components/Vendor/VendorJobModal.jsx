@@ -5,6 +5,7 @@ import {
 	Fade,
 	FormControl,
 	Grid,
+	InputAdornment, // Import InputAdornment
 	InputLabel,
 	MenuItem,
 	Modal,
@@ -85,6 +86,11 @@ const VendorJobModal = ({ open, onClose }) => {
 									fullWidth
 									label="Deadline"
 									type="date"
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">mm/dd/yyyy</InputAdornment>
+										),
+									}}
 								/>
 							</Grid>
 							<Grid
