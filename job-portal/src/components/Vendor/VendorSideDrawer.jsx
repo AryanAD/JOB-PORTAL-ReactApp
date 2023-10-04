@@ -122,7 +122,7 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-const SideDrawerVendor = () => {
+const VendorSideDrawer = () => {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -304,4 +304,4 @@ const SideDrawerVendor = () => {
 	);
 };
 
-export default SideDrawerVendor;
+export default VendorSideDrawer;

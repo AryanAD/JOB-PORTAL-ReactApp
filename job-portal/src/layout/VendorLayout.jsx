@@ -1,9 +1,9 @@
-import SideDrawerVendor from "../components/SideDrawerVendor";
+import VendorSideDrawer from "../components/Vendor/VendorSideDrawer";
 
 const VendorLayout = () => {
 	return (
 		<>
-			<SideDrawerVendor />
+			<VendorSideDrawer />
 		</>
 	);
 };
