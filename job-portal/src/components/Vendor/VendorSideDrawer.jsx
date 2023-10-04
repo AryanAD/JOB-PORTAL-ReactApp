@@ -268,7 +268,6 @@ const VendorSideDrawer = () => {
 							height: "100%",
 							width: "100%",
 							padding: "20px auto",
-							// marginBottom: 1,
 						}}>
 						<Button
 							size="large"
@@ -282,7 +281,7 @@ const VendorSideDrawer = () => {
 			</Drawer>
 			<Box
 				component="main"
-				sx={{ flexGrow: 1, p: 3, bgcolor: "navajowhite" }}>
+				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
 				<VendorJobs />
 				<VendorJobModal />

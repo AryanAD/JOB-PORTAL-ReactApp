@@ -3,8 +3,12 @@ import {
 	Box,
 	Button,
 	Fade,
-	Grid, // Import Grid
+	FormControl,
+	Grid,
+	InputLabel,
+	MenuItem,
 	Modal,
+	Select,
 	TextField,
 } from "@mui/material";
 
@@ -21,8 +25,6 @@ const style = {
 };
 
 const VendorJobModal = ({ open, onClose }) => {
-	// No need to manage modal state in this component
-
 	return (
 		<div>
 			<Modal
@@ -55,7 +57,6 @@ const VendorJobModal = ({ open, onClose }) => {
 						<Grid
 							container
 							spacing={2}>
-							{/* Location Field */}
 							<Grid
 								item
 								xs={6}>
@@ -66,7 +67,6 @@ const VendorJobModal = ({ open, onClose }) => {
 									type="text"
 								/>
 							</Grid>
-							{/* Salary Field */}
 							<Grid
 								item
 								xs={6}>
@@ -77,26 +77,40 @@ const VendorJobModal = ({ open, onClose }) => {
 									type="number"
 								/>
 							</Grid>
+							<Grid
+								item
+								xs={6}>
+								<TextField
+									margin="normal"
+									fullWidth
+									label="Deadline"
+									type="date"
+								/>
+							</Grid>
+							<Grid
+								item
+								xs={6}>
+								<TextField
+									margin="normal"
+									fullWidth
+									label="Posted By"
+									type="text"
+								/>
+							</Grid>
+							<Grid
+								item
+								xs={12}>
+								<FormControl fullWidth>
+									<InputLabel>Category</InputLabel>
+									<Select label="Category">
+										<MenuItem value="Tech">Tech</MenuItem>
+										<MenuItem value="Finance">Finance</MenuItem>
+										<MenuItem value="Marketing">Marketing</MenuItem>
+									</Select>
+								</FormControl>
+							</Grid>
 						</Grid>
 
-						<TextField
-							margin="normal"
-							fullWidth
-							label="Deadline"
-							type="date"
-						/>
-						<TextField
-							margin="normal"
-							fullWidth
-							label="Posted By"
-							type="text"
-						/>
-						<TextField
-							margin="normal"
-							fullWidth
-							label="Category"
-							type="text"
-						/>
 						<Button
 							color="success"
 							type="submit"
