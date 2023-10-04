@@ -3,9 +3,9 @@ import {
 	Box,
 	Button,
 	Fade,
+	Grid, // Import Grid
 	Modal,
 	TextField,
-	Typography,
 } from "@mui/material";
 
 const style = {
@@ -52,23 +52,37 @@ const VendorJobModal = ({ open, onClose }) => {
 							label="Job Description"
 						/>
 
-						<TextField
-							margin="normal"
-							fullWidth
-							label="Location"
-							type="text"
-						/>
-						<TextField
-							margin="normal"
-							fullWidth
-							label="Salary"
-							type="number"
-						/>
+						<Grid
+							container
+							spacing={2}>
+							{/* Location Field */}
+							<Grid
+								item
+								xs={6}>
+								<TextField
+									margin="normal"
+									fullWidth
+									label="Location"
+									type="text"
+								/>
+							</Grid>
+							{/* Salary Field */}
+							<Grid
+								item
+								xs={6}>
+								<TextField
+									margin="normal"
+									fullWidth
+									label="Salary"
+									type="number"
+								/>
+							</Grid>
+						</Grid>
 
 						<TextField
-							label="Deadline"
 							margin="normal"
 							fullWidth
+							label="Deadline"
 							type="date"
 						/>
 						<TextField
