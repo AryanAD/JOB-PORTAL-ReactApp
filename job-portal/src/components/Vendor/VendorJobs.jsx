@@ -11,14 +11,14 @@ import {
 	styled,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import VendorJobModal from "./VendorJobModal";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded"; // Import the delete icon
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
 		backgroundColor: theme.palette.action.hover,
 	},
-	// hide last border
 	"&:last-child td, &:last-child th": {
 		border: 0,
 	},
@@ -42,6 +42,26 @@ const VendorJobs = () => {
 
 	const handleCloseModal = () => {
 		setIsModalOpen(false);
+	};
+
+	const [jobs, setJobs] = useState([
+		{
+			id: 1,
+			title: "Software Developer",
+			description:
+				"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
+			location: "Sundarharaincha-4",
+			salary: "Rs 130,000",
+			deadline: "2080-10-28",
+			postedBy: "Admin Bahadur",
+			category: "Tech",
+		},
+		// Add more job objects here
+	]);
+
+	const handleDeleteJob = (id) => {
+		const updatedJobs = jobs.filter((job) => job.id !== id);
+		setJobs(updatedJobs);
 	};
 
 	return (
@@ -156,108 +176,47 @@ const VendorJobs = () => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							<StyledTableRow>
-								<TableCell scope="row">Software Developer</TableCell>
-								<TableCell
-									component="th"
-									align="right">
-									{limitLength(
-										"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-										5
-									)}
-								</TableCell>
-								<TableCell align="right">Sundarharaincha-4</TableCell>
-								<TableCell align="right">Rs 130,000</TableCell>
-								<TableCell align="right">2080-10-28</TableCell>
-								<TableCell align="right">Admin Bahadur</TableCell>
-								<TableCell align="right">Tech</TableCell>
-								<TableCell align="right">
-									<Link to={"/vendorjobmodal"}>
+							{jobs.map((job) => (
+								<StyledTableRow key={job.id}>
+									<TableCell scope="row">{job.title}</TableCell>
+									<TableCell
+										component="th"
+										align="right">
+										{limitLength(job.description, 5)}
+									</TableCell>
+									<TableCell align="right">{job.location}</TableCell>
+									<TableCell align="right">{job.salary}</TableCell>
+									<TableCell align="right">{job.deadline}</TableCell>
+									<TableCell align="right">{job.postedBy}</TableCell>
+									<TableCell align="right">{job.category}</TableCell>
+									<TableCell align="right">
 										<Button
-											onClick={handleOpenModal}
+											size="small"
 											variant="contained"
-											color="success">
+											color="success"
+											onClick={handleOpenModal}>
+											<AddRoundedIcon />
 											Add Job
 										</Button>
-									</Link>
-								</TableCell>
-								<VendorJobModal
-									open={isModalOpen}
-									onClose={handleCloseModal}
-								/>
-							</StyledTableRow>
-							<StyledTableRow>
-								<TableCell scope="row">Software Developer</TableCell>
-								<TableCell
-									component="th"
-									align="right">
-									{limitLength(
-										"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-										5
-									)}
-								</TableCell>
-								<TableCell align="right">Sundarharaincha-4</TableCell>
-								<TableCell align="right">Rs 130,000</TableCell>
-								<TableCell align="right">2080-10-28</TableCell>
-								<TableCell align="right">Admin Bahadur</TableCell>
-								<TableCell align="right">Tech</TableCell>
-								<TableCell align="right">
-									<Button
-										variant="contained"
-										color="success">
-										Add Job
-									</Button>
-								</TableCell>
-							</StyledTableRow>
-							<StyledTableRow>
-								<TableCell scope="row">Software Developer</TableCell>
-								<TableCell
-									component="th"
-									align="right">
-									{limitLength(
-										"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-										5
-									)}
-								</TableCell>
-								<TableCell align="right">Sundarharaincha-4</TableCell>
-								<TableCell align="right">Rs 130,000</TableCell>
-								<TableCell align="right">2080-10-28</TableCell>
-								<TableCell align="right">Admin Bahadur</TableCell>
-								<TableCell align="right">Tech</TableCell>
-								<TableCell align="right">
-									<Button
-										variant="contained"
-										color="success">
-										Add Job
-									</Button>
-								</TableCell>
-							</StyledTableRow>
-							<StyledTableRow>
-								<TableCell scope="row">Software Developer</TableCell>
-								<TableCell
-									component="th"
-									align="right">
-									{limitLength(
-										"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-										5
-									)}
-								</TableCell>
-								<TableCell align="right">Sundarharaincha-4</TableCell>
-								<TableCell align="right">Rs 130,000</TableCell>
-								<TableCell align="right">2080-10-28</TableCell>
-								<TableCell align="right">Admin Bahadur</TableCell>
-								<TableCell align="right">Tech</TableCell>
-								<TableCell align="right">
-									<Button
-										variant="contained"
-										color="success">
-										Add Job
-									</Button>
-								</TableCell>
-							</StyledTableRow>
+										<Button
+											size="small"
+											variant="contained"
+											color="error"
+											onClick={() => handleDeleteJob(job.id)}
+											sx={{ marginLeft: "8px" }}>
+											<DeleteOutlineRoundedIcon />
+											Delete Job
+										</Button>
+									</TableCell>
+								</StyledTableRow>
+							))}
 						</TableBody>
 					</Table>
 				</TableContainer>
+				<VendorJobModal
+					open={isModalOpen}
+					onClose={handleCloseModal}
+				/>
 			</Box>
 		</Box>
 	);

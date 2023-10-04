@@ -5,14 +5,13 @@ import {
 	Fade,
 	FormControl,
 	Grid,
-	InputAdornment, // Import InputAdornment
 	InputLabel,
 	MenuItem,
 	Modal,
 	Select,
 	TextField,
 } from "@mui/material";
-
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 const style = {
 	position: "absolute",
 	top: "50%",
@@ -86,10 +85,8 @@ const VendorJobModal = ({ open, onClose }) => {
 									fullWidth
 									label="Deadline"
 									type="date"
-									InputProps={{
-										endAdornment: (
-											<InputAdornment position="end">mm/dd/yyyy</InputAdornment>
-										),
+									InputLabelProps={{
+										shrink: true,
 									}}
 								/>
 							</Grid>
@@ -122,7 +119,8 @@ const VendorJobModal = ({ open, onClose }) => {
 							type="submit"
 							fullWidth
 							variant="contained"
-							sx={{ mt: 3, mb: 2 }}>
+							sx={{ mt: 3, mb: 2, gap: 1, fontSize: "16px" }}>
+							<AddRoundedIcon />
 							Add Job
 						</Button>
 					</Box>
