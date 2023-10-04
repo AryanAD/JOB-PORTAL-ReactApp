@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
 	Box,
 	Button,
@@ -10,10 +11,12 @@ import {
 	TableRow,
 	styled,
 } from "@mui/material";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+	DeleteRounded as DeleteRoundedIcon,
+	AddRounded as AddRoundedIcon,
+} from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded"; // Import the delete icon
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
@@ -44,24 +47,10 @@ const VendorJobs = () => {
 		setIsModalOpen(false);
 	};
 
-	const [jobs, setJobs] = useState([
-		{
-			id: 1,
-			title: "Software Developer",
-			description:
-				"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-			location: "Sundarharaincha-4",
-			salary: "Rs 130,000",
-			deadline: "2080-10-28",
-			postedBy: "Admin Bahadur",
-			category: "Tech",
-		},
-		// Add more job objects here
-	]);
-
-	const handleDeleteJob = (id) => {
-		const updatedJobs = jobs.filter((job) => job.id !== id);
-		setJobs(updatedJobs);
+	// Placeholder for delete logic
+	const handleDelete = (rowIndex) => {
+		// Implement your delete logic here
+		console.log(`Delete button clicked for row ${rowIndex}`);
 	};
 
 	return (
@@ -75,7 +64,7 @@ const VendorJobs = () => {
 			}}>
 			<Box
 				sx={{
-					width: "80%",
+					width: "75%",
 				}}>
 				<TableContainer component={Paper}>
 					<Table
@@ -176,47 +165,57 @@ const VendorJobs = () => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{jobs.map((job) => (
-								<StyledTableRow key={job.id}>
-									<TableCell scope="row">{job.title}</TableCell>
+							{Array.from({ length: 7 }).map((_, rowIndex) => (
+								<StyledTableRow key={rowIndex}>
+									<TableCell scope="row">Software Developer</TableCell>
 									<TableCell
 										component="th"
 										align="right">
-										{limitLength(job.description, 5)}
+										{limitLength(
+											"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
+											5
+										)}
 									</TableCell>
-									<TableCell align="right">{job.location}</TableCell>
-									<TableCell align="right">{job.salary}</TableCell>
-									<TableCell align="right">{job.deadline}</TableCell>
-									<TableCell align="right">{job.postedBy}</TableCell>
-									<TableCell align="right">{job.category}</TableCell>
-									<TableCell align="right">
-										<Button
-											size="small"
-											variant="contained"
-											color="success"
-											onClick={handleOpenModal}>
-											<AddRoundedIcon />
-											Add Job
-										</Button>
+									<TableCell align="right">Sundarharaincha-4</TableCell>
+									<TableCell align="right">Rs 130,000</TableCell>
+									<TableCell align="right">2080-10-28</TableCell>
+									<TableCell align="right">Admin Bahadur</TableCell>
+									<TableCell align="right">Tech</TableCell>
+									<TableCell
+										sx={{
+											display: "flex",
+											justifyContent: "space-between",
+											width: "100%",
+										}}
+										align="right">
+										<Link to={"/vendorjobmodal"}>
+											<Button
+												size="small"
+												onClick={handleOpenModal}
+												variant="contained"
+												color="success">
+												<AddRoundedIcon />
+												Add Job
+											</Button>
+										</Link>
 										<Button
 											size="small"
 											variant="contained"
 											color="error"
-											onClick={() => handleDeleteJob(job.id)}
-											sx={{ marginLeft: "8px" }}>
-											<DeleteOutlineRoundedIcon />
-											Delete Job
+											startIcon={<DeleteRoundedIcon />}
+											onClick={() => handleDelete(rowIndex)}>
+											Delete
 										</Button>
 									</TableCell>
+									<VendorJobModal
+										open={isModalOpen}
+										onClose={handleCloseModal}
+									/>
 								</StyledTableRow>
 							))}
 						</TableBody>
 					</Table>
 				</TableContainer>
-				<VendorJobModal
-					open={isModalOpen}
-					onClose={handleCloseModal}
-				/>
 			</Box>
 		</Box>
 	);

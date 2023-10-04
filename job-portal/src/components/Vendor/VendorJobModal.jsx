@@ -119,7 +119,7 @@ const VendorJobModal = ({ open, onClose }) => {
 							type="submit"
 							fullWidth
 							variant="contained"
-							sx={{ mt: 3, mb: 2, gap: 1, fontSize: "16px" }}>
+							sx={{ mt: 3, mb: 2 }}>
 							<AddRoundedIcon />
 							Add Job
 						</Button>
