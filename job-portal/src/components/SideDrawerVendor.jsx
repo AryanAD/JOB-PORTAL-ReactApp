@@ -25,8 +25,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./AdminVendors";
 import Banners from "./Admin/AdminBanners";
 
-// import { IoLogOut } from "react-icons/fa";
-
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
 		{...props}
