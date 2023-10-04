@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
 	Box,
 	Button,
@@ -184,8 +184,8 @@ const VendorJobs = () => {
 									<TableCell
 										sx={{
 											display: "flex",
+											flexDirection: "row",
 											justifyContent: "space-between",
-											width: "100%",
 										}}
 										align="right">
 										<Link to={"/vendorjobmodal"}>
@@ -207,10 +207,12 @@ const VendorJobs = () => {
 											Delete
 										</Button>
 									</TableCell>
-									<VendorJobModal
-										open={isModalOpen}
-										onClose={handleCloseModal}
-									/>
+									{isModalOpen && (
+										<VendorJobModal
+											open={isModalOpen}
+											onClose={handleCloseModal}
+										/>
+									)}
 								</StyledTableRow>
 							))}
 						</TableBody>

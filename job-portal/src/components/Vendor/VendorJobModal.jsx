@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
 	Backdrop,
 	Box,
@@ -12,16 +13,21 @@ import {
 	TextField,
 } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+
 const style = {
 	position: "absolute",
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	bgcolor: "background.paper",
+	bgcolor: "white", // Adjust the background color of the modal itself here
 	border: "1px solid #29a2f3",
 	borderRadius: "13px",
 	boxShadow: 24,
 	p: 4,
+};
+
+const backdropStyle = {
+	backgroundColor: "rgba(0, 0, 0, 0.2)", // Adjust the background color and opacity of the backdrop here
 };
 
 const VendorJobModal = ({ open, onClose }) => {
@@ -33,11 +39,10 @@ const VendorJobModal = ({ open, onClose }) => {
 				open={open}
 				onClose={onClose}
 				closeAfterTransition
-				slots={{ backdrop: Backdrop }}
-				slotProps={{
-					backdrop: {
-						timeout: 500,
-					},
+				BackdropComponent={Backdrop}
+				BackdropProps={{
+					timeout: 500,
+					style: backdropStyle, // Apply the backdrop style here
 				}}>
 				<Fade in={open}>
 					<Box sx={style}>
