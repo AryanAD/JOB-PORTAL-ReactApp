@@ -23,6 +23,7 @@ import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link } from "react-router-dom";
 import VendorJobModal from "./VendorJobModal";
+import VendorJobs from "./VendorJobs";
 
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
@@ -281,8 +282,9 @@ const VendorSideDrawer = () => {
 			</Drawer>
 			<Box
 				component="main"
-				sx={{ flexGrow: 1, p: 3 }}>
+				sx={{ flexGrow: 1, p: 3, bgcolor: "navajowhite" }}>
 				<DrawerHeader />
+				<VendorJobs />
 				<VendorJobModal />
 			</Box>
 		</Box>

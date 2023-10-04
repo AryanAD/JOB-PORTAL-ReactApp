@@ -10,7 +10,9 @@ import {
 	TableRow,
 	styled,
 } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import VendorJobModal from "./VendorJobModal";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
@@ -32,6 +34,16 @@ const limitLength = (text, maxLength) => {
 };
 
 const VendorJobs = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const handleOpenModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const handleCloseModal = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
 		<Box
 			sx={{
@@ -162,12 +174,17 @@ const VendorJobs = () => {
 								<TableCell align="right">
 									<Link to={"/vendorjobmodal"}>
 										<Button
+											onClick={handleOpenModal}
 											variant="contained"
 											color="success">
 											Add Job
 										</Button>
 									</Link>
 								</TableCell>
+								<VendorJobModal
+									open={isModalOpen}
+									onClose={handleCloseModal}
+								/>
 							</StyledTableRow>
 							<StyledTableRow>
 								<TableCell scope="row">Software Developer</TableCell>
