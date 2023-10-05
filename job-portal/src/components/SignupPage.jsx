@@ -172,13 +172,33 @@ const SignupPage = () => {
 								id="password"
 								autoComplete="current-password"
 							/>
-							<Button
-								type="submit"
-								fullWidth
-								variant="contained"
-								sx={{ mt: 3, mb: 2 }}>
-								Sign Up
-							</Button>
+							<Grid
+								container
+								spacing={2}>
+								<Grid
+									xs={8.5}
+									item>
+									<Button
+										type="submit"
+										fullWidth
+										variant="contained"
+										sx={{ mt: 3, mb: 2 }}>
+										Sign Up
+									</Button>
+								</Grid>
+								<Grid
+									xs={3.5}
+									item>
+									<Button
+										type="submit"
+										fullWidth
+										color="secondary"
+										variant="contained"
+										sx={{ mt: 3, mb: 2 }}>
+										Sign Up As Vendor
+									</Button>
+								</Grid>
+							</Grid>
 							<Grid container>
 								<Grid item>
 									<Link

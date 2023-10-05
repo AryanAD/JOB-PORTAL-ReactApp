@@ -1,18 +1,18 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import HomePage from "./layout/HomePage";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
 import Modal from "./components/Modal";
-import DashBoard from "./layout/DashBoard";
 // import VendorLayout from "./layout/VendorLayout";
-import AdminBanners from "./components/Admin/AdminBanners";
+// import AdminBanners from "./components/Admin/AdminBanners";
 // import AdminLayout from "./layout/AdminLayout";
-import AdminCategories from "./components/Admin/AdminCategories";
-import AdminVendors from "./components/Admin/AdminVendors";
+// import AdminCategories from "./components/Admin/AdminCategories";
+// import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
 import UserLayout from "./layout/UserLayout";
+import UserHomePage from "./components/User/UserHomePage";
+import UserNavBar from "./components/User/UserNavBar";
 
 function App() {
 	return (
@@ -32,34 +32,43 @@ function App() {
 				/>
 				<UserLayout />
 				<Routes>
-					<Route
+					{/* User Routes */}
+					<Route element={<UserLayout />}>
+						<Route element={<UserNavBar />}>
+							<Route
+								index
+								element={<UserHomePage />}
+							/>
+							<Route
+								path="signin"
+								element={<SigninPage />}
+							/>
+							<Route
+								path="signup"
+								element={<SignupPage />}
+							/>
+						</Route>
+					</Route>
+
+					{/* Admin Routes */}
+					{/* <Route
 						path="/"
-						element={<HomePage />}
-					/>
-					<Route
-						path="/dashboard"
-						element={<DashBoard />}>
+						element={<AdminLayout />}>
 						<Route
-							path="/dashboard/vendors"
+							path="/vendors"
 							element={<AdminVendors />}
 						/>
 						<Route
-							path="/dashboard/categories"
+							path="/categories"
 							element={<AdminCategories />}
 						/>
 						<Route
-							path="/dashboard/banners"
+							path="/banners"
 							element={<AdminBanners />}
 						/>
-					</Route>
-					<Route
-						path="/signin"
-						element={<SigninPage />}
-					/>
-					<Route
-						path="/signup"
-						element={<SignupPage />}
-					/>
+					</Route> */}
+
+					{/* Other Routes */}
 					<Route
 						path="/modal"
 						element={<Modal />}

@@ -6,100 +6,122 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import HailRoundedIcon from "@mui/icons-material/HailRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
+import UserHomePage from "./UserHomePage";
+import SignupPage from "../SignupPage";
+import SigninPage from "../SigninPage";
 
 const UserNavBar = () => {
+	const location = useLocation();
+
 	return (
-		<AppBar position="static">
-			<Container maxWidth="xl">
-				<Toolbar disableGutters>
-					<HailRoundedIcon
-						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-					/>
-					<Link
-						to="/"
-						style={{
-							color: "white",
-							textDecoration: "none",
-						}}>
-						<Typography
-							variant="h6"
-							noWrap
-							component="a"
-							sx={{
-								mr: 2,
-								display: { xs: "none", md: "flex" },
-								fontFamily: "monospace",
-								fontWeight: 700,
-								letterSpacing: ".3rem",
-								color: "inherit",
+		<>
+			<AppBar position="static">
+				<Container maxWidth="xl">
+					<Toolbar disableGutters>
+						<HailRoundedIcon
+							sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+						/>
+						<Link
+							to="/"
+							style={{
+								color: "white",
 								textDecoration: "none",
 							}}>
-							REACT JOB PORTAL
-						</Typography>
-					</Link>
-
-					<Box
-						sx={{
-							flexGrow: 1,
-							display: "flex",
-							justifyContent: "flex-end",
-							mr: 5,
-							gap: 2,
-						}}>
-						<Button
-							sx={{ my: 2, color: "white", display: "flex" }}
-							color="info">
-							<Link
-								style={{
-									margin: "auto 10px",
-									color: "white",
-									display: "flex",
+							<Typography
+								variant="h6"
+								noWrap
+								component="a"
+								sx={{
+									mr: 2,
+									display: { xs: "none", md: "flex" },
+									fontFamily: "monospace",
+									fontWeight: 700,
+									letterSpacing: ".3rem",
+									color: "inherit",
 									textDecoration: "none",
-								}}
-								to="/signin">
-								Sign In
-							</Link>
-						</Button>
-						<Button
-							sx={{
-								my: 2,
-								color: "white",
-								display: "flex",
-							}}
-							color="info">
-							<Link
-								style={{
-									margin: "auto 10px",
-									color: "white",
-									display: "flex",
-									textDecoration: "none",
-								}}
-								to="/signup">
-								Sign Up
-							</Link>
-						</Button>
-					</Box>
-					<Box>
-						<Link
-							style={{
-								textDecoration: "none",
-							}}
-							to="/">
-							<IconButton size="large">
-								<HomeRoundedIcon
-									style={{
-										color: "white",
-									}}
-									fontSize="inherit"
-								/>
-							</IconButton>
+								}}>
+								REACT JOB PORTAL
+							</Typography>
 						</Link>
-					</Box>
-				</Toolbar>
-			</Container>
-		</AppBar>
+
+						<Box
+							sx={{
+								flexGrow: 1,
+								display: "flex",
+								justifyContent: "flex-end",
+								mr: 5,
+								gap: 2,
+							}}>
+							<Button
+								sx={{ my: 2, color: "white", display: "flex" }}
+								color="info">
+								<Link
+									style={{
+										margin: "auto 10px",
+										color: "white",
+										display: "flex",
+										textDecoration: "none",
+									}}
+									to="/signin">
+									Sign In
+								</Link>
+							</Button>
+							<Button
+								sx={{
+									my: 2,
+									color: "white",
+									display: "flex",
+								}}
+								color="info">
+								<Link
+									style={{
+										margin: "auto 10px",
+										color: "white",
+										display: "flex",
+										textDecoration: "none",
+									}}
+									to="/signup">
+									Sign Up
+								</Link>
+							</Button>
+						</Box>
+						<Box>
+							<Link
+								style={{
+									textDecoration: "none",
+								}}
+								to="/">
+								<IconButton size="large">
+									<HomeRoundedIcon
+										style={{
+											color: "white",
+										}}
+										fontSize="inherit"
+									/>
+								</IconButton>
+							</Link>
+						</Box>
+					</Toolbar>
+				</Container>
+			</AppBar>
+			<Box
+				style={{
+					fontFamily: "tr_larabiefont",
+					color: "black",
+				}}
+				component="main"
+				sx={{ flexGrow: 1, p: 3 }}>
+				{location.pathname === "/signin" ? (
+					<SigninPage />
+				) : location.pathname === "/signup" ? (
+					<SignupPage />
+				) : (
+					<UserHomePage />
+				)}
+			</Box>
+		</>
 	);
 };
 

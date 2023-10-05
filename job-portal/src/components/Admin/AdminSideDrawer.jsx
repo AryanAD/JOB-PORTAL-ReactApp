@@ -197,7 +197,7 @@ const AdminSideDrawer = () => {
 								color: "#272727	",
 								textDecoration: "none",
 							}}
-							to={"/dashboard/vendors"}>
+							to={"/vendors"}>
 							<ListItemButton onClick={vendor}>
 								<CustomToolTip
 									title="Vendors"
@@ -214,7 +214,7 @@ const AdminSideDrawer = () => {
 								color: "#272727	",
 								textDecoration: "none",
 							}}
-							to={"/dashboard/categories"}>
+							to={"/categories"}>
 							<ListItemButton>
 								<CustomToolTip
 									title="Categories"
@@ -231,7 +231,7 @@ const AdminSideDrawer = () => {
 								color: "#272727	",
 								textDecoration: "none",
 							}}
-							to={"/dashboard/banners"}>
+							to={"/banners"}>
 							<ListItemButton>
 								<CustomToolTip
 									title="Banners"

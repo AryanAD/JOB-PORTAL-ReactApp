@@ -1,7 +1,11 @@
-import UserNavBar from "../components/User/UserNavBar";
+import { Outlet } from "react-router-dom";
 
 const UserLayout = () => {
-	return <UserNavBar />;
+	return (
+		<>
+			<Outlet /> {/* This will render the child routes */}
+		</>
+	);
 };
 
 export default UserLayout;
