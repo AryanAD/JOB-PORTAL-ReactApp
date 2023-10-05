@@ -1,6 +1,7 @@
 import {
 	Box,
 	Button,
+	Divider,
 	Paper,
 	Table,
 	TableBody,
@@ -8,15 +9,14 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	Typography,
 	styled,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
-	DeleteRounded as DeleteRoundedIcon,
-	AddRounded as AddRoundedIcon,
+	CloseRounded as CloseRoundedIcon,
+	DoneRounded as DoneRoundedIcon,
 } from "@mui/icons-material";
-import VendorJobModal from "./VendorJobModal";
-import { useState } from "react";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
@@ -27,199 +27,194 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }));
 
-const limitLength = (text, maxLength) => {
-	const words = text.split(" ");
-	if (words.length <= maxLength) {
-		return text;
-	}
-	const truncatedText = words.slice(0, maxLength).join(" ");
-	return `${truncatedText}...`;
-};
+// const limitLength = (text, maxLength) => {
+// 	const words = text.split(" ");
+// 	if (words.length <= maxLength) {
+// 		return text;
+// 	}
+// 	const truncatedText = words.slice(0, maxLength).join(" ");
+// 	return `${truncatedText}...`;
+// };
 
 const VendorApplicants = () => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const handleOpenModal = () => {
-		setIsModalOpen(true);
-	};
-
-	const handleCloseModal = () => {
-		setIsModalOpen(false);
-	};
-
-	// Placeholder for delete logic
-	const handleDelete = (rowIndex) => {
-		// Implement your delete logic here
-		console.log(`Delete button clicked for row ${rowIndex}`);
-	};
-
 	return (
-		<Box
-			sx={{
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-				margin: "20px auto",
-				width: "100%",
-			}}>
+		<>
+			<Divider
+				variant="inset"
+				textAlign="left">
+				<Typography
+					sx={{
+						color: "black",
+						fontFamily: "nunito",
+						letterSpacing: "6px",
+						marginBottom: "5px",
+						fontWeight: "bold",
+						textAlign: "center",
+					}}
+					variant="h4">
+					Applications
+				</Typography>
+			</Divider>
 			<Box
 				sx={{
-					width: "75%",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					margin: "20px auto",
+					width: "100%",
 				}}>
-				<TableContainer component={Paper}>
-					<Table
-						size="small"
-						sx={{ minWidth: 700 }}
-						aria-label="customized table">
-						<TableHead>
-							<TableRow>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-										borderRadius: "11px 0 0 0",
-									}}>
-									Title
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-									}}
-									align="center">
-									Description
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-									}}
-									align="right">
-									Location
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-									}}
-									align="right">
-									Salary
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-									}}
-									align="right">
-									Deadline
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-									}}
-									align="right">
-									Posted By
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "10px",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-									}}
-									align="right">
-									Category
-								</TableCell>
-								<TableCell
-									sx={{
-										fontWeight: "bold",
-										padding: "20px auto",
-										fontSize: "20px",
-										fontFamily: "monospace",
-										bgcolor: "#29a2f3",
-										borderRadius: "0 11px 0 0",
-									}}
-									align="right">
-									Actions
-								</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{Array.from({ length: 7 }).map((_, rowIndex) => (
-								<StyledTableRow key={rowIndex}>
-									<TableCell scope="row">Software Developer</TableCell>
-									<TableCell
-										component="th"
-										align="right">
-										{limitLength(
-											"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-											5
-										)}
-									</TableCell>
-									<TableCell align="right">Sundarharaincha-4</TableCell>
-									<TableCell align="right">Rs 130,000</TableCell>
-									<TableCell align="right">2080-10-28</TableCell>
-									<TableCell align="right">Admin Bahadur</TableCell>
-									<TableCell align="right">Tech</TableCell>
+				<Box
+					sx={{
+						width: "55%",
+					}}>
+					<TableContainer component={Paper}>
+						<Table
+							size="small"
+							sx={{ minWidth: 700 }}
+							aria-label="customized table">
+							<TableHead>
+								<TableRow>
 									<TableCell
 										sx={{
-											display: "flex",
-											flexDirection: "row",
-											justifyContent: "space-between",
+											width: "50px",
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+											borderRadius: "11px 0 0 0",
+										}}>
+										SN
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+										}}
+										align="center">
+										Job ID
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
 										}}
 										align="right">
-										<Link to={"/vendorjobmodal"}>
+										Status
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+										}}
+										align="right">
+										CV
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+										}}
+										align="right">
+										Location
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+										}}
+										align="right">
+										Contact
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "10px",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+										}}
+										align="right">
+										Payment
+									</TableCell>
+									<TableCell
+										sx={{
+											fontWeight: "bold",
+											padding: "20px auto",
+											fontSize: "20px",
+											fontFamily: "monospace",
+											bgcolor: "#29a2f3",
+											borderRadius: "0 11px 0 0",
+										}}
+										align="right">
+										Actions
+									</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{Array.from({ length: 7 }).map((_, rowIndex) => (
+									<StyledTableRow key={rowIndex}>
+										<TableCell scope="row">1</TableCell>
+										<TableCell
+											component="th"
+											align="right">
+											J1US8
+										</TableCell>
+										<TableCell align="right">Approved</TableCell>
+										<TableCell align="right">
+											<>Download CV</>
+										</TableCell>
+										<TableCell align="right">Home-2</TableCell>
+										<TableCell align="right">985654952</TableCell>
+										<TableCell align="right">pending</TableCell>
+										<TableCell
+											sx={{
+												display: "flex",
+												flexDirection: "row",
+												justifyContent: "space-between",
+											}}
+											align="right">
+											<Link to={"/vendorjobmodal"}>
+												<Button
+													sx={{ gap: 1 }}
+													size="small"
+													variant="contained"
+													color="success"
+													startIcon={<DoneRoundedIcon />}>
+													Accept
+												</Button>
+											</Link>
 											<Button
 												size="small"
-												onClick={handleOpenModal}
 												variant="contained"
-												color="success">
-												<AddRoundedIcon />
-												Add Job
+												color="error"
+												startIcon={<CloseRoundedIcon />}>
+												Reject
 											</Button>
-										</Link>
-										<Button
-											size="small"
-											variant="contained"
-											color="error"
-											startIcon={<DeleteRoundedIcon />}
-											onClick={() => handleDelete(rowIndex)}>
-											Delete
-										</Button>
-									</TableCell>
-									{isModalOpen && (
-										<VendorJobModal
-											open={isModalOpen}
-											onClose={handleCloseModal}
-										/>
-									)}
-								</StyledTableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
+										</TableCell>
+									</StyledTableRow>
+								))}
+							</TableBody>
+						</Table>
+					</TableContainer>
+				</Box>
 			</Box>
-		</Box>
+		</>
 	);
 };
 
