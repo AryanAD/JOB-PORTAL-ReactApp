@@ -16,6 +16,7 @@ import {
 	AddRounded as AddRoundedIcon,
 } from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
+import { useState } from "react";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {

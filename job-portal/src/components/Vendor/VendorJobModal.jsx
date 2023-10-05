@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
 	Backdrop,
 	Box,
@@ -42,7 +41,7 @@ const VendorJobModal = ({ open, onClose }) => {
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
-					style: backdropStyle, 
+					style: backdropStyle,
 				}}>
 				<Fade in={open}>
 					<Box sx={style}>
