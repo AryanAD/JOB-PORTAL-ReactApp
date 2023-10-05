@@ -22,7 +22,7 @@ import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link } from "react-router-dom";
-import VendorApplicants from "./VendorApplicants";
+import VendorJobs from "./VendorJobs";
 
 const CustomToolTip = styled(({ className, ...props }) => (
 	<Tooltip
@@ -282,7 +282,7 @@ const VendorSideDrawer = () => {
 				component="main"
 				sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
-				<VendorApplicants />
+				<VendorJobs />
 			</Box>
 		</Box>
 	);

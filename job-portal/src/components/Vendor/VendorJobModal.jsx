@@ -29,18 +29,19 @@ const backdropStyle = {
 	backgroundColor: "rgba(0, 0, 0, 0.2)", // Adjust the background color and opacity of the backdrop here
 };
 
-const VendorJobModal = () => {
+const VendorJobModal = ({ open, onClose }) => {
 	return (
 		<div>
 			<Modal
 				aria-labelledby="transition-modal-title"
 				aria-describedby="transition-modal-description"
 				open={open}
+				onClose={onClose}
 				closeAfterTransition
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
-					style: backdropStyle,
+					style: backdropStyle, // Apply the backdrop style here
 				}}>
 				<Fade in={open}>
 					<Box sx={style}>
