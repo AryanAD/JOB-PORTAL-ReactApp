@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-const UserLayout = () => {
+const PublicLayout = () => {
 	return (
 		<>
 			<Outlet /> {/* This will render the child routes */}
@@ -8,4 +8,4 @@ const UserLayout = () => {
 	);
 };
 
-export default UserLayout;
+export default PublicLayout;

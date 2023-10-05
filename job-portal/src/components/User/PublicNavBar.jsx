@@ -8,11 +8,11 @@ import HailRoundedIcon from "@mui/icons-material/HailRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link, useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import UserHomePage from "./UserHomePage";
 import SignupPage from "../SignupPage";
 import SigninPage from "../SigninPage";
+import PublicHomePage from "./PublicHomePage";
 
-const UserNavBar = () => {
+const PublicNavBar = () => {
 	const location = useLocation();
 
 	return (
@@ -118,11 +118,11 @@ const UserNavBar = () => {
 				) : location.pathname === "/signup" ? (
 					<SignupPage />
 				) : (
-					<UserHomePage />
+					<PublicHomePage />
 				)}
 			</Box>
 		</>
 	);
 };
 
-export default UserNavBar;
+export default PublicNavBar;
