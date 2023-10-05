@@ -5,8 +5,7 @@ const UserHomePage = () => {
 	return (
 		<Box
 			sx={{
-				background:
-					"url('https://www.jobs360.com.ph/wp-content/uploads/2023/04/Tips-for-Job-Hunting-as-a-Fresh-Graduate.jpg.webp') no-repeat center center/cover",
+				background: "url(..../assets/job_bg.jpg) no-repeat center center/cover",
 				margin: 0,
 				padding: "80px 0 60px 0",
 				// pt: 8,
