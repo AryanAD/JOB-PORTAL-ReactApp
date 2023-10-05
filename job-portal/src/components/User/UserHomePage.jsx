@@ -1,11 +1,15 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import Image from "./assets/job_banner.jpg";
 
 const UserHomePage = () => {
 	return (
 		<Box
 			sx={{
-				background: "url(..../assets/job_bg.jpg) no-repeat center center/cover",
+				backgroundImage: `url(${Image})`, // Use the imported image
+				backgroundRepeat: "no-repeat",
+				backgroundPosition: "center center",
+				backgroundSize: "cover",
 				margin: 0,
 				padding: "80px 0 60px 0",
 				// pt: 8,
@@ -13,20 +17,20 @@ const UserHomePage = () => {
 			}}>
 			<Container maxWidth="sm">
 				<Typography
-					fontFamily={"monospace"}
-					fontWeight={"bolder"}
-					fontSize={"60px"}
+					fontFamily="monospace"
+					fontWeight="bolder"
+					fontSize="60px"
 					component="h1"
 					variant="h2"
 					align="center"
-					color="text.primary"
 					gutterBottom>
 					React Job Portal
 				</Typography>
 				<Typography
 					variant="h5"
 					align="center"
-					color="text.secondary"
+					fontFamily="monospace"
+					color="black"
 					paragraph>
 					Apply for a Job through our Job Portal. We provide a variety of
 					feeelance options for all the freelancers. Our main job categories
@@ -35,13 +39,23 @@ const UserHomePage = () => {
 				<Stack
 					sx={{ pt: 4 }}
 					direction="row"
-					spacing={2}
+					spacing={4}
 					justifyContent="center">
 					<Link to="/signin">
-						<Button variant="contained">Sign In</Button>
+						<Button
+							color="primary"
+							size="large"
+							variant="contained">
+							Sign In
+						</Button>
 					</Link>
 					<Link to="/signup">
-						<Button variant="outlined">Sign Up</Button>
+						<Button
+							color="primary"
+							size="large"
+							variant="contained">
+							Sign Up
+						</Button>
 					</Link>
 				</Stack>
 			</Container>
