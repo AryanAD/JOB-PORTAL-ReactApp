@@ -5,12 +5,18 @@ const UserHomePage = () => {
 	return (
 		<Box
 			sx={{
-				bgcolor: "background.paper",
-				pt: 8,
-				pb: 6,
+				background:
+					"url('https://www.jobs360.com.ph/wp-content/uploads/2023/04/Tips-for-Job-Hunting-as-a-Fresh-Graduate.jpg.webp') no-repeat center center/cover",
+				margin: 0,
+				padding: "80px 0 60px 0",
+				// pt: 8,
+				// pb: 6,
 			}}>
 			<Container maxWidth="sm">
 				<Typography
+					fontFamily={"monospace"}
+					fontWeight={"bolder"}
+					fontSize={"60px"}
 					component="h1"
 					variant="h2"
 					align="center"

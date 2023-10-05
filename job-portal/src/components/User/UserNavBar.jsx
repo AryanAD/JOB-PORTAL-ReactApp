@@ -37,7 +37,7 @@ const UserNavBar = () => {
 									mr: 2,
 									display: { xs: "none", md: "flex" },
 									fontFamily: "monospace",
-									fontWeight: 700,
+									fontWeight: "bolder",
 									letterSpacing: ".3rem",
 									color: "inherit",
 									textDecoration: "none",
@@ -112,7 +112,7 @@ const UserNavBar = () => {
 					color: "black",
 				}}
 				component="main"
-				sx={{ flexGrow: 1, p: 3 }}>
+				sx={{ flexGrow: 1 }}>
 				{location.pathname === "/signin" ? (
 					<SigninPage />
 				) : location.pathname === "/signup" ? (
