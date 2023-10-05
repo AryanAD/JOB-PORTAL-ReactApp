@@ -2,7 +2,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Image from "./assets/job_banner.jpg";
 
-const PublicHomePage = () => {
+const ViewerHomePage = () => {
 	return (
 		<Box
 			sx={{
@@ -62,4 +62,4 @@ const PublicHomePage = () => {
 		</Box>
 	);
 };
-export default PublicHomePage;
+export default ViewerHomePage;

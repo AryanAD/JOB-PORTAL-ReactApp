@@ -10,9 +10,9 @@ import Modal from "./components/Modal";
 // import AdminCategories from "./components/Admin/AdminCategories";
 // import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
-import PublicLayout from "./layout/PublicLayout";
-import PublicHomePage from "./components/Public/PublicHomePage";
-import PublicNavBar from "./components/Public/PublicNavBar";
+import ViewerLayout from "./layout/ViewerLayout";
+import ViewerHomePage from "./components/Viewer/ViewerHomePage";
+import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 
 function App() {
 	return (
@@ -30,14 +30,14 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
-				<PublicLayout />
+				<ViewerLayout />
 				<Routes>
-					{/* Public Routes */}
-					<Route element={<PublicLayout />}>
-						<Route element={<PublicNavBar />}>
+					{/* Viewer Routes */}
+					<Route element={<ViewerLayout />}>
+						<Route element={<ViewerNavBar />}>
 							<Route
 								index
-								element={<PublicHomePage />}
+								element={<ViewerHomePage />}
 							/>
 							<Route
 								path="signin"

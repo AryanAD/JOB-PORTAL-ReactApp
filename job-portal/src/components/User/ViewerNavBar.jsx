@@ -10,9 +10,9 @@ import { Link, useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import SignupPage from "../SignupPage";
 import SigninPage from "../SigninPage";
-import PublicHomePage from "./PublicHomePage";
+import ViewerHomePage from "./ViewerHomePage";
 
-const PublicNavBar = () => {
+const ViewerNavBar = () => {
 	const location = useLocation();
 
 	return (
@@ -118,11 +118,11 @@ const PublicNavBar = () => {
 				) : location.pathname === "/signup" ? (
 					<SignupPage />
 				) : (
-					<PublicHomePage />
+					<ViewerHomePage />
 				)}
 			</Box>
 		</>
 	);
 };
 
-export default PublicNavBar;
+export default ViewerNavBar;
