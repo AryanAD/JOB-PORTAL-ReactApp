@@ -9,7 +9,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 
-const NavBar = () => {
+const UserNavBar = () => {
 	return (
 		<AppBar position="static">
 			<Container maxWidth="xl">
@@ -103,4 +103,4 @@ const NavBar = () => {
 	);
 };
 
-export default NavBar;
+export default UserNavBar;

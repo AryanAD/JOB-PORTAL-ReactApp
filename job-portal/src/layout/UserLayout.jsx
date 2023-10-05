@@ -1,5 +1,7 @@
+import UserNavBar from "../components/User/UserNavBar";
+
 const UserLayout = () => {
-	return <div></div>;
+	return <UserNavBar />;
 };
 
 export default UserLayout;

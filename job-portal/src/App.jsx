@@ -6,12 +6,13 @@ import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
 import Modal from "./components/Modal";
 import DashBoard from "./layout/DashBoard";
-import VendorLayout from "./layout/VendorLayout";
+// import VendorLayout from "./layout/VendorLayout";
 import AdminBanners from "./components/Admin/AdminBanners";
 // import AdminLayout from "./layout/AdminLayout";
 import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
+import UserLayout from "./layout/UserLayout";
 
 function App() {
 	return (
@@ -29,7 +30,7 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
-				<VendorLayout />
+				<UserLayout />
 				<Routes>
 					<Route
 						path="/"
