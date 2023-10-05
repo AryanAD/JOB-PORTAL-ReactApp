@@ -42,7 +42,7 @@ const VendorJobModal = ({ open, onClose }) => {
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
-					style: backdropStyle, // Apply the backdrop style here
+					style: backdropStyle, 
 				}}>
 				<Fade in={open}>
 					<Box sx={style}>

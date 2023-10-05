@@ -35,7 +35,7 @@ const limitLength = (text, maxLength) => {
 	return `${truncatedText}...`;
 };
 
-const VendorJobs = () => {
+const VendorApplicants = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const handleOpenModal = () => {
@@ -222,4 +222,4 @@ const VendorJobs = () => {
 	);
 };
 
-export default VendorJobs;
+export default VendorApplicants;
