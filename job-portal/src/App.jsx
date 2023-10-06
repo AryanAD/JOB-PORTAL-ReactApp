@@ -71,7 +71,7 @@ function App() {
 								path="user-jobs"
 								element={<UserJobs />}>
 								<Route
-									path="/user-jobs-modal"
+									path="user-jobs-modal"
 									element={<UserJobsModal />}
 								/>
 							</Route>
