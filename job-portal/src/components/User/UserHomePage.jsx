@@ -54,7 +54,9 @@ const UserHomePage = () => {
 			</Divider>
 			<Grid
 				style={{
-					width: "95vw",
+					display: "flex",
+					alignItems: "center",
+					width: "92vw",
 					margin: 5,
 				}}
 				container
