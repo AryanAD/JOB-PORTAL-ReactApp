@@ -16,9 +16,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
+import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import React from "react";
-import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useLocation } from "react-router-dom";
@@ -195,13 +196,30 @@ const UserSideDrawer = () => {
 									color: "#272727	",
 									textDecoration: "none",
 								}}
-								to={"/dashboard/Users"}>
+								to={"/"}>
+								<ListItemButton>
+									<CustomToolTip
+										title="Home"
+										placement="right">
+										<ListItemIcon>
+											<HomeRoundedIcon />
+										</ListItemIcon>
+									</CustomToolTip>
+									<ListItemText primary="Home" />
+								</ListItemButton>
+							</Link>
+							<Link
+								style={{
+									color: "#272727	",
+									textDecoration: "none",
+								}}
+								to={"/user-jobs"}>
 								<ListItemButton>
 									<CustomToolTip
 										title="Jobs"
 										placement="right">
 										<ListItemIcon>
-											<EngineeringRoundedIcon />
+											<WorkRoundedIcon />
 										</ListItemIcon>
 									</CustomToolTip>
 									<ListItemText primary="Jobs" />
@@ -212,16 +230,16 @@ const UserSideDrawer = () => {
 									color: "#272727	",
 									textDecoration: "none",
 								}}
-								to={"/dashboard/categories"}>
+								to={"/user-profile"}>
 								<ListItemButton>
 									<CustomToolTip
-										title="Applications"
+										title="Profile"
 										placement="right">
 										<ListItemIcon>
-											<TaskRoundedIcon />
+											<AccountCircleRoundedIcon />
 										</ListItemIcon>
 									</CustomToolTip>
-									<ListItemText primary="Applications" />
+									<ListItemText primary="Profile" />
 								</ListItemButton>
 							</Link>
 						</ListItem>
