@@ -8,6 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button, styled } from "@mui/material";
 import { Link } from "react-router-dom";
+import UserJobsModal from "./UserJobsModal";
+import { useState } from "react";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
@@ -28,6 +30,15 @@ const limitLength = (text, maxLength) => {
 };
 
 const UserJobsTable = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const handleOpenModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const handleCloseModal = () => {
+		setIsModalOpen(false);
+	};
 	return (
 		<Box
 			sx={{
@@ -157,15 +168,22 @@ const UserJobsTable = () => {
 									<TableCell align="right">Admin Bahadur</TableCell>
 									<TableCell align="right">Tech</TableCell>
 									<TableCell align="right">
-										<Link to={"/vendorjobmodal"}>
+										<Link to={"/user-jobs-modal"}>
 											<Button
 												size="small"
+												onClick={handleOpenModal}
 												variant="outlined"
 												color="info">
 												Details
 											</Button>
 										</Link>
 									</TableCell>
+									{isModalOpen && (
+										<UserJobsModal
+											open={isModalOpen}
+											onClose={handleCloseModal}
+										/>
+									)}
 								</StyledTableRow>
 							))}
 						</TableBody>

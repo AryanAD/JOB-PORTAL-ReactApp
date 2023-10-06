@@ -18,6 +18,7 @@ import UserSideDrawer from "./components/User/UserSideDrawer";
 import UserHomePage from "./components/User/UserHomePage";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
+import UserJobsModal from "./components/User/UserJobsModal";
 
 function App() {
 	return (
@@ -68,8 +69,12 @@ function App() {
 							/>
 							<Route
 								path="user-jobs"
-								element={<UserJobs />}
-							/>
+								element={<UserJobs />}>
+								<Route
+									path="/user-jobs-modal"
+									element={<UserJobsModal />}
+								/>
+							</Route>
 						</Route>
 					</Route>
 
