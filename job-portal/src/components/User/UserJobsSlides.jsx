@@ -69,7 +69,7 @@ const UserJobsSlides = () => {
 					width: "80%",
 					color: "black",
 					borderRadius: "13px 13px 0  0",
-					mt: 3,
+					mt: 2,
 					display: "flex",
 					alignItems: "center",
 					height: 50,
