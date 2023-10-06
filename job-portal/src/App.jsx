@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import SigninPage from "./components/SigninPage";
-import SignupPage from "./components/SignupPage";
+// import SigninPage from "./components/SigninPage";
+// import SignupPage from "./components/SignupPage";
 import Modal from "./components/Modal";
 // import VendorLayout from "./layout/VendorLayout";
 // import AdminBanners from "./components/Admin/AdminBanners";
@@ -10,9 +10,14 @@ import Modal from "./components/Modal";
 // import AdminCategories from "./components/Admin/AdminCategories";
 // import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
-import ViewerLayout from "./layout/ViewerLayout";
-import ViewerHomePage from "./components/Viewer/ViewerHomePage";
-import ViewerNavBar from "./components/Viewer/ViewerNavBar";
+// import ViewerLayout from "./layout/ViewerLayout";
+// import ViewerHomePage from "./components/Viewer/ViewerHomePage";
+// import ViewerNavBar from "./components/Viewer/ViewerNavBar";
+import UserLayout from "./layout/UserLayout";
+import UserSideDrawer from "./components/User/UserSideDrawer";
+import UserHomePage from "./components/User/UserHomePage";
+import UserProfile from "./components/User/UserProfile";
+import UserJobs from "./components/User/UserJobs";
 
 function App() {
 	return (
@@ -30,10 +35,10 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
-				<ViewerLayout />
+				<UserLayout />
 				<Routes>
 					{/* Viewer Routes */}
-					<Route element={<ViewerLayout />}>
+					{/* <Route element={<ViewerLayout />}>
 						<Route element={<ViewerNavBar />}>
 							<Route
 								index
@@ -46,6 +51,24 @@ function App() {
 							<Route
 								path="signup"
 								element={<SignupPage />}
+							/>
+						</Route>
+					</Route> */}
+
+					{/* User Routes */}
+					<Route element={<UserLayout />}>
+						<Route element={<UserSideDrawer />}>
+							<Route
+								index
+								element={<UserHomePage />}
+							/>
+							<Route
+								path="user-profile"
+								element={<UserProfile />}
+							/>
+							<Route
+								path="user-jobs"
+								element={<UserJobs />}
 							/>
 						</Route>
 					</Route>
