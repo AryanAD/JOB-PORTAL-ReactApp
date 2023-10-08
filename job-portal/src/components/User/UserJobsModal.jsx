@@ -18,7 +18,7 @@ const style = {
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	bgcolor: "white", // Adjust the background color of the modal itself here
+	bgcolor: "white",
 	border: "1px solid #29a2f3",
 	borderRadius: "13px",
 	boxShadow: 24,
@@ -26,7 +26,7 @@ const style = {
 };
 
 const backdropStyle = {
-	backgroundColor: "rgba(0, 0, 0, 0.2)", // Adjust the background color and opacity of the backdrop here
+	backgroundColor: "rgba(0, 0, 0, 0.2)",
 };
 
 const UserJobsModal = ({ open, onClose }) => {
@@ -41,7 +41,7 @@ const UserJobsModal = ({ open, onClose }) => {
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
-					style: backdropStyle, // Apply the backdrop style here
+					style: backdropStyle,
 				}}>
 				<Fade in={open}>
 					<Box sx={style}>

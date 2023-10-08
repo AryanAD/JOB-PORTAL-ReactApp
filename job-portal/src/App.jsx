@@ -10,7 +10,7 @@ import Modal from "./components/Modal";
 // import AdminCategories from "./components/Admin/AdminCategories";
 // import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
-// import ViewerLayout from "./layout/ViewerLayout";
+import ViewerLayout from "./layout/ViewerLayout";
 // import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 // import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserLayout from "./layout/UserLayout";
@@ -19,6 +19,7 @@ import UserHomePage from "./components/User/UserHomePage";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
 import UserJobsModal from "./components/User/UserJobsModal";
+import UserJobsTable from "./components/User/UserJobsTable";
 
 function App() {
 	return (
@@ -36,10 +37,10 @@ function App() {
 					pauseOnHover
 					theme="light"
 				/>
-				<UserLayout />
+				<ViewerLayout />
 				<Routes>
-					{/* Viewer Routes */}
-					{/* <Route element={<ViewerLayout />}>
+					{/* Viewer Routes
+					<Route element={<ViewerLayout />}>
 						<Route element={<ViewerNavBar />}>
 							<Route
 								index
@@ -55,7 +56,6 @@ function App() {
 							/>
 						</Route>
 					</Route> */}
-
 					{/* User Routes */}
 					<Route element={<UserLayout />}>
 						<Route element={<UserSideDrawer />}>
@@ -68,18 +68,23 @@ function App() {
 								element={<UserProfile />}
 							/>
 							<Route
-								path="user-jobs"
-								element={<UserJobs />}>
-								<Route
-									path="user-jobs-modal"
-									element={<UserJobsModal />}
-								/>
-							</Route>
+								path="/user-jobs"
+								element={<UserJobs />}
+							/>
+
+							<Route
+								path="/user-jobs/*"
+								element={<UserJobsTable />}
+							/>
+
+							<Route
+								path="/user-jobs-modal"
+								element={<UserJobsModal />}
+							/>
 						</Route>
 					</Route>
-
-					{/* Admin Routes */}
-					{/* <Route
+					{/* Admin Routes 
+					 <Route
 						path="/"
 						element={<AdminLayout />}>
 						<Route
@@ -95,7 +100,6 @@ function App() {
 							element={<AdminBanners />}
 						/>
 					</Route> */}
-
 					{/* Other Routes */}
 					<Route
 						path="/modal"
