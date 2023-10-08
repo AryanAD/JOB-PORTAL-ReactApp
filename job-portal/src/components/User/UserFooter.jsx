@@ -94,8 +94,9 @@ const UserFooter = () => {
 							lineHeight: "28px",
 						}}>
 						Find your first job with us. We are a Job Portal with a huge network
-						and database of currently available jobs in Nepal and we provide you
-						with the option to choose from our huge database.
+						and database of currently available jobs in Nepal and you can rest
+						assured that you will not have to bear the burden of searching for a
+						job ever again
 					</p>
 				</Box>
 				<Box sx={right}>

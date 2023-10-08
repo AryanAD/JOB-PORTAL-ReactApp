@@ -43,7 +43,17 @@ const UserHomePage = () => {
 				alignItems: "center",
 				justifyContent: "center",
 			}}>
-			{/* <Divider
+			<Box
+				sx={{
+					height: "58vh",
+					flexGrow: 1,
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+				}}>
+				<Typography variant="h1">Banner</Typography>
+			</Box>
+			<Divider
 				sx={{
 					mt: 4,
 				}}
@@ -56,22 +66,16 @@ const UserHomePage = () => {
 						letterSpacing: "6px",
 						marginBottom: "5px",
 						fontWeight: "bold",
-						textAlign: "center",
+						textAlign: "left",
 					}}
-					variant="h4">
-					Currently Available Jobs
+					variant="h5">
+					Jobs Popular Today
 				</Typography>
-			</Divider> */}
-			<Box
-				sx={{
-					height: "58vh",
-					flexGrow: 1,
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-				}}>
-				<Typography variant="h1">Banner</Typography>
-			</Box>
+				<Divider variant="middle" />
+				<Divider variant="middle" />
+				<Divider variant="middle" />
+				<Divider variant="middle" />
+			</Divider>
 			<Grid
 				style={{
 					display: "flex",
@@ -148,48 +152,55 @@ const UserHomePage = () => {
 			<Box
 				sx={{
 					display: "flex",
-					flexDirection: "column",
 					alignItems: "center",
-					justifyContent: "space-evenly",
 					mt: 10,
 					width: "1920px",
 					height: "620px",
 					backgroundImage: `url(${Image})`,
 				}}>
-				<Box sx={{ display: "flex" }}>
-					<Typography
-						sx={{
-							color: "orangered",
-							fontFamily: "nunito",
-							letterSpacing: "6px",
-							fontWeight: "bold",
-							textAlign: "center",
-						}}
-						variant="h1">
-						Need a Freelancer?
-					</Typography>
-				</Box>
-				<Box sx={{ display: "flex" }}>
-					<Typography
-						variant="h4"
-						sx={{
-							color: "black",
-							fontFamily: "nunito",
-							letterSpacing: "6px",
-							marginBottom: "5px",
-							fontWeight: "bold",
-							textAlign: "center",
-						}}>
-						Become a Vendor Today!
-					</Typography>
-				</Box>
-				<Box sx={{ display: "flex", alignItems: "center" }}>
-					<Button
-						sx={{ fontSize: 28 }}
-						color="secondary"
-						variant="contained">
-						Apply for Vendor
-					</Button>
+				<Box sx={{ width: "900px", height: "620px" }} />
+				<Box
+					sx={{
+						height: "500px",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "space-around",
+					}}>
+					<Box sx={{ display: "flex" }}>
+						<Typography
+							sx={{
+								color: "orangered",
+								fontFamily: "nunito",
+								letterSpacing: "6px",
+								fontWeight: "bold",
+								textAlign: "center",
+							}}
+							variant="h1">
+							Need a Freelancer?
+						</Typography>
+					</Box>
+					<Box sx={{ display: "flex" }}>
+						<Typography
+							variant="h4"
+							sx={{
+								color: "black",
+								fontFamily: "nunito",
+								letterSpacing: "6px",
+								fontWeight: "bold",
+								textAlign: "center",
+							}}>
+							Become a Vendor Today!
+						</Typography>
+					</Box>
+					<Box sx={{ display: "flex", alignItems: "center" }}>
+						<Button
+							sx={{ fontSize: 28 }}
+							color="secondary"
+							variant="contained">
+							Apply for Vendor
+						</Button>
+					</Box>
 				</Box>
 			</Box>
 			<Link
