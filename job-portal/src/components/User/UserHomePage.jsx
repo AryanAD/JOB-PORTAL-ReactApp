@@ -57,9 +57,8 @@ const UserHomePage = () => {
 				style={{
 					display: "flex",
 					alignItems: "center",
-					maxWidth: "98vw",
+					width: "92vw",
 					margin: 5,
-					mb: 2,
 				}}
 				container
 				spacing={4}>
