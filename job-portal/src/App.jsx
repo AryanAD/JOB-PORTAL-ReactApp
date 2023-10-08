@@ -14,7 +14,7 @@ import ViewerLayout from "./layout/ViewerLayout";
 // import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 // import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserLayout from "./layout/UserLayout";
-import UserSideDrawer from "./components/User/UserSideDrawer";
+import UserNavBar from "./components/User/UserNavBar";
 import UserHomePage from "./components/User/UserHomePage";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
@@ -58,7 +58,7 @@ function App() {
 					</Route> */}
 					{/* User Routes */}
 					<Route element={<UserLayout />}>
-						<Route element={<UserSideDrawer />}>
+						<Route element={<UserNavBar />}>
 							<Route
 								index
 								element={<UserHomePage />}
