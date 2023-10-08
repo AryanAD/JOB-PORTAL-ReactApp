@@ -94,7 +94,9 @@ const UserNavBar = () => {
 						<HailRoundedIcon
 							sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
 						/>
-						<Link to="/">
+						<Link
+							to="/"
+							style={{ textDecoration: "none", color: "white" }}>
 							<Typography
 								variant="h5"
 								noWrap
@@ -126,8 +128,8 @@ const UserNavBar = () => {
 									onClick={handleOpenUserMenu}
 									sx={{ p: 0 }}>
 									<Avatar
-										alt="Remy Sharp"
-										src="/static/images/avatar/2.jpg"
+										alt="Dummy User"
+										src="https://mui.com/static/images/avatar/2.jpg"
 									/>
 								</IconButton>
 							</Tooltip>
@@ -147,11 +149,9 @@ const UserNavBar = () => {
 								open={Boolean(anchorElUser)}
 								onClose={handleCloseUserMenu}>
 								<MenuItem onClick={handleCloseUserMenu}>
-									<Typography textAlign="center">Profile</Typography>
+									<Typography textAlign="center">My Profile</Typography>
 								</MenuItem>
-								<MenuItem onClick={handleCloseUserMenu}>
-									<Typography textAlign="center">My Account</Typography>
-								</MenuItem>
+
 								<MenuItem
 									sx={{
 										bgcolor: "red",

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
+import UserFooter from "./UserFooter";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -56,8 +57,9 @@ const UserHomePage = () => {
 				style={{
 					display: "flex",
 					alignItems: "center",
-					width: "92vw",
+					maxWidth: "98vw",
 					margin: 5,
+					mb: 2,
 				}}
 				container
 				spacing={4}>
@@ -130,6 +132,7 @@ const UserHomePage = () => {
 					/>
 				</IconButton>
 			</Link>
+			<UserFooter />
 		</>
 	);
 };
