@@ -13,7 +13,8 @@ import {
 import { Link } from "react-router-dom";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import UserFooter from "./UserFooter";
-import Image from "./assets/vendor.png";
+import VendorImg from "./assets/vendor.png";
+import Banner from "./assets/Advertising.png";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -45,17 +46,46 @@ const UserHomePage = () => {
 			}}>
 			<Box
 				sx={{
-					height: "58vh",
+					height: "1040px",
+					width: "1920px",
 					flexGrow: 1,
 					display: "flex",
-					justifyContent: "center",
+					justifyContent: "flex-end",
 					alignItems: "center",
+					backgroundImage: `url(${Banner})`,
+					backgroundRepeat: "no-repeat",
+					backgroundSize: "cover",
 				}}>
-				<Typography variant="h1">Banner</Typography>
+				<Box
+					sx={{
+						height: "400px",
+						width: "1120px",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "flex-end",
+					}}>
+					<Button
+						fullwidth
+						sx={{
+							"&:hover": { bgcolor: "#277aff", color: "white" },
+							scale: "2",
+						}}
+						size="large"
+						variant="outlined">
+						Find a Job
+					</Button>
+				</Box>
+				<Box
+					sx={{
+						height: "1040px",
+						width: "800px",
+					}}></Box>
 			</Box>
 			<Divider
 				sx={{
 					mt: 4,
+					mb: 8,
 				}}
 				variant="inset"
 				textAlign="left">
@@ -68,7 +98,7 @@ const UserHomePage = () => {
 						fontWeight: "bold",
 						textAlign: "left",
 					}}
-					variant="h5">
+					variant="h4">
 					Jobs Popular Today
 				</Typography>
 				<Divider variant="middle" />
@@ -79,6 +109,7 @@ const UserHomePage = () => {
 			<Grid
 				style={{
 					display: "flex",
+					justifyContent: "center",
 					alignItems: "center",
 					maxWidth: "80vw",
 					margin: 5,
@@ -89,66 +120,97 @@ const UserHomePage = () => {
 					<Grid
 						item
 						key={card}
-						xs={10}
-						sm={10}
-						md={3}>
+						xs={7}
+						sm={7}
+						md={4}>
 						<Card
 							sx={{
 								height: "100%",
+								maxWidth: "24vw",
 								display: "flex",
-								// alignItems: "center",
-								flexDirection: "column",
 								bgcolor: "#e9e9e9",
 								boxShadow: 24,
 								border: "1px solid #d8d8d8",
 								borderRadius: 3,
 							}}>
-							<CardContent sx={{ flexGrow: 1 }}>
-								<Typography
-									gutterBottom={false}
-									variant="h4"
-									sx={{ mb: 0, pb: 0 }}
-									component="h2">
-									Job Name
-								</Typography>
-								<Divider variant="inset" />
-								<Divider variant="inset" />
-								<Divider variant="inset" />
-								<Divider variant="inset" />
-							</CardContent>
-							<CardMedia
-								gutterBottom
-								component="div"
+							<CardContent
 								sx={{
-									// 16:9
-									pt: "45%",
-								}}
-								image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-							/>
-
-							<CardActions>
-								<Link
-									style={{
-										width: "100%",
-									}}
-									to="/signup">
-									<Button
+									gap: 2,
+									flexGrow: 1,
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}>
+								<Box>
+									<CardMedia
+										gutterBottom
 										sx={{
-											my: 0.5,
-											color: "black",
-											"&:hover": { bgcolor: "#277aff", color: "white" },
+											// 16:9
+											width: "100px",
+											height: "100px",
+											border: "4px inset #277aff",
+											borderRadius: "13px",
 										}}
-										fullWidth
-										variant="outlined"
-										size="medium">
-										Join us
-									</Button>
-								</Link>
-							</CardActions>
+										image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+									/>
+								</Box>
+								<Box
+									sx={{
+										height: "100%",
+										width: "100%",
+										display: "flex",
+										flexDirection: "column",
+										alignItems: "space-between",
+									}}>
+									<Typography
+										gutterBottom={false}
+										variant="h4"
+										sx={{
+											mb: 0,
+											pb: 0,
+											fontWeight: "bolder",
+											color: "#444",
+											fontFamily: "monospace",
+										}}
+										component="h2">
+										Job Name
+									</Typography>
+									<CardActions>
+										<Link
+											style={{
+												width: "100%",
+											}}
+											to="/signup">
+											<Button
+												sx={{
+													my: 0.5,
+													color: "black",
+													"&:hover": { bgcolor: "#277aff", color: "white" },
+												}}
+												fullWidth
+												variant="outlined"
+												size="medium">
+												More Info
+											</Button>
+										</Link>
+									</CardActions>
+								</Box>
+							</CardContent>
 						</Card>
 					</Grid>
 				))}
 			</Grid>
+			<Button
+				sx={{
+					mt: 10,
+					scale: "2",
+					bgcolor: "#7ed957",
+					"&:hover": { bgcolor: "#00bf63" },
+				}}
+				size="small"
+				variant="contained">
+				More Jobs
+			</Button>
 			<Box
 				sx={{
 					display: "flex",
@@ -156,7 +218,7 @@ const UserHomePage = () => {
 					mt: 10,
 					width: "1920px",
 					height: "620px",
-					backgroundImage: `url(${Image})`,
+					backgroundImage: `url(${VendorImg})`,
 				}}>
 				<Box sx={{ width: "900px", height: "620px" }} />
 				<Box
