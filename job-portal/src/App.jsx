@@ -20,6 +20,7 @@ import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
 import UserJobsModal from "./components/User/UserJobsModal";
 import UserJobsTable from "./components/User/UserJobsTable";
+import UserNewVendor from "./components/User/UserNewVendor";
 
 function App() {
 	return (
@@ -80,6 +81,10 @@ function App() {
 							<Route
 								path="/user-jobs-modal"
 								element={<UserJobsModal />}
+							/>
+							<Route
+								path="/register-vendor"
+								element={<UserNewVendor />}
 							/>
 						</Route>
 					</Route>

@@ -1,21 +1,26 @@
 import {
+	HomeRepairServiceRounded,
+	LockPersonRounded,
+	MailRounded,
+	PersonRounded,
+	PhoneRounded,
+	PushPinRounded,
+	SettingsSuggestRounded,
+} from "@mui/icons-material";
+import {
 	Avatar,
 	Box,
 	Button,
 	CssBaseline,
 	Grid,
+	InputAdornment,
+	Paper,
 	TextField,
 	ThemeProvider,
 	Typography,
-	Paper,
 	createTheme,
-	InputAdornment,
 } from "@mui/material";
-import LockPersonIcon from "@mui/icons-material/LockPerson";
-import EmailIcon from "@mui/icons-material/Email";
-import LockIcon from "@mui/icons-material/Lock";
 import { Link } from "react-router-dom";
-import { PersonRounded } from "@mui/icons-material";
 
 function Copyright(props) {
 	return (
@@ -26,7 +31,10 @@ function Copyright(props) {
 			{...props}>
 			{"Copyright © "}
 			<Link
-				style={{ textDecoration: "none", color: "#555" }}
+				style={{
+					textDecoration: "none",
+					color: "#555",
+				}}
 				to="/">
 				React Job Portal
 			</Link>{" "}
@@ -38,16 +46,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-const SignupPage = () => {
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get("email"),
-			password: data.get("password"),
-		});
-	};
-
+const UserNewVendor = () => {
 	return (
 		<ThemeProvider theme={defaultTheme}>
 			<Grid
@@ -90,17 +89,16 @@ const SignupPage = () => {
 						<Avatar
 							variant="rounded"
 							sx={{ m: 1, bgcolor: "#17e717", width: 50, height: 50 }}>
-							<LockPersonIcon />
+							<LockPersonRounded />
 						</Avatar>
 						<Typography
 							component="h1"
 							variant="h4">
-							Sign Up
+							Sign In
 						</Typography>
 						<Box
 							component="form"
 							noValidate
-							onSubmit={handleSubmit}
 							sx={{ mt: 1 }}>
 							<TextField
 								InputProps={{
@@ -110,77 +108,101 @@ const SignupPage = () => {
 										</InputAdornment>
 									),
 								}}
-								type="text"
 								margin="normal"
-								required
 								fullWidth
 								id="name"
 								label="Full Name"
 								name="name"
-								autoComplete="name"
 								autoFocus
+								type="text"
 							/>
 							<TextField
 								InputProps={{
 									startAdornment: (
 										<InputAdornment position="start">
-											<EmailIcon />
+											<MailRounded />
 										</InputAdornment>
 									),
 								}}
-								type="email"
 								margin="normal"
-								required
 								fullWidth
 								id="email"
 								label="Email Address"
 								name="email"
-								autoComplete="email"
 								autoFocus
+								type="email"
 							/>
 							<TextField
 								InputProps={{
 									startAdornment: (
 										<InputAdornment position="start">
-											<LockIcon />
+											<HomeRepairServiceRounded />
 										</InputAdornment>
 									),
 								}}
 								margin="normal"
-								required
 								fullWidth
-								name="password"
-								label="Password"
-								type="password"
-								id="password"
-								autoComplete="current-password"
+								id="name"
+								label="Designation"
+								name="name"
+								autoFocus
+								type="text"
 							/>
 							<TextField
 								InputProps={{
 									startAdornment: (
 										<InputAdornment position="start">
-											<LockIcon />
+											<SettingsSuggestRounded />
 										</InputAdornment>
 									),
 								}}
 								margin="normal"
-								required
 								fullWidth
-								name="password"
-								label="Confirm Password"
-								type="password"
-								id="password"
-								autoComplete="current-password"
+								id="name"
+								label="Service"
+								name="name"
+								autoFocus
+								type="text"
 							/>
-
+							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<PhoneRounded />
+										</InputAdornment>
+									),
+								}}
+								margin="normal"
+								fullWidth
+								id="number"
+								label="Contact"
+								name="number"
+								autoFocus
+								type="number"
+							/>
+							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<PushPinRounded />
+										</InputAdornment>
+									),
+								}}
+								margin="normal"
+								fullWidth
+								id="name"
+								label="Address"
+								name="name"
+								autoFocus
+								type="text"
+							/>
 							<Button
 								type="submit"
 								fullWidth
 								variant="contained"
 								sx={{ mt: 3, mb: 2 }}>
-								Sign Up
+								Sign In
 							</Button>
-
 							<Grid container>
 								<Grid item>
 									<Link
@@ -189,8 +211,8 @@ const SignupPage = () => {
 											color: "indianred",
 											fontWeight: "bold",
 										}}
-										to="/signin">
-										{"↼ Back to Sign In"}
+										to="/signup">
+										{"Don't have an account? Sign Up"}
 									</Link>
 								</Grid>
 							</Grid>
@@ -203,4 +225,4 @@ const SignupPage = () => {
 	);
 };
 
-export default SignupPage;
+export default UserNewVendor;

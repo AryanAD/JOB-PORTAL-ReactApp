@@ -8,6 +8,7 @@ import {
 	Divider,
 	Grid,
 	IconButton,
+	Rating,
 	Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -15,6 +16,7 @@ import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import UserFooter from "./UserFooter";
 import VendorImg from "./assets/vendor.png";
 import Banner from "./assets/Advertising.png";
+import { StarRounded } from "@mui/icons-material";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -27,6 +29,19 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8];
 // 	return `${truncatedText}...`;
 // };
 
+const labels = {
+	0.5: "Useless",
+	1: "Useless+",
+	1.5: "Poor",
+	2: "Poor+",
+	2.5: "Ok",
+	3: "Ok+",
+	3.5: "Good",
+	4: "Good+",
+	4.5: "Excellent",
+	5: "Excellent+",
+};
+
 const goToTop = () => {
 	window.scrollTo({
 		top: 0,
@@ -35,6 +50,7 @@ const goToTop = () => {
 };
 
 const UserHomePage = () => {
+	const value = 3.5;
 	return (
 		<Box
 			sx={{
@@ -65,16 +81,18 @@ const UserHomePage = () => {
 						alignItems: "center",
 						justifyContent: "flex-end",
 					}}>
-					<Button
-						fullwidth
-						sx={{
-							"&:hover": { bgcolor: "#277aff", color: "white" },
-							scale: "2",
-						}}
-						size="large"
-						variant="outlined">
-						Find a Job
-					</Button>
+					<Link to="/user-jobs">
+						<Button
+							fullwidth
+							sx={{
+								"&:hover": { bgcolor: "#277aff", color: "white" },
+								scale: "2",
+							}}
+							size="large"
+							variant="outlined">
+							Find a Job
+						</Button>
+					</Link>
 				</Box>
 				<Box
 					sx={{
@@ -146,8 +164,8 @@ const UserHomePage = () => {
 										gutterBottom
 										sx={{
 											// 16:9
-											width: "100px",
-											height: "100px",
+											width: "130px",
+											height: "130px",
 											border: "4px inset #277aff",
 											borderRadius: "13px",
 										}}
@@ -175,12 +193,33 @@ const UserHomePage = () => {
 										component="h2">
 										Job Name
 									</Typography>
+									<Box
+										sx={{
+											width: 200,
+											display: "flex",
+											justifyContent: "center",
+											alignItems: "center",
+										}}>
+										<Rating
+											name="text-feedback"
+											value={value}
+											readOnly
+											precision={0.5}
+											emptyIcon={
+												<StarRounded
+													style={{ opacity: 0.55 }}
+													fontSize="inherit"
+												/>
+											}
+										/>
+										<Box sx={{ ml: 2 }}>{labels[value]}</Box>
+									</Box>
 									<CardActions>
 										<Link
 											style={{
 												width: "100%",
 											}}
-											to="/signup">
+											to="/user-jobs">
 											<Button
 												sx={{
 													my: 0.5,
@@ -200,17 +239,19 @@ const UserHomePage = () => {
 					</Grid>
 				))}
 			</Grid>
-			<Button
-				sx={{
-					mt: 10,
-					scale: "2",
-					bgcolor: "#7ed957",
-					"&:hover": { bgcolor: "#00bf63" },
-				}}
-				size="small"
-				variant="contained">
-				More Jobs
-			</Button>
+			<Link to="/user-jobs">
+				<Button
+					sx={{
+						mt: 10,
+						scale: "2",
+						bgcolor: "#7ed957",
+						"&:hover": { bgcolor: "#00bf63" },
+					}}
+					size="small"
+					variant="contained">
+					More Jobs
+				</Button>
+			</Link>
 			<Box
 				sx={{
 					display: "flex",
@@ -256,12 +297,14 @@ const UserHomePage = () => {
 						</Typography>
 					</Box>
 					<Box sx={{ display: "flex", alignItems: "center" }}>
-						<Button
-							sx={{ fontSize: 28 }}
-							color="secondary"
-							variant="contained">
-							Apply for Vendor
-						</Button>
+						<Link to="/register-vendor">
+							<Button
+								sx={{ fontSize: 28 }}
+								color="secondary"
+								variant="contained">
+								Apply for Vendor
+							</Button>
+						</Link>
 					</Box>
 				</Box>
 			</Box>

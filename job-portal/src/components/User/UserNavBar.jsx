@@ -11,6 +11,7 @@ import UserHomePage from "./UserHomePage";
 import UserProfile from "./UserProfile";
 import UserJobs from "./UserJobs";
 import { Link } from "react-router-dom";
+import UserNewVendor from "./UserNewVendor";
 
 const UserNavBar = () => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -148,9 +149,16 @@ const UserNavBar = () => {
 								}}
 								open={Boolean(anchorElUser)}
 								onClose={handleCloseUserMenu}>
-								<MenuItem onClick={handleCloseUserMenu}>
-									<Typography textAlign="center">My Profile</Typography>
-								</MenuItem>
+								<Link
+									to="/user-profile"
+									style={{
+										color: "black",
+										textDecoration: "none",
+									}}>
+									<MenuItem onClick={handleCloseUserMenu}>
+										<Typography textAlign="center">My Profile</Typography>
+									</MenuItem>
+								</Link>
 
 								<MenuItem
 									sx={{
@@ -181,6 +189,8 @@ const UserNavBar = () => {
 					<UserProfile />
 				) : location.pathname === "/user-jobs" ? (
 					<UserJobs />
+				) : location.pathname === "/register-vendor" ? (
+					<UserNewVendor />
 				) : (
 					<UserHomePage />
 				)}
