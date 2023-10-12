@@ -26,11 +26,12 @@ const UserProfile = () => {
 							display: "flex",
 							justifyContent: "space-between",
 							alignItems: "space-between",
-							bgcolor: "navyblue",
+							bgcolor: "blue",
 							width: "20vw",
 							height: "100vh",
 						}}>
-						<Box></Box>
+						<h1>hello</h1>
+						<Box sx></Box>
 						<Box></Box>
 						<Box></Box>
 					</Box>
