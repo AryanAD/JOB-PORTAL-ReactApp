@@ -31,8 +31,13 @@ const UserProfile = () => {
 							height: "100vh",
 						}}>
 						<h1>hello</h1>
-						<Box sx></Box>
 						<Box></Box>
+						<Box></Box>
+					</Box>
+					<Box
+						sx={{
+							display: "flex",
+						}}>
 						<Box></Box>
 					</Box>
 				</Box>
