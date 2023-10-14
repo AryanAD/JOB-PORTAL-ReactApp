@@ -26,7 +26,6 @@ const UserProfile = () => {
 						alignItems: "center",
 						width: "80vw",
 						height: "100vh",
-						bgcolor: "white",
 					}}>
 					{/* left */}
 					<Box
@@ -135,8 +134,27 @@ const UserProfile = () => {
 										mt: 2,
 										mx: 3,
 									}}>
-									<label>Full Name:</label>
-									<TextField></TextField>
+									<label
+										style={{
+											padding: 2,
+											fontFamily: "monospace",
+											color: "#555",
+										}}>
+										Full Name:
+									</label>
+									<TextField
+										sx={{
+											boxShadow: 3,
+											borderRadius: "9px",
+											outline: "transparent",
+											border: "transparent",
+											"&:hover": {
+												outline: "transparent",
+												border: "transparent",
+											},
+											outlineColor: "transparent",
+										}}
+										variant="outlined"></TextField>
 								</Box>
 							</Box>
 						</Box>
