@@ -3,6 +3,7 @@ import {
 	Box,
 	Button,
 	Divider,
+	Grid,
 	TextField,
 	Typography,
 } from "@mui/material";
@@ -126,10 +127,14 @@ const UserProfile = () => {
 								<Divider variant="inset" />
 								<Divider variant="inset" />
 								<Divider variant="inset" />
+										<Grid container>
+											<Grid item>
 								<Box
 									sx={{
-										width: "55vw",
+										bgcolor: "orange",
+										width: "35vw",
 										display: "flex",
+										alignItems: "center",
 										flexDirection: "column",
 										mt: 2,
 										mx: 3,
@@ -141,6 +146,71 @@ const UserProfile = () => {
 											color: "#555",
 										}}>
 										Full Name:
+									</label>
+
+									<TextField
+										sx={{
+											boxShadow: 3,
+											borderRadius: "9px",
+											outline: "transparent",
+											border: "transparent",
+											"&:hover": {
+												outline: "transparent",
+												border: "transparent",
+											},
+											outlineColor: "transparent",
+										}}
+										variant="outlined"></TextField>
+
+										<label
+										style={{
+											padding: 2,
+											fontFamily: "monospace",
+											color: "#555",
+										}}>
+										Email:
+									</label>
+									<TextField
+										sx={{
+											boxShadow: 3,
+											borderRadius: "9px",
+											outline: "transparent",
+											border: "transparent",
+											"&:hover": {
+												outline: "transparent",
+												border: "transparent",
+											},
+											outlineColor: "transparent",
+										}}
+										variant="outlined"></TextField>
+<label
+										style={{
+											padding: 2,
+											fontFamily: "monospace",
+											color: "#555",
+										}}>
+										Password:
+									</label>
+									<TextField
+										sx={{
+											boxShadow: 3,
+											borderRadius: "9px",
+											outline: "transparent",
+											border: "transparent",
+											"&:hover": {
+												outline: "transparent",
+												border: "transparent",
+											},
+											outlineColor: "transparent",
+										}}
+										variant="outlined"></TextField>
+<label
+										style={{
+											padding: 2,
+											fontFamily: "monospace",
+											color: "#555",
+										}}>
+										Confirm Password:
 									</label>
 									<TextField
 										sx={{
@@ -156,6 +226,8 @@ const UserProfile = () => {
 										}}
 										variant="outlined"></TextField>
 								</Box>
+										</Grid>
+									</Grid>
 							</Box>
 						</Box>
 					</Box>
