@@ -1,4 +1,11 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import {
+	Avatar,
+	Box,
+	Button,
+	Divider,
+	TextField,
+	Typography,
+} from "@mui/material";
 
 const UserProfile = () => {
 	return (
@@ -41,7 +48,7 @@ const UserProfile = () => {
 								borderRadius: "11px",
 								width: "18vw",
 								height: "36vh",
-								border: "2px solid #277aff",
+								boxShadow: "9",
 								pt: 4,
 							}}>
 							<Avatar
@@ -61,7 +68,7 @@ const UserProfile = () => {
 						</Box>
 						<Box
 							sx={{
-								border: "2px solid #277aff",
+								boxShadow: "9",
 								display: "flex",
 								borderRadius: "11px",
 								width: "18vw",
@@ -83,9 +90,56 @@ const UserProfile = () => {
 								margin: 5,
 								borderRadius: "11px",
 								width: "58vw",
-								border: "2px solid #277aff",
+								boxShadow: "9",
 								height: "100vh",
-							}}></Box>
+							}}>
+							<Box>
+								<Box
+									sx={{
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "space-between",
+										alignItems: "center",
+										mt: 2,
+										mx: 3,
+										mb: 1,
+										width: "55vw",
+									}}>
+									<Typography
+										sx={{ fontFamily: "monospace" }}
+										variant="h3">
+										My Profile
+									</Typography>
+									<Button
+										sx={{
+											height: "35px",
+											"&:hover": {
+												bgcolor: "#e0e0e0",
+												color: "white",
+											},
+										}}
+										variant="outlined"
+										size="large">
+										Back
+									</Button>
+								</Box>
+								<Divider variant="inset" />
+								<Divider variant="inset" />
+								<Divider variant="inset" />
+								<Divider variant="inset" />
+								<Box
+									sx={{
+										width: "55vw",
+										display: "flex",
+										flexDirection: "column",
+										mt: 2,
+										mx: 3,
+									}}>
+									<label>Full Name:</label>
+									<TextField></TextField>
+								</Box>
+							</Box>
+						</Box>
 					</Box>
 				</Box>
 			</Box>
