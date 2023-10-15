@@ -3,9 +3,13 @@ import {
   Box,
   Button,
   Divider,
+  List,
+  ListItem,
+  ListItemButton,
   TextField,
   Typography,
 } from "@mui/material";
+import { SaveRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const UserProfile = () => {
@@ -56,7 +60,7 @@ const UserProfile = () => {
               }}
             >
               <Avatar
-                alt="Remy Sharp"
+                alt="Angus Young"
                 src="https://i.discogs.com/SITk5YC38UEY6SIcDrveDUW4kOcbKk1tk15ZjnI7fK0/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTI3MzU0/NC0xNjExOTYyNzEx/LTg3NjguanBlZw.jpeg"
                 sx={{ width: 190, height: 190, border: "2px solid #333" }}
               />
@@ -78,8 +82,56 @@ const UserProfile = () => {
                 borderRadius: "11px",
                 width: "18vw",
                 height: "56vh",
+                margin: 0,
+                padding: 0,
               }}
-            ></Box>
+            >
+              <List
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-around",
+                }}
+              >
+                <ListItem>
+                  <ListItemButton
+                    sx={{
+                      bgcolor: "#1CC21C",
+                      borderRadius: "8px",
+                      justifyContent: "center",
+                      fontFamily: "monospace",
+                      fontSize: "16px",
+                      py: 2,
+                      "&:hover": {
+                        bgcolor: "#06E406",
+                      },
+                    }}
+                  >
+                    Apply For Job
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem>
+                  <ListItemButton
+                    sx={{
+                      bgcolor: "#7250CE",
+                      color: "white",
+                      borderRadius: "8px",
+                      justifyContent: "center",
+                      fontFamily: "monospace",
+                      fontSize: "16px",
+                      py: 2,
+                      "&:hover": {
+                        bgcolor: "#7e5ed4",
+                      },
+                    }}
+                  >
+                    Apply For Vendor
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Box>
           </Box>
           {/* right */}
           <Box
@@ -133,10 +185,22 @@ const UserProfile = () => {
                     </Button>
                   </Link>
                 </Box>
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider
+                  variant="inset"
+                  sx={{ bgcolor: "#1976D2", width: "920px" }}
+                />
+                <Divider
+                  variant="inset"
+                  sx={{ bgcolor: "#1976D2", width: "920px" }}
+                />
+                <Divider
+                  variant="inset"
+                  sx={{ bgcolor: "#1976D2", width: "920px" }}
+                />
+                <Divider
+                  variant="inset"
+                  sx={{ bgcolor: "#1976D2", width: "920px" }}
+                />
                 <Box
                   sx={{
                     width: "55vw",
@@ -254,14 +318,15 @@ const UserProfile = () => {
                     ></TextField>
                   </Box>
                 </Box>
+
                 <Box
                   sx={{
-                    mt: 4,
+                    width: "55vw",
                     display: "flex",
+                    justifyContent: "space-between",
                     flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
+                    mt: 4,
+                    mx: 50,
                   }}
                 >
                   <label
@@ -269,41 +334,43 @@ const UserProfile = () => {
                       padding: 2,
                       fontFamily: "monospace",
                       color: "#555",
+                      width: "190px",
+                      borderBottom: "2px solid #333",
                     }}
                   >
-                    Edit Avatar:
+                    Update Profile Picture:
                   </label>
-                  <TextField
-                    sx={{
-                      width: "40%",
-                      boxShadow: 3,
-                    }}
-                    variant="outlined"
-                    value="AC/DC@angusy0un6"
-                  ></TextField>
+                  <input
+                    style={{ paddingTop: 10 }}
+                    type="file"
+                    accept="image/*"
+                  />
                 </Box>
+
                 <Box
                   sx={{
-                    mt: 30,
+                    mt: 10,
                     width: "55vw",
                     display: "flex",
                     flexGrow: 1,
                     justifyContent: "space-around",
                   }}
                 >
-                  <Box sx={{ width: "30px" }}>
+                  <Box>
                     <Button
+                      startIcon={<SaveRounded />}
                       variant="contained"
                       fullWidth
                       sx={{
                         bgcolor: "#06e406",
+                        color: "#000",
+                        "&:hover": {
+                          bgcolor: "#1cc21c",
+                        },
                       }}
                     >
-                      a
+                      Save Changes
                     </Button>
-                  </Box>
-                  <Box>
-                    <Button>a</Button>
                   </Box>
                 </Box>
               </Box>
