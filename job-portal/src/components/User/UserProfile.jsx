@@ -145,7 +145,13 @@ const UserProfile = () => {
                     mx: 3,
                   }}
                 >
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "25vw",
+                    }}
+                  >
                     <label
                       style={{
                         padding: 2,
