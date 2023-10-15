@@ -268,14 +268,13 @@ const VendorSideDrawer = () => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {location.pathname === "/" ? (
-          <VendorApplications />
-        ) : location.pathname === "/jobs" ? (
+        {location.pathname === "/jobs" ? (
           <VendorJobs />
         ) : location.pathname === "/applications" ? (
           <VendorApplications />
-        ) : null}
-        <VendorJobs />
+        ) : (
+          <VendorApplications />
+        )}
       </Box>
     </Box>
   );
