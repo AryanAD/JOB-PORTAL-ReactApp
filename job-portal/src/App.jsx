@@ -7,9 +7,9 @@ import Modal from "./components/Modal";
 // import AdminBanners from "./components/Admin/AdminBanners";
 // import AdminLayout from "./layout/AdminLayout";
 // import AdminCategories from "./components/Admin/AdminCategories";
-import AdminVendors from "./components/Admin/AdminVendors";
+// import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
-import ViewerLayout from "./layout/ViewerLayout";
+// import ViewerLayout from "./layout/ViewerLayout";
 // import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 // import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 // import UserLayout from "./layout/UserLayout";
@@ -22,6 +22,7 @@ import ViewerLayout from "./layout/ViewerLayout";
 // import UserNewVendor from "./components/User/UserNewVendor";
 import VendorLayout from "./layout/VendorLayout";
 import VendorJobs from "./components/Vendor/VendorJobs";
+import VendorApplications from "./components/Vendor/VendorApplications";
 
 function App() {
   return (
@@ -39,7 +40,6 @@ function App() {
           pauseOnHover
           theme="light"
         />
-        <ViewerLayout />
         <Routes>
           {/* Viewer Routes
 					<Route element={<ViewerLayout />}>
@@ -83,7 +83,7 @@ function App() {
           {/* Vendor Layout */}
           <Route path="/" element={<VendorLayout />}>
             <Route path="/jobs" element={<VendorJobs />} />
-			<
+            <Route path="/applications" element={<VendorApplications />} />
           </Route>
 
           {/* Other Routes */}
