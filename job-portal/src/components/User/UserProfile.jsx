@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Divider,
-  Grid,
   TextField,
   Typography,
 } from "@mui/material";
@@ -135,116 +134,131 @@ const UserProfile = () => {
                 <Divider variant="inset" />
                 <Divider variant="inset" />
                 <Divider variant="inset" />
-                <Grid container>
-                  <Grid item>
-                    <Box
-                      sx={{
-                        bgcolor: "orange",
-                        width: "35vw",
-                        display: "flex",
-                        alignItems: "center",
-                        flexDirection: "column",
-                        mt: 2,
-                        mx: 3,
+                <Box
+                  sx={{
+                    bgcolor: "orange",
+                    width: "55vw",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    // flexDirection: "column",
+                    mt: 2,
+                    mx: 3,
+                  }}
+                >
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <label
+                      style={{
+                        padding: 2,
+                        fontFamily: "monospace",
+                        color: "#555",
                       }}
                     >
-                      <label
-                        style={{
-                          padding: 2,
-                          fontFamily: "monospace",
-                          color: "#555",
-                        }}
-                      >
-                        Full Name:
-                      </label>
+                      Full Name:
+                    </label>
 
-                      <TextField
-                        sx={{
-                          boxShadow: 3,
-                          borderRadius: "9px",
+                    <TextField
+                      sx={{
+                        boxShadow: 3,
+                        borderRadius: "9px",
+                        outline: "transparent",
+                        border: "transparent",
+                        "&:hover": {
                           outline: "transparent",
                           border: "transparent",
-                          "&:hover": {
-                            outline: "transparent",
-                            border: "transparent",
-                          },
-                          outlineColor: "transparent",
-                        }}
-                        variant="outlined"
-                      ></TextField>
-
-                      <label
-                        style={{
-                          padding: 2,
-                          fontFamily: "monospace",
-                          color: "#555",
-                        }}
-                      >
-                        Email:
-                      </label>
-                      <TextField
-                        sx={{
-                          boxShadow: 3,
-                          borderRadius: "9px",
+                        },
+                        outlineColor: "transparent",
+                      }}
+                      variant="outlined"
+                    ></TextField>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <label
+                      style={{
+                        padding: 2,
+                        fontFamily: "monospace",
+                        color: "#555",
+                      }}
+                    >
+                      Email:
+                    </label>
+                    <TextField
+                      sx={{
+                        boxShadow: 3,
+                        borderRadius: "9px",
+                        outline: "transparent",
+                        border: "transparent",
+                        "&:hover": {
                           outline: "transparent",
                           border: "transparent",
-                          "&:hover": {
-                            outline: "transparent",
-                            border: "transparent",
-                          },
-                          outlineColor: "transparent",
-                        }}
-                        variant="outlined"
-                      ></TextField>
-                      <label
-                        style={{
-                          padding: 2,
-                          fontFamily: "monospace",
-                          color: "#555",
-                        }}
-                      >
-                        Password:
-                      </label>
-                      <TextField
-                        sx={{
-                          boxShadow: 3,
-                          borderRadius: "9px",
+                        },
+                        outlineColor: "transparent",
+                      }}
+                      variant="outlined"
+                    ></TextField>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    bgcolor: "orange",
+                    width: "55vw",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    // flexDirection: "column",
+                    mt: 2,
+                    mx: 3,
+                  }}
+                >
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <label
+                      style={{
+                        padding: 2,
+                        fontFamily: "monospace",
+                        color: "#555",
+                      }}
+                    >
+                      Password:
+                    </label>
+                    <TextField
+                      sx={{
+                        boxShadow: 3,
+                        borderRadius: "9px",
+                        outline: "transparent",
+                        border: "transparent",
+                        "&:hover": {
                           outline: "transparent",
                           border: "transparent",
-                          "&:hover": {
-                            outline: "transparent",
-                            border: "transparent",
-                          },
-                          outlineColor: "transparent",
-                        }}
-                        variant="outlined"
-                      ></TextField>
-                      <label
-                        style={{
-                          padding: 2,
-                          fontFamily: "monospace",
-                          color: "#555",
-                        }}
-                      >
-                        Confirm Password:
-                      </label>
-                      <TextField
-                        sx={{
-                          boxShadow: 3,
-                          borderRadius: "9px",
+                        },
+                        outlineColor: "transparent",
+                      }}
+                      variant="outlined"
+                    ></TextField>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <label
+                      style={{
+                        padding: 2,
+                        fontFamily: "monospace",
+                        color: "#555",
+                      }}
+                    >
+                      Confirm Password:
+                    </label>
+                    <TextField
+                      sx={{
+                        boxShadow: 3,
+                        borderRadius: "9px",
+                        outline: "transparent",
+                        border: "transparent",
+                        "&:hover": {
                           outline: "transparent",
                           border: "transparent",
-                          "&:hover": {
-                            outline: "transparent",
-                            border: "transparent",
-                          },
-                          outlineColor: "transparent",
-                        }}
-                        variant="outlined"
-                      ></TextField>
-                    </Box>
-                  </Grid>
-                </Grid>
+                        },
+                        outlineColor: "transparent",
+                      }}
+                      variant="outlined"
+                    ></TextField>
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </Box>
