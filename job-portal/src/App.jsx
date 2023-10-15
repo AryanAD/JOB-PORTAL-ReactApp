@@ -4,10 +4,9 @@ import { ToastContainer } from "react-toastify";
 // import SigninPage from "./components/SigninPage";
 // import SignupPage from "./components/SignupPage";
 import Modal from "./components/Modal";
-// import VendorLayout from "./layout/VendorLayout";
-import AdminBanners from "./components/Admin/AdminBanners";
-import AdminLayout from "./layout/AdminLayout";
-import AdminCategories from "./components/Admin/AdminCategories";
+// import AdminBanners from "./components/Admin/AdminBanners";
+// import AdminLayout from "./layout/AdminLayout";
+// import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
 import ViewerLayout from "./layout/ViewerLayout";
@@ -21,6 +20,8 @@ import ViewerLayout from "./layout/ViewerLayout";
 // import UserJobsModal from "./components/User/UserJobsModal";
 // import UserJobsTable from "./components/User/UserJobsTable";
 // import UserNewVendor from "./components/User/UserNewVendor";
+import VendorLayout from "./layout/VendorLayout";
+import VendorJobs from "./components/Vendor/VendorJobs";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
 							/>
 						</Route>
 					</Route> */}
+
           {/* User Routes */}
           {/* <Route element={<UserLayout />}>
             <Route element={<UserNavBar />}>
@@ -70,12 +72,20 @@ function App() {
               <Route path="/register-vendor" element={<UserNewVendor />} />
             </Route>
           </Route> */}
+
           {/* Admin Routes  */}
-          <Route path="/" element={<AdminLayout />}>
+          {/* <Route path="/" element={<AdminLayout />}>
             <Route path="/vendors" element={<AdminVendors />} />
             <Route path="/categories" element={<AdminCategories />} />
             <Route path="/banners" element={<AdminBanners />} />
+          </Route> */}
+
+          {/* Vendor Layout */}
+          <Route path="/" element={<VendorLayout />}>
+            <Route path="/jobs" element={<VendorJobs />} />
+			<
           </Route>
+
           {/* Other Routes */}
           <Route path="/modal" element={<Modal />} />
           <Route path="/vendorjobmodal" element={<VendorJobModal />} />
