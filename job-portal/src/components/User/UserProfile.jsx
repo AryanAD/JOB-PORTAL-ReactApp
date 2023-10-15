@@ -6,6 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   return (
@@ -106,7 +107,7 @@ const UserProfile = () => {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    alignItems: "center",
+                    alignItems: "space-between",
                     mt: 2,
                     mx: 3,
                     mb: 1,
@@ -116,32 +117,32 @@ const UserProfile = () => {
                   <Typography sx={{ fontFamily: "monospace" }} variant="h3">
                     My Profile
                   </Typography>
-                  <Button
-                    sx={{
-                      height: "35px",
-                      "&:hover": {
-                        bgcolor: "#e0e0e0",
-                        color: "white",
-                      },
-                    }}
-                    variant="outlined"
-                    size="large"
-                  >
-                    Back
-                  </Button>
+                  <Link to="/">
+                    <Button
+                      sx={{
+                        height: "35px",
+                        "&:hover": {
+                          bgcolor: "#1976D2",
+                          color: "white",
+                        },
+                      }}
+                      variant="outlined"
+                      size="large"
+                    >
+                      Back
+                    </Button>
+                  </Link>
                 </Box>
-                <Divider variant="inset" />
-                <Divider variant="inset" />
-                <Divider variant="inset" />
-                <Divider variant="inset" />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
                 <Box
                   sx={{
-                    bgcolor: "orange",
                     width: "55vw",
                     display: "flex",
                     justifyContent: "space-between",
-                    // flexDirection: "column",
-                    mt: 2,
+                    mt: 4,
                     mx: 3,
                   }}
                 >
@@ -165,19 +166,18 @@ const UserProfile = () => {
                     <TextField
                       sx={{
                         boxShadow: 3,
-                        borderRadius: "9px",
-                        outline: "transparent",
-                        border: "transparent",
-                        "&:hover": {
-                          outline: "transparent",
-                          border: "transparent",
-                        },
-                        outlineColor: "transparent",
                       }}
                       variant="outlined"
+                      value="Angus Young"
                     ></TextField>
                   </Box>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "25vw",
+                    }}
+                  >
                     <label
                       style={{
                         padding: 2,
@@ -190,31 +190,28 @@ const UserProfile = () => {
                     <TextField
                       sx={{
                         boxShadow: 3,
-                        borderRadius: "9px",
-                        outline: "transparent",
-                        border: "transparent",
-                        "&:hover": {
-                          outline: "transparent",
-                          border: "transparent",
-                        },
-                        outlineColor: "transparent",
                       }}
                       variant="outlined"
+                      value="acangusdcyoung@gmail.com"
                     ></TextField>
                   </Box>
                 </Box>
                 <Box
                   sx={{
-                    bgcolor: "orange",
                     width: "55vw",
                     display: "flex",
                     justifyContent: "space-between",
-                    // flexDirection: "column",
-                    mt: 2,
+                    mt: 4,
                     mx: 3,
                   }}
                 >
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "25vw",
+                    }}
+                  >
                     <label
                       style={{
                         padding: 2,
@@ -227,19 +224,18 @@ const UserProfile = () => {
                     <TextField
                       sx={{
                         boxShadow: 3,
-                        borderRadius: "9px",
-                        outline: "transparent",
-                        border: "transparent",
-                        "&:hover": {
-                          outline: "transparent",
-                          border: "transparent",
-                        },
-                        outlineColor: "transparent",
                       }}
                       variant="outlined"
+                      value="AC/DC@angusy0un6"
                     ></TextField>
                   </Box>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "25vw",
+                    }}
+                  >
                     <label
                       style={{
                         padding: 2,
@@ -252,17 +248,62 @@ const UserProfile = () => {
                     <TextField
                       sx={{
                         boxShadow: 3,
-                        borderRadius: "9px",
-                        outline: "transparent",
-                        border: "transparent",
-                        "&:hover": {
-                          outline: "transparent",
-                          border: "transparent",
-                        },
-                        outlineColor: "transparent",
                       }}
                       variant="outlined"
+                      value="AC/DC@angusy0un6"
                     ></TextField>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    mt: 4,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <label
+                    style={{
+                      padding: 2,
+                      fontFamily: "monospace",
+                      color: "#555",
+                    }}
+                  >
+                    Edit Avatar:
+                  </label>
+                  <TextField
+                    sx={{
+                      width: "40%",
+                      boxShadow: 3,
+                    }}
+                    variant="outlined"
+                    value="AC/DC@angusy0un6"
+                  ></TextField>
+                </Box>
+                <Box
+                  sx={{
+                    mt: 30,
+                    width: "55vw",
+                    display: "flex",
+                    flexGrow: 1,
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <Box sx={{ width: "30px" }}>
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      sx={{
+                        bgcolor: "#06e406",
+                      }}
+                    >
+                      a
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Button>a</Button>
                   </Box>
                 </Box>
               </Box>
@@ -270,7 +311,6 @@ const UserProfile = () => {
           </Box>
         </Box>
       </Box>
-      ;
     </>
   );
 };

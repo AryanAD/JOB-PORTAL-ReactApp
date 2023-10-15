@@ -1,11 +1,11 @@
 * {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-    font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
-    overflow-x: hidden;
-    color: #138113;
+  overflow-x: hidden;
+  color: #06e406;
 }
