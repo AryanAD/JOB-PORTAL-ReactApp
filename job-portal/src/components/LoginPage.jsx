@@ -41,7 +41,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SigninPage() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -101,7 +101,7 @@ export default function SigninPage() {
               <LockPersonIcon />
             </Avatar>
             <Typography component="h1" variant="h4">
-              Sign In
+              Log In
             </Typography>
             <Box
               component="form"
@@ -151,7 +151,7 @@ export default function SigninPage() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Log In
               </Button>
               <Grid container>
                 <Grid item>

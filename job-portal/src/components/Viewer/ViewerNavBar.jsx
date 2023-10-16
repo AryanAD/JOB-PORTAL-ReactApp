@@ -9,7 +9,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link, useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import SignupPage from "../SignupPage";
-import SigninPage from "../SigninPage";
+import LoginPage from "../LoginPage";
 import ViewerHomePage from "./ViewerHomePage";
 import Footer from "../../layout/Footer";
 
@@ -69,9 +69,9 @@ const ViewerNavBar = () => {
                     display: "flex",
                     textDecoration: "none",
                   }}
-                  to="/signin"
+                  to="/login"
                 >
-                  Sign In
+                  Log In
                 </Link>
               </Button>
               <Button
@@ -123,8 +123,8 @@ const ViewerNavBar = () => {
         component="main"
         sx={{ flexGrow: 1 }}
       >
-        {location.pathname === "/signin" ? (
-          <SigninPage />
+        {location.pathname === "/login" ? (
+          <LoginPage />
         ) : location.pathname === "/signup" ? (
           <SignupPage />
         ) : (

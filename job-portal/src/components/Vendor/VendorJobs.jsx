@@ -47,11 +47,12 @@ const VendorJobs = () => {
     const apiUrl = "http://localhost:3000/api/vendor/jobs";
 
     axios
-      .get(apiUrl, headers:
-		{
-            "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
-        })
+      .get(apiUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
       .then((response) => {
         setJobsData(response.data);
       })

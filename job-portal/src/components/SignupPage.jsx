@@ -195,9 +195,9 @@ const SignupPage = () => {
                       color: "indianred",
                       fontWeight: "bold",
                     }}
-                    to="/signin"
+                    to="/login"
                   >
-                    {"↼ Back to Sign In"}
+                    {"↼ Back to Log In"}
                   </Link>
                 </Grid>
               </Grid>
