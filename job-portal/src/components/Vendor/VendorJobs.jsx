@@ -18,7 +18,8 @@ import {
   AddRounded as AddRoundedIcon,
 } from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -39,7 +40,21 @@ const limitLength = (text, maxLength) => {
 };
 
 const VendorJobs = () => {
+  const [jobsData, setJobsData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const apiUrl = "http://localhost:3000/api/vendor/jobs";
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setJobsData(response.data);
+      })
+      .catch((error) => {
+        console.error(`Error fetching data: ${error}`);
+      });
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
