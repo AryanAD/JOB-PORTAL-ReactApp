@@ -23,14 +23,12 @@ import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 // import VendorLayout from "./layout/VendorLayout";
 // import VendorJobs from "./components/Vendor/VendorJobs";
 // import VendorApplications from "./components/Vendor/VendorApplications";
-import { useState } from "react";
+// import { useState } from "react";
 
 function App() {
-  const [token, setToken] = useState();
+  const token = localStorage.getItem("token");
+  console.log(token);
 
-  if (!token) {
-    return <SigninPage setToken={setToken} />;
-  }
   return (
     <>
       <BrowserRouter>

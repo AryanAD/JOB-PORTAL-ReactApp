@@ -41,29 +41,29 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SigninPage({ setToken }) {
+export default function SigninPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Send a POST request to your authentication endpoint
     axios
-      .post("http://localhost:3000/api/login", {
+      .post("http://localhost:3000/api/user/login", {
         email: email,
         password: password,
       })
       .then((response) => {
         const token = response.data.token;
 
-        // Store the token and update the authentication status
-        setToken(token);
+        localStorage.setItem("token", token);
       })
       .catch((error) => {
         console.error("Login failed: ", error);
       });
   };
+  const token = localStorage.getItem("token");
+  console.log(token);
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
