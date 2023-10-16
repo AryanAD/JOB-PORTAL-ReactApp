@@ -99,19 +99,19 @@ const RouteManager = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route
-        path="/"
+        path="/user/"
         element={
           <AuthWrapper>
             <Route element={<UserLayout />}>
               <Route element={<UserNavBar />}>
-                <Route index element={<UserHomePage />} />
+                <Route path="" element={<UserHomePage />} />
                 <Route path="user-profile" element={<UserProfile />} />
-                <Route path="/user-jobs" element={<UserJobs />} />
+                <Route path="user-jobs" element={<UserJobs />} />
 
-                <Route path="/user-jobs/*" element={<UserJobsTable />} />
+                <Route path="user-jobs/*" element={<UserJobsTable />} />
 
-                <Route path="/user-jobs-modal" element={<UserJobsModal />} />
-                <Route path="/register-vendor" element={<UserNewVendor />} />
+                <Route path="user-jobs-modal" element={<UserJobsModal />} />
+                <Route path="register-vendor" element={<UserNewVendor />} />
               </Route>
             </Route>
           </AuthWrapper>
@@ -146,7 +146,6 @@ const RouteManager = () => (
 );
 
 const AuthWrapper = ({ children }) => {
-  // const token = localStorage.getItem("token");
   const navigate = useNavigate();
   if (!token) {
     return navigate("/login");
