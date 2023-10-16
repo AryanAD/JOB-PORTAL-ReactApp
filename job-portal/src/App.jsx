@@ -84,11 +84,11 @@ function App() {
           <Route path="/" element={<VendorLayout />}>
             <Route path="/jobs" element={<VendorJobs />} />
             <Route path="/applications" element={<VendorApplications />} />
+            <Route path="/vendorjobmodal" element={<VendorJobModal />} />
           </Route>
 
           {/* Other Routes */}
           <Route path="/modal" element={<Modal />} />
-          <Route path="/vendorjobmodal" element={<VendorJobModal />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -231,7 +231,7 @@ const VendorJobs = () => {
                       }}
                       align="right"
                     >
-                      <Link to={"/vendorjobmodal"}>
+                      <Link to="/vendorjobmodal">
                         <Button
                           size="small"
                           variant="contained"
