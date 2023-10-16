@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { PersonRounded } from "@mui/icons-material";
 import axios from "axios";
 import { useState } from "react";
+import Image from "./assets/job.png";
 
 function Copyright(props) {
   return (
@@ -72,7 +73,7 @@ const SignupPage = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "",
+            backgroundImage: `url(${Image})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
