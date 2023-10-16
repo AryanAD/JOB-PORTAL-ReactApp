@@ -21,7 +21,7 @@ import React from "react";
 import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import VendorJobs from "./VendorJobs";
 import VendorApplications from "./VendorApplications";
 
@@ -119,6 +119,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const VendorSideDrawer = () => {
+  const location = useLocation();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 

@@ -22,7 +22,7 @@ import React from "react";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Vendors from "./AdminVendors";
 import AdminUsers from "./AdminUsers";
 import AdminBanners from "./AdminBanners";
@@ -123,6 +123,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const AdminSideDrawer = () => {
+  const location = useLocation();
   const nav = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
