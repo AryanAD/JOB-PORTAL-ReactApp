@@ -14,12 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOption = {
-	origin: "http://localhost:5173",
-	credentials: true,
-	preflightContinue: false,
+  origin: "http://localhost:5173",
+  credentials: true,
+  preflightContinue: false,
 };
 app.use(cors(corsOption));
-
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "uploads")));
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
@@ -28,5 +28,5 @@ app.use("/api/vendor", vendorRoute);
 const PORT = 3000;
 
 app.listen(PORT, () => {
-	console.log("Server is running on port", PORT);
+  console.log("Server is running on port", PORT);
 });
