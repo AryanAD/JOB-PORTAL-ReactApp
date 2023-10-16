@@ -234,9 +234,9 @@ const VendorJobs = () => {
                       <Link to={"/vendorjobmodal"}>
                         <Button
                           size="small"
-                          onClick={handleOpenModal}
                           variant="contained"
                           color="success"
+                          onClick={handleOpenModal}
                         >
                           <AddRoundedIcon />
                           Add Job
@@ -252,12 +252,6 @@ const VendorJobs = () => {
                         Delete
                       </Button>
                     </TableCell>
-                    {isModalOpen && (
-                      <VendorJobModal
-                        open={isModalOpen}
-                        onClose={handleCloseModal}
-                      />
-                    )}
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -265,6 +259,7 @@ const VendorJobs = () => {
           </TableContainer>
         </Box>
       </Box>
+      <VendorJobModal open={isModalOpen} handleClose={handleCloseModal} />
     </>
   );
 };
