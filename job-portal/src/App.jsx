@@ -1,14 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import SignupPage from "./components/SignupPage";
-// import Modal from "./components/Modal";
 import AdminBanners from "./components/Admin/AdminBanners";
 import AdminLayout from "./layout/AdminLayout";
 import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
-// import ViewerLayout from "./layout/ViewerLayout";
-// import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserLayout from "./layout/UserLayout";
 import UserNavBar from "./components/User/UserNavBar";
@@ -23,7 +20,6 @@ import VendorJobs from "./components/Vendor/VendorJobs";
 import VendorApplications from "./components/Vendor/VendorApplications";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
 import LoginPage from "./components/LoginPage";
-// import { useState } from "react";
 
 const token = localStorage.getItem("token");
 console.log(token);
@@ -94,6 +90,18 @@ console.log(token);
 
 const RouteManager = () => (
   <BrowserRouter>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     <Routes>
       <Route path="/" element={<ViewerNavBar />} />
       <Route path="/login" element={<LoginPage />} />
