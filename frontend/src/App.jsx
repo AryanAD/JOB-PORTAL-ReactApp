@@ -86,7 +86,10 @@ const RouteManager = () => {
           path="/admin/"
           element={
             <AuthWrapper>
-              <Route path="" element={<AdminLayout />}>
+              <Route
+                path=""
+                element={role === "admin" ? <AdminLayout /> : <VendorLayout />}
+              >
                 <Route path="vendors" element={<AdminVendors />} />
                 <Route path="categories" element={<AdminCategories />} />
                 <Route path="banners" element={<AdminBanners />} />
