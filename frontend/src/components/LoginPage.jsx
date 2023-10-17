@@ -141,7 +141,7 @@ export default function LoginPage() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                autoComplete="off"
                 autoFocus
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -160,7 +160,7 @@ export default function LoginPage() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Button

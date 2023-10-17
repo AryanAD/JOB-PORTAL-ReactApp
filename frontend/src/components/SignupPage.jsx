@@ -126,7 +126,7 @@ const SignupPage = () => {
                 id="name"
                 label="Full Name"
                 name="name"
-                autoComplete="name"
+                autoComplete="off"
                 autoFocus
                 onChange={(e) => setName(e.target.value)}
               />
@@ -144,7 +144,7 @@ const SignupPage = () => {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                autoComplete="off"
                 autoFocus
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -162,7 +162,7 @@ const SignupPage = () => {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <TextField
@@ -179,7 +179,7 @@ const SignupPage = () => {
                 label="Confirm Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
                 onChange={(e) => setPassword(e.target.value)}
               />
 

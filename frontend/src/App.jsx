@@ -1,9 +1,8 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AdminBanners from "./components/Admin/AdminBanners";
-import AdminCategories from "./components/Admin/AdminCategories";
+import { AdminBanners, AdminCategories } from "./components/Admin/";
+// import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
@@ -18,6 +17,8 @@ import AdminSideDrawer from "./components/Admin/AdminSideDrawer";
 import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserHomePage from "./components/User/UserHomePage";
 import ViewerHomePage from "./components/Viewer/ViewerHomePage";
+import { Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 
 const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
@@ -112,14 +113,6 @@ const RouteManager = () => {
       </Routes>
     </BrowserRouter>
   );
-};
-
-const AuthWrapper = ({ children }) => {
-  const navigate = useNavigate();
-  if (!token) {
-    return navigate("/login");
-  }
-  return token && children;
 };
 
 function App() {
