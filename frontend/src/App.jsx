@@ -88,7 +88,10 @@ const RouteManager = () => {
       )}
       {role === "vendor" && (
         <Routes>
-          <Route path="/vendor" element={<VendorSideDrawer />} />
+          <Route
+            path="/vendor"
+            element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
+          />
           <Route path="/vendor/applications" element={<VendorApplications />} />
           <Route path="/vendor/jobs" element={<VendorJobs />} />
         </Routes>
