@@ -7,23 +7,25 @@ const {
   acceptOrRejectApplicant,
 } = require("../controller/vendor/vendorController");
 
-const { isAuthenticated } = require("../middleware/isAuthenticated");
+const { isAuthenticated, userRole } = require("../middleware/isAuthenticated");
 
 const router = require("express").Router();
 
 router
   .route("/jobs")
-  .post(isAuthenticated, createJob)
-  .get(isAuthenticated, individualVendorJobs);
+  .post(isAuthenticated, userRole("vendor"), createJob)
+  .get(isAuthenticated, userRole("vendor"), individualVendorJobs);
 router
   .route("/jobs/:id")
-  .delete(isAuthenticated, deleteJob)
-  .get(isAuthenticated, viewSingleJob);
+  .delete(isAuthenticated, userRole("vendor"), deleteJob)
+  .get(isAuthenticated, userRole("vendor"), viewSingleJob);
 
 //application
-router.route("/applicants").get(isAuthenticated, myApplicants);
+router
+  .route("/applicants")
+  .get(isAuthenticated, userRole("vendor"), myApplicants);
 router
   .route("/applicants/action")
-  .post(isAuthenticated, acceptOrRejectApplicant);
+  .post(isAuthenticated, userRole("vendor"), acceptOrRejectApplicant);
 
 module.exports = router;
