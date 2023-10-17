@@ -57,6 +57,7 @@ export default function LoginPage() {
       .then((response) => {
         const token = response.data.token;
 
+        localStorage.setItem("role", response.data.role);
         localStorage.setItem("token", token);
       })
       .catch((error) => {
