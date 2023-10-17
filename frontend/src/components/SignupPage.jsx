@@ -14,11 +14,12 @@ import {
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PersonRounded } from "@mui/icons-material";
 import axios from "axios";
 import { useState } from "react";
 import Image from "./assets/job.png";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -41,6 +42,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const SignupPage = () => {
+  const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -58,6 +60,8 @@ const SignupPage = () => {
         const token = response.data.token;
 
         localStorage.setItem("token", token);
+        toast.success("Registered as New User");
+        nav("/login");
       })
       .catch((error) => {
         console.error("Login failed: ", error);

@@ -24,6 +24,7 @@ import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./AdminVendors";
+import { toast } from "react-toastify";
 
 const CustomToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -129,6 +130,14 @@ const AdminSideDrawer = ({ anotherItem }) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+
+    nav("/");
+    toast.error("Logged out Successfully");
   };
 
   const vendor = () => {
@@ -251,6 +260,7 @@ const AdminSideDrawer = ({ anotherItem }) => {
                   backgroundColor: "rgb(220, 20, 60, 0.6)",
                 },
               }}
+              onClick={handleLogout}
             >
               <LogoutTooltip title="Log Out" placement="right">
                 <ListItemIcon>
@@ -279,7 +289,13 @@ const AdminSideDrawer = ({ anotherItem }) => {
               padding: "20px auto",
             }}
           >
-            <Button size="large" fullWidth color="error" variant="contained">
+            <Button
+              size="large"
+              fullWidth
+              color="error"
+              variant="contained"
+              onClick={handleLogout}
+            >
               LOG OUT
             </Button>
           </Box>

@@ -12,6 +12,7 @@ import UserProfile from "./UserProfile";
 import UserJobs from "./UserJobs";
 import { Link, useNavigate } from "react-router-dom";
 import UserNewVendor from "./UserNewVendor";
+import { toast } from "react-toastify";
 
 const UserNavBar = ({ anotherItem }) => {
   const nav = useNavigate();
@@ -34,6 +35,7 @@ const UserNavBar = ({ anotherItem }) => {
     localStorage.removeItem("role");
 
     nav("/");
+    toast.error("Logged out Successfully");
   };
 
   return (
