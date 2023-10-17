@@ -1,11 +1,11 @@
-import { Outlet } from "react-router";
+import UserNavBar from "../components/User/UserNavBar";
 
 const UserLayout = () => {
-	return (
-		<>
-			<Outlet />
-		</>
-	);
+  return (
+    <>
+      <UserNavBar />
+    </>
+  );
 };
 
 export default UserLayout;

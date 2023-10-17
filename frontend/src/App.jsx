@@ -1,12 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import SignupPage from "./components/SignupPage";
 import AdminBanners from "./components/Admin/AdminBanners";
 import AdminLayout from "./layout/AdminLayout";
 import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
-import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserLayout from "./layout/UserLayout";
 import UserNavBar from "./components/User/UserNavBar";
 import UserHomePage from "./components/User/UserHomePage";
@@ -19,7 +17,9 @@ import VendorLayout from "./layout/VendorLayout";
 import VendorJobs from "./components/Vendor/VendorJobs";
 import VendorApplications from "./components/Vendor/VendorApplications";
 import VendorJobModal from "./components/Vendor/VendorJobModal";
+import ViewerLayout from "./layout/ViewerLayout";
 import LoginPage from "./components/LoginPage";
+import SignupPage from "./components/SignupPage";
 
 const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
@@ -41,14 +41,12 @@ const RouteManager = () => {
         pauseOnHover
         theme="light"
       />
-      <Routes>
-        <Route
-          path="/"
-          element={role === "user" ? <UserNavBar /> : <ViewerNavBar />}
-        />
+
+      {/* {role === "user" &&   <Routes>
+        <Route path="/" element={ <UserNavBar />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route
+        <Route path="/signup" element={<SignupPage />} /> */}
+      {/* <Route
           path="/user/"
           element={
             <AuthWrapper>
@@ -66,37 +64,49 @@ const RouteManager = () => {
               </Route>
             </AuthWrapper>
           }
-        />
-        <Route
-          path="/vendor/"
-          element={
-            <AuthWrapper>
-              <Route
-                path=""
-                element={role === "vendor" ? <VendorLayout /> : <AdminLayout />}
-              >
-                <Route path="jobs" element={<VendorJobs />} />
-                <Route path="applications" element={<VendorApplications />} />
-                <Route path="vendorjobmodal" element={<VendorJobModal />} />
-              </Route>
-            </AuthWrapper>
-          }
-        />
-        <Route
-          path="/admin/"
-          element={
-            <AuthWrapper>
-              <Route
-                path=""
-                element={role === "admin" ? <AdminLayout /> : <VendorLayout />}
-              >
-                <Route path="vendors" element={<AdminVendors />} />
-                <Route path="categories" element={<AdminCategories />} />
-                <Route path="banners" element={<AdminBanners />} />
-              </Route>
-            </AuthWrapper>
-          }
-        />
+        />} */}
+      {/* {role === "vendor" && (
+          <Route
+            path="/vendor/"
+            element={
+              <AuthWrapper>
+                <Route path="" element={<VendorLayout />}>
+                  <Route path="jobs" element={<VendorJobs />} />
+                  <Route path="applications" element={<VendorApplications />} />
+                  <Route path="vendorjobmodal" element={<VendorJobModal />} />
+                </Route>
+              </AuthWrapper>
+            }
+          />
+        )} */}
+
+      {role === "admin" && (
+        <Routes>
+          <Route path="/admin" element={<AdminLayout />} />
+          <Route path="/admin/banners" element={<AdminBanners />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/vendors" element={<AdminVendors />} />
+        </Routes>
+      )}
+      {role === "vendor" && (
+        <Routes>
+          <Route path="/vendor" element={<VendorLayout />} />
+          <Route path="/vendor/applications" element={<VendorApplications />} />
+          <Route path="/vendor/jobs" element={<VendorJobs />} />
+        </Routes>
+      )}
+      {role === "user" && (
+        <Routes>
+          <Route path="/user" element={<UserLayout />} />
+          <Route path="/user/jobs" element={<UserJobs />} />
+          <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/user/new-vendor" element={<UserNewVendor />} />
+        </Routes>
+      )}
+      <Routes>
+        <Route path="/" element={<ViewerLayout />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </BrowserRouter>
   );
