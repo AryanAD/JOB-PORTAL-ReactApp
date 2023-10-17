@@ -7,11 +7,7 @@ import HailRoundedIcon from "@mui/icons-material/HailRounded";
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import React from "react";
 import { LogoutRounded, MenuRounded } from "@mui/icons-material";
-import UserHomePage from "./UserHomePage";
-import UserProfile from "./UserProfile";
-import UserJobs from "./UserJobs";
 import { Link, useNavigate } from "react-router-dom";
-import UserNewVendor from "./UserNewVendor";
 import { toast } from "react-toastify";
 
 const UserNavBar = ({ anotherItem }) => {
