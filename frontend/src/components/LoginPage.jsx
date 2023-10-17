@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import Image from "./assets/job.png";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -60,11 +61,24 @@ export default function LoginPage() {
 
         localStorage.setItem("role", response.data.role);
         localStorage.setItem("token", token);
+
+        const role = localStorage.getItem("role");
+        console.log(role);
+
+        if (role === "admin") {
+          toast.success("Logged in as Administrator");
+          return nav("/admin");
+        } else if (role === "vendor") {
+          toast.success("Logged in as Vendor");
+          return nav("/vendor");
+        } else if (role === "user") {
+          toast.success("Logged in as User");
+          return nav("/user");
+        }
       })
       .catch((error) => {
         console.error("Login failed: ", error);
       });
-    nav();
   };
   const token = localStorage.getItem("token");
   console.log(token);

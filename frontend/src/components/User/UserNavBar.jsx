@@ -10,10 +10,11 @@ import { LogoutRounded, MenuRounded } from "@mui/icons-material";
 import UserHomePage from "./UserHomePage";
 import UserProfile from "./UserProfile";
 import UserJobs from "./UserJobs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserNewVendor from "./UserNewVendor";
 
 const UserNavBar = ({ anotherItem }) => {
+  const nav = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -28,8 +29,11 @@ const UserNavBar = ({ anotherItem }) => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+
+    nav("/");
   };
 
   return (
@@ -87,11 +91,7 @@ const UserNavBar = ({ anotherItem }) => {
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}
-              >
-                {/* <MenuItem onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">a</Typography>
-								</MenuItem> */}
-              </Menu>
+              ></Menu>
             </Box>
             <HailRoundedIcon
               sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
@@ -115,13 +115,9 @@ const UserNavBar = ({ anotherItem }) => {
                 React Job Portal
               </Typography>
             </Link>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {/* <Button
-								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: "white", display: "block" }}>
-								a
-							</Button> */}
-            </Box>
+            <Box
+              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+            ></Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
@@ -146,7 +142,7 @@ const UserNavBar = ({ anotherItem }) => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={handleLogout}
               >
                 <Link
                   to="/user-profile"
@@ -155,7 +151,7 @@ const UserNavBar = ({ anotherItem }) => {
                     textDecoration: "none",
                   }}
                 >
-                  <MenuItem onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleLogout}>
                     <Typography textAlign="center">My Profile</Typography>
                   </MenuItem>
                 </Link>
@@ -168,7 +164,7 @@ const UserNavBar = ({ anotherItem }) => {
                     gap: 1,
                     "&:hover": { color: "red", bgcolor: "#f5f5f5" },
                   }}
-                  onClick={handleCloseUserMenu}
+                  onClick={handleLogout}
                 >
                   <LogoutRounded />
                   <Typography textAlign="center">Log Out</Typography>
