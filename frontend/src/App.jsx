@@ -1,8 +1,8 @@
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AdminBanners, AdminCategories } from "./components/Admin/";
-// import AdminCategories from "./components/Admin/AdminCategories";
+import AdminBanners from "./components/Admin/AdminBanners";
+import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
