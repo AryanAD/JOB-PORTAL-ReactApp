@@ -122,7 +122,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const AdminSideDrawer = () => {
+const AdminSideDrawer = ({ anotherItem }) => {
   const location = useLocation();
   const nav = useNavigate();
   const theme = useTheme();
@@ -193,7 +193,7 @@ const AdminSideDrawer = () => {
                 color: "#272727	",
                 textDecoration: "none",
               }}
-              to={"/vendors"}
+              to={"/admin/vendors"}
             >
               <ListItemButton onClick={vendor}>
                 <CustomToolTip title="Vendors" placement="right">
@@ -209,7 +209,7 @@ const AdminSideDrawer = () => {
                 color: "#272727	",
                 textDecoration: "none",
               }}
-              to={"/categories"}
+              to={"/admin/categories"}
             >
               <ListItemButton>
                 <CustomToolTip title="Categories" placement="right">
@@ -225,7 +225,7 @@ const AdminSideDrawer = () => {
                 color: "#272727	",
                 textDecoration: "none",
               }}
-              to={"/banners"}
+              to={"/admin/banners"}
             >
               <ListItemButton>
                 <CustomToolTip title="Banners" placement="right">
@@ -292,15 +292,7 @@ const AdminSideDrawer = () => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {location.pathname === "/banners" ? (
-          <AdminBanners />
-        ) : location.pathname === "/vendors" ? (
-          <AdminVendors />
-        ) : location.pathname === "/categories" ? (
-          <AdminCategories />
-        ) : (
-          <AdminUsers />
-        )}
+        {anotherItem}
       </Box>
     </Box>
   );

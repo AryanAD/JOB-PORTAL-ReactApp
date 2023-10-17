@@ -2,24 +2,19 @@ import "./App.css";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AdminBanners from "./components/Admin/AdminBanners";
-import AdminLayout from "./layout/AdminLayout";
 import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
-import UserLayout from "./layout/UserLayout";
-import UserNavBar from "./components/User/UserNavBar";
-import UserHomePage from "./components/User/UserHomePage";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
-import UserJobsModal from "./components/User/UserJobsModal";
-import UserJobsTable from "./components/User/UserJobsTable";
+import UserNavBar from "./components/User/UserNavBar";
 import UserNewVendor from "./components/User/UserNewVendor";
-import VendorLayout from "./layout/VendorLayout";
 import VendorJobs from "./components/Vendor/VendorJobs";
 import VendorApplications from "./components/Vendor/VendorApplications";
-import VendorJobModal from "./components/Vendor/VendorJobModal";
-import ViewerLayout from "./layout/ViewerLayout";
+import VendorSideDrawer from "./components/Vendor/VendorSideDrawer";
 import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
+import AdminSideDrawer from "./components/Admin/AdminSideDrawer";
+import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 
 const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
@@ -82,29 +77,32 @@ const RouteManager = () => {
 
       {role === "admin" && (
         <Routes>
-          <Route path="/admin" element={<AdminLayout />} />
-          <Route path="/admin/banners" element={<AdminBanners />} />
-          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route
+            path="/admin"
+            element={<AdminSideDrawer anotherItem={<AdminBanners />} />}
+          />
           <Route path="/admin/vendors" element={<AdminVendors />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/banners" element={<AdminBanners />} />
         </Routes>
       )}
       {role === "vendor" && (
         <Routes>
-          <Route path="/vendor" element={<VendorLayout />} />
+          <Route path="/vendor" element={<VendorSideDrawer />} />
           <Route path="/vendor/applications" element={<VendorApplications />} />
           <Route path="/vendor/jobs" element={<VendorJobs />} />
         </Routes>
       )}
       {role === "user" && (
         <Routes>
-          <Route path="/user" element={<UserLayout />} />
+          <Route path="/user" element={<UserNavBar />} />
           <Route path="/user/jobs" element={<UserJobs />} />
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/user/new-vendor" element={<UserNewVendor />} />
         </Routes>
       )}
       <Routes>
-        <Route path="/" element={<ViewerLayout />} />
+        <Route path="/" element={<ViewerNavBar />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
