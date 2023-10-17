@@ -15,6 +15,8 @@ import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
 import AdminSideDrawer from "./components/Admin/AdminSideDrawer";
 import ViewerNavBar from "./components/Viewer/ViewerNavBar";
+import UserHomePage from "./components/User/UserHomePage";
+import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 
 const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
@@ -37,53 +39,24 @@ const RouteManager = () => {
         theme="light"
       />
 
-      {/* {role === "user" &&   <Routes>
-        <Route path="/" element={ <UserNavBar />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} /> */}
-      {/* <Route
-          path="/user/"
-          element={
-            <AuthWrapper>
-              <Route element={<UserLayout />}>
-                <Route element={<UserNavBar />}>
-                  <Route path="" element={<UserHomePage />} />
-                  <Route path="user-profile" element={<UserProfile />} />
-                  <Route path="user-jobs" element={<UserJobs />} />
-
-                  <Route path="user-jobs/*" element={<UserJobsTable />} />
-
-                  <Route path="user-jobs-modal" element={<UserJobsModal />} />
-                  <Route path="register-vendor" element={<UserNewVendor />} />
-                </Route>
-              </Route>
-            </AuthWrapper>
-          }
-        />} */}
-      {/* {role === "vendor" && (
-          <Route
-            path="/vendor/"
-            element={
-              <AuthWrapper>
-                <Route path="" element={<VendorLayout />}>
-                  <Route path="jobs" element={<VendorJobs />} />
-                  <Route path="applications" element={<VendorApplications />} />
-                  <Route path="vendorjobmodal" element={<VendorJobModal />} />
-                </Route>
-              </AuthWrapper>
-            }
-          />
-        )} */}
-
       {role === "admin" && (
         <Routes>
           <Route
             path="/admin"
+            element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+          />
+          <Route
+            path="/admin/vendors"
+            element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+          />
+          <Route
+            path="/admin/categories"
+            element={<AdminSideDrawer anotherItem={<AdminCategories />} />}
+          />
+          <Route
+            path="/admin/banners"
             element={<AdminSideDrawer anotherItem={<AdminBanners />} />}
           />
-          <Route path="/admin/vendors" element={<AdminVendors />} />
-          <Route path="/admin/categories" element={<AdminCategories />} />
-          <Route path="/admin/banners" element={<AdminBanners />} />
         </Routes>
       )}
       {role === "vendor" && (
@@ -92,22 +65,49 @@ const RouteManager = () => {
             path="/vendor"
             element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
           />
-          <Route path="/vendor/applications" element={<VendorApplications />} />
-          <Route path="/vendor/jobs" element={<VendorJobs />} />
+          <Route
+            path="/vendor/applications"
+            element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
+          />
+          <Route
+            path="/vendor/jobs"
+            element={<VendorSideDrawer anotherItem={<VendorJobs />} />}
+          />
         </Routes>
       )}
       {role === "user" && (
         <Routes>
-          <Route path="/user" element={<UserNavBar />} />
-          <Route path="/user/jobs" element={<UserJobs />} />
-          <Route path="/user/profile" element={<UserProfile />} />
-          <Route path="/user/new-vendor" element={<UserNewVendor />} />
+          <Route
+            path="/user"
+            element={<UserNavBar anotherItem={<UserHomePage />} />}
+          />
+          <Route
+            path="/user/jobs"
+            element={<UserNavBar anotherItem={<UserJobs />} />}
+          />
+          <Route
+            path="/user/profile"
+            element={<UserNavBar anotherItem={<UserProfile />} />}
+          />
+          <Route
+            path="/user/new-vendor"
+            element={<UserNavBar anotherItem={<UserNewVendor />} />}
+          />
         </Routes>
       )}
       <Routes>
-        <Route path="/" element={<ViewerNavBar />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        <Route
+          path="/"
+          element={<ViewerNavBar anotherItem={<ViewerHomePage />} />}
+        />
+        <Route
+          path="/login"
+          element={<ViewerNavBar anotherItem={<LoginPage />} />}
+        />
+        <Route
+          path="/signup"
+          element={<ViewerNavBar anotherItem={<SignupPage />} />}
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -21,9 +21,7 @@ import React from "react";
 import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { Link, useLocation } from "react-router-dom";
-import VendorJobs from "./VendorJobs";
-import VendorApplications from "./VendorApplications";
+import { Link } from "react-router-dom";
 
 const CustomToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -117,8 +115,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const VendorSideDrawer = () => {
-  const location = useLocation();
+const VendorSideDrawer = ({ anotherItem }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -147,7 +144,7 @@ const VendorSideDrawer = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link style={{ textDecoration: "none", color: "white" }} to="/">
+          <Link style={{ textDecoration: "none", color: "white" }} to="/vendor">
             <Typography
               sx={{
                 display: "flex",
@@ -267,13 +264,7 @@ const VendorSideDrawer = () => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {location.pathname === "/jobs" ? (
-          <VendorJobs />
-        ) : location.pathname === "/applications" ? (
-          <VendorApplications />
-        ) : (
-          <VendorApplications />
-        )}
+        {anotherItem}
       </Box>
     </Box>
   );

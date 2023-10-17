@@ -6,7 +6,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const footerStyles = {
-  marginTop: "20px",
   left: 0,
   bottom: 0,
   width: "100vw",

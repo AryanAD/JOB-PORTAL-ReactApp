@@ -151,7 +151,7 @@ const AdminSideDrawer = ({ anotherItem }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Link style={{ textDecoration: "none", color: "white" }} to="/">
+          <Link style={{ textDecoration: "none", color: "white" }} to="/admin">
             <Typography
               sx={{
                 display: "flex",
