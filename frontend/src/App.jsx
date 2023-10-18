@@ -20,12 +20,12 @@ import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
-function App() {
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-  console.log(token);
-  console.log(role);
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+console.log(token);
+console.log(role);
 
+const RouteManager = () => {
   return (
     <BrowserRouter>
       <ToastContainer
@@ -113,6 +113,10 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+};
+
+function App() {
+  return RouteManager();
 }
 
 export default App;
