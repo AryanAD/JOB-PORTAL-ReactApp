@@ -67,26 +67,30 @@ const UserNewVendor = () => {
     console.log(token);
     console.log(role);
 
-    if (role === "user" && token) {
-      axios
-        .post("http://localhost:3000/api/user/registerAsVendor", {
+    axios
+      .post(
+        "http://localhost:3000/api/user/registerAsVendor",
+        {
           name: name,
           email: email,
           designation: designation,
           service: service,
           contact: contact,
           address: address,
-        })
-        .then((response) => {
-          console.log(response, "re");
-          console.log(role);
-        })
-        .catch((error) => {
-          console.error("Login failed: ", error);
-        });
-    } else {
-      console.error("Invalid User");
-    }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response, "re");
+        console.log(role);
+      })
+      .catch((error) => {
+        console.error("Login failed: ", error);
+      });
   };
 
   return (
