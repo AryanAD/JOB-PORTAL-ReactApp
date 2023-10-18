@@ -42,7 +42,7 @@ const UserNavBar = ({ anotherItem }) => {
             <HailRoundedIcon
               sx={{ display: { xs: "none", md: "flex" }, mr: 1, fontSize: 40 }}
             />
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Link to="/user" style={{ textDecoration: "none", color: "white" }}>
               <Typography
                 variant="h4"
                 noWrap
@@ -94,7 +94,7 @@ const UserNavBar = ({ anotherItem }) => {
             <HailRoundedIcon
               sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
             />
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Link to="/user" style={{ textDecoration: "none", color: "white" }}>
               <Typography
                 variant="h5"
                 noWrap

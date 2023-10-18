@@ -312,7 +312,7 @@ const UserHomePage = () => {
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Link to="/new-vendor">
+            <Link to="/user/new-vendor">
               <Button
                 sx={{ fontSize: 28 }}
                 color="secondary"
