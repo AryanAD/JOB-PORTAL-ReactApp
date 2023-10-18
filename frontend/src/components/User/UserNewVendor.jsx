@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import Image from "./assets/newVendor.png";
 import Footer from "../../layout/Footer";
 import { useState } from "react";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -61,29 +62,31 @@ const UserNewVendor = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const role = localStorage.getItem("role");
+    const token = localStorage.getItem("token");
+    console.log(token);
+    console.log(role);
 
-    axios
-      .post("http://localhost:3000/api/user/registerAsVendor", {
-        name: name,
-        email: email,
-        designation: designation,
-        service: service,
-        contact: contact,
-        address: address,
-      })
-      .then((response) => {
-        const token = response.data.token;
-        console.log(response, "re");
-
-        localStorage.setItem("role", response.data.role);
-        localStorage.setItem("token", token);
-
-        const role = localStorage.getItem("role");
-        console.log(role);
-      })
-      .catch((error) => {
-        console.error("Login failed: ", error);
-      });
+    if (role === "user" && token) {
+      axios
+        .post("http://localhost:3000/api/user/registerAsVendor", {
+          name: name,
+          email: email,
+          designation: designation,
+          service: service,
+          contact: contact,
+          address: address,
+        })
+        .then((response) => {
+          console.log(response, "re");
+          console.log(role);
+        })
+        .catch((error) => {
+          console.error("Login failed: ", error);
+        });
+    } else {
+      console.error("Invalid User");
+    }
   };
 
   return (
@@ -134,7 +137,12 @@ const UserNewVendor = () => {
               <Typography component="h1" variant="h4">
                 Apply for Vendor
               </Typography>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Box
+                onSubmit={handleSubmit}
+                component="form"
+                noValidate
+                sx={{ mt: 1 }}
+              >
                 <TextField
                   InputProps={{
                     startAdornment: (
@@ -151,6 +159,7 @@ const UserNewVendor = () => {
                   autoFocus
                   type="text"
                   autoComplete="off"
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
                   InputProps={{
@@ -168,6 +177,7 @@ const UserNewVendor = () => {
                   autoFocus
                   type="email"
                   autoComplete="off"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
                   InputProps={{
@@ -185,6 +195,7 @@ const UserNewVendor = () => {
                   autoFocus
                   type="text"
                   autoComplete="off"
+                  onChange={(e) => setDesignation(e.target.value)}
                 />
                 <TextField
                   InputProps={{
@@ -202,6 +213,7 @@ const UserNewVendor = () => {
                   autoFocus
                   type="text"
                   autoComplete="off"
+                  onChange={(e) => setService(e.target.value)}
                 />
                 <TextField
                   InputProps={{
@@ -219,6 +231,7 @@ const UserNewVendor = () => {
                   autoFocus
                   type="number"
                   autoComplete="off"
+                  onChange={(e) => setContact(e.target.value)}
                 />
                 <TextField
                   InputProps={{
@@ -236,6 +249,7 @@ const UserNewVendor = () => {
                   autoFocus
                   type="text"
                   autoComplete="off"
+                  onChange={(e) => setAddress(e.target.value)}
                 />
                 <Button
                   color="secondary"
