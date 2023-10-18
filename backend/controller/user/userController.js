@@ -60,7 +60,10 @@ exports.logIn = async (req, res) => {
 };
 
 exports.registerAsVendor = async (req, res) => {
+  console.log(req.body);
   try {
+    const existUser = await user.find({});
+    console.log(existUser.email);
     const { name, email, designation, service, contact, address } = req.body;
     const user = await userModel.findOne({
       _id: req.userId,

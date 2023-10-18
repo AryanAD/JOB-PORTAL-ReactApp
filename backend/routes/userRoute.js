@@ -22,9 +22,7 @@ const upload = multer({ storage: storage });
 
 router.route("/register").post(register);
 router.route("/login").post(logIn);
-router
-  .route("/registerAsVendor")
-  .post(isAuthenticated, userRole("user"), registerAsVendor);
+router.route("/registerAsVendor").post(isAuthenticated, registerAsVendor);
 
 //jobs
 

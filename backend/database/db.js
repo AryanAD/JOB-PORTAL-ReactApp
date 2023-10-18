@@ -10,27 +10,7 @@ function mongoConnection(url) {
       useUnifiedTopology: true,
     })
     .then(() => {
-      console.log("Database connected");
-      userModel.findOne({ role: "admin" }).then((admin) => {
-        if (admin) {
-          console.log("Admin already seeded");
-          return;
-        } else {
-          userModel
-            .create({
-              name: "admin",
-              email: "admin@gmail.com",
-              password: bcrypt.hashSync("password", 10),
-              role: "admin",
-            })
-            .then((admin) => {
-              console.log("Admin seeded");
-            });
-        }
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+      console.log("Connected to MongoDB");
     });
 }
 

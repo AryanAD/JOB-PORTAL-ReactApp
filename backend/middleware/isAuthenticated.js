@@ -1,17 +1,27 @@
 const userModel = require("../model/userModel");
 
 exports.isAuthenticated = async (req, res, next) => {
-  const token = req.headers["token"];
+  try {
+    let token;
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startswith("Bearer ")
+    );
+    {
+      token = req.headers.authorization.split(" ")[1];
+    }
 
-  if (!token) {
-    return res.status(401).json({ msg: "No token provided" });
-  }
-  const user = await userModel.findById(token);
-  if (!user) {
-    return res.status(401).json({ msg: "Unauthorized" });
-  }
-  req.userId = token;
-  req.user = user;
+    if (!token) {
+      return res.status(401).json({ msg: "No token provided" });
+    }
+    const user = await userModel.findById(token);
+    if (!user) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+    req.userId = token;
+    req.user = user;
+  } catch (error) {}
+
   next();
 };
 
