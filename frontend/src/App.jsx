@@ -1,6 +1,7 @@
-import "./App.css";
+import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminBanners from "./components/Admin/AdminBanners";
 import AdminCategories from "./components/Admin/AdminCategories";
 import AdminVendors from "./components/Admin/AdminVendors";
@@ -17,15 +18,12 @@ import AdminSideDrawer from "./components/Admin/AdminSideDrawer";
 import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserHomePage from "./components/User/UserHomePage";
 import ViewerHomePage from "./components/Viewer/ViewerHomePage";
-import { Route, Routes } from "react-router";
-import { BrowserRouter } from "react-router-dom";
 
-const token = localStorage.getItem("token");
-const role = localStorage.getItem("role");
-console.log(token);
-console.log(role);
+function App() {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  console.log(token);
 
-const RouteManager = () => {
   return (
     <BrowserRouter>
       <ToastContainer
@@ -41,63 +39,70 @@ const RouteManager = () => {
         theme="light"
       />
 
-      {role === "admin" && (
-        <Routes>
-          <Route
-            path="/admin"
-            element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
-          />
-          <Route
-            path="/admin/vendors"
-            element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
-          />
-          <Route
-            path="/admin/categories"
-            element={<AdminSideDrawer anotherItem={<AdminCategories />} />}
-          />
-          <Route
-            path="/admin/banners"
-            element={<AdminSideDrawer anotherItem={<AdminBanners />} />}
-          />
-        </Routes>
-      )}
-      {role === "vendor" && (
-        <Routes>
-          <Route
-            path="/vendor"
-            element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
-          />
-          <Route
-            path="/vendor/applications"
-            element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
-          />
-          <Route
-            path="/vendor/jobs"
-            element={<VendorSideDrawer anotherItem={<VendorJobs />} />}
-          />
-        </Routes>
-      )}
-      {role === "user" && (
-        <Routes>
-          <Route
-            path="/user"
-            element={<UserNavBar anotherItem={<UserHomePage />} />}
-          />
-          <Route
-            path="/user/jobs"
-            element={<UserNavBar anotherItem={<UserJobs />} />}
-          />
-          <Route
-            path="/user/profile"
-            element={<UserNavBar anotherItem={<UserProfile />} />}
-          />
-          <Route
-            path="/user/new-vendor"
-            element={<UserNavBar anotherItem={<UserNewVendor />} />}
-          />
-        </Routes>
-      )}
       <Routes>
+        {role === "admin" && (
+          <>
+            <Route
+              path="/admin"
+              element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+            />
+            <Route
+              path="/admin/vendors"
+              element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+            />
+            <Route
+              path="/admin/categories"
+              element={<AdminSideDrawer anotherItem={<AdminCategories />} />}
+            />
+            <Route
+              path="/admin/banners"
+              element={<AdminSideDrawer anotherItem={<AdminBanners />} />}
+            />
+          </>
+        )}
+
+        {role === "vendor" && (
+          <>
+            <Route
+              path="/vendor"
+              element={
+                <VendorSideDrawer anotherItem={<VendorApplications />} />
+              }
+            />
+            <Route
+              path="/vendor/applications"
+              element={
+                <VendorSideDrawer anotherItem={<VendorApplications />} />
+              }
+            />
+            <Route
+              path="/vendor/jobs"
+              element={<VendorSideDrawer anotherItem={<VendorJobs />} />}
+            />
+          </>
+        )}
+
+        {role === "user" && (
+          <>
+            <Route
+              path="/user"
+              element={<UserNavBar anotherItem={<UserHomePage />} />}
+            />
+            <Route
+              path="/user/jobs"
+              element={<UserNavBar anotherItem={<UserJobs />} />}
+            />
+            <Route
+              path="/user/profile"
+              element={<UserNavBar anotherItem={<UserProfile />} />}
+            />
+            <Route
+              path="/user/new-vendor"
+              element={<UserNavBar anotherItem={<UserNewVendor />} />}
+            />
+          </>
+        )}
+
         <Route
           path="/"
           element={<ViewerNavBar anotherItem={<ViewerHomePage />} />}
@@ -113,10 +118,6 @@ const RouteManager = () => {
       </Routes>
     </BrowserRouter>
   );
-};
-
-function App() {
-  return RouteManager();
 }
 
 export default App;
