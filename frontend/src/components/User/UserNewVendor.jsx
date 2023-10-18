@@ -23,6 +23,7 @@ import {
 import { Link } from "react-router-dom";
 import Image from "./assets/newVendor.png";
 import Footer from "../../layout/Footer";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -51,6 +52,40 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const UserNewVendor = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [service, setService] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post("http://localhost:3000/api/user/registerAsVendor", {
+        name: name,
+        email: email,
+        designation: designation,
+        service: service,
+        contact: contact,
+        address: address,
+      })
+      .then((response) => {
+        const token = response.data.token;
+        console.log(response, "re");
+
+        localStorage.setItem("role", response.data.role);
+        localStorage.setItem("token", token);
+
+        const role = localStorage.getItem("role");
+        console.log(role);
+      })
+      .catch((error) => {
+        console.error("Login failed: ", error);
+      });
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <>
@@ -115,6 +150,7 @@ const UserNewVendor = () => {
                   name="name"
                   autoFocus
                   type="text"
+                  autoComplete="off"
                 />
                 <TextField
                   InputProps={{
@@ -131,6 +167,7 @@ const UserNewVendor = () => {
                   name="email"
                   autoFocus
                   type="email"
+                  autoComplete="off"
                 />
                 <TextField
                   InputProps={{
@@ -147,6 +184,7 @@ const UserNewVendor = () => {
                   name="name"
                   autoFocus
                   type="text"
+                  autoComplete="off"
                 />
                 <TextField
                   InputProps={{
@@ -163,6 +201,7 @@ const UserNewVendor = () => {
                   name="name"
                   autoFocus
                   type="text"
+                  autoComplete="off"
                 />
                 <TextField
                   InputProps={{
@@ -179,6 +218,7 @@ const UserNewVendor = () => {
                   name="number"
                   autoFocus
                   type="number"
+                  autoComplete="off"
                 />
                 <TextField
                   InputProps={{
@@ -195,6 +235,7 @@ const UserNewVendor = () => {
                   name="name"
                   autoFocus
                   type="text"
+                  autoComplete="off"
                 />
                 <Button
                   color="secondary"
