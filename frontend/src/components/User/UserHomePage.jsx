@@ -84,7 +84,7 @@ const UserHomePage = () => {
             justifyContent: "flex-end",
           }}
         >
-          <Link to="/user-jobs">
+          <Link to="/user/jobs">
             <Button
               fullwidth
               sx={{
@@ -227,7 +227,7 @@ const UserHomePage = () => {
                       style={{
                         width: "100%",
                       }}
-                      to="/user-jobs"
+                      to="/user/jobs"
                     >
                       <Button
                         sx={{
@@ -249,7 +249,7 @@ const UserHomePage = () => {
           </Grid>
         ))}
       </Grid>
-      <Link to="/user-jobs">
+      <Link to="/user/jobs">
         <Button
           sx={{
             mt: 10,
