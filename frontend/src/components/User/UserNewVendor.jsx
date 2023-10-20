@@ -68,7 +68,7 @@ const UserNewVendor = () => {
     const role = localStorage.getItem("role");
 
     if (!token || !role) {
-      // Handle the case where token or role is missing
+      console.log(`Error: No token or Role found`);
       return;
     }
 
