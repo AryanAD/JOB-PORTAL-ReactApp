@@ -62,15 +62,15 @@ const UserNewVendor = () => {
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const role = localStorage.getItem("role");
     const token = localStorage.getItem("token");
     console.log(token);
     console.log(role);
 
-    axios
-      .post(
+    try {
+      const response = await axios.post(
         "http://localhost:3000/api/user/registerAsVendor",
         {
           name: name,
@@ -85,18 +85,17 @@ const UserNewVendor = () => {
             Authorization: `Bearer ${token}`,
           },
         }
-      )
-      .then((response) => {
-        console.log(response, "re");
-        console.log(role);
-        if (role) {
-          toast.success("Successfully applied for Vendor!");
-          nav("/user");
-        }
-      })
-      .catch((error) => {
-        console.error("Login failed: ", error);
-      });
+      );
+
+      console.log(response, "re");
+      console.log(role);
+      if (role) {
+        toast.success("Successfully applied for Vendor!");
+        nav("/user");
+      }
+    } catch (error) {
+      console.error("API request failed: ", error);
+    }
   };
 
   return (

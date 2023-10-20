@@ -1,20 +1,25 @@
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockPersonIcon from "@mui/icons-material/LockPerson";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import EmailIcon from "@mui/icons-material/Email";
-import LockIcon from "@mui/icons-material/Lock";
-import { InputAdornment } from "@mui/material";
+import {
+  LockPersonRounded,
+  EmailRounded,
+  LockRounded,
+} from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  InputAdornment,
+  Paper,
+  TextField,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import Image from "./assets/job.png";
 import { useState } from "react";
 import axios from "axios";
-import Image from "./assets/job.png";
 import { toast } from "react-toastify";
 
 function Copyright(props) {
@@ -42,7 +47,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function LoginPage() {
+const LoginPage = () => {
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,31 +62,19 @@ export default function LoginPage() {
       })
       .then((response) => {
         const token = response.data.token;
-        console.log(response, "re");
-
         localStorage.setItem("role", response.data.role);
         localStorage.setItem("token", token);
 
         const role = localStorage.getItem("role");
-        console.log(role);
 
-        if (role === "admin") {
-          toast.success("Logged in as Administrator");
-          return nav("/admin");
-        } else if (role === "vendor") {
-          toast.success("Logged in as Vendor");
-          return nav("/vendor");
-        } else if (role === "user") {
-          toast.success("Logged in as User");
-          return nav("/user");
-        }
+        toast.success(`Logged in as ${role}`);
+        nav(`/${role.toLowerCase()}`);
       })
       .catch((error) => {
         console.error("Login failed: ", error);
       });
   };
-  const token = localStorage.getItem("token");
-  console.log(token);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -116,7 +109,7 @@ export default function LoginPage() {
               variant="rounded"
               sx={{ m: 1, bgcolor: "#17e717", width: 50, height: 50 }}
             >
-              <LockPersonIcon />
+              <LockPersonRounded />
             </Avatar>
             <Typography component="h1" variant="h4">
               Log In
@@ -131,7 +124,7 @@ export default function LoginPage() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <EmailIcon />
+                      <EmailRounded />
                     </InputAdornment>
                   ),
                 }}
@@ -149,7 +142,7 @@ export default function LoginPage() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <LockIcon />
+                      <LockRounded />
                     </InputAdornment>
                   ),
                 }}
@@ -192,4 +185,6 @@ export default function LoginPage() {
       </Grid>
     </ThemeProvider>
   );
-}
+};
+
+export default LoginPage;
