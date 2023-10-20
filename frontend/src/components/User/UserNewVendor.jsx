@@ -20,11 +20,12 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "./assets/newVendor.png";
 import Footer from "../../layout/Footer";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -53,6 +54,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const UserNewVendor = () => {
+  const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
@@ -87,6 +89,10 @@ const UserNewVendor = () => {
       .then((response) => {
         console.log(response, "re");
         console.log(role);
+        if (role) {
+          toast.success("Successfully applied for Vendor!");
+          nav("/user");
+        }
       })
       .catch((error) => {
         console.error("Login failed: ", error);
