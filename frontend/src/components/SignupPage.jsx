@@ -45,8 +45,6 @@ const SignupPage = () => {
   const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [firstPasswords, setFirstPasswords] = useState("");
-  const [secondPasswords, setSecondPasswords] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
