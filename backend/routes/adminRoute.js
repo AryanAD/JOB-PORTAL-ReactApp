@@ -19,6 +19,7 @@ const upload = multer({ storage: storage });
 router
   .route("/changeToVendor")
   .post(isAuthenticated, userRole("admin"), changeToVendor);
+
 router.route("/vendors").get(isAuthenticated, userRole("admin"), getAllVendors);
 router
   .route("/vendors/:id")
