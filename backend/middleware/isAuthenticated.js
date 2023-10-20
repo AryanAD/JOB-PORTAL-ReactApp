@@ -6,8 +6,7 @@ exports.isAuthenticated = async (req, res, next) => {
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer ")
-    );
-    {
+    ) {
       token = req.headers.authorization.split(" ")[1];
     }
 
@@ -18,9 +17,11 @@ exports.isAuthenticated = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
-    req.userId = token;
+    req.userId = user._id;
     req.user = user;
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
 
   next();
 };
@@ -28,7 +29,7 @@ exports.isAuthenticated = async (req, res, next) => {
 exports.userRole = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return res.status(401).json({ msg: "Unauthorized user" });
+      return res.status(403).json({ msg: "Unauthorized user" });
     }
     next();
   };
