@@ -29,3 +29,12 @@ exports.isAuthenticated = async (req, res, next) => {
 
   next();
 };
+
+exports.userRole = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ msg: "Unauthorized user" });
+    }
+    next();
+  };
+};
