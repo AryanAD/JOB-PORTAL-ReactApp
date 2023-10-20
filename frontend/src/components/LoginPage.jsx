@@ -62,10 +62,10 @@ const LoginPage = () => {
       })
       .then((response) => {
         const token = response.data.token;
-        localStorage.setItem("role", response.data.role);
-        localStorage.setItem("token", token);
+        const role = response.data.role;
 
-        const role = localStorage.getItem("role");
+        localStorage.setItem("role", role);
+        localStorage.setItem("token", token);
 
         toast.success(`Logged in as ${role}`);
         nav(`/${role.toLowerCase()}`);
