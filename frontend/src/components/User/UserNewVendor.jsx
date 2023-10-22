@@ -67,11 +67,6 @@ const UserNewVendor = () => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
 
-    if (!token || !role) {
-      console.log(`Error: No token or Role found`);
-      return;
-    }
-
     try {
       const response = await axios.post(
         "http://localhost:3000/api/user/registerAsVendor",
