@@ -18,6 +18,7 @@ import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserHomePage from "./components/User/UserHomePage";
 import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import UserSingleJob from "./components/User/UserSingleJob";
+import AdminHomepage from "./components/Admin/AdminHomepage";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -44,7 +45,7 @@ function App() {
           <>
             <Route
               path="/admin"
-              element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+              element={<AdminSideDrawer anotherItem={<AdminHomepage />} />}
             />
             <Route
               path="/admin/vendors"

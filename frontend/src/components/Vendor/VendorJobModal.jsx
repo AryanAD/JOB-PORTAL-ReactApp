@@ -19,14 +19,14 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "white", // Adjust the background color of the modal itself here
+  bgcolor: "white",
   borderRadius: "13px",
   boxShadow: 24,
   p: 4,
 };
 
 const backdropStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.2)", // Adjust the background color and opacity of the backdrop here
+  backgroundColor: "rgba(0, 0, 0, 0.2)",
 };
 
 const VendorJobModal = ({ open, close }) => {
@@ -42,7 +42,7 @@ const VendorJobModal = ({ open, close }) => {
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-          style: backdropStyle, // Apply the backdrop style here
+          style: backdropStyle,
         }}
       >
         <Fade in={open}>
