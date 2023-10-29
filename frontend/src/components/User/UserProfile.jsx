@@ -66,7 +66,7 @@ const UserProfile = () => {
               />
               <Typography
                 sx={{
-                  fontFamily: "Dank Mono",
+                  fontFamily: "monospace",
                   fontWeight: "bolder",
                   color: "#555",
                 }}
@@ -77,7 +77,7 @@ const UserProfile = () => {
             </Box>
             <Box
               sx={{
-                boxShadow: "9",
+                // boxShadow: "9",
                 display: "flex",
                 borderRadius: "11px",
                 width: "18vw",
@@ -95,40 +95,60 @@ const UserProfile = () => {
                 }}
               >
                 <ListItem>
-                  <ListItemButton
-                    sx={{
-                      bgcolor: "#1CC21C",
-                      borderRadius: "8px",
-                      justifyContent: "center",
-                      fontFamily: "monospace",
-                      fontSize: "16px",
-                      py: 2,
-                      "&:hover": {
-                        bgcolor: "#06E406",
-                      },
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
                     }}
+                    to="/user/jobs"
                   >
-                    Apply For Job
-                  </ListItemButton>
+                    <ListItemButton
+                      sx={{
+                        bgcolor: "#1CC21C",
+                        boxShadow: 10,
+                        borderRadius: "8px",
+                        justifyContent: "center",
+                        fontFamily: "monospace",
+                        fontSize: "16px",
+                        py: 2,
+                        "&:hover": {
+                          bgcolor: "#06E406",
+                        },
+                      }}
+                    >
+                      Apply For Job
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
 
                 <ListItem>
-                  <ListItemButton
-                    sx={{
-                      bgcolor: "#7250CE",
+                  <Link
+                    style={{
+                      textDecoration: "none",
                       color: "white",
-                      borderRadius: "8px",
-                      justifyContent: "center",
-                      fontFamily: "monospace",
-                      fontSize: "16px",
-                      py: 2,
-                      "&:hover": {
-                        bgcolor: "#7e5ed4",
-                      },
+                      width: "100%",
                     }}
+                    to="/user/new-vendor"
                   >
-                    Apply For Vendor
-                  </ListItemButton>
+                    <ListItemButton
+                      sx={{
+                        bgcolor: "#7250CE",
+                        boxShadow: 10,
+                        color: "white",
+                        borderRadius: "8px",
+                        justifyContent: "center",
+                        fontFamily: "monospace",
+                        fontSize: "16px",
+                        py: 2,
+                        "&:hover": {
+                          bgcolor: "#7e5ed4",
+                        },
+                      }}
+                    >
+                      Apply For Vendor
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
               </List>
             </Box>
