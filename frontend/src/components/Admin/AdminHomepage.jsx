@@ -1,52 +1,27 @@
 import {
-  AddRounded,
   AttachMoneyRounded,
   CalendarMonthRounded,
+  CheckRounded,
+  CloseRounded,
   DeleteForeverRounded,
-  DeleteRounded,
-  FormatListBulletedRounded,
   LocationOnRounded,
-  OpenInNewRounded,
-  PersonRounded,
+  MoreHorizRounded,
+  SupportAgentRounded,
+  WorkRounded,
 } from "@mui/icons-material";
-import { Button, Sheet, Table } from "@mui/joy";
+import { Sheet, Table } from "@mui/joy";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Divider,
   Grid,
-  IconButton,
-  Tooltip,
   Typography,
-  styled,
-  tooltipClasses,
 } from "@mui/material";
 import Chip from "@mui/material-next/Chip";
 
 const cards = [1, 2, 3, 4, 5, 6];
-
-const limitLength = (text, maxLength) => {
-  const words = text.split(" ");
-  if (words.length <= maxLength) {
-    return text;
-  }
-  const truncatedText = words.slice(0, maxLength).join(" ");
-  return `${truncatedText}...`;
-};
-
-const CustomToolTip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "gray",
-    color: "white",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(18),
-    border: "1px solid #dadde9",
-    borderRadius: "7px",
-  },
-}));
 
 const AdminHomepage = () => {
   return (
@@ -103,7 +78,7 @@ const AdminHomepage = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                maxWidth: "80vw",
+                maxWidth: "63vw",
                 margin: 5,
               }}
               container
@@ -114,6 +89,7 @@ const AdminHomepage = () => {
                   <Card
                     sx={{
                       height: "100%",
+                      width: "100%",
                       display: "flex",
                       boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
                       border: "1px solid whitesmoke",
@@ -130,7 +106,14 @@ const AdminHomepage = () => {
                       }}
                     >
                       <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                        sx={{
+                          display: "flex",
+                          //   width: "100%",
+                          height: "100%",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          gap: 2,
+                        }}
                       >
                         <Box
                           sx={{
@@ -138,7 +121,7 @@ const AdminHomepage = () => {
                             width: "100%",
                             display: "flex",
                             flexDirection: "column",
-                            alignItems: "space-between",
+                            alignItems: "space-evenly",
                           }}
                         >
                           <Typography
@@ -153,17 +136,21 @@ const AdminHomepage = () => {
                             }}
                             component="h2"
                           >
-                            Software Developer
+                            User Name
                           </Typography>
                           <Divider />
                           <Divider />
                           <Divider />
-                          <Box>
-                            <Typography variant="body2">
-                              {limitLength(
-                                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-                                23
-                              )}
+                          <Box
+                            sx={{
+                              py: 2,
+                              color: "gray",
+                              fontFamily: "monospace",
+                              width: "400px",
+                            }}
+                          >
+                            <Typography variant="body">
+                              user@email.com | user.contact | user.address
                             </Typography>
                           </Box>
 
@@ -173,86 +160,63 @@ const AdminHomepage = () => {
                               pt: 1,
                               width: "100%",
                               display: "flex",
-                              justifyContent: "space-evenly",
+                              justifyContent: "space-around",
                               alignItems: "center",
                             }}
                           >
                             <Chip
-                              icon={<LocationOnRounded />}
-                              color="tertiary"
+                              icon={<WorkRounded />}
                               disabled={false}
                               size="small"
-                              variant="filled"
-                              label="Location"
+                              variant="outlined"
+                              label="Designation"
                             />
                             <Chip
-                              icon={<AttachMoneyRounded />}
-                              color="success"
+                              icon={<SupportAgentRounded />}
                               disabled={false}
                               size="small"
-                              variant="filled"
-                              label="Salary"
+                              variant="outlined"
+                              label="Service"
                             />
                             <Chip
-                              icon={<CalendarMonthRounded />}
+                              icon={<MoreHorizRounded />}
                               color="warning"
                               disabled={false}
                               size="small"
                               variant="filled"
-                              label="Deadline"
-                            />
-                            <Chip
-                              icon={<PersonRounded />}
-                              color="primary"
-                              disabled={false}
-                              size="small"
-                              variant="filled"
-                              label="Posted By"
-                            />
-                            <Chip
-                              icon={<FormatListBulletedRounded />}
-                              color="tertiary"
-                              disabled={false}
-                              size="small"
-                              variant="filled"
-                              label="Category"
+                              label="Status"
                             />
                           </Box>
                         </Box>
-                        <Box sx={{ display: "flex", flexDirection: "column" }}>
-                          <CustomToolTip title="Add" placement="right">
-                            <IconButton
-                              sx={{
-                                borderRadius: "50%",
-                                color: "green",
-                                "&:hover": { bgcolor: "#a0f5d1" },
-                              }}
-                            >
-                              <AddRounded />
-                            </IconButton>
-                          </CustomToolTip>
-                          <CustomToolTip title="Delete" placement="right">
-                            <IconButton
-                              sx={{
-                                borderRadius: "50%",
-                                color: "red",
-                                "&:hover": { bgcolor: "#ffd8e4" },
-                              }}
-                            >
-                              <DeleteRounded />
-                            </IconButton>
-                          </CustomToolTip>
-                          <CustomToolTip title="Visit" placement="right">
-                            <IconButton
-                              sx={{
-                                borderRadius: "50%",
-                                color: "#1976d2",
-                                "&:hover": { bgcolor: "#a7d3ff" },
-                              }}
-                            >
-                              <OpenInNewRounded />
-                            </IconButton>
-                          </CustomToolTip>
+                        <Box
+                          sx={{
+                            gap: 2,
+                            pt: 5,
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        >
+                          <Button
+                            fullWidth
+                            sx={{
+                              color: "green",
+                              "&:hover": { bgcolor: "#a0f5d1" },
+                            }}
+                            startIcon={<CheckRounded />}
+                          >
+                            Approve
+                          </Button>
+                          <Button
+                            fullWidth
+                            sx={{
+                              color: "red",
+                              "&:hover": { bgcolor: "#ffd8e4" },
+                            }}
+                            startIcon={<CloseRounded />}
+                          >
+                            Reject
+                          </Button>
                         </Box>
                       </Box>
                     </CardContent>
