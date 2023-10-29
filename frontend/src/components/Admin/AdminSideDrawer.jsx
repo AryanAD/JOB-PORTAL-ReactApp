@@ -25,6 +25,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Vendors from "./AdminVendors";
 import { toast } from "react-toastify";
+import { HomeRounded } from "@mui/icons-material";
 
 const CustomToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -238,6 +239,22 @@ const AdminSideDrawer = ({ anotherItem }) => {
                   </ListItemIcon>
                 </CustomToolTip>
                 <ListItemText primary="Banners" />
+              </ListItemButton>
+            </Link>
+            <Link
+              style={{
+                color: "#272727	",
+                textDecoration: "none",
+              }}
+              to={"/admin"}
+            >
+              <ListItemButton>
+                <CustomToolTip title="HomePage" placement="right">
+                  <ListItemIcon>
+                    <HomeRounded />
+                  </ListItemIcon>
+                </CustomToolTip>
+                <ListItemText primary="HomePage" />
               </ListItemButton>
             </Link>
           </ListItem>
