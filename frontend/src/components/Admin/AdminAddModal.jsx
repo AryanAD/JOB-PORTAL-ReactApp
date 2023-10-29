@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useSpring, animated } from "@react-spring/web";
 import { useNavigate } from "react-router";
+import { TextField } from "@mui/material";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -56,16 +57,17 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
+  borderRadius: "11px",
   p: 4,
+  display: "flex",
+  flexDirection: "column",
 };
 
 const AdminAddModal = ({ modalOpen, modalClose }) => {
   const nav = useNavigate();
   return (
-    <div>
-      <Button onClick={modalOpen}>Open modal</Button>
+    <Box>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -79,21 +81,22 @@ const AdminAddModal = ({ modalOpen, modalClose }) => {
           },
         }}
       >
-        <Fade in={open}>
+        <Fade in={modalOpen}>
           <Box sx={style}>
-            <Typography id="spring-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="spring-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+            <TextField
+              variant="outlined"
+              type="text"
+              label="Category Title"
+              color="info"
+            />
+            <input type="image"></input>
             <Button onClick={(nav("/admin/categories"), modalClose)}>
               Close
             </Button>
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </Box>
   );
 };
 
