@@ -26,9 +26,7 @@ const AdminHomepage = () => {
             alignItems: "space-between",
           }}
         >
-          {/* Users */}
           <AdminUsers />
-          {/* VendorTable */}
           <AdminVendors />
         </Box>
       </Box>
