@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import LaunchIcon from "@mui/icons-material/Launch";
+import { AddRounded } from "@mui/icons-material";
 
 const AdminCategories = () => {
   return (
@@ -44,7 +45,7 @@ const AdminCategories = () => {
           image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="h2">
             Category Title
           </Typography>
         </CardContent>
@@ -74,6 +75,19 @@ const AdminCategories = () => {
           </Button>
         </CardActions>
       </Card>
+      <Box
+        sx={{
+          width: "100%",
+          position: "absolute",
+          left: "45%",
+          right: "50%",
+          bottom: 30,
+        }}
+      >
+        <Button variant="contained" color="success" startIcon={<AddRounded />}>
+          Add Category
+        </Button>
+      </Box>
     </Box>
   );
 };
