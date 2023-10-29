@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useSpring, animated } from "@react-spring/web";
+import { useNavigate } from "react-router";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -60,19 +61,16 @@ const style = {
   p: 4,
 };
 
-const AdminAddModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+const AdminAddModal = ({ modalOpen, modalClose }) => {
+  const nav = useNavigate();
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={modalOpen}>Open modal</Button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
-        open={open}
-        onClose={handleClose}
+        open={modalOpen}
+        onClose={modalClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -89,6 +87,9 @@ const AdminAddModal = () => {
             <Typography id="spring-modal-description" sx={{ mt: 2 }}>
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>
+            <Button onClick={(nav("/admin/categories"), modalClose)}>
+              Close
+            </Button>
           </Box>
         </Fade>
       </Modal>

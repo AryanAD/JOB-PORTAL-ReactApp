@@ -20,6 +20,7 @@
     "@mui/lab": "^5.0.0-alpha.146",
     "@mui/material": "^5.14.11",
     "@mui/material-next": "^6.0.0-alpha.107",
+    "@react-spring/web": "^9.7.3",
     "@rsuite/icons": "^1.0.3",
     "antd": "^5.9.4",
     "axios": "^1.5.1",
