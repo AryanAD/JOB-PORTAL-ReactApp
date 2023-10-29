@@ -1,10 +1,7 @@
 import {
-  AttachMoneyRounded,
-  CalendarMonthRounded,
   CheckRounded,
   CloseRounded,
   DeleteForeverRounded,
-  LocationOnRounded,
   MoreHorizRounded,
   SupportAgentRounded,
   WorkRounded,
