@@ -1,5 +1,12 @@
-import { Button, CardContent } from "@mui/joy";
-import { Box, Card, Divider, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  Divider,
+  Grid,
+  Typography,
+  Button,
+  CardContent,
+} from "@mui/material";
 import {
   CheckRounded,
   CloseRounded,
@@ -13,7 +20,7 @@ const cards = [1, 2, 3, 4, 5, 6];
 const AdminUsers = () => {
   return (
     <>
-      <Divider variant="inset" textAlign="left">
+      <Divider sx={{ pt: 5 }} variant="inset" textAlign="left">
         <Typography
           sx={{
             color: "black",
@@ -56,7 +63,7 @@ const AdminUsers = () => {
                   height: "100%",
                   width: "100%",
                   display: "flex",
-                  boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                  boxShadow: "10px 20px 20px rgba(150, 150, 150, 0.2)",
                   border: "1px solid whitesmoke",
                   borderRadius: 3,
                 }}
@@ -163,6 +170,7 @@ const AdminUsers = () => {
                       }}
                     >
                       <Button
+                        variant="text"
                         fullWidth
                         sx={{
                           color: "green",
@@ -173,6 +181,7 @@ const AdminUsers = () => {
                         Approve
                       </Button>
                       <Button
+                        variant="text"
                         fullWidth
                         sx={{
                           color: "red",
