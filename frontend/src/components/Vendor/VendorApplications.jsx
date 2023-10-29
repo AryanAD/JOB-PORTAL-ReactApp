@@ -14,10 +14,7 @@ import {
   styled,
   tooltipClasses,
 } from "@mui/material";
-import {
-  CloseRounded as CloseRoundedIcon,
-  DoneRounded as DoneRoundedIcon,
-} from "@mui/icons-material";
+import { CloseRounded, DoneRounded } from "@mui/icons-material";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -56,7 +53,7 @@ const VendorApplications = () => {
           }}
           variant="h4"
         >
-          Job Applications
+          Applications
         </Typography>
       </Divider>
       <Box
@@ -70,7 +67,7 @@ const VendorApplications = () => {
       >
         <Box
           sx={{
-            width: "50%",
+            width: "55%",
           }}
         >
           <TableContainer component={Paper}>
@@ -83,6 +80,7 @@ const VendorApplications = () => {
                 <TableRow>
                   <TableCell
                     sx={{
+                      // width: "50px",
                       fontWeight: "bold",
                       padding: "10px",
                       fontSize: "20px",
@@ -192,12 +190,12 @@ const VendorApplications = () => {
                     >
                       <CustomToolTip title="Approve" placement="left">
                         <IconButton color="success">
-                          <DoneRoundedIcon />
+                          <DoneRounded />
                         </IconButton>
                       </CustomToolTip>
                       <CustomToolTip title="Reject" placement="right">
                         <IconButton color="error">
-                          <CloseRoundedIcon />
+                          <CloseRounded />
                         </IconButton>
                       </CustomToolTip>
                     </TableCell>

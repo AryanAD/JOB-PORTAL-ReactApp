@@ -260,7 +260,6 @@ const VendorJobs = () => {
           ))}
         </Grid>
       </Box>
-      <Footer />
       <VendorJobModal open={isModalOpen} close={handleCloseModal} />
     </>
   );
