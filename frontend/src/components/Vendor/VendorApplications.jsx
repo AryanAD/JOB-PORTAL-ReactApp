@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   IconButton,
   Paper,
@@ -13,9 +12,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import {
-  CheckRounded,
   CloseRounded as CloseRoundedIcon,
   DoneRounded as DoneRoundedIcon,
 } from "@mui/icons-material";
@@ -28,15 +25,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-// const limitLength = (text, maxLength) => {
-// 	const words = text.split(" ");
-// 	if (words.length <= maxLength) {
-// 		return text;
-// 	}
-// 	const truncatedText = words.slice(0, maxLength).join(" ");
-// 	return `${truncatedText}...`;
-// };
 
 const VendorApplications = () => {
   return (
