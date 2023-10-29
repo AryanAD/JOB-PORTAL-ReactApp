@@ -1,22 +1,5 @@
-import {
-  CheckRounded,
-  DeleteRounded,
-  SupportAgentRounded,
-  WorkRounded,
-} from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import AdminUsers from "./AdminUsers";
-import Chip from "@mui/material-next/Chip";
-
-const cards = [1, 2, 3, 4, 5, 6];
 
 const AdminHomepage = () => {
   return (
