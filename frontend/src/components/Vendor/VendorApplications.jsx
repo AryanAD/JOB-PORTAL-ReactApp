@@ -9,8 +9,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
   Typography,
   styled,
+  tooltipClasses,
 } from "@mui/material";
 import {
   CloseRounded as CloseRoundedIcon,
@@ -23,6 +25,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
   "&:last-child td, &:last-child th": {
     border: 0,
+  },
+}));
+
+const CustomToolTip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "gray",
+    color: "white",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(18),
+    border: "1px solid #dadde9",
+    borderRadius: "7px",
   },
 }));
 
@@ -175,12 +190,16 @@ const VendorApplications = () => {
                       }}
                       align="right"
                     >
-                      <IconButton color="success">
-                        <DoneRoundedIcon />
-                      </IconButton>
-                      <IconButton color="error">
-                        <CloseRoundedIcon />
-                      </IconButton>
+                      <CustomToolTip title="Approve" placement="left">
+                        <IconButton color="success">
+                          <DoneRoundedIcon />
+                        </IconButton>
+                      </CustomToolTip>
+                      <CustomToolTip title="Reject" placement="right">
+                        <IconButton color="error">
+                          <CloseRoundedIcon />
+                        </IconButton>
+                      </CustomToolTip>
                     </TableCell>
                   </StyledTableRow>
                 ))}
