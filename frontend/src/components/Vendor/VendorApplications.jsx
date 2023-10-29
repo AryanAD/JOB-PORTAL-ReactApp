@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Divider,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -14,6 +15,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
+  CheckRounded,
   CloseRounded as CloseRoundedIcon,
   DoneRounded as DoneRoundedIcon,
 } from "@mui/icons-material";
@@ -65,7 +67,7 @@ const VendorApplications = () => {
       >
         <Box
           sx={{
-            width: "55%",
+            width: "50%",
           }}
         >
           <TableContainer component={Paper}>
@@ -78,7 +80,6 @@ const VendorApplications = () => {
                 <TableRow>
                   <TableCell
                     sx={{
-                      width: "50px",
                       fontWeight: "bold",
                       padding: "10px",
                       fontSize: "20px",
@@ -87,7 +88,7 @@ const VendorApplications = () => {
                       borderRadius: "11px 0 0 0",
                     }}
                   >
-                    SN
+                    Job ID
                   </TableCell>
                   <TableCell
                     sx={{
@@ -97,9 +98,9 @@ const VendorApplications = () => {
                       fontFamily: "monospace",
                       bgcolor: "#29a2f3",
                     }}
-                    align="center"
+                    align="right"
                   >
-                    Job ID
+                    User ID
                   </TableCell>
                   <TableCell
                     sx={{
@@ -149,18 +150,7 @@ const VendorApplications = () => {
                   >
                     Contact
                   </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    Payment
-                  </TableCell>
+
                   <TableCell
                     sx={{
                       fontWeight: "bold",
@@ -179,7 +169,7 @@ const VendorApplications = () => {
               <TableBody>
                 {Array.from({ length: 7 }).map((_, rowIndex) => (
                   <StyledTableRow key={rowIndex}>
-                    <TableCell scope="row">1</TableCell>
+                    <TableCell scope="row">J8EH90-JH83</TableCell>
                     <TableCell component="th" align="right">
                       J1US8
                     </TableCell>
@@ -189,7 +179,6 @@ const VendorApplications = () => {
                     </TableCell>
                     <TableCell align="right">Home-2</TableCell>
                     <TableCell align="right">985654952</TableCell>
-                    <TableCell align="right">pending</TableCell>
                     <TableCell
                       sx={{
                         display: "flex",
@@ -198,25 +187,12 @@ const VendorApplications = () => {
                       }}
                       align="right"
                     >
-                      <Link to={"/vendorjobmodal"}>
-                        <Button
-                          sx={{ gap: 1 }}
-                          size="small"
-                          variant="contained"
-                          color="success"
-                          startIcon={<DoneRoundedIcon />}
-                        >
-                          Accept
-                        </Button>
-                      </Link>
-                      <Button
-                        size="small"
-                        variant="contained"
-                        color="error"
-                        startIcon={<CloseRoundedIcon />}
-                      >
-                        Reject
-                      </Button>
+                      <IconButton color="success">
+                        <DoneRoundedIcon />
+                      </IconButton>
+                      <IconButton color="error">
+                        <CloseRoundedIcon />
+                      </IconButton>
                     </TableCell>
                   </StyledTableRow>
                 ))}
