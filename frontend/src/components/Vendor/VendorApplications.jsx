@@ -189,12 +189,22 @@ const VendorApplications = () => {
                       align="right"
                     >
                       <CustomToolTip title="Approve" placement="left">
-                        <IconButton color="success">
+                        <IconButton
+                          sx={{
+                            "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                          }}
+                          color="success"
+                        >
                           <DoneRounded />
                         </IconButton>
                       </CustomToolTip>
                       <CustomToolTip title="Reject" placement="right">
-                        <IconButton color="error">
+                        <IconButton
+                          sx={{
+                            "&:hover": { bgcolor: "#d74747", color: "white" },
+                          }}
+                          color="error"
+                        >
                           <CloseRounded />
                         </IconButton>
                       </CustomToolTip>

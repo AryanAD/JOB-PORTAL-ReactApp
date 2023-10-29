@@ -18,7 +18,6 @@ import {
 import VendorJobModal from "./VendorJobModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Footer from "../../layout/Footer";
 import Chip from "@mui/material-next/Chip";
 
 const cards = [1, 2, 3, 4, 5, 6];
