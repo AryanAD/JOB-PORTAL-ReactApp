@@ -5,7 +5,10 @@ import {
   Divider,
   Grid,
   IconButton,
+  Tooltip,
   Typography,
+  tooltipClasses,
+  styled,
 } from "@mui/material";
 import {
   DeleteRounded,
@@ -28,6 +31,18 @@ const limitLength = (text, maxLength) => {
   const truncatedText = words.slice(0, maxLength).join(" ");
   return `${truncatedText}...`;
 };
+const CustomToolTip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "gray",
+    color: "white",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(18),
+    border: "1px solid #dadde9",
+    borderRadius: "7px",
+  },
+}));
 
 const VendorJobs = () => {
   const [jobsData, setJobsData] = useState([]);
@@ -67,6 +82,7 @@ const VendorJobs = () => {
     <>
       <Box
         sx={{
+          pl: 0,
           pb: 10,
           display: "flex",
           flexDirection: "column",
@@ -215,32 +231,38 @@ const VendorJobs = () => {
                       </Box>
                     </Box>
                     <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <IconButton
-                        sx={{
-                          borderRadius: "50%",
-                          color: "green",
-                        }}
-                        onClick={handleOpenModal}
-                      >
-                        <AddRounded />
-                      </IconButton>
-                      <IconButton
-                        sx={{
-                          borderRadius: "50%",
-                          color: "red",
-                        }}
-                        onClick={handleDelete}
-                      >
-                        <DeleteRounded />
-                      </IconButton>
-                      <IconButton
-                        sx={{
-                          borderRadius: "50%",
-                          color: "#1976d2",
-                        }}
-                      >
-                        <OpenInNewRounded />
-                      </IconButton>
+                      <CustomToolTip title="Add" placement="right">
+                        <IconButton
+                          sx={{
+                            borderRadius: "50%",
+                            color: "green",
+                          }}
+                          onClick={handleOpenModal}
+                        >
+                          <AddRounded />
+                        </IconButton>
+                      </CustomToolTip>
+                      <CustomToolTip title="Delete" placement="right">
+                        <IconButton
+                          sx={{
+                            borderRadius: "50%",
+                            color: "red",
+                          }}
+                          onClick={handleDelete}
+                        >
+                          <DeleteRounded />
+                        </IconButton>
+                      </CustomToolTip>
+                      <CustomToolTip title="Visit" placement="right">
+                        <IconButton
+                          sx={{
+                            borderRadius: "50%",
+                            color: "#1976d2",
+                          }}
+                        >
+                          <OpenInNewRounded />
+                        </IconButton>
+                      </CustomToolTip>
                     </Box>
                   </Box>
                 </CardContent>

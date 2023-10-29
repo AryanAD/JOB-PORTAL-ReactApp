@@ -278,7 +278,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
           </Box>
         )}
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, pl: 0 }}>
         <DrawerHeader />
         {anotherItem}
       </Box>
