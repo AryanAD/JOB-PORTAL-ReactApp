@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import AdminUsers from "./AdminUsers";
+import AdminVendors from "./AdminVendors";
 
 const AdminHomepage = () => {
   return (
@@ -28,6 +29,7 @@ const AdminHomepage = () => {
           {/* Users */}
           <AdminUsers />
           {/* VendorTable */}
+          <AdminVendors />
         </Box>
       </Box>
     </>
