@@ -169,7 +169,7 @@ const UserProfile = () => {
                   <Typography sx={{ fontFamily: "monospace" }} variant="h3">
                     My Profile
                   </Typography>
-                  <Link to="/">
+                  <Link to="/user">
                     <Button
                       sx={{
                         height: "35px",

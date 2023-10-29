@@ -127,7 +127,7 @@ const UserNavBar = ({ anotherItem }) => {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: "45px", padding: 0 }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -140,19 +140,19 @@ const UserNavBar = ({ anotherItem }) => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleLogout}
+                onClose={handleCloseNavMenu}
               >
-                <Link
-                  to="/user-profile"
-                  style={{
-                    color: "black",
-                    textDecoration: "none",
-                  }}
-                >
-                  <MenuItem onClick={handleLogout}>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Link
+                    to="/user/profile"
+                    style={{
+                      color: "black",
+                      textDecoration: "none",
+                    }}
+                  >
                     <Typography textAlign="center">My Profile</Typography>
-                  </MenuItem>
-                </Link>
+                  </Link>
+                </MenuItem>
 
                 <MenuItem
                   sx={{
