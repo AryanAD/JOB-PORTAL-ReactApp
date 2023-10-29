@@ -30,7 +30,6 @@ const limitLength = (text, maxLength) => {
 };
 
 const UserJobsTable = () => {
-  const nav = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
