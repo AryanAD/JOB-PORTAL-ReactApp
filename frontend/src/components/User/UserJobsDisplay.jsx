@@ -10,10 +10,26 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import React from "react";
+import StarRounded from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
+const cards = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const labels = {
+  0.5: "Useless",
+  1: "Useless+",
+  1.5: "Poor",
+  2: "Poor+",
+  2.5: "Ok",
+  3: "Ok+",
+  3.5: "Good",
+  4: "Good+",
+  4.5: "Excellent",
+  5: "Excellent+",
+};
+
 const UserJobsDisplay = () => {
+  const value = 4.5;
   return (
     <div>
       <Divider
