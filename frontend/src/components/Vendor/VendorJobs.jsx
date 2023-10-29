@@ -14,6 +14,12 @@ import {
   DeleteRounded,
   AddRounded,
   OpenInNewRounded,
+  LocationOnRounded,
+  MoneyRounded,
+  AttachMoneyRounded,
+  CalendarMonthRounded,
+  PersonRounded,
+  FormatListBulletedRounded,
 } from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
 import { useEffect, useState } from "react";
@@ -121,8 +127,8 @@ const VendorJobs = () => {
                 sx={{
                   height: "100%",
                   display: "flex",
-                  boxShadow: 1,
-                  border: "1px solid #d8d8d8",
+                  boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                  border: "1px solid whitesmoke",
                   borderRadius: 3,
                 }}
               >
@@ -182,20 +188,23 @@ const VendorJobs = () => {
                         }}
                       >
                         <Chip
-                          color="error"
+                          icon={<LocationOnRounded />}
+                          color="tertiary"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Location"
                         />
                         <Chip
-                          color="info"
+                          icon={<AttachMoneyRounded />}
+                          color="success"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Salary"
                         />
                         <Chip
+                          icon={<CalendarMonthRounded />}
                           color="warning"
                           disabled={false}
                           size="small"
@@ -203,13 +212,15 @@ const VendorJobs = () => {
                           label="Deadline"
                         />
                         <Chip
-                          color="success"
+                          icon={<PersonRounded />}
+                          color="primary"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Posted By"
                         />
                         <Chip
+                          icon={<FormatListBulletedRounded />}
                           color="tertiary"
                           disabled={false}
                           size="small"
@@ -224,6 +235,7 @@ const VendorJobs = () => {
                           sx={{
                             borderRadius: "50%",
                             color: "green",
+                            "&:hover": { bgcolor: "#a0f5d1" },
                           }}
                           onClick={handleOpenModal}
                         >
@@ -235,6 +247,7 @@ const VendorJobs = () => {
                           sx={{
                             borderRadius: "50%",
                             color: "red",
+                            "&:hover": { bgcolor: "#ffd8e4" },
                           }}
                           onClick={handleDelete}
                         >
@@ -246,6 +259,7 @@ const VendorJobs = () => {
                           sx={{
                             borderRadius: "50%",
                             color: "#1976d2",
+                            "&:hover": { bgcolor: "#a7d3ff" },
                           }}
                         >
                           <OpenInNewRounded />
