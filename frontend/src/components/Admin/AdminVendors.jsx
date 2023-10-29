@@ -137,19 +137,17 @@ const AdminVendors = () => {
                         }}
                       >
                         <Chip
-                          color="error"
                           icon={<WorkRounded />}
                           disabled={false}
                           size="small"
-                          variant="filled"
+                          variant="outlined"
                           label="Designation"
                         />
                         <Chip
-                          color="warning"
                           icon={<SupportAgentRounded />}
                           disabled={false}
                           size="small"
-                          variant="filled"
+                          variant="outlined"
                           label="Service"
                         />
                       </Box>
@@ -164,10 +162,10 @@ const AdminVendors = () => {
                       }}
                     >
                       <Typography sx={{ fontFamily: "monospace" }}>
-                        Address:
+                        Address
                       </Typography>
                       <Typography sx={{ fontFamily: "monospace" }}>
-                        Contact:
+                        Contact
                       </Typography>
                     </Box>
                     <Box
@@ -187,8 +185,8 @@ const AdminVendors = () => {
                         icon={<CheckRounded />}
                         color="success"
                         disabled={false}
-                        size="medium"
-                        variant="elevated"
+                        size="small"
+                        variant="filled"
                         label="Approved"
                       />
                     </Box>
