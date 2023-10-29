@@ -80,6 +80,21 @@ const VendorJobs = () => {
 
   return (
     <>
+      <Divider variant="inset" textAlign="left">
+        <Typography
+          sx={{
+            color: "black",
+            fontFamily: "nunito",
+            letterSpacing: "6px",
+            marginBottom: "5px",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          variant="h4"
+        >
+          Jobs Available Today
+        </Typography>
+      </Divider>
       <Box
         sx={{
           pl: 0,
@@ -90,32 +105,6 @@ const VendorJobs = () => {
           maxHeight: "100%",
         }}
       >
-        <Divider
-          sx={{
-            mt: 4,
-            mb: 8,
-          }}
-          variant="inset"
-          textAlign="left"
-        >
-          <Typography
-            sx={{
-              color: "black",
-              fontFamily: "nunito",
-              letterSpacing: "6px",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              textAlign: "left",
-            }}
-            variant="h4"
-          >
-            Jobs Available Today
-          </Typography>
-          <Divider variant="middle" />
-          <Divider variant="middle" />
-          <Divider variant="middle" />
-          <Divider variant="middle" />
-        </Divider>
         <Grid
           style={{
             display: "flex",

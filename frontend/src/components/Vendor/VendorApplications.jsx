@@ -56,7 +56,7 @@ const VendorApplications = () => {
           }}
           variant="h4"
         >
-          Applications
+          Job Applications
         </Typography>
       </Divider>
       <Box

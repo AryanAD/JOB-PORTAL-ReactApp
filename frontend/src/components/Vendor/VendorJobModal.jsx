@@ -20,7 +20,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "white", // Adjust the background color of the modal itself here
-  border: "1px solid #29a2f3",
   borderRadius: "13px",
   boxShadow: 24,
   p: 4,
