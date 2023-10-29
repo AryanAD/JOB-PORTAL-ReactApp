@@ -190,7 +190,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
                 color: "#272727	",
                 textDecoration: "none",
               }}
-              to="/jobs"
+              to="/vendor/jobs"
             >
               <ListItemButton>
                 <CustomToolTip title="Jobs" placement="right">
@@ -206,7 +206,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
                 color: "#272727	",
                 textDecoration: "none",
               }}
-              to="/applications"
+              to="/vendor/applications"
             >
               <ListItemButton>
                 <CustomToolTip title="Applications" placement="right">
