@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { useNavigate } from "react-router";
 
 const style = {
   position: "absolute",
@@ -29,14 +30,15 @@ const backdropStyle = {
   backgroundColor: "rgba(0, 0, 0, 0.2)", // Adjust the background color and opacity of the backdrop here
 };
 
-const VendorJobModal = ({ open, onClose }) => {
+const VendorJobModal = ({ open, close }) => {
+  const nav = useNavigate();
   return (
     <div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
-        onClose={onClose}
+        onClose={close}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -113,6 +115,7 @@ const VendorJobModal = ({ open, onClose }) => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={(nav("/vendor/jobs"), close)}
             >
               <AddRoundedIcon />
               Add Job

@@ -1,34 +1,24 @@
 import {
   Box,
-  Button,
+  Card,
+  CardContent,
   Divider,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  Grid,
+  IconButton,
   Typography,
-  styled,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import {
-  DeleteRounded as DeleteRoundedIcon,
-  AddRounded as AddRoundedIcon,
+  DeleteRounded,
+  AddRounded,
+  OpenInNewRounded,
 } from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Footer from "../../layout/Footer";
+import Chip from "@mui/material-next/Chip";
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+const cards = [1, 2, 3, 4, 5, 6];
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -69,202 +59,198 @@ const VendorJobs = () => {
     setIsModalOpen(false);
   };
 
-  // Placeholder for delete logic
   const handleDelete = (rowIndex) => {
-    // Implement your delete logic here
     console.log(`Delete button clicked for row ${rowIndex}`);
   };
 
   return (
     <>
-      <Divider variant="inset" textAlign="left">
-        <Typography
-          sx={{
-            color: "black",
-            fontFamily: "nunito",
-            letterSpacing: "6px",
-            marginBottom: "5px",
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-          variant="h4"
-        >
-          Jobs
-        </Typography>
-      </Divider>
       <Box
         sx={{
+          pb: 10,
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          margin: "20px auto",
-          width: "100%",
+          maxHeight: "100%",
         }}
       >
-        <Box
+        <Divider
           sx={{
-            width: "75%",
+            mt: 4,
+            mb: 8,
           }}
+          variant="inset"
+          textAlign="left"
         >
-          <TableContainer component={Paper}>
-            <Table
-              size="small"
-              sx={{ minWidth: 700 }}
-              aria-label="customized table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                      borderRadius: "11px 0 0 0",
-                    }}
-                  >
-                    Title
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="center"
-                  >
-                    Description
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    Location
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    Salary
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    Deadline
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    Posted By
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    Category
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "20px auto",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                      borderRadius: "0 11px 0 0",
-                    }}
-                    align="right"
-                  >
-                    Actions
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.from({ length: 7 }).map((_, rowIndex) => (
-                  <StyledTableRow key={rowIndex}>
-                    <TableCell scope="row">Software Developer</TableCell>
-                    <TableCell component="th" align="right">
-                      {limitLength(
-                        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-                        5
-                      )}
-                    </TableCell>
-                    <TableCell align="right">Sundarharaincha-4</TableCell>
-                    <TableCell align="right">Rs 130,000</TableCell>
-                    <TableCell align="right">2080-10-28</TableCell>
-                    <TableCell align="right">Admin Bahadur</TableCell>
-                    <TableCell align="right">Tech</TableCell>
-                    <TableCell
+          <Typography
+            sx={{
+              color: "black",
+              fontFamily: "nunito",
+              letterSpacing: "6px",
+              marginBottom: "5px",
+              fontWeight: "bold",
+              textAlign: "left",
+            }}
+            variant="h4"
+          >
+            Jobs Available Today
+          </Typography>
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+        </Divider>
+        <Grid
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            maxWidth: "80vw",
+            margin: 5,
+          }}
+          container
+          spacing={4}
+        >
+          {cards.map((card) => (
+            <Grid item key={card} xs={7} sm={3} md={6}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  boxShadow: 1,
+                  border: "1px solid #d8d8d8",
+                  borderRadius: 3,
+                }}
+              >
+                <CardContent
+                  sx={{
+                    gap: 2,
+                    flexGrow: 1,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Box
                       sx={{
+                        height: "100%",
+                        width: "100%",
                         display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
+                        flexDirection: "column",
+                        alignItems: "space-between",
                       }}
-                      align="right"
                     >
-                      <Link to="/vendorjobmodal">
-                        <Button
-                          size="small"
-                          variant="contained"
-                          color="success"
-                          onClick={handleOpenModal}
-                        >
-                          <AddRoundedIcon />
-                          Add Job
-                        </Button>
-                      </Link>
-                      <Button
-                        size="small"
-                        variant="contained"
-                        color="error"
-                        startIcon={<DeleteRoundedIcon />}
-                        onClick={() => handleDelete(rowIndex)}
+                      <Typography
+                        gutterBottom={false}
+                        variant="h4"
+                        sx={{
+                          mb: 0,
+                          pb: 0,
+                          fontWeight: "bolder",
+                          color: "#444",
+                          fontFamily: "monospace",
+                        }}
+                        component="h2"
                       >
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
+                        Software Developer
+                      </Typography>
+                      <Divider />
+                      <Divider />
+                      <Divider />
+                      <Box>
+                        <Typography variant="body2">
+                          {limitLength(
+                            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
+                            23
+                          )}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          gap: 2,
+                          pt: 1,
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "space-evenly",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Chip
+                          color="error"
+                          disabled={false}
+                          size="small"
+                          variant="filled"
+                          label="Location"
+                        />
+                        <Chip
+                          color="info"
+                          disabled={false}
+                          size="small"
+                          variant="filled"
+                          label="Salary"
+                        />
+                        <Chip
+                          color="warning"
+                          disabled={false}
+                          size="small"
+                          variant="filled"
+                          label="Deadline"
+                        />
+                        <Chip
+                          color="success"
+                          disabled={false}
+                          size="small"
+                          variant="filled"
+                          label="Posted By"
+                        />
+                        <Chip
+                          color="tertiary"
+                          disabled={false}
+                          size="small"
+                          variant="filled"
+                          label="Category"
+                        />
+                      </Box>
+                    </Box>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <IconButton
+                        sx={{
+                          borderRadius: "50%",
+                          color: "green",
+                        }}
+                        onClick={handleOpenModal}
+                      >
+                        <AddRounded />
+                      </IconButton>
+                      <IconButton
+                        sx={{
+                          borderRadius: "50%",
+                          color: "red",
+                        }}
+                        onClick={handleDelete}
+                      >
+                        <DeleteRounded />
+                      </IconButton>
+                      <IconButton
+                        sx={{
+                          borderRadius: "50%",
+                          color: "#1976d2",
+                        }}
+                      >
+                        <OpenInNewRounded />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
-      <VendorJobModal open={isModalOpen} handleClose={handleCloseModal} />
+      <Footer />
+      <VendorJobModal open={isModalOpen} close={handleCloseModal} />
     </>
   );
 };
