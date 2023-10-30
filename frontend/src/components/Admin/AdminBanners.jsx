@@ -13,16 +13,25 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { AddRounded } from "@mui/icons-material";
 import { useState } from "react";
 import AdminBannerModal from "./AdminBannerModal";
+import AdminBannersSingle from "./AdminBannersSingle";
 
 const AdminBanners = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [singleModalOpen, setSingleModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const openSingleModal = () => {
+    setSingleModalOpen(true);
+  };
+  const closeSingleModal = () => {
+    setSingleModalOpen(false);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const openAddModal = () => {
+    setAddModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setAddModalOpen(false);
   };
   return (
     <>
@@ -73,6 +82,7 @@ const AdminBanners = () => {
               fullWidth
               variant="contained"
               size="small"
+              onClick={openSingleModal}
             >
               View
             </Button>
@@ -101,12 +111,16 @@ const AdminBanners = () => {
           variant="contained"
           color="success"
           startIcon={<AddRounded />}
-          onClick={handleOpenModal}
+          onClick={openAddModal}
         >
           Add Banners
         </Button>
       </Box>
-      <AdminBannerModal modalOpen={isModalOpen} modalClose={handleCloseModal} />
+      <AdminBannersSingle
+        modalOpen={singleModalOpen}
+        modalClose={closeSingleModal}
+      />
+      <AdminBannerModal modalOpen={addModalOpen} modalClose={closeAddModal} />
     </>
   );
 };
