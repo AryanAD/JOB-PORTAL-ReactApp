@@ -4,7 +4,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import { useSpring, animated } from "@react-spring/web";
 import { useNavigate } from "react-router";
 import { TextField } from "@mui/material";
@@ -64,7 +63,7 @@ const style = {
   flexDirection: "column",
 };
 
-const AdminAddModal = ({ modalOpen, modalClose }) => {
+const AdminCategoryModal = ({ modalOpen, modalClose }) => {
   const nav = useNavigate();
   return (
     <Box>
@@ -127,4 +126,4 @@ const AdminAddModal = ({ modalOpen, modalClose }) => {
   );
 };
 
-export default AdminAddModal;
+export default AdminCategoryModal;

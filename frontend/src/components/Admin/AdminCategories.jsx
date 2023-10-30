@@ -11,8 +11,8 @@ import {
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { AddRounded } from "@mui/icons-material";
-import AdminAddModal from "./AdminAddModal";
 import { useState } from "react";
+import AdminCategoryModal from "./AdminCategoryModal";
 
 const AdminCategories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,7 +107,10 @@ const AdminCategories = () => {
           </Button>
         </Box>
       </Box>
-      <AdminAddModal modalOpen={isModalOpen} modalClose={handleCloseModal} />
+      <AdminCategoryModal
+        modalOpen={isModalOpen}
+        modalClose={handleCloseModal}
+      />
     </>
   );
 };
