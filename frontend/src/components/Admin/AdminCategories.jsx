@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  CircularProgress,
   Divider,
   Grid,
   Typography,
@@ -16,6 +17,7 @@ import AdminCategoryModal from "./AdminCategoryModal";
 import axios from "axios";
 
 const AdminCategories = () => {
+  const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [myData, setMyData] = useState([]);
@@ -34,6 +36,21 @@ const AdminCategories = () => {
   useEffect(() => {
     fetchMyData();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      await axios.delete(`http://localhost:3000/api/admin/category/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(`Deleted category with ID ${id}.`);
+      fetchMyData();
+    } catch (error) {
+      console.error(`Error deleting category with ID ${id}.`, error);
+    }
+  };
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -79,57 +96,72 @@ const AdminCategories = () => {
           container
           spacing={2}
         >
-          {myData.map((category, i) => {
-            return (
-              <Grid item key={i} xs={3} sm={5} md={3}>
-                <Card
-                  key={category._id}
-                  sx={{
-                    margin: "20px",
-                    maxWidth: 345,
-                    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "12px",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="140"
-                    image={category.image}
-                  />
-                  <CardContent>
-                    <Typography
-                      sx={{ fontFamily: "monospace" }}
-                      variant="h5"
-                      component="h2"
-                    >
-                      {category.category}
-                    </Typography>
-                  </CardContent>
-                  <CardActions
+          {myData.length === 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "70vh",
+              }}
+            >
+              <CircularProgress size={80} color="info" />
+            </Box>
+          ) : (
+            myData.map((category, i) => {
+              return (
+                <Grid item key={i} xs={3} sm={5} md={3}>
+                  <Card
+                    key={category._id}
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "90%",
-                      mb: 2,
-                      mx: "auto",
+                      margin: "20px",
+                      maxWidth: 350,
+                      boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
+                      borderRadius: "12px",
                     }}
                   >
-                    <Button
-                      startIcon={<DeleteRoundedIcon />}
-                      color="error"
-                      fullWidth
-                      variant="contained"
-                      size="small"
+                    <CardMedia
+                      component="img"
+                      alt="green iguana"
+                      height="140"
+                      image={category.image}
+                    />
+                    <CardContent>
+                      <Typography
+                        sx={{ fontFamily: "monospace" }}
+                        variant="h5"
+                        component="h2"
+                      >
+                        {category.category}
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "90%",
+                        mb: 2,
+                        mx: "auto",
+                      }}
                     >
-                      Delete
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            );
-          })}
+                      <Button
+                        startIcon={<DeleteRoundedIcon />}
+                        color="error"
+                        fullWidth
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleDelete(category._id)}
+                      >
+                        Delete
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            })
+          )}
         </Grid>
         <Box
           sx={{
