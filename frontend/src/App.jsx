@@ -41,72 +41,62 @@ function App() {
       />
 
       <Routes>
-        {role === "admin" && (
-          <>
-            <Route
-              path="/admin"
-              element={<AdminSideDrawer anotherItem={<AdminHomepage />} />}
-            />
-            <Route
-              path="/admin/vendors"
-              element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
-            />
-            <Route
-              path="/admin/categories"
-              element={<AdminSideDrawer anotherItem={<AdminCategories />} />}
-            />
-            <Route
-              path="/admin/banners"
-              element={<AdminSideDrawer anotherItem={<AdminBanners />} />}
-            />
-          </>
-        )}
+        <>
+          <Route
+            path="/admin"
+            element={<AdminSideDrawer anotherItem={<AdminHomepage />} />}
+          />
+          <Route
+            path="/admin/vendors"
+            element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+          />
+          <Route
+            path="/admin/categories"
+            element={<AdminSideDrawer anotherItem={<AdminCategories />} />}
+          />
+          <Route
+            path="/admin/banners"
+            element={<AdminSideDrawer anotherItem={<AdminBanners />} />}
+          />
+        </>
 
-        {role === "vendor" && (
-          <>
-            <Route
-              path="/vendor"
-              element={
-                <VendorSideDrawer anotherItem={<VendorApplications />} />
-              }
-            />
-            <Route
-              path="/vendor/applications"
-              element={
-                <VendorSideDrawer anotherItem={<VendorApplications />} />
-              }
-            />
-            <Route
-              path="/vendor/jobs"
-              element={<VendorSideDrawer anotherItem={<VendorJobs />} />}
-            />
-          </>
-        )}
+        <>
+          <Route
+            path="/vendor"
+            element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
+          />
+          <Route
+            path="/vendor/applications"
+            element={<VendorSideDrawer anotherItem={<VendorApplications />} />}
+          />
+          <Route
+            path="/vendor/jobs"
+            element={<VendorSideDrawer anotherItem={<VendorJobs />} />}
+          />
+        </>
 
-        {role === "user" && (
-          <>
-            <Route
-              path="/user"
-              element={<UserNavBar anotherItem={<UserHomePage />} />}
-            />
-            <Route
-              path="/user/jobs"
-              element={<UserNavBar anotherItem={<UserJobs />} />}
-            />
-            <Route
-              path="/user/jobs/single"
-              element={<UserNavBar anotherItem={<UserSingleJob />} />}
-            />
-            <Route
-              path="/user/profile"
-              element={<UserNavBar anotherItem={<UserProfile />} />}
-            />
-            <Route
-              path="/user/new-vendor"
-              element={<UserNavBar anotherItem={<UserNewVendor />} />}
-            />
-          </>
-        )}
+        <>
+          <Route
+            path="/user"
+            element={<UserNavBar anotherItem={<UserHomePage />} />}
+          />
+          <Route
+            path="/user/jobs"
+            element={<UserNavBar anotherItem={<UserJobs />} />}
+          />
+          <Route
+            path="/user/jobs/single"
+            element={<UserNavBar anotherItem={<UserSingleJob />} />}
+          />
+          <Route
+            path="/user/profile"
+            element={<UserNavBar anotherItem={<UserProfile />} />}
+          />
+          <Route
+            path="/user/new-vendor"
+            element={<UserNavBar anotherItem={<UserNewVendor />} />}
+          />
+        </>
 
         <Route
           path="/"

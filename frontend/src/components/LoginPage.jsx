@@ -67,7 +67,20 @@ const LoginPage = () => {
         localStorage.setItem("role", role);
         localStorage.setItem("token", token);
 
-        toast.success(`Logged in as ${role}`);
+        if (role === "admin") {
+          nav("/admin");
+          toast.success(`Logged in as ${response.data.emailExists.name}`);
+        } else if (role === "vendor") {
+          nav("/vendor");
+          toast.success(`Logged in as ${response.data.emailExists.name}`);
+        } else if (role === "user") {
+          nav("/user");
+          toast.success(`Logged in as ${response.data.emailExists.name}`);
+        } else {
+          nav("/login");
+          toast.error(`Email or Password incorrect`);
+        }
+
         nav(`/${role.toLowerCase()}`);
       })
       .catch((error) => {
