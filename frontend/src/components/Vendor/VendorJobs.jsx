@@ -9,13 +9,13 @@ import {
   Typography,
   tooltipClasses,
   styled,
+  Button,
 } from "@mui/material";
 import {
   DeleteRounded,
   AddRounded,
   OpenInNewRounded,
   LocationOnRounded,
-  MoneyRounded,
   AttachMoneyRounded,
   CalendarMonthRounded,
   PersonRounded,
@@ -107,7 +107,9 @@ const VendorJobs = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
           maxHeight: "100%",
+          gap: 4,
         }}
       >
         <Grid
@@ -165,10 +167,10 @@ const VendorJobs = () => {
                       >
                         Software Developer
                       </Typography>
-                      <Divider />
-                      <Divider />
-                      <Divider />
-                      <Box>
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Box sx={{ pt: 1 }}>
                         <Typography variant="body2">
                           {limitLength(
                             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
@@ -230,18 +232,6 @@ const VendorJobs = () => {
                       </Box>
                     </Box>
                     <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <CustomToolTip title="Add" placement="right">
-                        <IconButton
-                          sx={{
-                            borderRadius: "50%",
-                            color: "green",
-                            "&:hover": { bgcolor: "#a0f5d1" },
-                          }}
-                          onClick={handleOpenModal}
-                        >
-                          <AddRounded />
-                        </IconButton>
-                      </CustomToolTip>
                       <CustomToolTip title="Delete" placement="right">
                         <IconButton
                           sx={{
@@ -272,6 +262,18 @@ const VendorJobs = () => {
             </Grid>
           ))}
         </Grid>
+        <Button
+          variant="outlined"
+          color="success"
+          sx={{
+            color: "green",
+            "&:hover": { bgcolor: "#a0f5d1" },
+          }}
+          onClick={handleOpenModal}
+          startIcon={<AddRounded />}
+        >
+          Add a Job
+        </Button>
       </Box>
       <VendorJobModal open={isModalOpen} close={handleCloseModal} />
     </>
