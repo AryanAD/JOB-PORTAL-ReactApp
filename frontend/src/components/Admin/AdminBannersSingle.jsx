@@ -3,11 +3,30 @@ import PropTypes from "prop-types";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
 import { useSpring, animated } from "@react-spring/web";
 import { useNavigate } from "react-router";
-import { CardContent, CardMedia, TextField } from "@mui/material";
+import {
+  CardContent,
+  CardMedia,
+  IconButton,
+  Tooltip,
+  styled,
+  tooltipClasses,
+} from "@mui/material";
+import { CloseRounded } from "@mui/icons-material";
 
+const CustomToolTip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "gray",
+    color: "white",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(18),
+    border: "1px solid #dadde9",
+    borderRadius: "7px",
+  },
+}));
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
     children,
@@ -60,6 +79,7 @@ const style = {
   borderRadius: "11px",
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
 };
 
 const AdminBannersSingle = ({ modalOpen, modalClose }) => {
@@ -90,6 +110,19 @@ const AdminBannersSingle = ({ modalOpen, modalClose }) => {
                 />
               </CardMedia>
             </CardContent>
+            <CustomToolTip title="Close" placement="top">
+              <IconButton
+                sx={{
+                  borderRadius: "50%",
+                  width: 50,
+                  height: 50,
+                  "&:hover": { bgcolor: "#f9dedc" },
+                }}
+                onClick={(nav("/admin/banners"), modalClose)}
+              >
+                <CloseRounded color="error" />
+              </IconButton>
+            </CustomToolTip>
           </Box>
         </Fade>
       </Modal>
