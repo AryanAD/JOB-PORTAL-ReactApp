@@ -85,7 +85,7 @@ const AdminBannerModal = ({ modalOpen, modalClose }) => {
             <TextField
               variant="outlined"
               type="text"
-              label="Category Title"
+              label="Banner Title"
               color="info"
             />
             <Box
