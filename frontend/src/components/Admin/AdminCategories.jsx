@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import LaunchIcon from "@mui/icons-material/Launch";
 import { AddRounded } from "@mui/icons-material";
 import { useState } from "react";
 import AdminCategoryModal from "./AdminCategoryModal";
@@ -65,18 +64,13 @@ const AdminCategories = () => {
           <CardActions
             sx={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "90%",
+              mb: 2,
+              mx: "auto",
             }}
           >
-            <Button
-              startIcon={<LaunchIcon />}
-              color="info"
-              fullWidth
-              variant="contained"
-              size="small"
-            >
-              View
-            </Button>
             <Button
               startIcon={<DeleteRoundedIcon />}
               color="error"
