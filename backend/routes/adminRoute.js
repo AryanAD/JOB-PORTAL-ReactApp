@@ -35,7 +35,7 @@ router
     upload.single("image"),
     createCategory
   )
-  .get(isAuthenticated, userRole("admin"), getAllCategories);
+  .get(getAllCategories);
 
 router
   .route("/category/:id")
