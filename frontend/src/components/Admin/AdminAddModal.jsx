@@ -89,9 +89,36 @@ const AdminAddModal = ({ modalOpen, modalClose }) => {
               label="Category Title"
               color="info"
             />
-            <input type="image"></input>
-            <Button onClick={(nav("/admin/categories"), modalClose)}>
-              Close
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                mt: 2,
+                mx: "auto",
+                gap: 1,
+              }}
+            >
+              <label
+                style={{
+                  padding: 2,
+                  fontFamily: "monospace",
+                  color: "#555",
+                  borderBottom: "2px solid #333",
+                }}
+              >
+                Upload Image:
+              </label>
+              <input style={{ paddingTop: 1 }} type="file" accept="image/*" />
+            </Box>
+            <Button
+              color="success"
+              variant="outlined"
+              sx={{ mt: 2, "&:hover": { bgcolor: "#bfd7c0", color: "green" } }}
+              onClick={(nav("/admin/categories"), modalClose)}
+            >
+              Add
             </Button>
           </Box>
         </Fade>
