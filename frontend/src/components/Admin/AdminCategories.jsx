@@ -185,6 +185,7 @@ const AdminCategories = () => {
       <AdminCategoryModal
         modalOpen={isModalOpen}
         modalClose={handleCloseModal}
+        fetchMyData={fetchMyData}
       />
     </>
   );

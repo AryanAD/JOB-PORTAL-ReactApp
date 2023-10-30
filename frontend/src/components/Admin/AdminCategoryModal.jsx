@@ -65,7 +65,7 @@ const style = {
   flexDirection: "column",
 };
 
-const AdminCategoryModal = ({ modalOpen, modalClose }) => {
+const AdminCategoryModal = ({ modalOpen, modalClose, fetchMyData }) => {
   const token = localStorage.getItem("token");
   const nav = useNavigate();
   const [category, setCategory] = React.useState("");
@@ -94,8 +94,9 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
       );
       console.log(formData);
       console.log(response, "re");
+      fetchMyData();
+      setImage(null);
       toast.success("Successfully created a category!");
-      nav("/admin/categories");
     } catch (error) {
       console.error("API request failed: ", error);
     }
@@ -108,7 +109,7 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
   };
 
   return (
-    <Box>
+    <>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -126,6 +127,7 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
           <Box sx={style}>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
               <TextField
+                fullWidth
                 variant="outlined"
                 type="text"
                 label="Category Title"
@@ -159,13 +161,16 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
                   accept="image/*"
                   onChange={imagePreview}
                 />
-                <Avatar
-                  variant="square"
-                  sx={{ width: 80, height: 80 }}
-                  src={image}
-                />
+                {!image ? null : (
+                  <Avatar
+                    variant="rounded"
+                    sx={{ width: 80, height: 80 }}
+                    src={image}
+                  />
+                )}
               </Box>
               <Button
+                fullWidth
                 type="submit"
                 color="success"
                 variant="outlined"
@@ -173,7 +178,7 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
                   mt: 2,
                   "&:hover": { bgcolor: "#bfd7c0", color: "green" },
                 }}
-                onClick={(nav("/admin/categories"), modalClose)}
+                onClick={modalClose}
               >
                 Add
               </Button>
@@ -181,7 +186,7 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
           </Box>
         </Fade>
       </Modal>
-    </Box>
+    </>
   );
 };
 
