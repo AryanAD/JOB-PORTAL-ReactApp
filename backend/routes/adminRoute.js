@@ -35,7 +35,10 @@ router
     upload.single("image"),
     createCategory
   )
-  .get(getAllCategories)
+  .get(isAuthenticated, userRole("admin"), getAllCategories);
+
+router
+  .route("/category/:id")
   .delete(isAuthenticated, userRole("admin"), deleteCategory);
 
 //banner api
