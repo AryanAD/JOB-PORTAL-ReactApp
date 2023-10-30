@@ -10,11 +10,29 @@ import {
 } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { AddRounded } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminCategoryModal from "./AdminCategoryModal";
+import axios from "axios";
 
 const AdminCategories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [myData, setMyData] = useState([]);
+
+  const fetchMyData = async () => {
+    try {
+      let response = await axios.get(
+        `http://localhost:3000/api/admin/category`
+      );
+      setMyData(response.data.categories);
+      console.log(myData);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+  useEffect(() => {
+    fetchMyData();
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -42,46 +60,52 @@ const AdminCategories = () => {
             Categories
           </Typography>
         </Divider>
-        <Card
-          sx={{
-            margin: "20px",
-            maxWidth: 345,
-            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
-            borderRadius: "12px",
-          }}
-        >
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Category Title
-            </Typography>
-          </CardContent>
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "90%",
-              mb: 2,
-              mx: "auto",
-            }}
-          >
-            <Button
-              startIcon={<DeleteRoundedIcon />}
-              color="error"
-              fullWidth
-              variant="contained"
-              size="small"
+        {myData.map((category) => {
+          console.log(category._id);
+          return (
+            <Card
+              key={category._id}
+              sx={{
+                margin: "20px",
+                maxWidth: 345,
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
+                borderRadius: "12px",
+              }}
             >
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
+              <CardMedia
+                component="img"
+                alt="green iguana"
+                height="140"
+                image={category.image}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {category.category}
+                </Typography>
+              </CardContent>
+              <CardActions
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "90%",
+                  mb: 2,
+                  mx: "auto",
+                }}
+              >
+                <Button
+                  startIcon={<DeleteRoundedIcon />}
+                  color="error"
+                  fullWidth
+                  variant="contained"
+                  size="small"
+                >
+                  Delete
+                </Button>
+              </CardActions>
+            </Card>
+          );
+        })}
         <Box
           sx={{
             width: "100%",
