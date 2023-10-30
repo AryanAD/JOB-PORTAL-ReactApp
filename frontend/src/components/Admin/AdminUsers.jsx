@@ -110,9 +110,9 @@ const AdminUsers = () => {
                       >
                         User Name
                       </Typography>
-                      <Divider />
-                      <Divider />
-                      <Divider />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
                       <Box
                         sx={{
                           py: 2,

@@ -121,9 +121,9 @@ const AdminVendors = () => {
                         }}
                       >
                         <Typography variant="body">email@email.com</Typography>
-                        <Divider variant="middle" />
-                        <Divider variant="middle" />
-                        <Divider variant="middle" />
+                        <Divider sx={{ bgcolor: "#1976d2" }} variant="middle" />
+                        <Divider sx={{ bgcolor: "#1976d2" }} variant="middle" />
+                        <Divider sx={{ bgcolor: "#1976d2" }} variant="middle" />
                       </Box>
 
                       <Box
