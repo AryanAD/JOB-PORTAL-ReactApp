@@ -6,7 +6,9 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { useSpring, animated } from "@react-spring/web";
 import { useNavigate } from "react-router";
-import { TextField } from "@mui/material";
+import { Avatar, TextField } from "@mui/material";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -64,7 +66,47 @@ const style = {
 };
 
 const AdminCategoryModal = ({ modalOpen, modalClose }) => {
+  const token = localStorage.getItem("token");
   const nav = useNavigate();
+  const [category, setCategory] = React.useState("");
+  const [image, setImage] = React.useState();
+  const [file, setFile] = React.useState();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData();
+
+      formData.append("category", category);
+      formData.append("image", file);
+
+      const response = await axios.post(
+        "http://localhost:3000/api/admin/category",
+        formData,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(formData);
+      console.log(response, "re");
+      toast.success("Successfully created a category!");
+      nav("/admin/categories");
+    } catch (error) {
+      console.error("API request failed: ", error);
+    }
+  };
+
+  const imagePreview = (e) => {
+    console.log(e.target.files);
+    setFile(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <Box>
       <Modal
@@ -82,43 +124,60 @@ const AdminCategoryModal = ({ modalOpen, modalClose }) => {
       >
         <Fade in={modalOpen}>
           <Box sx={style}>
-            <TextField
-              variant="outlined"
-              type="text"
-              label="Category Title"
-              color="info"
-            />
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                mt: 2,
-                mx: "auto",
-                gap: 1,
-              }}
-            >
-              <label
-                style={{
-                  padding: 2,
-                  fontFamily: "monospace",
-                  color: "#555",
-                  borderBottom: "2px solid #333",
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
+              <TextField
+                variant="outlined"
+                type="text"
+                label="Category Title"
+                color="info"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  mt: 2,
+                  mx: "auto",
+                  gap: 1,
                 }}
               >
-                Upload Image:
-              </label>
-              <input style={{ paddingTop: 1 }} type="file" accept="image/*" />
-            </Box>
-            <Button
-              color="success"
-              variant="outlined"
-              sx={{ mt: 2, "&:hover": { bgcolor: "#bfd7c0", color: "green" } }}
-              onClick={(nav("/admin/categories"), modalClose)}
-            >
-              Add
-            </Button>
+                <label
+                  style={{
+                    padding: 2,
+                    fontFamily: "monospace",
+                    color: "#555",
+                    borderBottom: "2px solid #333",
+                  }}
+                >
+                  Upload Image:
+                </label>
+                <input
+                  style={{ paddingTop: 1 }}
+                  type="file"
+                  accept="image/*"
+                  onChange={imagePreview}
+                />
+                <Avatar
+                  variant="square"
+                  sx={{ width: 80, height: 80 }}
+                  src={image}
+                />
+              </Box>
+              <Button
+                type="submit"
+                color="success"
+                variant="outlined"
+                sx={{
+                  mt: 2,
+                  "&:hover": { bgcolor: "#bfd7c0", color: "green" },
+                }}
+                onClick={(nav("/admin/categories"), modalClose)}
+              >
+                Add
+              </Button>
+            </form>
           </Box>
         </Fade>
       </Modal>
