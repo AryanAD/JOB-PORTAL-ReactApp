@@ -67,7 +67,6 @@ const style = {
 
 const AdminCategoryModal = ({ modalOpen, modalClose, fetchMyData }) => {
   const token = localStorage.getItem("token");
-  const nav = useNavigate();
   const [category, setCategory] = React.useState("");
   const [image, setImage] = React.useState();
   const [file, setFile] = React.useState();

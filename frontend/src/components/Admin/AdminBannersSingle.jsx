@@ -118,7 +118,7 @@ const AdminBannersSingle = ({ modalOpen, modalClose }) => {
                   height: 50,
                   "&:hover": { bgcolor: "#f9dedc" },
                 }}
-                onClick={(nav("/admin/banners"), modalClose)}
+                onClick={modalClose}
               >
                 <CloseRounded color="error" />
               </IconButton>

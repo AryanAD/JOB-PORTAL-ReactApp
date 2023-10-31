@@ -5,19 +5,52 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  CircularProgress,
   Divider,
+  Grid,
   Typography,
 } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { AddRounded } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminBannerModal from "./AdminBannerModal";
 import AdminBannersSingle from "./AdminBannersSingle";
+import axios from "axios";
 
 const AdminBanners = () => {
+  const token = localStorage.getItem("token");
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [singleModalOpen, setSingleModalOpen] = useState(false);
+  const [myData, setMyData] = useState([]);
+
+  const fetchMyData = async () => {
+    try {
+      let response = await axios.get(`http://localhost:3000/api/admin/banner`);
+      setMyData(response.data.banners);
+      console.log(myData);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+  useEffect(() => {
+    fetchMyData();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      await axios.delete(`http://localhost:3000/api/admin/banner/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(`Deleted category with ID ${id}.`);
+      fetchMyData();
+    } catch (error) {
+      console.error(`Error deleting category with ID ${id}.`, error);
+    }
+  };
 
   const openSingleModal = () => {
     setSingleModalOpen(true);
@@ -51,52 +84,95 @@ const AdminBanners = () => {
             Banners
           </Typography>
         </Divider>
-        <Card
+        <Box
           sx={{
-            margin: "20px",
-            maxWidth: 345,
-            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
-            borderRadius: "12px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Banner Title
-            </Typography>
-          </CardContent>
-          <CardActions
-            sx={{
+          <Grid
+            style={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "center",
+              alignItems: "center",
+              maxWidth: "80vw",
+              margin: 5,
             }}
+            container
+            spacing={2}
           >
-            <Button
-              startIcon={<LaunchIcon />}
-              color="info"
-              fullWidth
-              variant="contained"
-              size="small"
-              onClick={openSingleModal}
-            >
-              View
-            </Button>
-            <Button
-              startIcon={<DeleteRoundedIcon />}
-              color="error"
-              fullWidth
-              variant="contained"
-              size="small"
-            >
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
+            {myData.length === 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "70vh",
+                }}
+              >
+                <CircularProgress size={80} color="info" />
+              </Box>
+            ) : (
+              myData.map((banner, i) => {
+                return (
+                  <Grid item key={i} xs={3} sm={5} md={3}>
+                    <Card
+                      key={banner._id}
+                      sx={{
+                        margin: "20px",
+                        maxWidth: 345,
+                        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
+                        borderRadius: "12px",
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        alt="green iguana"
+                        height="140"
+                        image={banner.image}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {banner.title}
+                        </Typography>
+                      </CardContent>
+                      <CardActions
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                        }}
+                      >
+                        <Button
+                          startIcon={<LaunchIcon />}
+                          color="info"
+                          fullWidth
+                          variant="contained"
+                          size="small"
+                          onClick={openSingleModal}
+                        >
+                          View
+                        </Button>
+                        <Button
+                          startIcon={<DeleteRoundedIcon />}
+                          color="error"
+                          fullWidth
+                          variant="contained"
+                          size="small"
+                          onClick={() => handleDelete(banner._id)}
+                        >
+                          Delete
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              })
+            )}
+          </Grid>
+        </Box>
       </Box>
       <Box
         sx={{
@@ -120,7 +196,11 @@ const AdminBanners = () => {
         modalOpen={singleModalOpen}
         modalClose={closeSingleModal}
       />
-      <AdminBannerModal modalOpen={addModalOpen} modalClose={closeAddModal} />
+      <AdminBannerModal
+        modalOpen={addModalOpen}
+        modalClose={closeAddModal}
+        fetchMyData={fetchMyData}
+      />
     </>
   );
 };
