@@ -50,7 +50,7 @@ router
     upload.single("image"),
     createBanner
   )
-  .get(isAuthenticated, userRole("admin"), getAllBanners);
+  .get(getAllBanners);
 
 router
   .route("/banner/:id")

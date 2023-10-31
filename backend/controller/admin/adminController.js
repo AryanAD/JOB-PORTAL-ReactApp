@@ -68,23 +68,15 @@ exports.deleteCategory = async (req, res) => {
 // banner section
 
 exports.createBanner = async (req, res) => {
-  try {
-    const { title } = req.body;
-    const banner = await bannerModel.create({
-      title,
-      image: process.env.BACKEND_URL + "/" + req.file.filename,
-    });
-    if (banner)
-      return res.json({ status: 200, message: "Banner created successfully" });
-    else return res.json({ status: 400, message: "Banner not created" });
-  } catch (e) {
-    console.log(e);
-    res.json({
-      status: 400,
-      message: "Something went wrong",
-      errorMessage: e,
-    });
-  }
+  const { title } = req.body;
+  console.log(req.file);
+  const banner = await bannerModel.create({
+    title,
+    image: process.env.BACKEND_URL + "/" + req.file.filename,
+  });
+  if (banner)
+    return res.json({ status: 200, message: "Banner created successfully" });
+  else return res.json({ status: 400, message: "Banner not created" });
 };
 
 exports.getAllBanners = async (req, res) => {
