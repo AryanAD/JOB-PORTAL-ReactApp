@@ -166,7 +166,7 @@ const AdminCategories = () => {
         <Box
           sx={{
             width: "100%",
-            position: "absolute",
+            position: "fixed",
             left: "45%",
             right: "50%",
             bottom: 30,
