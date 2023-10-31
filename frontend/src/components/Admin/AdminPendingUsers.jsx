@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 const AdminPendingUsers = () => {
   const token = localStorage.getItem("token");
   const [myData, setMyData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   const fetchMyData = async () => {
     const token = localStorage.getItem("token");
@@ -35,6 +36,7 @@ const AdminPendingUsers = () => {
         }
       );
       setMyData(response.data.vendors);
+      setFilteredData(response.data.vendors);
       console.log(response.data);
     } catch (err) {
       console.log(`Error: ${err.message}`);
@@ -58,6 +60,9 @@ const AdminPendingUsers = () => {
       );
       console.log(response, "re");
       toast.success("Successfully Approved Application");
+      setFilteredData((prevData) =>
+        prevData.filter((data) => data.userId !== userId)
+      );
       fetchMyData();
     } catch (error) {
       console.error("API request failed: ", error);
@@ -78,11 +83,18 @@ const AdminPendingUsers = () => {
       );
       console.log(response, "re");
       toast.success("Successfully Rejected Application");
+      setFilteredData((prevData) =>
+        prevData.filter((data) => data.userId !== userId)
+      );
       fetchMyData();
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
+
+  useEffect(() => {
+    setFilteredData(myData.filter((vendor) => vendor.status === "pending"));
+  }, [myData]);
 
   return (
     <>
@@ -122,7 +134,7 @@ const AdminPendingUsers = () => {
           container
           spacing={4}
         >
-          {myData.length === 0 ? (
+          {filteredData.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -132,9 +144,7 @@ const AdminPendingUsers = () => {
                 height: "20vh",
               }}
             >
-              <Typography variant="h3" color="error">
-                No Rejected Applicants Found
-              </Typography>
+              <Typography variant="h4">No Pending Applicants Found</Typography>
             </Box>
           ) : (
             myData.map((data, i) => {

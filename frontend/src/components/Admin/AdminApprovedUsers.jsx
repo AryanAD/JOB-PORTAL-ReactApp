@@ -2,6 +2,7 @@ import {
   Box,
   Card,
   CardContent,
+  CircularProgress,
   Divider,
   Grid,
   Typography,
@@ -40,6 +41,10 @@ const AdminApprovedUsers = () => {
   useEffect(() => {
     fetchMyData();
   }, []);
+
+  const approvedVendors = myData.filter(
+    (vendor) => vendor.status === "approved"
+  );
 
   return (
     <>
@@ -80,7 +85,7 @@ const AdminApprovedUsers = () => {
           container
           spacing={4}
         >
-          {myData.length === 0 ? (
+          {approvedVendors.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -90,9 +95,7 @@ const AdminApprovedUsers = () => {
                 height: "20vh",
               }}
             >
-              <Typography variant="h3" color="error">
-                No Accepted Applicants Found
-              </Typography>
+              <Typography variant="h4">No Approved Applicants Found</Typography>
             </Box>
           ) : (
             myData

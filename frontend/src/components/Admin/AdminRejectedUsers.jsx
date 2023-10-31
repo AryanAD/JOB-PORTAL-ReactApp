@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import {
   CloseRounded,
@@ -60,6 +61,10 @@ const AdminRejectedUsers = () => {
     }
   };
 
+  const rejectedVendors = myData.filter(
+    (vendor) => vendor.status === "rejected"
+  );
+
   return (
     <>
       <Divider variant="inset" textAlign="left">
@@ -99,7 +104,7 @@ const AdminRejectedUsers = () => {
           container
           spacing={4}
         >
-          {myData.length === 0 ? (
+          {rejectedVendors.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -109,9 +114,7 @@ const AdminRejectedUsers = () => {
                 height: "20vh",
               }}
             >
-              <Typography variant="h3" color="error">
-                No Rejected Applicants Found
-              </Typography>
+              <Typography variant="h4">No Rejected Applicants Found</Typography>
             </Box>
           ) : (
             myData
