@@ -99,7 +99,7 @@ const AdminRejectedUsers = () => {
           container
           spacing={4}
         >
-          {myData.status !== "rejected" ? (
+          {myData.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
