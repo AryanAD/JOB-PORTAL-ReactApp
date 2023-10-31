@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { useSpring, animated } from "@react-spring/web";
-import { useNavigate } from "react-router";
 import { Avatar, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import axios from "axios";

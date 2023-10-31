@@ -23,7 +23,7 @@ import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
-import Vendors from "./AdminVendors";
+import Vendors from "./AdminRejectedUsers";
 import { toast } from "react-toastify";
 import { HomeRounded } from "@mui/icons-material";
 
@@ -198,15 +198,31 @@ const AdminSideDrawer = ({ anotherItem }) => {
                 color: "#272727	",
                 textDecoration: "none",
               }}
-              to={"/admin/vendors"}
+              to={"/admin"}
+            >
+              <ListItemButton>
+                <CustomToolTip title="HomePage" placement="right">
+                  <ListItemIcon>
+                    <HomeRounded />
+                  </ListItemIcon>
+                </CustomToolTip>
+                <ListItemText primary="HomePage" />
+              </ListItemButton>
+            </Link>
+            <Link
+              style={{
+                color: "#272727	",
+                textDecoration: "none",
+              }}
+              to={"/admin/applicants"}
             >
               <ListItemButton onClick={vendor}>
-                <CustomToolTip title="Vendors" placement="right">
+                <CustomToolTip title="Applicants" placement="right">
                   <ListItemIcon>
                     <PeopleAltRoundedIcon />
                   </ListItemIcon>
                 </CustomToolTip>
-                <ListItemText primary="Vendors" />
+                <ListItemText primary="Applicants" />
               </ListItemButton>
             </Link>
             <Link
@@ -239,22 +255,6 @@ const AdminSideDrawer = ({ anotherItem }) => {
                   </ListItemIcon>
                 </CustomToolTip>
                 <ListItemText primary="Banners" />
-              </ListItemButton>
-            </Link>
-            <Link
-              style={{
-                color: "#272727	",
-                textDecoration: "none",
-              }}
-              to={"/admin"}
-            >
-              <ListItemButton>
-                <CustomToolTip title="HomePage" placement="right">
-                  <ListItemIcon>
-                    <HomeRounded />
-                  </ListItemIcon>
-                </CustomToolTip>
-                <ListItemText primary="HomePage" />
               </ListItemButton>
             </Link>
           </ListItem>

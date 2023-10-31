@@ -5,10 +5,12 @@ import {
   Divider,
   Grid,
   Typography,
+  Button,
   CircularProgress,
 } from "@mui/material";
 import {
-  CheckRounded,
+  CloseRounded,
+  DeleteRounded,
   LocalPhoneRounded,
   LocationOnRounded,
   SupportAgentRounded,
@@ -17,9 +19,9 @@ import {
 import Chip from "@mui/material-next/Chip";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-const AdminApprovedUsers = () => {
+const AdminRejectedUsers = () => {
   const token = localStorage.getItem("token");
   const [myData, setMyData] = useState([]);
 
@@ -43,21 +45,21 @@ const AdminApprovedUsers = () => {
     fetchMyData();
   }, []);
 
-  //   const handleDelete = async (id) => {
-  //     try {
-  //       console.log(id);
-  //       await axios.delete(`http://localhost:3000/api/admin/vendors/${id}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       console.log(`Deleted Vendor with ID ${id}.`);
-  //       toast.success("Successfully deleted Vendor");
-  //       fetchMyData();
-  //     } catch (error) {
-  //       console.error(`Error deleting Vendor with ID ${id}.`, error);
-  //     }
-  //   };
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      await axios.delete(`http://localhost:3000/api/admin/vendors/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(`Deleted Vendor with ID ${id}.`);
+      toast.success("Successfully deleted Vendor");
+      fetchMyData();
+    } catch (error) {
+      console.error(`Error deleting Vendor with ID ${id}.`, error);
+    }
+  };
 
   return (
     <>
@@ -73,7 +75,7 @@ const AdminApprovedUsers = () => {
           }}
           variant="h4"
         >
-          Approved Vendors
+          Rejected Vendors
         </Typography>
       </Divider>
 
@@ -112,7 +114,7 @@ const AdminApprovedUsers = () => {
             </Box>
           ) : (
             myData
-              .filter((vendor) => vendor.status === "approved")
+              .filter((vendor) => vendor.status === "rejected")
               .map((vendor, i) => {
                 return (
                   <Grid item key={i} xs={7} sm={5} md={4}>
@@ -210,7 +212,7 @@ const AdminApprovedUsers = () => {
                                 size="small"
                                 variant="filled"
                                 label="Designation"
-                                color="info"
+                                color="tertiary"
                               />
                               <Chip
                                 icon={<SupportAgentRounded />}
@@ -218,7 +220,7 @@ const AdminApprovedUsers = () => {
                                 size="small"
                                 variant="filled"
                                 label="Service"
-                                color="info"
+                                color="tertiary"
                               />
                             </Box>
                             <Box
@@ -248,7 +250,7 @@ const AdminApprovedUsers = () => {
                               size="small"
                               variant="filled"
                               label="Address"
-                              color="tertiary"
+                              color="info"
                             />
                             <Chip
                               icon={<LocalPhoneRounded />}
@@ -256,7 +258,7 @@ const AdminApprovedUsers = () => {
                               size="small"
                               variant="filled"
                               label="Contact"
-                              color="tertiary"
+                              color="info"
                             />
                           </Box>
                           <Box
@@ -272,16 +274,19 @@ const AdminApprovedUsers = () => {
                           </Box>
                           <Box>
                             <Chip
-                              sx={{ mt: 1 }}
-                              icon={<CheckRounded />}
-                              color="success"
+                              sx={{
+                                mt: 1,
+                                color: "#d32f2f",
+                                bgcolor: "#f9dedc",
+                              }}
+                              icon={<CloseRounded />}
                               disabled={false}
                               size="small"
                               variant="elevated"
                               label={vendor.status}
                             />
                           </Box>
-                          {/* <Box
+                          <Box
                             sx={{
                               gap: 2,
                               pt: 2,
@@ -293,20 +298,17 @@ const AdminApprovedUsers = () => {
                             <Button
                               variant="outlined"
                               fullWidth
-                              color="info"
+                              color="error"
                               sx={{
-                                color: "#0b8cd2",
-                                "&:hover": {
-                                  bgcolor: "#a2e4fd",
-                                  color: "blue",
-                                },
+                                color: "#ff0000",
+                                "&:hover": { bgcolor: "#f9dedc" },
                               }}
-                              startIcon={<LaunchRounded />}
-                              onClick={openModal}
+                              startIcon={<DeleteRounded />}
+                              onClick={() => handleDelete(vendor._id)}
                             >
-                              Details
+                              Delete Vendor
                             </Button>
-                          </Box> */}
+                          </Box>
                         </Box>
                       </CardContent>
                     </Card>
@@ -320,4 +322,4 @@ const AdminApprovedUsers = () => {
   );
 };
 
-export default AdminApprovedUsers;
+export default AdminRejectedUsers;

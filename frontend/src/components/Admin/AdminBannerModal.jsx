@@ -65,7 +65,7 @@ const style = {
   flexDirection: "column",
 };
 
-const AdminBannerModal = ({ modalOpen, modalClose, fetchBannerData }) => {
+const AdminBannerModal = ({ modalOpen, modalClose }) => {
   const token = localStorage.getItem("token");
   const [banner, setBanner] = useState("");
   const [image, setImage] = useState();
@@ -93,7 +93,6 @@ const AdminBannerModal = ({ modalOpen, modalClose, fetchBannerData }) => {
       );
       console.log(formData);
       console.log(response, "re");
-      fetchBannerData();
       setImage(null);
       toast.success("Successfully created a banner!");
     } catch (error) {

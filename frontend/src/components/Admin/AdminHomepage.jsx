@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
-import AdminUsers from "./AdminUsers";
-import AdminVendors from "./AdminVendors";
+import AdminPendingUsers from "./AdminPendingUsers";
+import AdminRejectedUsers from "./AdminRejectedUsers";
+import AdminApprovedUsers from "./AdminApprovedUsers";
 
 const AdminHomepage = () => {
   return (
@@ -26,8 +27,9 @@ const AdminHomepage = () => {
             alignItems: "space-between",
           }}
         >
-          <AdminUsers />
-          <AdminVendors />
+          <AdminPendingUsers />
+          <AdminApprovedUsers />
+          <AdminRejectedUsers />
         </Box>
       </Box>
     </>

@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminBanners from "./components/Admin/AdminBanners";
 import AdminCategories from "./components/Admin/AdminCategories";
-import AdminVendors from "./components/Admin/AdminVendors";
 import UserProfile from "./components/User/UserProfile";
 import UserJobs from "./components/User/UserJobs";
 import UserNavBar from "./components/User/UserNavBar";
@@ -19,6 +18,7 @@ import UserHomePage from "./components/User/UserHomePage";
 import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import UserSingleJob from "./components/User/UserSingleJob";
 import AdminHomepage from "./components/Admin/AdminHomepage";
+import AdminPendingUsers from "./components/Admin/AdminPendingUsers";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -47,8 +47,8 @@ function App() {
             element={<AdminSideDrawer anotherItem={<AdminHomepage />} />}
           />
           <Route
-            path="/admin/vendors"
-            element={<AdminSideDrawer anotherItem={<AdminVendors />} />}
+            path="/admin/applicants"
+            element={<AdminSideDrawer anotherItem={<AdminPendingUsers />} />}
           />
           <Route
             path="/admin/categories"

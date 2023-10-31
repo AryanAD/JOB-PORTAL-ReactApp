@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 
 // const cards = [1, 2, 3, 4, 5, 6];
 
-const AdminUsers = () => {
+const AdminPendingUsers = () => {
   const token = localStorage.getItem("token");
   const [myData, setMyData] = useState([]);
 
@@ -60,7 +60,7 @@ const AdminUsers = () => {
         }
       );
       console.log(response, "re");
-      toast.success("Approved request");
+      toast.success("Successfully Approved Application");
       fetchMyData();
     } catch (error) {
       console.error("API request failed: ", error);
@@ -80,7 +80,7 @@ const AdminUsers = () => {
         }
       );
       console.log(response, "re");
-      toast.success("Rejected request");
+      toast.success("Successfully Rejected Application");
       fetchMyData();
     } catch (error) {
       console.error("API request failed: ", error);
@@ -236,16 +236,10 @@ const AdminUsers = () => {
 
                             <Chip
                               icon={<MoreHorizRounded />}
-                              color={
-                                data.status === "pending"
-                                  ? "warning"
-                                  : data.status === "approved"
-                                  ? "success"
-                                  : "error"
-                              }
+                              color="warning"
                               disabled={false}
                               size="small"
-                              variant="filled"
+                              variant="elevated"
                               label={data.status}
                             />
                           </Box>
@@ -299,4 +293,4 @@ const AdminUsers = () => {
   );
 };
 
-export default AdminUsers;
+export default AdminPendingUsers;

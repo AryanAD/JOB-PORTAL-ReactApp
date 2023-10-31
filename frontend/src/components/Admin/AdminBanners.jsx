@@ -178,7 +178,7 @@ const AdminBanners = () => {
       <AdminBannerModal
         modalOpen={addModalOpen}
         modalClose={closeAddModal}
-        fetchBannerData={fetchMyData}
+        fetchMyData={fetchMyData}
       />
     </>
   );
