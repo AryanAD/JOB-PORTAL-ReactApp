@@ -4,7 +4,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useSpring, animated } from "@react-spring/web";
-import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 import {
   CardContent,
   CardMedia,
@@ -14,6 +14,9 @@ import {
   tooltipClasses,
 } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const CustomToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -82,7 +85,30 @@ const style = {
   alignItems: "center",
 };
 
-const AdminBannersSingle = ({ modalOpen, modalClose }) => {
+const AdminBannersSingle = ({
+  modalOpen,
+  modalClose,
+  bannerID,
+  fetchSingleData,
+}) => {
+  const [myData, setMyData] = useState([]);
+
+  const fetchMyData = async () => {
+    fetchSingleData();
+
+    try {
+      let response = await axios.get(`http://localhost:3000/api/admin/banner/`);
+      setMyData(response.data.banners);
+      console.log(myData);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+    console.log(bannerID);
+  };
+  useEffect(() => {
+    fetchMyData();
+  }, []);
+
   return (
     <Box>
       <Modal
@@ -101,12 +127,13 @@ const AdminBannersSingle = ({ modalOpen, modalClose }) => {
         <Fade in={modalOpen}>
           <Box sx={style}>
             <CardContent sx={{ width: "100%", height: "100%" }}>
-              <CardMedia sx={{ width: "100%", height: "100%" }}>
+              <CardMedia sx={{ maxWidth: "90vw", maxHeight: "80vh" }}>
                 <img
-                  style={{ width: "100%", height: "100%" }}
-                  alt="green iguana"
-                  src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                  style={{ maxWidth: "100%", maxHeight: "80vh" }}
+                  alt={myData[bannerID]?.title}
+                  src={myData[bannerID]?.image}
                 />
+                <h1>{myData[bannerID]?.title}</h1>
               </CardMedia>
             </CardContent>
             <CustomToolTip title="Close" placement="top">

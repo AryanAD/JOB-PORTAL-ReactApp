@@ -23,6 +23,7 @@ const AdminBanners = () => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [singleModalOpen, setSingleModalOpen] = useState(false);
   const [myData, setMyData] = useState([]);
+  const [bannerID, setBannerID] = useState();
 
   const fetchMyData = async () => {
     try {
@@ -52,8 +53,11 @@ const AdminBanners = () => {
     }
   };
 
-  const openSingleModal = () => {
+  const openSingleModal = (id) => {
+    setBannerID(id);
+    console.log(bannerID);
     setSingleModalOpen(true);
+    // fetchMyData();
   };
   const closeSingleModal = () => {
     setSingleModalOpen(false);
@@ -151,7 +155,7 @@ const AdminBanners = () => {
                           fullWidth
                           variant="contained"
                           size="small"
-                          onClick={openSingleModal}
+                          onClick={() => openSingleModal(i)}
                         >
                           View
                         </Button>
@@ -195,6 +199,8 @@ const AdminBanners = () => {
       <AdminBannersSingle
         modalOpen={singleModalOpen}
         modalClose={closeSingleModal}
+        bannerID={bannerID}
+        fetchSingleData={fetchMyData}
       />
       <AdminBannerModal
         modalOpen={addModalOpen}
