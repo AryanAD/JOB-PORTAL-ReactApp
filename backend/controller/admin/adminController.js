@@ -20,6 +20,23 @@ exports.changeToVendor = async (req, res) => {
   return res.json({ status: 200, message: "User is now a vendor" });
 };
 
+exports.rejectVendor = async (req, res) => {
+  const { userId } = req.body;
+  const user = await userModel.findById(userId);
+  user.role = "user";
+  const changeVendorStatus = await vendorModel.findOneAndUpdate(
+    {
+      userId: userId,
+    },
+    {
+      status: "rejected",
+    }
+  );
+
+  await user.save();
+  return res.json({ status: 200, message: "User is now a vendor" });
+};
+
 exports.getAllVendors = async (req, res) => {
   const vendors = await vendorModel.find();
   return res.json({ status: 200, vendors });

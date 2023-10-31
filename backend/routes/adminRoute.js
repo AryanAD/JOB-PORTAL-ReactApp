@@ -9,6 +9,7 @@ const {
   getAllBanners,
   deleteBanner,
   deleteCategory,
+  rejectVendor,
 } = require("../controller/admin/adminController");
 const { isAuthenticated, userRole } = require("../middleware/isAuthenticated");
 
@@ -20,10 +21,15 @@ router
   .route("/changeToVendor")
   .post(isAuthenticated, userRole("admin"), changeToVendor);
 
+router
+  .route("/rejectVendor")
+  .post(isAuthenticated, userRole("admin"), rejectVendor);
+
 router.route("/vendors").get(isAuthenticated, userRole("admin"), getAllVendors);
+
 router
   .route("/vendors/:id")
-  .get(isAuthenticated, userRole("admin"), getSingleVendor)
+  .get(getSingleVendor)
   .delete(isAuthenticated, userRole("admin"), deleteVendor);
 
 // category api
@@ -54,6 +60,7 @@ router
 
 router
   .route("/banner/:id")
+  // .get(getSingleBanner)
   .delete(isAuthenticated, userRole("admin"), deleteBanner);
 
 module.exports = router;

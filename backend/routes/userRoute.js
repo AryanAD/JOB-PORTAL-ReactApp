@@ -25,15 +25,14 @@ router.route("/login").post(logIn);
 router
   .route("/registerAsVendor")
   .post(isAuthenticated, userRole("user"), registerAsVendor);
-//jobs
 
+// jobs
 router.route("/jobs").get(getAllJobs);
 router.route("/jobs/:id").get(getSingleJob);
 
 router.route("/jobs/category/:id").get(getJobByCategories);
 
 // apply job
-
 router
   .route("/jobs/apply")
   .post(isAuthenticated, userRole("user"), upload.single("cv"), applyJob);
