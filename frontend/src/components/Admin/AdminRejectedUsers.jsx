@@ -6,7 +6,6 @@ import {
   Grid,
   Typography,
   Button,
-  CircularProgress,
 } from "@mui/material";
 import {
   CloseRounded,
@@ -100,7 +99,7 @@ const AdminRejectedUsers = () => {
           container
           spacing={4}
         >
-          {myData.length === 0 ? (
+          {myData.status !== "rejected" ? (
             <Box
               sx={{
                 display: "flex",
@@ -110,7 +109,9 @@ const AdminRejectedUsers = () => {
                 height: "20vh",
               }}
             >
-              <CircularProgress size={80} color="info" />
+              <Typography variant="h3" color="error">
+                No Rejected Applicants Found
+              </Typography>
             </Box>
           ) : (
             myData

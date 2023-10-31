@@ -6,7 +6,6 @@ import {
   Typography,
   Button,
   CardContent,
-  CircularProgress,
 } from "@mui/material";
 import {
   CheckRounded,
@@ -19,8 +18,6 @@ import Chip from "@mui/material-next/Chip";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-// const cards = [1, 2, 3, 4, 5, 6];
 
 const AdminPendingUsers = () => {
   const token = localStorage.getItem("token");
@@ -135,7 +132,9 @@ const AdminPendingUsers = () => {
                 height: "20vh",
               }}
             >
-              <CircularProgress size={80} color="info" />
+              <Typography variant="h3" color="error">
+                No Rejected Applicants Found
+              </Typography>
             </Box>
           ) : (
             myData.map((data, i) => {

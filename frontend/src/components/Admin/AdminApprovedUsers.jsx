@@ -5,7 +5,6 @@ import {
   Divider,
   Grid,
   Typography,
-  CircularProgress,
 } from "@mui/material";
 import {
   CheckRounded,
@@ -17,7 +16,6 @@ import {
 import Chip from "@mui/material-next/Chip";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { toast } from "react-toastify";
 
 const AdminApprovedUsers = () => {
   const token = localStorage.getItem("token");
@@ -42,22 +40,6 @@ const AdminApprovedUsers = () => {
   useEffect(() => {
     fetchMyData();
   }, []);
-
-  //   const handleDelete = async (id) => {
-  //     try {
-  //       console.log(id);
-  //       await axios.delete(`http://localhost:3000/api/admin/vendors/${id}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       console.log(`Deleted Vendor with ID ${id}.`);
-  //       toast.success("Successfully deleted Vendor");
-  //       fetchMyData();
-  //     } catch (error) {
-  //       console.error(`Error deleting Vendor with ID ${id}.`, error);
-  //     }
-  //   };
 
   return (
     <>
@@ -108,7 +90,9 @@ const AdminApprovedUsers = () => {
                 height: "20vh",
               }}
             >
-              <CircularProgress size={80} color="info" />
+              <Typography variant="h3" color="error">
+                No Accepted Applicants Found
+              </Typography>
             </Box>
           ) : (
             myData
@@ -281,32 +265,6 @@ const AdminApprovedUsers = () => {
                               label={vendor.status}
                             />
                           </Box>
-                          {/* <Box
-                            sx={{
-                              gap: 2,
-                              pt: 2,
-                              display: "flex",
-                              flexDirection: "column",
-                              width: "85%",
-                            }}
-                          >
-                            <Button
-                              variant="outlined"
-                              fullWidth
-                              color="info"
-                              sx={{
-                                color: "#0b8cd2",
-                                "&:hover": {
-                                  bgcolor: "#a2e4fd",
-                                  color: "blue",
-                                },
-                              }}
-                              startIcon={<LaunchRounded />}
-                              onClick={openModal}
-                            >
-                              Details
-                            </Button>
-                          </Box> */}
                         </Box>
                       </CardContent>
                     </Card>
