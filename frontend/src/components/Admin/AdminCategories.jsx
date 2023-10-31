@@ -15,6 +15,7 @@ import { AddRounded } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import AdminCategoryModal from "./AdminCategoryModal";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AdminCategories = () => {
   const token = localStorage.getItem("token");
@@ -46,6 +47,7 @@ const AdminCategories = () => {
         },
       });
       console.log(`Deleted category with ID ${id}.`);
+      toast.success("Successfully deleted category");
       fetchMyData();
     } catch (error) {
       console.error(`Error deleting category with ID ${id}.`, error);

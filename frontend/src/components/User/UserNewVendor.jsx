@@ -23,7 +23,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Image from "./assets/newVendor.png";
 import Footer from "../../layout/Footer";
-import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -55,38 +54,40 @@ const defaultTheme = createTheme();
 
 const UserNewVendor = () => {
   const nav = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [service, setService] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
+  const token = localStorage.getItem("token");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
 
     try {
+      const data = new FormData(event.currentTarget);
+      let formData = {
+        name: data.get("name"),
+        email: data.get("email"),
+        designation: data.get("designation"),
+        service: data.get("service"),
+        contact: data.get("contact"),
+        address: data.get("address"),
+      };
+
       const response = await axios.post(
         "http://localhost:3000/api/user/registerAsVendor",
-        {
-          name: name,
-          email: email,
-          designation: designation,
-          service: service,
-          contact: contact,
-          address: address,
-        },
+        formData,
         {
           headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
       console.log(response, "re");
-      toast.success("Successfully applied for Vendor!");
+      if (response.data.status === 400) {
+        toast.error(`Error: ${response.data.message}`);
+      } else {
+        toast.success("Successfully applied for Vendor!");
+      }
       nav("/user");
     } catch (error) {
       console.error("API request failed: ", error);
@@ -154,7 +155,6 @@ const UserNewVendor = () => {
                 autoFocus
                 type="text"
                 autoComplete="off"
-                onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 InputProps={{
@@ -172,7 +172,6 @@ const UserNewVendor = () => {
                 autoFocus
                 type="email"
                 autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 InputProps={{
@@ -186,11 +185,10 @@ const UserNewVendor = () => {
                 fullWidth
                 id="name"
                 label="Designation"
-                name="name"
+                name="designation"
                 autoFocus
                 type="text"
                 autoComplete="off"
-                onChange={(e) => setDesignation(e.target.value)}
               />
               <TextField
                 InputProps={{
@@ -204,11 +202,10 @@ const UserNewVendor = () => {
                 fullWidth
                 id="name"
                 label="Service"
-                name="name"
+                name="service"
                 autoFocus
                 type="text"
                 autoComplete="off"
-                onChange={(e) => setService(e.target.value)}
               />
               <TextField
                 InputProps={{
@@ -222,11 +219,10 @@ const UserNewVendor = () => {
                 fullWidth
                 id="number"
                 label="Contact"
-                name="number"
+                name="contact"
                 autoFocus
                 type="number"
                 autoComplete="off"
-                onChange={(e) => setContact(e.target.value)}
               />
               <TextField
                 InputProps={{
@@ -240,11 +236,10 @@ const UserNewVendor = () => {
                 fullWidth
                 id="name"
                 label="Address"
-                name="name"
+                name="address"
                 autoFocus
                 type="text"
                 autoComplete="off"
-                onChange={(e) => setAddress(e.target.value)}
               />
               <Button
                 color="secondary"

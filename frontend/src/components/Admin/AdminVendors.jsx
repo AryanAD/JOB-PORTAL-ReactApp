@@ -14,10 +14,35 @@ import {
   WorkRounded,
 } from "@mui/icons-material";
 import Chip from "@mui/material-next/Chip";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
 const AdminVendors = () => {
+  const [myData, setMyData] = useState([]);
+
+  const fetchMyData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      let response = await axios.get(
+        `http://localhost:3000/api/admin/vendors`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setMyData(response.data.vendors);
+      console.log(response.data);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+  useEffect(() => {
+    fetchMyData();
+  }, []);
+
   return (
     <>
       <Divider variant="inset" textAlign="left">
@@ -71,7 +96,6 @@ const AdminVendors = () => {
               >
                 <CardContent
                   sx={{
-                    // flexGrow: 1,
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",

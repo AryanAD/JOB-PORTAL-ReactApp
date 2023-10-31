@@ -10,20 +10,17 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import LaunchIcon from "@mui/icons-material/Launch";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { AddRounded } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import AdminBannerModal from "./AdminBannerModal";
-import AdminBannersSingle from "./AdminBannersSingle";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AdminBanners = () => {
   const token = localStorage.getItem("token");
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const [singleModalOpen, setSingleModalOpen] = useState(false);
   const [myData, setMyData] = useState([]);
-  const [bannerID, setBannerID] = useState();
 
   const fetchMyData = async () => {
     try {
@@ -47,20 +44,11 @@ const AdminBanners = () => {
         },
       });
       console.log(`Deleted category with ID ${id}.`);
+      toast.success("Successfully deleted banner");
       fetchMyData();
     } catch (error) {
       console.error(`Error deleting category with ID ${id}.`, error);
     }
-  };
-
-  const openSingleModal = (id) => {
-    setBannerID(id);
-    console.log(bannerID);
-    setSingleModalOpen(true);
-    // fetchMyData();
-  };
-  const closeSingleModal = () => {
-    setSingleModalOpen(false);
   };
 
   const openAddModal = () => {
@@ -150,16 +138,6 @@ const AdminBanners = () => {
                         }}
                       >
                         <Button
-                          startIcon={<LaunchIcon />}
-                          color="info"
-                          fullWidth
-                          variant="contained"
-                          size="small"
-                          onClick={() => openSingleModal(i)}
-                        >
-                          View
-                        </Button>
-                        <Button
                           startIcon={<DeleteRoundedIcon />}
                           color="error"
                           fullWidth
@@ -196,12 +174,7 @@ const AdminBanners = () => {
           Add Banners
         </Button>
       </Box>
-      <AdminBannersSingle
-        modalOpen={singleModalOpen}
-        modalClose={closeSingleModal}
-        bannerID={bannerID}
-        fetchSingleData={fetchMyData}
-      />
+
       <AdminBannerModal
         modalOpen={addModalOpen}
         modalClose={closeAddModal}
