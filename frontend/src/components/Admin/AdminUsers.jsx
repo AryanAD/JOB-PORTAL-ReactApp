@@ -142,7 +142,6 @@ const AdminUsers = () => {
               return (
                 <Grid item key={i} xs={7} sm={3} md={6}>
                   <Card
-                    key={data._id}
                     sx={{
                       height: "100%",
                       width: "100%",
