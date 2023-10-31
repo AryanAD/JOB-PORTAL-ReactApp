@@ -123,7 +123,7 @@ const AdminCategories = () => {
                   >
                     <CardMedia
                       component="img"
-                      alt="green iguana"
+                      alt={category.category}
                       height="140"
                       image={category.image}
                     />

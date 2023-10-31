@@ -130,7 +130,7 @@ const AdminBanners = () => {
                     >
                       <CardMedia
                         component="img"
-                        alt="green iguana"
+                        alt={banner.title}
                         height="140"
                         image={banner.image}
                       />
@@ -199,7 +199,7 @@ const AdminBanners = () => {
       <AdminBannerModal
         modalOpen={addModalOpen}
         modalClose={closeAddModal}
-        fetchMyData={fetchMyData}
+        fetchBannerData={fetchMyData}
       />
     </>
   );

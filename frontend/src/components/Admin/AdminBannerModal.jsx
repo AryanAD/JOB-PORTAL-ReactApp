@@ -65,7 +65,7 @@ const style = {
   flexDirection: "column",
 };
 
-const AdminBannerModal = ({ modalOpen, modalClose, fetchMyData }) => {
+const AdminBannerModal = ({ modalOpen, modalClose, fetchBannerData }) => {
   const token = localStorage.getItem("token");
   const [banner, setBanner] = useState("");
   const [image, setImage] = useState();
@@ -93,7 +93,7 @@ const AdminBannerModal = ({ modalOpen, modalClose, fetchMyData }) => {
       );
       console.log(formData);
       console.log(response, "re");
-      fetchMyData();
+      fetchBannerData();
       setImage(null);
       toast.success("Successfully created a banner!");
     } catch (error) {
@@ -175,6 +175,7 @@ const AdminBannerModal = ({ modalOpen, modalClose, fetchMyData }) => {
                   "&:hover": { bgcolor: "#bfd7c0", color: "green" },
                 }}
                 onClick={modalClose}
+                type="submit"
               >
                 Add
               </Button>

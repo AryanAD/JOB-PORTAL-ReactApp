@@ -83,7 +83,6 @@ const style = {
 };
 
 const AdminBannersSingle = ({ modalOpen, modalClose }) => {
-  const nav = useNavigate();
   return (
     <Box>
       <Modal
