@@ -29,7 +29,7 @@ router.route("/vendors").get(isAuthenticated, userRole("admin"), getAllVendors);
 
 router
   .route("/vendors/:id")
-  .get(getSingleVendor)
+  .get(isAuthenticated, userRole("admin"), getSingleVendor)
   .delete(isAuthenticated, userRole("admin"), deleteVendor);
 
 // category api

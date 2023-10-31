@@ -24,8 +24,8 @@ const appliedJobSchema = new Schema(
     contact: {
       type: String,
     },
-  paymentStatus: {
-      type : String,
+    paymentStatus: {
+      type: String,
       default: "pending",
     },
   },
