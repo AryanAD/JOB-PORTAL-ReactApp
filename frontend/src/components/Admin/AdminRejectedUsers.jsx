@@ -6,7 +6,6 @@ import {
   Grid,
   Typography,
   Button,
-  CircularProgress,
 } from "@mui/material";
 import {
   CloseRounded,
