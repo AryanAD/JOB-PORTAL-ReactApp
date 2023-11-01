@@ -282,7 +282,13 @@ const AdminHomepage = () => {
 
                                   <Chip
                                     icon={<MoreHorizRounded />}
-                                    color="warning"
+                                    color={
+                                      data.status === "approved"
+                                        ? "success"
+                                        : data.status === "rejected"
+                                        ? "error"
+                                        : "warning"
+                                    }
                                     disabled={false}
                                     size="small"
                                     variant="elevated"
