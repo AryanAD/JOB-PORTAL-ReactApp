@@ -14,16 +14,14 @@ const router = require("express").Router();
 router
   .route("/jobs")
   .post(isAuthenticated, userRole("vendor"), createJob)
-  .get(isAuthenticated, userRole("vendor"), individualVendorJobs);
+  .get(individualVendorJobs);
 router
   .route("/jobs/:id")
   .delete(isAuthenticated, userRole("vendor"), deleteJob)
-  .get(isAuthenticated, userRole("vendor"), viewSingleJob);
+  .get(viewSingleJob);
 
 //application
-router
-  .route("/applicants")
-  .get(isAuthenticated, userRole("vendor"), myApplicants);
+router.route("/applicants").get(myApplicants);
 router
   .route("/applicants/action")
   .post(isAuthenticated, userRole("vendor"), acceptOrRejectApplicant);
