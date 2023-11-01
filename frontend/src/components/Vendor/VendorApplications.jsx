@@ -15,6 +15,8 @@ import {
   tooltipClasses,
 } from "@mui/material";
 import { CloseRounded, DoneRounded } from "@mui/icons-material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -39,6 +41,30 @@ const CustomToolTip = styled(({ className, ...props }) => (
 }));
 
 const VendorApplications = () => {
+  const token = localStorage.getItem("token");
+  // const [myData, setMyData] = useState([]);
+
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000/api/vendor",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get("/applicants");
+      // setMyData(response.data);
+      // setFilteredData(response.data.vendors);
+      console.log(response.data, "fetchData");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <Divider variant="inset" textAlign="left">

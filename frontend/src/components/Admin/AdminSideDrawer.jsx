@@ -19,11 +19,9 @@ import ListItemText from "@mui/material/ListItemText";
 import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
 import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
 import React from "react";
-import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { Button, Tooltip, tooltipClasses } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link, useNavigate } from "react-router-dom";
-import Vendors from "./AdminRejectedUsers";
 import { toast } from "react-toastify";
 import { HomeRounded } from "@mui/icons-material";
 
@@ -141,9 +139,6 @@ const AdminSideDrawer = ({ anotherItem }) => {
     toast.error("Logged out Successfully");
   };
 
-  const vendor = () => {
-    nav(<Vendors />);
-  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -207,22 +202,6 @@ const AdminSideDrawer = ({ anotherItem }) => {
                   </ListItemIcon>
                 </CustomToolTip>
                 <ListItemText primary="HomePage" />
-              </ListItemButton>
-            </Link>
-            <Link
-              style={{
-                color: "#272727	",
-                textDecoration: "none",
-              }}
-              to={"/admin/applicants"}
-            >
-              <ListItemButton onClick={vendor}>
-                <CustomToolTip title="Applicants" placement="right">
-                  <ListItemIcon>
-                    <PeopleAltRoundedIcon />
-                  </ListItemIcon>
-                </CustomToolTip>
-                <ListItemText primary="Applicants" />
               </ListItemButton>
             </Link>
             <Link

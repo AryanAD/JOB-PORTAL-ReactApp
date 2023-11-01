@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Divider,
@@ -11,6 +12,7 @@ import OpenInNewRounded from "@mui/icons-material/OpenInNewRounded";
 import { Link } from "react-router-dom";
 import Footer from "../../layout/Footer";
 import Chip from "@mui/material-next/Chip";
+import { HomeRounded } from "@mui/icons-material";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -61,6 +63,35 @@ const UserJobs = () => {
           <Divider variant="middle" />
           <Divider variant="middle" />
         </Divider>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              width: "7%",
+              height: "100%",
+              mx: 10,
+            }}
+          >
+            <Button
+              fullWidth
+              startIcon={<HomeRounded />}
+              variant="outlined"
+              sx={{
+                "&:hover": { color: "1976d2", bgcolor: "#c2d7fe" },
+              }}
+            >
+              Back
+            </Button>
+          </Box>
+        </Box>
         <Grid
           style={{
             display: "flex",
