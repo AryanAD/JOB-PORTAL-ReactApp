@@ -23,8 +23,8 @@ import {
 } from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Chip from "@mui/material-next/Chip";
+import { apiText } from "../../global/API";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -53,22 +53,18 @@ const VendorJobs = () => {
   const [jobsData, setJobsData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const fetchData = async () => {
+    console.log("fetchDatainside");
+    try {
+      const response = await apiText.get("vendor/jobs");
+      setJobsData(response);
+      console.log(response);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
   useEffect(() => {
-    const apiUrl = "http://localhost:3000/api/vendor/jobs";
-
-    axios
-      .get(apiUrl, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        setJobsData(response.data);
-      })
-      .catch((error) => {
-        console.error(`Error fetching data: ${error}`);
-      });
+    fetchData();
   }, []);
 
   const handleOpenModal = () => {
