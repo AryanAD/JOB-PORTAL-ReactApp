@@ -49,7 +49,7 @@ const UserJobsModal = ({ modalOpen, modalClose }) => {
       console.log(formData, "inside .post");
       console.log(response, "re");
       toast.success("Successfully Approved Application");
-      //   fetchData();
+      fetchData();
     } catch (error) {
       console.error("API request failed: ", error);
     }

@@ -275,7 +275,7 @@ const VendorJobs = () => {
           Add a Job
         </Button>
       </Box>
-      <VendorJobModal open={isModalOpen} close={handleCloseModal} />
+      <VendorJobModal modalOpen={isModalOpen} modalClose={handleCloseModal} />
     </>
   );
 };

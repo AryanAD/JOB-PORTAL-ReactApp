@@ -1,91 +1,106 @@
-import {
-  Backdrop,
-  Box,
-  Button,
-  Fade,
-  Grid,
-  Modal,
-  TextField,
-} from "@mui/material";
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Backdrop, Box, Button, Grid, Modal, TextField } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import { useNavigate } from "react-router";
-import axios from "axios";
-import { useState } from "react";
+import { useSpring, animated } from "@react-spring/web";
 import { toast } from "react-toastify";
+import { apiText } from "../../global/API";
+
+const Fade = React.forwardRef(function Fade(props, ref) {
+  const {
+    children,
+    in: open,
+    onClick,
+    onEnter,
+    onExited,
+    ownerState,
+    ...other
+  } = props;
+  const style = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: open ? 1 : 0 },
+    onStart: () => {
+      if (open && onEnter) {
+        onEnter(null, true);
+      }
+    },
+    onRest: () => {
+      if (!open && onExited) {
+        onExited(null, true);
+      }
+    },
+  });
+
+  return (
+    <animated.div ref={ref} style={style} {...other}>
+      {React.cloneElement(children, { onClick })}
+    </animated.div>
+  );
+});
+
+Fade.propTypes = {
+  children: PropTypes.element.isRequired,
+  in: PropTypes.bool,
+  onClick: PropTypes.any,
+  onEnter: PropTypes.func,
+  onExited: PropTypes.func,
+  ownerState: PropTypes.any,
+};
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "white",
-  borderRadius: "13px",
+  width: 400,
+  bgcolor: "background.paper",
   boxShadow: 24,
+  borderRadius: "11px",
   p: 4,
+  display: "flex",
+  flexDirection: "column",
 };
-
-const backdropStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.2)",
-};
-
-const VendorJobModal = ({ open, close }) => {
-  const nav = useNavigate();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-  const [salary, setSalary] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [postedBy, setPostedBy] = useState("");
-  const [category, setCategory] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
+const VendorJobModal = ({ modalOpen, modalClose }) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("location", location);
-      formData.append("salary", salary);
-      formData.append("deadline", deadline);
-      formData.append("categoryId", category);
+      const data = new FormData(e.currentTarget);
+      let formData = {
+        title: data.get("title"),
+        description: data.get("description"),
+        location: data.get("location"),
+        salary: data.get("salary"),
+        deadline: data.get("deadline"),
+        postedBy: data.get("postedBy"),
+        category: data.get("category"),
+      };
 
-      const response = await axios.post(
-        "http://localhost:3000/api/vendor/jobs",
-        formData,
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(formData);
+      const response = await apiText.post("vendor/jobs", formData);
+      console.log(formData, "vendormodal");
       console.log(response, "re");
       toast.success("Successfully created a job!");
-      nav("/vendor/jobs");
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
 
   return (
-    <Box>
+    <>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={close}
+        aria-labelledby="spring-modal-title"
+        aria-describedby="spring-modal-description"
+        open={modalOpen}
+        onClose={modalClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-          style: backdropStyle,
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            TransitionComponent: Fade,
+          },
         }}
       >
-        <Fade in={open}>
+        <Fade in={modalOpen}>
           <Box sx={style}>
             <form onSubmit={handleSubmit}>
               <TextField
@@ -93,14 +108,14 @@ const VendorJobModal = ({ open, close }) => {
                 margin="normal"
                 fullWidth
                 label="Job Title"
-                onChange={(e) => setTitle(e.target.value)}
+                name="title"
               />
               <TextField
                 type="text"
                 margin="normal"
                 fullWidth
                 label="Job Description"
-                onChange={(e) => setDescription(e.target.value)}
+                name="description"
               />
 
               <Grid container spacing={2}>
@@ -110,7 +125,7 @@ const VendorJobModal = ({ open, close }) => {
                     fullWidth
                     label="Location"
                     type="text"
-                    onChange={(e) => setLocation(e.target.value)}
+                    name="location"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -119,7 +134,7 @@ const VendorJobModal = ({ open, close }) => {
                     fullWidth
                     label="Salary"
                     type="number"
-                    onChange={(e) => setSalary(e.target.value)}
+                    name="salary"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -131,7 +146,7 @@ const VendorJobModal = ({ open, close }) => {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    onChange={(e) => setDeadline(e.target.value)}
+                    name="deadline"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -140,7 +155,7 @@ const VendorJobModal = ({ open, close }) => {
                     fullWidth
                     label="Posted By"
                     type="text"
-                    onChange={(e) => setPostedBy(e.target.value)}
+                    name="postedBy"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -149,7 +164,7 @@ const VendorJobModal = ({ open, close }) => {
                     fullWidth
                     label="Category"
                     type="text"
-                    onChange={(e) => setCategory(e.target.value)}
+                    name="category"
                   />
                 </Grid>
               </Grid>
@@ -160,7 +175,7 @@ const VendorJobModal = ({ open, close }) => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={(nav("/vendor/jobs"), close)}
+                onClick={modalClose}
               >
                 <AddRoundedIcon />
                 Add Job
@@ -169,7 +184,7 @@ const VendorJobModal = ({ open, close }) => {
           </Box>
         </Fade>
       </Modal>
-    </Box>
+    </>
   );
 };
 
