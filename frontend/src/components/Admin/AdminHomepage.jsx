@@ -18,26 +18,18 @@ import {
   Typography,
 } from "@mui/material";
 import Chip from "@mui/material-next/Chip";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { apiText } from "../../global/API";
 
 const AdminHomepage = () => {
-  const token = localStorage.getItem("token");
   const [myData, setMyData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-
-  const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api/admin",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
 
   // Function to fetch the Vendor Data
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get("/vendors");
+      const response = await apiText.get("admin/vendors");
       setMyData(response.data.vendors);
       setFilteredData(response.data.vendors);
       console.log(response.data);
@@ -50,7 +42,9 @@ const AdminHomepage = () => {
   const acceptRequest = async (userId) => {
     console.log(userId);
     try {
-      const response = await axiosInstance.post("/changeToVendor", { userId });
+      const response = await apiText.post("admin/changeToVendor", {
+        userId,
+      });
       console.log(response, "re");
       toast.success("Successfully Approved Application");
       setFilteredData((prevData) =>
@@ -66,7 +60,9 @@ const AdminHomepage = () => {
   const rejectRequest = async (userId) => {
     console.log(userId);
     try {
-      const response = await axiosInstance.post("/rejectVendor", { userId });
+      const response = await apiText.post("admin/rejectVendor", {
+        userId,
+      });
       console.log(response, "re");
       toast.success("Successfully Rejected Application");
       setFilteredData((prevData) =>
@@ -82,7 +78,7 @@ const AdminHomepage = () => {
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axiosInstance.delete(`/vendors/${id}`);
+      await apiText.delete(`admin/vendors/${id}`);
       console.log(`Deleted Vendor with ID ${id}.`);
       toast.success("Successfully deleted Vendor");
       fetchData();

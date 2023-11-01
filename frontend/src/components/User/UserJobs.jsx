@@ -12,7 +12,18 @@ import OpenInNewRounded from "@mui/icons-material/OpenInNewRounded";
 import { Link } from "react-router-dom";
 import Footer from "../../layout/Footer";
 import Chip from "@mui/material-next/Chip";
-import { HomeRounded } from "@mui/icons-material";
+import {
+  AddRounded,
+  AttachMoneyRounded,
+  CalendarMonthRounded,
+  HomeRounded,
+  InventoryRounded,
+  LocationOnRounded,
+  PersonRounded,
+} from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import UserJobsModal from "./UserJobsModal";
+import { apiText } from "../../global/API";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -26,6 +37,31 @@ const limitLength = (text, maxLength) => {
 };
 
 const UserJobs = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [myData, setMyData] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await apiText.get(`/user/jobs`);
+      // setMyData(response.data);
+      // setFilteredData(response.data.vendors);
+      console.log(response.data.jobs, "fetchData");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <Box
@@ -80,16 +116,18 @@ const UserJobs = () => {
               mx: 10,
             }}
           >
-            <Button
-              fullWidth
-              startIcon={<HomeRounded />}
-              variant="outlined"
-              sx={{
-                "&:hover": { color: "1976d2", bgcolor: "#c2d7fe" },
-              }}
-            >
-              Back
-            </Button>
+            <Link to="/user">
+              <Button
+                fullWidth
+                startIcon={<HomeRounded />}
+                // variant="outlined"
+                sx={{
+                  "&:hover": { color: "1976d2", bgcolor: "#c2d7fe" },
+                }}
+              >
+                Home
+              </Button>
+            </Link>
           </Box>
         </Box>
         <Grid
@@ -170,35 +208,40 @@ const UserJobs = () => {
                         }}
                       >
                         <Chip
-                          color="error"
+                          icon={<LocationOnRounded />}
+                          color="tertiary"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Location"
                         />
                         <Chip
-                          color="info"
+                          icon={<AttachMoneyRounded />}
+                          color="success"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Salary"
                         />
                         <Chip
-                          color="warning"
+                          icon={<CalendarMonthRounded />}
+                          color="error"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Deadline"
                         />
                         <Chip
-                          color="success"
+                          icon={<PersonRounded />}
+                          color="warning"
                           disabled={false}
                           size="small"
                           variant="filled"
                           label="Posted By"
                         />
                         <Chip
-                          color="tertiary"
+                          icon={<InventoryRounded />}
+                          color="info"
                           disabled={false}
                           size="small"
                           variant="filled"
@@ -206,14 +249,39 @@ const UserJobs = () => {
                         />
                       </Box>
                     </Box>
-                    <Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 2,
+                      }}
+                    >
                       <IconButton
                         sx={{
                           borderRadius: "50%",
                           "&:hover": { bgcolor: "#1976d2", color: "white" },
                         }}
                       >
-                        <OpenInNewRounded />
+                        <OpenInNewRounded
+                          color="info"
+                          sx={{
+                            "&:hover": { color: "white" },
+                          }}
+                        />
+                      </IconButton>
+                      <IconButton
+                        sx={{
+                          borderRadius: "50%",
+                          "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                        }}
+                        onClick={handleOpenModal}
+                      >
+                        <AddRounded
+                          color="success"
+                          sx={{
+                            "&:hover": { color: "white" },
+                          }}
+                        />
                       </IconButton>
                     </Box>
                   </Box>
@@ -224,6 +292,7 @@ const UserJobs = () => {
         </Grid>
       </Box>
       <Footer />
+      <UserJobsModal modalOpen={isModalOpen} modalClose={handleCloseModal} />
     </>
   );
 };
