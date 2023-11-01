@@ -1,10 +1,23 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Backdrop, Box, Button, Grid, Modal, TextField } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+  TextField,
+} from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useSpring, animated } from "@react-spring/web";
 import { toast } from "react-toastify";
 import { apiText } from "../../global/API";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -61,6 +74,22 @@ const style = {
   flexDirection: "column",
 };
 const VendorJobModal = ({ modalOpen, modalClose }) => {
+  const [myCategory, setMyCategory] = useState([]);
+
+  const fetchCategory = async () => {
+    console.log("fetchCategory");
+    try {
+      const response = await apiText.get("admin/category");
+      setMyCategory(response.data.categories);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+  useEffect(() => {
+    fetchCategory();
+  }, []);
+
+  console.log(myCategory);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -159,13 +188,19 @@ const VendorJobModal = ({ modalOpen, modalClose }) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Category"
-                    type="text"
-                    name="category"
-                  />
+                  <FormControl fullWidth>
+                    <InputLabel>Category</InputLabel>
+                    <Select label="Category">
+                      {myCategory.map((data, i) => {
+                        return (
+                          <MenuItem key={i} value={data.category}>
+                            {data.category}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                    ;
+                  </FormControl>
                 </Grid>
               </Grid>
 

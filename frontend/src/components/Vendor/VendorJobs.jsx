@@ -10,6 +10,7 @@ import {
   tooltipClasses,
   styled,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import {
   DeleteRounded,
@@ -26,8 +27,6 @@ import { useEffect, useState } from "react";
 import Chip from "@mui/material-next/Chip";
 import { apiText } from "../../global/API";
 
-const cards = [1, 2, 3, 4, 5, 6];
-
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
   if (words.length <= maxLength) {
@@ -36,6 +35,7 @@ const limitLength = (text, maxLength) => {
   const truncatedText = words.slice(0, maxLength).join(" ");
   return `${truncatedText}...`;
 };
+
 const CustomToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -57,8 +57,8 @@ const VendorJobs = () => {
     console.log("fetchDatainside");
     try {
       const response = await apiText.get("vendor/jobs");
-      setJobsData(response);
-      console.log(response);
+      setJobsData(response.data.jobs);
+      console.log(jobsData);
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
@@ -119,144 +119,148 @@ const VendorJobs = () => {
           container
           spacing={4}
         >
-          {cards.map((card) => (
-            <Grid item key={card} xs={7} sm={3} md={6}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
-                  border: "1px solid whitesmoke",
-                  borderRadius: 3,
-                }}
-              >
-                <CardContent
+          {jobsData.length === 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "65vh",
+              }}
+            >
+              <Typography variant="h4">No Jobs Found</Typography>
+            </Box>
+          ) : (
+            jobsData.map((jobs, i) => (
+              <Grid item key={i} xs={7} sm={3} md={6}>
+                <Card
                   sx={{
-                    gap: 2,
-                    flexGrow: 1,
+                    height: "100%",
                     display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                    border: "1px solid whitesmoke",
+                    borderRadius: 3,
                   }}
                 >
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <Box
-                      sx={{
-                        height: "100%",
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "space-between",
-                      }}
-                    >
-                      <Typography
-                        gutterBottom={false}
-                        variant="h4"
-                        sx={{
-                          mb: 0,
-                          pb: 0,
-                          fontWeight: "bolder",
-                          color: "#444",
-                          fontFamily: "monospace",
-                        }}
-                        component="h2"
-                      >
-                        Software Developer
-                      </Typography>
-                      <Divider sx={{ bgcolor: "#1976d2" }} />
-                      <Divider sx={{ bgcolor: "#1976d2" }} />
-                      <Divider sx={{ bgcolor: "#1976d2" }} />
-                      <Box sx={{ pt: 1 }}>
-                        <Typography variant="body2">
-                          {limitLength(
-                            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-                            23
-                          )}
-                        </Typography>
-                      </Box>
-
+                  <CardContent
+                    sx={{
+                      gap: 2,
+                      flexGrow: 1,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                       <Box
                         sx={{
-                          gap: 2,
-                          pt: 1,
+                          height: "100%",
                           width: "100%",
                           display: "flex",
-                          justifyContent: "space-evenly",
-                          alignItems: "center",
+                          flexDirection: "column",
+                          alignItems: "space-between",
                         }}
                       >
-                        <Chip
-                          icon={<LocationOnRounded />}
-                          color="tertiary"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label="Location"
-                        />
-                        <Chip
-                          icon={<AttachMoneyRounded />}
-                          color="success"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label="Salary"
-                        />
-                        <Chip
-                          icon={<CalendarMonthRounded />}
-                          color="warning"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label="Deadline"
-                        />
-                        <Chip
-                          icon={<PersonRounded />}
-                          color="primary"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label="Posted By"
-                        />
-                        <Chip
-                          icon={<FormatListBulletedRounded />}
-                          color="tertiary"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label="Category"
-                        />
+                        <Typography
+                          gutterBottom={false}
+                          variant="h4"
+                          sx={{
+                            mb: 0,
+                            pb: 0,
+                            fontWeight: "bolder",
+                            color: "#444",
+                            fontFamily: "monospace",
+                          }}
+                          component="h2"
+                        >
+                          {jobs.title}
+                        </Typography>
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Box sx={{ pt: 1 }}>
+                          <Typography variant="body2">
+                            {limitLength(jobs.description, 23)}
+                          </Typography>
+                        </Box>
+
+                        <Box
+                          sx={{
+                            gap: 2,
+                            pt: 1,
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Chip
+                            icon={<LocationOnRounded />}
+                            color="tertiary"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={jobs.location}
+                          />
+                          <Chip
+                            icon={<AttachMoneyRounded />}
+                            color="success"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={jobs.salary}
+                          />
+                          <Chip
+                            icon={<CalendarMonthRounded />}
+                            color="warning"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={jobs.deadline.slice(0, 10)}
+                          />
+
+                          <Chip
+                            icon={<FormatListBulletedRounded />}
+                            color="tertiary"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={jobs.category}
+                          />
+                        </Box>
+                      </Box>
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <CustomToolTip title="Delete" placement="right">
+                          <IconButton
+                            sx={{
+                              borderRadius: "50%",
+                              color: "red",
+                              "&:hover": { bgcolor: "#ffd8e4" },
+                            }}
+                            onClick={handleDelete}
+                          >
+                            <DeleteRounded />
+                          </IconButton>
+                        </CustomToolTip>
+                        <CustomToolTip title="Visit" placement="right">
+                          <IconButton
+                            sx={{
+                              borderRadius: "50%",
+                              color: "#1976d2",
+                              "&:hover": { bgcolor: "#a7d3ff" },
+                            }}
+                          >
+                            <OpenInNewRounded />
+                          </IconButton>
+                        </CustomToolTip>
                       </Box>
                     </Box>
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <CustomToolTip title="Delete" placement="right">
-                        <IconButton
-                          sx={{
-                            borderRadius: "50%",
-                            color: "red",
-                            "&:hover": { bgcolor: "#ffd8e4" },
-                          }}
-                          onClick={handleDelete}
-                        >
-                          <DeleteRounded />
-                        </IconButton>
-                      </CustomToolTip>
-                      <CustomToolTip title="Visit" placement="right">
-                        <IconButton
-                          sx={{
-                            borderRadius: "50%",
-                            color: "#1976d2",
-                            "&:hover": { bgcolor: "#a7d3ff" },
-                          }}
-                        >
-                          <OpenInNewRounded />
-                        </IconButton>
-                      </CustomToolTip>
-                    </Box>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          )}
         </Grid>
         <Button
           variant="outlined"
