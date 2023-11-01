@@ -57,7 +57,6 @@ exports.myApplicants = async (req, res) => {
   const jobs = await jobModel.find({ postedBy: req.userId });
 
   //find all the applicants for the jobs posted by the vendor
-
   const applicants = await appliedJobModel
     .find({
       jobId: { $in: jobs.map((job) => job._id) },

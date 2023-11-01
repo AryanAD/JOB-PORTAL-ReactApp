@@ -29,7 +29,6 @@ router
 // jobs
 router.route("/jobs").get(getAllJobs);
 router.route("/jobs/:id").get(getSingleJob);
-
 router.route("/jobs/category/:id").get(getJobByCategories);
 
 // apply job
