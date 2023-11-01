@@ -130,6 +130,7 @@ const AdminHomepage = () => {
           }}
         >
           <>
+            {/* Pending Vendors */}
             <Divider sx={{ pt: 5 }} variant="inset" textAlign="left">
               <Typography
                 sx={{
@@ -335,7 +336,9 @@ const AdminHomepage = () => {
               </Grid>
             </Box>
           </>
+
           <>
+            {/* Approved Vendors */}
             <Divider variant="inset" textAlign="left">
               <Typography
                 sx={{
@@ -570,7 +573,9 @@ const AdminHomepage = () => {
               </Grid>
             </Box>
           </>
+
           <>
+            {/* REjected Vendors */}
             <Divider variant="inset" textAlign="left">
               <Typography
                 sx={{
