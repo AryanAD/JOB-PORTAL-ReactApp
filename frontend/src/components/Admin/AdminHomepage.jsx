@@ -27,17 +27,17 @@ const AdminHomepage = () => {
   const [myData, setMyData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  const fetchMyData = async () => {
-    const token = localStorage.getItem("token");
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000/api/admin",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  // Function to fetch the Vendor Data
+  const fetchData = async () => {
     try {
-      let response = await axios.get(
-        `http://localhost:3000/api/admin/vendors`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.get("/vendors");
       setMyData(response.data.vendors);
       setFilteredData(response.data.vendors);
       console.log(response.data);
@@ -45,82 +45,65 @@ const AdminHomepage = () => {
       console.log(`Error: ${err.message}`);
     }
   };
-  useEffect(() => {
-    fetchMyData();
-  }, []);
 
+  // Function to Acceot vendor application
   const acceptRequest = async (userId) => {
     console.log(userId);
     try {
-      const response = await axios.post(
-        `http://localhost:3000/api/admin/changeToVendor`,
-        { userId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.post("/changeToVendor", { userId });
       console.log(response, "re");
       toast.success("Successfully Approved Application");
       setFilteredData((prevData) =>
         prevData.filter((data) => data.userId !== userId)
       );
-      fetchMyData();
+      fetchData();
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
 
+  // Function to Reject vendor application
   const rejectRequest = async (userId) => {
     console.log(userId);
     try {
-      const response = await axios.post(
-        `http://localhost:3000/api/admin/rejectVendor`,
-        { userId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.post("/rejectVendor", { userId });
       console.log(response, "re");
       toast.success("Successfully Rejected Application");
       setFilteredData((prevData) =>
         prevData.filter((data) => data.userId !== userId)
       );
-      fetchMyData();
+      fetchData();
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
 
-  useEffect(() => {
-    setFilteredData(myData.filter((vendor) => vendor.status === "pending"));
-  }, [myData]);
-
+  // Function to Delete rejected vendor applications
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:3000/api/admin/vendors/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axiosInstance.delete(`/vendors/${id}`);
       console.log(`Deleted Vendor with ID ${id}.`);
       toast.success("Successfully deleted Vendor");
-      fetchMyData();
+      fetchData();
     } catch (error) {
       console.error(`Error deleting Vendor with ID ${id}.`, error);
     }
   };
 
-  const rejectedVendors = myData.filter(
-    (vendor) => vendor.status === "rejected"
-  );
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setFilteredData(myData.filter((vendor) => vendor.status === "pending"));
+  }, [myData]);
 
   const approvedVendors = myData.filter(
     (vendor) => vendor.status === "approved"
+  );
+  const rejectedVendors = myData.filter(
+    (vendor) => vendor.status === "rejected"
   );
 
   return (
