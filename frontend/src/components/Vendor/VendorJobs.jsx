@@ -26,6 +26,7 @@ import VendorJobModal from "./VendorJobModal";
 import { useEffect, useState } from "react";
 import Chip from "@mui/material-next/Chip";
 import { apiText } from "../../global/API";
+import { toast } from "react-toastify";
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -75,8 +76,16 @@ const VendorJobs = () => {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (rowIndex) => {
-    console.log(`Delete button clicked for row ${rowIndex}`);
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      await apiText.delete(`vendor/jobs/${id}`);
+      console.log(`Deleted Job with ID ${id}.`);
+      toast.success("Successfully deleted Job");
+      fetchData();
+    } catch (error) {
+      console.error(`Error deleting Job with ID ${id}.`, error);
+    }
   };
 
   return (
@@ -226,7 +235,7 @@ const VendorJobs = () => {
                             disabled={false}
                             size="small"
                             variant="filled"
-                            // label={jobs.category}
+                            label={jobs.category}
                           />
                         </Box>
                       </Box>
@@ -238,7 +247,7 @@ const VendorJobs = () => {
                               color: "red",
                               "&:hover": { bgcolor: "#ffd8e4" },
                             }}
-                            onClick={handleDelete}
+                            onClick={() => handleDelete(jobs._id)}
                           >
                             <DeleteRounded />
                           </IconButton>
@@ -275,7 +284,11 @@ const VendorJobs = () => {
           Add a Job
         </Button>
       </Box>
-      <VendorJobModal modalOpen={isModalOpen} modalClose={handleCloseModal} />
+      <VendorJobModal
+        modalOpen={isModalOpen}
+        modalClose={handleCloseModal}
+        fetchJobs={fetchData}
+      />
     </>
   );
 };

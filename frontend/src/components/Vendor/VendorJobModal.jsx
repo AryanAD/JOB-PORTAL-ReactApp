@@ -73,7 +73,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
 };
-const VendorJobModal = ({ modalOpen, modalClose }) => {
+const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
   const [myCategory, setMyCategory] = useState([]);
 
   const fetchCategory = async () => {
@@ -108,6 +108,7 @@ const VendorJobModal = ({ modalOpen, modalClose }) => {
       const response = await apiText.post("vendor/jobs", formData);
       console.log(formData, "vendormodal");
       console.log(response, "re");
+      fetchJobs();
       toast.success("Successfully created a job!");
     } catch (error) {
       console.error("API request failed: ", error);
@@ -191,15 +192,12 @@ const VendorJobModal = ({ modalOpen, modalClose }) => {
                   <FormControl fullWidth>
                     <InputLabel>Category</InputLabel>
                     <Select label="Category">
-                      {myCategory.map((data, i) => {
-                        return (
-                          <MenuItem key={i} value={data.category}>
-                            {data.category}
-                          </MenuItem>
-                        );
-                      })}
+                      {myCategory.map((data, i) => (
+                        <MenuItem name="category" key={i} value={data.category}>
+                          {data.category}
+                        </MenuItem>
+                      ))}
                     </Select>
-                    ;
                   </FormControl>
                 </Grid>
               </Grid>
