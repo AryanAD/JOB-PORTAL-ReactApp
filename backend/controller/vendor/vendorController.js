@@ -17,6 +17,7 @@ exports.createJob = async (req, res) => {
     postedBy: req.userId,
     category: categoryId,
   });
+  console.log(categoryId);
   if (job) {
     return res.json({ status: 200, message: "Job created successfully" });
   } else {
