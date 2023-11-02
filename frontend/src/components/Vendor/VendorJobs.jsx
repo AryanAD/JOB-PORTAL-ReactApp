@@ -226,7 +226,7 @@ const VendorJobs = () => {
                             disabled={false}
                             size="small"
                             variant="filled"
-                            label={jobs.category}
+                            // label={jobs.category}
                           />
                         </Box>
                       </Box>
