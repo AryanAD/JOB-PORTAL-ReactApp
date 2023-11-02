@@ -15,8 +15,9 @@ import {
   tooltipClasses,
 } from "@mui/material";
 import { CloseRounded, DoneRounded } from "@mui/icons-material";
-import { useEffect } from "react";
-import { apiText } from "../../global/API";
+import { useEffect, useState } from "react";
+import { apiImage } from "../../global/API";
+import Chip from "@mui/material-next/Chip";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -41,14 +42,13 @@ const CustomToolTip = styled(({ className, ...props }) => (
 }));
 
 const VendorApplications = () => {
-  // const [myData, setMyData] = useState([]);
+  const [myData, setMyData] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await apiText.get("vendor/applicants");
-      // setMyData(response.data);
-      // setFilteredData(response.data.vendors);
-      console.log(response.data, "fetchData");
+      const response = await apiImage.get("vendor/applicants");
+      setMyData(response.data.applicants);
+      console.log(myData, "applicants");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
@@ -85,20 +85,19 @@ const VendorApplications = () => {
       >
         <Box
           sx={{
-            width: "55%",
+            width: "50%",
           }}
         >
           <TableContainer component={Paper}>
             <Table
               size="small"
-              sx={{ minWidth: 700 }}
+              sx={{ minWidth: 600 }}
               aria-label="customized table"
             >
               <TableHead>
                 <TableRow>
                   <TableCell
                     sx={{
-                      // width: "50px",
                       fontWeight: "bold",
                       padding: "10px",
                       fontSize: "20px",
@@ -106,20 +105,9 @@ const VendorApplications = () => {
                       bgcolor: "#29a2f3",
                       borderRadius: "11px 0 0 0",
                     }}
+                    align="left"
                   >
-                    Job ID
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    User ID
+                    Applicant
                   </TableCell>
                   <TableCell
                     sx={{
@@ -133,18 +121,7 @@ const VendorApplications = () => {
                   >
                     Status
                   </TableCell>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      padding: "10px",
-                      fontSize: "20px",
-                      fontFamily: "monospace",
-                      bgcolor: "#29a2f3",
-                    }}
-                    align="right"
-                  >
-                    CV
-                  </TableCell>
+
                   <TableCell
                     sx={{
                       fontWeight: "bold",
@@ -169,7 +146,18 @@ const VendorApplications = () => {
                   >
                     Contact
                   </TableCell>
-
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                      padding: "10px",
+                      fontSize: "20px",
+                      fontFamily: "monospace",
+                      bgcolor: "#29a2f3",
+                    }}
+                    align="right"
+                  >
+                    CV
+                  </TableCell>
                   <TableCell
                     sx={{
                       fontWeight: "bold",
@@ -186,49 +174,102 @@ const VendorApplications = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {Array.from({ length: 7 }).map((_, rowIndex) => (
-                  <StyledTableRow key={rowIndex}>
-                    <TableCell scope="row">J8EH90-JH83</TableCell>
-                    <TableCell component="th" align="right">
-                      J1US8
-                    </TableCell>
-                    <TableCell align="right">Approved</TableCell>
-                    <TableCell align="right">
-                      <>Download CV</>
-                    </TableCell>
-                    <TableCell align="right">Home-2</TableCell>
-                    <TableCell align="right">985654952</TableCell>
-                    <TableCell
-                      sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                      align="right"
-                    >
-                      <CustomToolTip title="Approve" placement="left">
-                        <IconButton
+                {myData.length === 0 ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      height: "20vh",
+                    }}
+                  >
+                    <Typography variant="h4">
+                      No Pending Applicants Found
+                    </Typography>
+                  </Box>
+                ) : myData === null ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      height: "20vh",
+                    }}
+                  >
+                    <Typography variant="h4">
+                      No Pending Applicants Found
+                    </Typography>
+                  </Box>
+                ) : (
+                  myData?.map((applicant, i) => {
+                    return (
+                      <StyledTableRow key={i}>
+                        <TableCell component="th" align="left">
+                          {applicant.userId.name}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Chip
+                            color={
+                              applicant.status === "accepted"
+                                ? "success"
+                                : applicant.status === "rejected"
+                                ? "error"
+                                : "warning"
+                            }
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={applicant.status}
+                          />
+                        </TableCell>
+                        <TableCell align="right">
+                          {applicant.location}
+                        </TableCell>
+                        <TableCell align="right">{applicant.contact}</TableCell>
+                        <TableCell align="right">
+                          <a download>{applicant.cv}</a>
+                        </TableCell>
+                        <TableCell
                           sx={{
-                            "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
                           }}
-                          color="success"
+                          align="right"
                         >
-                          <DoneRounded />
-                        </IconButton>
-                      </CustomToolTip>
-                      <CustomToolTip title="Reject" placement="right">
-                        <IconButton
-                          sx={{
-                            "&:hover": { bgcolor: "#d74747", color: "white" },
-                          }}
-                          color="error"
-                        >
-                          <CloseRounded />
-                        </IconButton>
-                      </CustomToolTip>
-                    </TableCell>
-                  </StyledTableRow>
-                ))}
+                          <CustomToolTip title="Approve" placement="left">
+                            <IconButton
+                              sx={{
+                                "&:hover": {
+                                  bgcolor: "#2e7d32",
+                                  color: "white",
+                                },
+                              }}
+                              color="success"
+                            >
+                              <DoneRounded />
+                            </IconButton>
+                          </CustomToolTip>
+                          <CustomToolTip title="Reject" placement="right">
+                            <IconButton
+                              sx={{
+                                "&:hover": {
+                                  bgcolor: "#d74747",
+                                  color: "white",
+                                },
+                              }}
+                              color="error"
+                            >
+                              <CloseRounded />
+                            </IconButton>
+                          </CustomToolTip>
+                        </TableCell>
+                      </StyledTableRow>
+                    );
+                  })
+                )}
               </TableBody>
             </Table>
           </TableContainer>

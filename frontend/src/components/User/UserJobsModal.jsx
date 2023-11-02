@@ -1,154 +1,170 @@
-import {
-  Backdrop,
-  Box,
-  Button,
-  Fade,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Modal,
-  Select,
-  TextField,
-} from "@mui/material";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
+/* eslint-disable react/prop-types */
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Backdrop, Box, Button, Modal, TextField } from "@mui/material";
+import { useSpring, animated } from "@react-spring/web";
 import { toast } from "react-toastify";
 import { apiImage } from "../../global/API";
+
+const Fade = React.forwardRef(function Fade(props, ref) {
+  const {
+    children,
+    in: open,
+    onClick,
+    onEnter,
+    onExited,
+    ownerState,
+    ...other
+  } = props;
+  const style = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: open ? 1 : 0 },
+    onStart: () => {
+      if (open && onEnter) {
+        onEnter(null, true);
+      }
+    },
+    onRest: () => {
+      if (!open && onExited) {
+        onExited(null, true);
+      }
+    },
+  });
+
+  return (
+    <animated.div ref={ref} style={style} {...other}>
+      {React.cloneElement(children, { onClick })}
+    </animated.div>
+  );
+});
+
+Fade.propTypes = {
+  children: PropTypes.element.isRequired,
+  in: PropTypes.bool,
+  onClick: PropTypes.any,
+  onEnter: PropTypes.func,
+  onExited: PropTypes.func,
+  ownerState: PropTypes.any,
+};
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "white",
-  borderRadius: "13px",
+  width: 400,
+  bgcolor: "background.paper",
   boxShadow: 24,
+  borderRadius: "11px",
   p: 4,
+  display: "flex",
+  flexDirection: "column",
 };
 
-const backdropStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.2)",
-};
-
-const UserJobsModal = ({ modalOpen, modalClose }) => {
+const UserJobsModal = ({ modalOpen, modalClose, jobId }) => {
+  const userId = localStorage.getItem("token");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = new FormData(e.currentTarget);
       let formData = {
-        title: data.get("title"),
-        description: data.get("description"),
+        jobId,
+        userId,
+        cv: data.get("cv"),
         location: data.get("location"),
-        salary: data.get("salary"),
-        deadline: data.get("deadline"),
-        postedBy: data.get("postedBy"),
-        category: data.get("category"),
+        contact: data.get("contact"),
       };
 
       const response = await apiImage.post("user/jobs/apply", formData);
       console.log(formData, "inside .post");
       console.log(response, "re");
       toast.success("Successfully Approved Application");
-      fetchData();
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
   return (
-    <div>
+    <>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="spring-modal-title"
+        aria-describedby="spring-modal-description"
         open={modalOpen}
         onClose={modalClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-          style: backdropStyle,
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            TransitionComponent: Fade,
+          },
         }}
       >
-        <Fade in={open}>
+        <Fade in={modalOpen}>
           <Box sx={style}>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
               <TextField
-                type="text"
+                type=""
                 margin="normal"
                 fullWidth
-                label="Job Title"
-                // name={title}
+                label="Your Location"
+                name="location"
               />
               <TextField
-                type="text"
+                type="number"
                 margin="normal"
                 fullWidth
-                label="Job Description"
+                label="Your Contact Number"
+                name="contact"
               />
 
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Location"
-                    type="text"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Salary"
-                    type="number"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Deadline"
-                    type="date"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Posted By"
-                    type="text"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth>
-                    <InputLabel>Category</InputLabel>
-                    <Select label="Category">
-                      <MenuItem value="Tech">Tech</MenuItem>
-                      <MenuItem value="Finance">Finance</MenuItem>
-                      <MenuItem value="Marketing">Marketing</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  mt: 2,
+                  mx: "auto",
+                  gap: 1,
+                }}
+              >
+                <label
+                  style={{
+                    padding: 2,
+                    fontFamily: "monospace",
+                    color: "#555",
+                    borderBottom: "2px solid #333",
+                  }}
+                >
+                  Upload CV:
+                </label>
+                <input
+                  style={{
+                    marginTop: 2,
+                    textDecoration: "none",
+                    color: "gray",
+                    fontFamily: "monospace",
+                  }}
+                  type="file"
+                  accept="file/*"
+                  name="cv"
+                />
+              </Box>
 
               <Button
                 color="success"
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3 }}
                 onClick={modalClose}
               >
-                <AddRoundedIcon />
-                Add Job
+                Apply for Job
               </Button>
             </form>
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 };
 

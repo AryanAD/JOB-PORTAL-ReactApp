@@ -295,6 +295,11 @@ const UserJobs = () => {
                         >
                           <AddRounded />
                         </IconButton>
+                        <UserJobsModal
+                          modalOpen={isModalOpen}
+                          modalClose={handleCloseModal}
+                          jobId={data._id}
+                        />
                       </CustomToolTip>
                     </Box>
                   </Box>
@@ -305,7 +310,6 @@ const UserJobs = () => {
         </Grid>
       </Box>
       <Footer />
-      <UserJobsModal modalOpen={isModalOpen} modalClose={handleCloseModal} />
     </>
   );
 };
