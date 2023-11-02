@@ -23,7 +23,6 @@ exports.createJob = async (req, res) => {
   } else {
     return res.json({ status: 400, message: "Job not created" });
   }
-  x;
 };
 
 exports.individualVendorJobs = async (req, res) => {
