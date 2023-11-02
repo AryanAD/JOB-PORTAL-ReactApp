@@ -65,7 +65,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 700,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "11px",
@@ -89,7 +89,6 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
     fetchCategory();
   }, []);
 
-  console.log(myCategory);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -102,7 +101,7 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
         salary: data.get("salary"),
         deadline: data.get("deadline"),
         postedBy: data.get("postedBy"),
-        category: data.get("category"),
+        categoryId: data.get("category"),
       };
 
       const response = await apiText.post("vendor/jobs", formData);
@@ -142,6 +141,9 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
               />
               <TextField
                 type="text"
+                minRows={3}
+                maxRows={6}
+                multiline
                 margin="normal"
                 fullWidth
                 label="Job Description"
@@ -179,7 +181,7 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
                     name="deadline"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                {/* <Grid item xs={6}>
                   <TextField
                     margin="normal"
                     fullWidth
@@ -187,16 +189,18 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
                     type="text"
                     name="postedBy"
                   />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth>
+                </Grid> */}
+                <Grid item xs={6}>
+                  <FormControl margin="normal" fullWidth>
                     <InputLabel>Category</InputLabel>
-                    <Select label="Category">
-                      {myCategory.map((data, i) => (
-                        <MenuItem name="category" key={i} value={data.category}>
-                          {data.category}
-                        </MenuItem>
-                      ))}
+                    <Select label="Category" name="category">
+                      {myCategory.map((data, i) => {
+                        return (
+                          <MenuItem key={i} value={data._id}>
+                            {data.category}
+                          </MenuItem>
+                        );
+                      })}
                     </Select>
                   </FormControl>
                 </Grid>

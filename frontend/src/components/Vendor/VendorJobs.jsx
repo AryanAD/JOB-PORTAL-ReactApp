@@ -10,7 +10,6 @@ import {
   tooltipClasses,
   styled,
   Button,
-  CircularProgress,
 } from "@mui/material";
 import {
   DeleteRounded,
@@ -19,11 +18,10 @@ import {
   LocationOnRounded,
   AttachMoneyRounded,
   CalendarMonthRounded,
-  PersonRounded,
   FormatListBulletedRounded,
 } from "@mui/icons-material";
 import VendorJobModal from "./VendorJobModal";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Chip from "@mui/material-next/Chip";
 import { apiText } from "../../global/API";
 import { toast } from "react-toastify";
@@ -53,19 +51,47 @@ const CustomToolTip = styled(({ className, ...props }) => (
 const VendorJobs = () => {
   const [jobsData, setJobsData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [myCategory, setMyCategory] = useState([]);
 
-  const fetchData = async () => {
-    console.log("fetchDatainside");
+  const fetchData = useCallback(async () => {
     try {
       const response = await apiText.get("vendor/jobs");
       setJobsData(response.data.jobs);
-      console.log(jobsData);
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
-  };
+  }, []);
+
+  console.log(jobsData, "jobs data");
+  const fetchCategory = useCallback(async () => {
+    try {
+      const response = await apiText.get("admin/category");
+      setMyCategory(response.data.categories);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  }, []);
+
+  const filteredJobs = jobsData.map((job) => {
+    const category = myCategory.find(
+      (category) => category._id === job.category
+    );
+    console.log(category);
+    if (category) {
+      return {
+        ...job,
+        categoryName: category.category,
+      };
+    }
+    return job;
+  });
+
+  // Now, filteredJobs contains the category title for each job
+  console.log(filteredJobs, "filtered jobs");
+
   useEffect(() => {
     fetchData();
+    fetchCategory();
   }, []);
 
   const handleOpenModal = () => {
@@ -128,7 +154,19 @@ const VendorJobs = () => {
           container
           spacing={4}
         >
-          {jobsData.length === 0 ? (
+          {filteredJobs?.length === 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "65vh",
+              }}
+            >
+              <Typography variant="h4">No Jobs Found</Typography>
+            </Box>
+          ) : filteredJobs === null ? (
             <Box
               sx={{
                 display: "flex",
@@ -141,7 +179,7 @@ const VendorJobs = () => {
               <Typography variant="h4">No Jobs Found</Typography>
             </Box>
           ) : (
-            jobsData.map((jobs, i) => (
+            filteredJobs?.map((jobs, i) => (
               <Grid item key={i} xs={7} sm={3} md={6}>
                 <Card
                   sx={{
@@ -235,7 +273,7 @@ const VendorJobs = () => {
                             disabled={false}
                             size="small"
                             variant="filled"
-                            label={jobs.category}
+                            label={jobs.categoryName}
                           />
                         </Box>
                       </Box>
