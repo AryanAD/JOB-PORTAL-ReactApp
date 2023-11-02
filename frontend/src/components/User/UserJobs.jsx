@@ -6,7 +6,10 @@ import {
   Divider,
   Grid,
   IconButton,
+  Tooltip,
   Typography,
+  styled,
+  tooltipClasses,
 } from "@mui/material";
 import OpenInNewRounded from "@mui/icons-material/OpenInNewRounded";
 import { Link } from "react-router-dom";
@@ -25,8 +28,6 @@ import { useEffect, useState } from "react";
 import UserJobsModal from "./UserJobsModal";
 import { apiText } from "../../global/API";
 
-const cards = [1, 2, 3, 4, 5, 6];
-
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
   if (words.length <= maxLength) {
@@ -36,16 +37,29 @@ const limitLength = (text, maxLength) => {
   return `${truncatedText}...`;
 };
 
+const CustomToolTip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "gray",
+    color: "white",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(18),
+    border: "1px solid #dadde9",
+    borderRadius: "7px",
+  },
+}));
+
 const UserJobs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [myData, setMyData] = useState([]);
+  const [jobData, setJobData] = useState([]);
 
   const fetchData = async () => {
     try {
       const response = await apiText.get(`/user/jobs`);
-      // setMyData(response.data);
+      setJobData(response.data.jobs);
       // setFilteredData(response.data.vendors);
-      console.log(response.data.jobs, "fetchData");
+      console.log(jobData, "job data");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
@@ -141,12 +155,13 @@ const UserJobs = () => {
           container
           spacing={4}
         >
-          {cards.map((card) => (
-            <Grid item key={card} xs={7} sm={3} md={6}>
+          {jobData?.map((data, i) => (
+            <Grid item key={i} xs={7} sm={3} md={6}>
               <Card
                 sx={{
                   height: "100%",
                   display: "flex",
+                  flexGrow: 1,
                   boxShadow: 1,
                   border: "1px solid #d8d8d8",
                   borderRadius: 3,
@@ -155,13 +170,20 @@ const UserJobs = () => {
                 <CardContent
                   sx={{
                     gap: 2,
-                    flexGrow: 1,
+                    flexGrow: 2,
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                   }}
                 >
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexGrow: 1,
+                      alignItems: "center",
+                      gap: 2,
+                    }}
+                  >
                     <Box
                       sx={{
                         height: "100%",
@@ -183,17 +205,14 @@ const UserJobs = () => {
                         }}
                         component="h2"
                       >
-                        Software Developer
+                        {data.title}
                       </Typography>
                       <Divider />
                       <Divider />
                       <Divider />
                       <Box>
                         <Typography variant="body2">
-                          {limitLength(
-                            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae asperiores eum cum voluptatibus sint similique, facere ducimus facilis voluptate delectus veniam consequuntur necessitatibus! Aspernatur quod itaque ea consectetur quaerat.",
-                            23
-                          )}
+                          {limitLength(data.description, 23)}
                         </Typography>
                       </Box>
 
@@ -213,7 +232,7 @@ const UserJobs = () => {
                           disabled={false}
                           size="small"
                           variant="filled"
-                          label="Location"
+                          label={data.location}
                         />
                         <Chip
                           icon={<AttachMoneyRounded />}
@@ -221,7 +240,7 @@ const UserJobs = () => {
                           disabled={false}
                           size="small"
                           variant="filled"
-                          label="Salary"
+                          label={data.salary}
                         />
                         <Chip
                           icon={<CalendarMonthRounded />}
@@ -229,7 +248,7 @@ const UserJobs = () => {
                           disabled={false}
                           size="small"
                           variant="filled"
-                          label="Deadline"
+                          label={data.deadline.slice(0, 10)}
                         />
                         <Chip
                           icon={<PersonRounded />}
@@ -237,7 +256,7 @@ const UserJobs = () => {
                           disabled={false}
                           size="small"
                           variant="filled"
-                          label="Posted By"
+                          label={data.postedBy.name}
                         />
                         <Chip
                           icon={<InventoryRounded />}
@@ -245,7 +264,7 @@ const UserJobs = () => {
                           disabled={false}
                           size="small"
                           variant="filled"
-                          label="Category"
+                          label={data.category.category}
                         />
                       </Box>
                     </Box>
@@ -256,33 +275,27 @@ const UserJobs = () => {
                         gap: 2,
                       }}
                     >
-                      <IconButton
-                        sx={{
-                          borderRadius: "50%",
-                          "&:hover": { bgcolor: "#1976d2", color: "white" },
-                        }}
-                      >
-                        <OpenInNewRounded
-                          color="info"
+                      <CustomToolTip title="View" placement="left">
+                        <IconButton
                           sx={{
-                            "&:hover": { color: "white" },
+                            "&:hover": { bgcolor: "#1976d2", color: "white" },
                           }}
-                        />
-                      </IconButton>
-                      <IconButton
-                        sx={{
-                          borderRadius: "50%",
-                          "&:hover": { bgcolor: "#2e7d32", color: "white" },
-                        }}
-                        onClick={handleOpenModal}
-                      >
-                        <AddRounded
+                          color="primary"
+                        >
+                          <OpenInNewRounded />
+                        </IconButton>
+                      </CustomToolTip>
+                      <CustomToolTip title="Apply" placement="right">
+                        <IconButton
+                          onClick={handleOpenModal}
+                          sx={{
+                            "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                          }}
                           color="success"
-                          sx={{
-                            "&:hover": { color: "white" },
-                          }}
-                        />
-                      </IconButton>
+                        >
+                          <AddRounded />
+                        </IconButton>
+                      </CustomToolTip>
                     </Box>
                   </Box>
                 </CardContent>

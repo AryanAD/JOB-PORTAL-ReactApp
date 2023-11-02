@@ -199,7 +199,14 @@ const VendorJobs = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexGrow: 1,
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
                       <Box
                         sx={{
                           height: "100%",
