@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   Divider,
   IconButton,
   Paper,
@@ -184,9 +185,16 @@ const VendorApplications = () => {
                       height: "20vh",
                     }}
                   >
-                    <Typography variant="h4">
-                      No Pending Applicants Found
-                    </Typography>
+                    <CircularProgress
+                      color="primary"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: 80,
+                        height: 80,
+                      }}
+                    />
                   </Box>
                 ) : myData === null ? (
                   <Box
@@ -198,9 +206,16 @@ const VendorApplications = () => {
                       height: "20vh",
                     }}
                   >
-                    <Typography variant="h4">
-                      No Pending Applicants Found
-                    </Typography>
+                    <CircularProgress
+                      color="primary"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: 80,
+                        height: 80,
+                      }}
+                    />
                   </Box>
                 ) : (
                   myData?.map((applicant, i) => {

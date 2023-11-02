@@ -124,7 +124,7 @@ const UserHomePage = () => {
           }}
           variant="h4"
         >
-          Jobs Popular Today
+          Jobs By Catergories
         </Typography>
         <Divider variant="middle" />
         <Divider variant="middle" />
@@ -169,8 +169,8 @@ const UserHomePage = () => {
                     gutterBottom
                     sx={{
                       // 16:9
-                      width: "130px",
-                      height: "130px",
+                      width: "90px",
+                      height: "90px",
                       border: "4px inset #277aff",
                       borderRadius: "13px",
                     }}

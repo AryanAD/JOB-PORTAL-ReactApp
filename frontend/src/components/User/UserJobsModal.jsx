@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Backdrop, Box, Button, Modal, TextField } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 import { useSpring, animated } from "@react-spring/web";
+import { TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { apiImage } from "../../global/API";
 
@@ -84,7 +88,7 @@ const UserJobsModal = ({ modalOpen, modalClose, jobId }) => {
     }
   };
   return (
-    <>
+    <Box>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -164,7 +168,7 @@ const UserJobsModal = ({ modalOpen, modalClose, jobId }) => {
           </Box>
         </Fade>
       </Modal>
-    </>
+    </Box>
   );
 };
 
