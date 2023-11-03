@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
 import Backdrop from "@mui/material/Backdrop";
@@ -5,7 +6,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { useSpring, animated } from "@react-spring/web";
-import { Avatar, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -93,7 +94,6 @@ const UserViewSingleModal = ({ modalOpen, modalClose, fetchMyData }) => {
       console.log(formData);
       console.log(response, "re");
       fetchMyData();
-      setImage(null);
       toast.success("Successfully created a banner!");
     } catch (error) {
       console.error("API request failed: ", error);
@@ -103,7 +103,6 @@ const UserViewSingleModal = ({ modalOpen, modalClose, fetchMyData }) => {
   const imagePreview = (e) => {
     console.log(e.target.files);
     setFile(e.target.files[0]);
-    setImage(URL.createObjectURL(e.target.files[0]));
   };
 
   return (

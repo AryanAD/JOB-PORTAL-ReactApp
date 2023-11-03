@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
 import {
@@ -26,6 +27,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     onClick,
     onEnter,
     onExited,
+    // eslint-disable-next-line no-unused-vars
     ownerState,
     ...other
   } = props;
@@ -73,7 +75,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
 };
-const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
+const VendorAddJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
   const [myCategory, setMyCategory] = useState([]);
 
   const fetchCategory = async () => {
@@ -194,7 +196,7 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
                   <FormControl margin="normal" fullWidth>
                     <InputLabel>Category</InputLabel>
                     <Select label="Category" name="category">
-                      {myCategory.map((data, i) => {
+                      {myCategory?.map((data, i) => {
                         return (
                           <MenuItem key={i} value={data._id}>
                             {data.category}
@@ -225,4 +227,4 @@ const VendorJobModal = ({ modalOpen, modalClose, fetchJobs }) => {
   );
 };
 
-export default VendorJobModal;
+export default VendorAddJobModal;

@@ -20,11 +20,12 @@ import {
   CalendarMonthRounded,
   FormatListBulletedRounded,
 } from "@mui/icons-material";
-import VendorJobModal from "./VendorJobModal";
+import VendorAddJobModal from "./VendorAddJobModal";
 import { useCallback, useEffect, useState } from "react";
 import Chip from "@mui/material-next/Chip";
 import { apiText } from "../../global/API";
 import { toast } from "react-toastify";
+import VendorSingleJobModal from "./VendorSingleJobModal";
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -50,8 +51,10 @@ const CustomToolTip = styled(({ className, ...props }) => (
 
 const VendorJobs = () => {
   const [jobsData, setJobsData] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
   const [myCategory, setMyCategory] = useState([]);
+  const [singleJobId, setSingleJobId] = useState({});
 
   const fetchData = useCallback(async () => {
     try {
@@ -76,7 +79,6 @@ const VendorJobs = () => {
     const category = myCategory.find(
       (category) => category._id === job.category
     );
-    console.log(category);
     if (category) {
       return {
         ...job,
@@ -94,12 +96,22 @@ const VendorJobs = () => {
     fetchCategory();
   }, []);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
+
+  const openSingleModal = (id) => {
+    setSingleJobId(id);
+    console.log(singleJobId, "job ID");
+    setIsSingleModalOpen(true);
+  };
+
+  const closeSingleModal = () => {
+    setIsSingleModalOpen(false);
   };
 
   const handleDelete = async (id) => {
@@ -285,29 +297,30 @@ const VendorJobs = () => {
                         </Box>
                       </Box>
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <CustomToolTip title="Delete" placement="right">
-                          <IconButton
-                            sx={{
-                              borderRadius: "50%",
-                              color: "red",
-                              "&:hover": { bgcolor: "#ffd8e4" },
-                            }}
-                            onClick={() => handleDelete(jobs._id)}
-                          >
+                        <IconButton
+                          sx={{
+                            borderRadius: "50%",
+                            color: "red",
+                            "&:hover": { bgcolor: "#ffd8e4" },
+                          }}
+                          onClick={() => handleDelete(jobs._id)}
+                        >
+                          <CustomToolTip title="Delete" placement="right">
                             <DeleteRounded />
-                          </IconButton>
-                        </CustomToolTip>
-                        <CustomToolTip title="Visit" placement="right">
-                          <IconButton
-                            sx={{
-                              borderRadius: "50%",
-                              color: "#1976d2",
-                              "&:hover": { bgcolor: "#a7d3ff" },
-                            }}
-                          >
+                          </CustomToolTip>
+                        </IconButton>
+                        <IconButton
+                          onClick={() => openSingleModal(jobs._id)}
+                          sx={{
+                            borderRadius: "50%",
+                            color: "#1976d2",
+                            "&:hover": { bgcolor: "#a7d3ff" },
+                          }}
+                        >
+                          <CustomToolTip title="Visit" placement="right">
                             <OpenInNewRounded />
-                          </IconButton>
-                        </CustomToolTip>
+                          </CustomToolTip>
+                        </IconButton>
                       </Box>
                     </Box>
                   </CardContent>
@@ -323,15 +336,21 @@ const VendorJobs = () => {
             color: "green",
             "&:hover": { bgcolor: "#a0f5d1" },
           }}
-          onClick={handleOpenModal}
+          onClick={openAddModal}
           startIcon={<AddRounded />}
         >
           Add a Job
         </Button>
       </Box>
-      <VendorJobModal
-        modalOpen={isModalOpen}
-        modalClose={handleCloseModal}
+      <VendorAddJobModal
+        modalOpen={isAddModalOpen}
+        modalClose={closeAddModal}
+        fetchJobs={fetchData}
+      />
+      <VendorSingleJobModal
+        modalOpen={isSingleModalOpen}
+        modalClose={closeSingleModal}
+        singleJobId={singleJobId}
         fetchJobs={fetchData}
       />
     </>
