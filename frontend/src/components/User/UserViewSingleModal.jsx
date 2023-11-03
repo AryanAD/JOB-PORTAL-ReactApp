@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
 import Backdrop from "@mui/material/Backdrop";
@@ -6,9 +5,10 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { useSpring, animated } from "@react-spring/web";
-import { TextField } from "@mui/material";
+import { Avatar, TextField } from "@mui/material";
+import { useState } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
-import { apiImage } from "../../global/API";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -65,29 +65,47 @@ const style = {
   flexDirection: "column",
 };
 
-const UserApplyJobModal = ({ modalOpen, modalClose, jobId, updatedJobs }) => {
-  const userId = localStorage.getItem("token");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const data = new FormData(e.currentTarget);
-      let formData = {
-        jobId,
-        userId,
-        cv: data.get("cv"),
-        location: data.get("location"),
-        contact: data.get("contact"),
-      };
+const UserViewSingleModal = ({ modalOpen, modalClose, fetchMyData }) => {
+  const token = localStorage.getItem("token");
+  const [banner, setBanner] = useState("");
+  const [file, setFile] = useState();
 
-      const response = await apiImage.post("user/jobs/apply", formData);
-      console.log(formData, "inside .post");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData();
+
+      formData.append("title", banner);
+      formData.append("image", file);
+
+      const response = await axios.post(
+        "http://localhost:3000/api/admin/banner",
+        formData,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(formData);
       console.log(response, "re");
-      updatedJobs();
-      toast.success("Successfully Approved Application");
+      fetchMyData();
+      setImage(null);
+      toast.success("Successfully created a banner!");
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
+
+  const imagePreview = (e) => {
+    console.log(e.target.files);
+    setFile(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <Box>
       <Modal
@@ -107,20 +125,12 @@ const UserApplyJobModal = ({ modalOpen, modalClose, jobId, updatedJobs }) => {
           <Box sx={style}>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
               <TextField
-                type=""
-                margin="normal"
-                fullWidth
-                label="Your Location"
-                name="location"
+                variant="outlined"
+                type="text"
+                label="Banner Title"
+                color="info"
+                onChange={(e) => setBanner(e.target.value)}
               />
-              <TextField
-                type="number"
-                margin="normal"
-                fullWidth
-                label="Your Contact Number"
-                name="contact"
-              />
-
               <Box
                 sx={{
                   width: "100%",
@@ -140,7 +150,7 @@ const UserApplyJobModal = ({ modalOpen, modalClose, jobId, updatedJobs }) => {
                     borderBottom: "2px solid #333",
                   }}
                 >
-                  Upload CV:
+                  Upload Image:
                 </label>
                 <input
                   style={{
@@ -150,20 +160,21 @@ const UserApplyJobModal = ({ modalOpen, modalClose, jobId, updatedJobs }) => {
                     fontFamily: "monospace",
                   }}
                   type="file"
-                  accept="file/*"
-                  name="cv"
+                  accept="image/*"
+                  onChange={imagePreview}
                 />
               </Box>
-
               <Button
                 color="success"
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3 }}
+                variant="outlined"
+                sx={{
+                  mt: 2,
+                  "&:hover": { bgcolor: "#bfd7c0", color: "green" },
+                }}
                 onClick={modalClose}
+                type="submit"
               >
-                Apply for Job
+                Add
               </Button>
             </form>
           </Box>
@@ -173,4 +184,4 @@ const UserApplyJobModal = ({ modalOpen, modalClose, jobId, updatedJobs }) => {
   );
 };
 
-export default UserApplyJobModal;
+export default UserViewSingleModal;

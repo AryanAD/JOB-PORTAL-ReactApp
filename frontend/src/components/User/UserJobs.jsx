@@ -27,6 +27,7 @@ import {
 import { useEffect, useState } from "react";
 import UserApplyJobModal from "./UserApplyJobModal";
 import { apiText } from "../../global/API";
+import UserViewSingleModal from "./UserViewSingleModal";
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -52,6 +53,7 @@ const CustomToolTip = styled(({ className, ...props }) => (
 
 const UserJobs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [singleModalOpen, setSingleModalOpen] = useState(false);
   const [jobData, setJobData] = useState([]);
 
   const fetchData = async () => {
@@ -74,6 +76,14 @@ const UserJobs = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const viewModalOpen = (jobId) => {
+    setSingleModalOpen(true);
+  };
+
+  const viewModalClose = () => {
+    setSingleModalOpen(false);
   };
   return (
     <>
@@ -274,32 +284,39 @@ const UserJobs = () => {
                         gap: 2,
                       }}
                     >
-                      <CustomToolTip title="View" placement="left">
-                        <IconButton
-                          sx={{
-                            "&:hover": { bgcolor: "#1976d2", color: "white" },
-                          }}
-                          color="primary"
-                        >
+                      <IconButton
+                        onClick={() => viewModalOpen(data._id)}
+                        sx={{
+                          "&:hover": { bgcolor: "#1976d2", color: "white" },
+                        }}
+                        color="primary"
+                      >
+                        <CustomToolTip title="View" placement="left">
                           <OpenInNewRounded />
-                        </IconButton>
-                      </CustomToolTip>
-                      <CustomToolTip title="Apply" placement="right">
-                        <IconButton
-                          onClick={handleOpenModal}
-                          sx={{
-                            "&:hover": { bgcolor: "#2e7d32", color: "white" },
-                          }}
-                          color="success"
-                        >
+                        </CustomToolTip>
+                      </IconButton>
+                      <UserViewSingleModal
+                        modalOpen={singleModalOpen}
+                        modalClose={viewModalClose}
+                        updatedJobs={fetchData}
+                      />
+                      <IconButton
+                        onClick={handleOpenModal}
+                        sx={{
+                          "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                        }}
+                        color="success"
+                      >
+                        <CustomToolTip title="Apply" placement="right">
                           <AddRounded />
-                        </IconButton>
-                        <UserApplyJobModal
-                          modalOpen={isModalOpen}
-                          modalClose={handleCloseModal}
-                          jobId={data._id}
-                        />
-                      </CustomToolTip>
+                        </CustomToolTip>
+                      </IconButton>
+                      <UserApplyJobModal
+                        modalOpen={isModalOpen}
+                        modalClose={handleCloseModal}
+                        jobId={data._id}
+                        updatedJobs={fetchData}
+                      />
                     </Box>
                   </Box>
                 </CardContent>

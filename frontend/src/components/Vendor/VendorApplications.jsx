@@ -17,8 +17,9 @@ import {
 } from "@mui/material";
 import { CloseRounded, DoneRounded } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import { apiImage } from "../../global/API";
+import { apiImage, apiText } from "../../global/API";
 import Chip from "@mui/material-next/Chip";
+import { toast } from "react-toastify";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -54,6 +55,43 @@ const VendorApplications = () => {
       console.log(`Error: ${err.message}`);
     }
   };
+
+  const handleAccept = async (applicantId) => {
+    console.log(applicantId, "handleAcceptApplication");
+    try {
+      let applicant = {
+        applicantId,
+        status: "accepted",
+      };
+      const response = await apiText.post("vendor/applicants/action", {
+        applicant,
+      });
+      console.log(response, "re");
+      toast.success("Successfully Approved Application");
+      fetchData();
+    } catch (error) {
+      console.error("API request failed: ", error);
+    }
+  };
+
+  const handleReject = async (applicantId) => {
+    console.log(applicantId, "handleRejectApplication");
+    try {
+      let applicant = {
+        applicantId,
+        status: "rejected",
+      };
+      const response = await apiText.post("vendor/applicants/action", {
+        applicant,
+      });
+      console.log(response, "re");
+      toast.success("Successfully Rejected Application");
+      fetchData();
+    } catch (error) {
+      console.error("API request failed: ", error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -256,6 +294,7 @@ const VendorApplications = () => {
                         >
                           <CustomToolTip title="Approve" placement="left">
                             <IconButton
+                              onClick={() => handleAccept(applicant._id)}
                               sx={{
                                 "&:hover": {
                                   bgcolor: "#2e7d32",
@@ -269,6 +308,7 @@ const VendorApplications = () => {
                           </CustomToolTip>
                           <CustomToolTip title="Reject" placement="right">
                             <IconButton
+                              onClick={() => handleReject(applicant._id)}
                               sx={{
                                 "&:hover": {
                                   bgcolor: "#d74747",
