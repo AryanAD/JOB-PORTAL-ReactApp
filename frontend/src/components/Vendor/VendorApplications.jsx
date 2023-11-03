@@ -59,12 +59,9 @@ const VendorApplications = () => {
   const handleAccept = async (applicantId) => {
     console.log(applicantId, "handleAcceptApplication");
     try {
-      let applicant = {
+      const response = await apiText.post("vendor/applicants/action", {
         applicantId,
         status: "accepted",
-      };
-      const response = await apiText.post("vendor/applicants/action", {
-        applicant,
       });
       console.log(response, "re");
       toast.success("Successfully Approved Application");
@@ -77,12 +74,9 @@ const VendorApplications = () => {
   const handleReject = async (applicantId) => {
     console.log(applicantId, "handleRejectApplication");
     try {
-      let applicant = {
+      const response = await apiText.post("vendor/applicants/action", {
         applicantId,
         status: "rejected",
-      };
-      const response = await apiText.post("vendor/applicants/action", {
-        applicant,
       });
       console.log(response, "re");
       toast.success("Successfully Rejected Application");
