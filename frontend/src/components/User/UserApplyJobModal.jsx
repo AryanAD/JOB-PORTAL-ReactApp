@@ -65,7 +65,7 @@ const style = {
   flexDirection: "column",
 };
 
-const UserJobsModal = ({ modalOpen, modalClose, jobId }) => {
+const UserApplyJobModal = ({ modalOpen, modalClose, jobId }) => {
   const userId = localStorage.getItem("token");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -172,4 +172,4 @@ const UserJobsModal = ({ modalOpen, modalClose, jobId }) => {
   );
 };
 
-export default UserJobsModal;
+export default UserApplyJobModal;

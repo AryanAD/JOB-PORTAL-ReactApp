@@ -25,7 +25,7 @@ import {
   PersonRounded,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import UserJobsModal from "./UserJobsModal";
+import UserApplyJobModal from "./UserApplyJobModal";
 import { apiText } from "../../global/API";
 
 const limitLength = (text, maxLength) => {
@@ -58,7 +58,6 @@ const UserJobs = () => {
     try {
       const response = await apiText.get(`/user/jobs`);
       setJobData(response.data.jobs);
-      // setFilteredData(response.data.vendors);
       console.log(jobData, "job data");
     } catch (err) {
       console.log(`Error: ${err.message}`);
@@ -295,7 +294,7 @@ const UserJobs = () => {
                         >
                           <AddRounded />
                         </IconButton>
-                        <UserJobsModal
+                        <UserApplyJobModal
                           modalOpen={isModalOpen}
                           modalClose={handleCloseModal}
                           jobId={data._id}
