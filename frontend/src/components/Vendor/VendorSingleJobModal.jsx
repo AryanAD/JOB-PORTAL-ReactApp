@@ -146,7 +146,7 @@ const VendorSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
               <Typography sx={{ display: "flex" }}>
                 <CalendarMonthRounded />
-                {singleJob?.deadline.slice(0, 10)}
+                {singleJob?.deadline?.slice(0, 10)}
               </Typography>
             </Box>
           </Box>
