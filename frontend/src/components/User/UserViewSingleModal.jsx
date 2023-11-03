@@ -1,15 +1,20 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
+import { Backdrop, Box, Modal, Typography } from "@mui/material";
+import Divider from "@mui/material-next/Divider";
+
 import { useSpring, animated } from "@react-spring/web";
-import { TextField } from "@mui/material";
+import { apiText } from "../../global/API";
+import { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useCallback } from "react";
+import {
+  AttachMoneyRounded,
+  CalendarMonthRounded,
+  InventoryRounded,
+  LocationOnRounded,
+} from "@mui/icons-material";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -18,6 +23,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     onClick,
     onEnter,
     onExited,
+    // eslint-disable-next-line no-unused-vars
     ownerState,
     ...other
   } = props;
@@ -57,7 +63,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 1400,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "11px",
@@ -65,48 +71,25 @@ const style = {
   display: "flex",
   flexDirection: "column",
 };
-
-const UserViewSingleModal = ({ modalOpen, modalClose, fetchMyData }) => {
-  const token = localStorage.getItem("token");
-  const [banner, setBanner] = useState("");
-  const [file, setFile] = useState();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+const UserViewSingleModal = ({ modalOpen, modalClose, singleJobId }) => {
+  console.log(singleJobId, "modal ID");
+  const [singleJob, setSingleJob] = useState([]);
+  const fetchSingleJob = useCallback(async () => {
     try {
-      const formData = new FormData();
-
-      formData.append("title", banner);
-      formData.append("image", file);
-
-      const response = await axios.post(
-        "http://localhost:3000/api/admin/banner",
-        formData,
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(formData);
-      console.log(response, "re");
-      fetchMyData();
-      toast.success("Successfully created a banner!");
-    } catch (error) {
-      console.error("API request failed: ", error);
+      const res = await apiText.get(`user/jobs/${singleJobId}`);
+      setSingleJob(res.data.jobs);
+      console.log(res.data.jobs, "singleJobModal");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
     }
-  };
+  }, [singleJobId]);
 
-  const imagePreview = (e) => {
-    console.log(e.target.files);
-    setFile(e.target.files[0]);
-  };
+  useEffect(() => {
+    fetchSingleJob(singleJobId);
+  }, [fetchSingleJob, singleJobId]);
 
   return (
-    <Box>
+    <>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -122,64 +105,70 @@ const UserViewSingleModal = ({ modalOpen, modalClose, fetchMyData }) => {
       >
         <Fade in={modalOpen}>
           <Box sx={style}>
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-              <TextField
-                variant="outlined"
-                type="text"
-                label="Banner Title"
-                color="info"
-                onChange={(e) => setBanner(e.target.value)}
-              />
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  mt: 2,
-                  mx: "auto",
-                  gap: 1,
-                }}
-              >
-                <label
-                  style={{
-                    padding: 2,
-                    fontFamily: "monospace",
-                    color: "#555",
-                    borderBottom: "2px solid #333",
-                  }}
-                >
-                  Upload Image:
-                </label>
-                <input
-                  style={{
-                    marginTop: 2,
-                    textDecoration: "none",
-                    color: "gray",
-                    fontFamily: "monospace",
-                  }}
-                  type="file"
-                  accept="image/*"
-                  onChange={imagePreview}
-                />
-              </Box>
-              <Button
-                color="success"
-                variant="outlined"
-                sx={{
-                  mt: 2,
-                  "&:hover": { bgcolor: "#bfd7c0", color: "green" },
-                }}
-                onClick={modalClose}
-                type="submit"
-              >
-                Add
-              </Button>
-            </form>
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                fontWeight: "bold",
+                color: "black",
+              }}
+              variant="h4"
+              component="h1"
+            >
+              {singleJob?.title}
+            </Typography>
+
+            <Divider sx={{ bgcolor: "#1976d2" }} />
+            <Divider sx={{ bgcolor: "#1976d2" }} />
+            <Divider variant="middle" sx={{ bgcolor: "#1976d2" }} />
+
+            <Typography
+              sx={{ mt: 1, display: "flex", flexGrow: 2, color: "black" }}
+              variant="body2"
+              component="body"
+            >
+              {singleJob?.description}
+            </Typography>
+            <Box
+              sx={{
+                mt: 2,
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                border: "1px solid whitesmoke",
+                bgcolor: "whitesmoke",
+                borderRadius: "12px",
+              }}
+            >
+              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+                <LocationOnRounded />
+                {singleJob?.location}
+              </Typography>
+
+              <Divider sx={{ bgcolor: "gray", width: 2 }} />
+
+              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+                <AttachMoneyRounded />
+                {singleJob?.salary}
+              </Typography>
+
+              <Divider sx={{ bgcolor: "gray", width: 2 }} />
+
+              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+                <CalendarMonthRounded />
+                {singleJob?.deadline?.slice(0, 10)}
+              </Typography>
+
+              <Divider sx={{ bgcolor: "gray", width: 2 }} />
+
+              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+                <InventoryRounded />
+                {singleJob?.category?.category}
+              </Typography>
+            </Box>
           </Box>
         </Fade>
       </Modal>
-    </Box>
+    </>
   );
 };
 

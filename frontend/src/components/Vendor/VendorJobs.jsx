@@ -296,7 +296,13 @@ const VendorJobs = () => {
                           />
                         </Box>
                       </Box>
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 2,
+                        }}
+                      >
                         <IconButton
                           sx={{
                             borderRadius: "50%",

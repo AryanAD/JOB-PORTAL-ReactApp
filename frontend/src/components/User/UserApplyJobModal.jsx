@@ -83,7 +83,7 @@ const UserApplyJobModal = ({ modalOpen, modalClose, jobId, updatedJobs }) => {
       console.log(formData, "inside .post");
       console.log(response, "re");
       updatedJobs();
-      toast.success("Successfully Approved Application");
+      toast.success("Successfully Applied Application");
     } catch (error) {
       console.error("API request failed: ", error);
     }

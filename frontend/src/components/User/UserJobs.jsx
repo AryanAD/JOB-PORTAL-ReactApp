@@ -52,10 +52,11 @@ const CustomToolTip = styled(({ className, ...props }) => (
 }));
 
 const UserJobs = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [singleModalOpen, setSingleModalOpen] = useState(false);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
   const [jobData, setJobData] = useState([]);
-  const [jobId, setJobId] = useState([]);
+  const [singleJobId, setSingleJobId] = useState([]);
+  const [applyJobId, setApplyJobId] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -71,22 +72,24 @@ const UserJobs = () => {
     fetchData();
   }, []);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const openApplyModal = (Id) => {
+    setApplyJobId(Id);
+    console.log(applyJobId, "apply job ID");
+    setIsApplyModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const closeApplyModal = () => {
+    setIsApplyModalOpen(false);
   };
 
-  const viewModalOpen = (Id) => {
-    setJobId(Id);
-    console.log(jobId);
-    setSingleModalOpen(true);
+  const openSingleModal = (Id) => {
+    setSingleJobId(Id);
+    console.log(singleJobId, "view job ID");
+    setIsSingleModalOpen(true);
   };
 
-  const viewModalClose = () => {
-    setSingleModalOpen(false);
+  const closeSingleModal = () => {
+    setIsSingleModalOpen(false);
   };
   return (
     <>
@@ -161,7 +164,7 @@ const UserJobs = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            maxWidth: "80vw",
+            maxWidth: "85vw",
             margin: 5,
           }}
           container
@@ -173,16 +176,15 @@ const UserJobs = () => {
                 sx={{
                   height: "100%",
                   display: "flex",
-                  flexGrow: 1,
-                  boxShadow: 1,
-                  border: "1px solid #d8d8d8",
+                  boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                  border: "1px solid whitesmoke",
                   borderRadius: 3,
                 }}
               >
                 <CardContent
                   sx={{
                     gap: 2,
-                    flexGrow: 2,
+                    flexGrow: 1,
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
@@ -219,10 +221,10 @@ const UserJobs = () => {
                       >
                         {data.title}
                       </Typography>
-                      <Divider />
-                      <Divider />
-                      <Divider />
-                      <Box>
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Divider sx={{ bgcolor: "#1976d2" }} />
+                      <Box sx={{ pt: 1 }}>
                         <Typography variant="body2">
                           {limitLength(data.description, 23)}
                         </Typography>
@@ -284,11 +286,10 @@ const UserJobs = () => {
                       sx={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: 2,
                       }}
                     >
                       <IconButton
-                        onClick={() => viewModalOpen(data._id)}
+                        onClick={() => openSingleModal(data._id)}
                         sx={{
                           "&:hover": { bgcolor: "#1976d2", color: "white" },
                         }}
@@ -298,13 +299,8 @@ const UserJobs = () => {
                           <OpenInNewRounded />
                         </CustomToolTip>
                       </IconButton>
-                      <UserViewSingleModal
-                        modalOpen={singleModalOpen}
-                        modalClose={viewModalClose}
-                        updatedJobs={fetchData}
-                      />
                       <IconButton
-                        onClick={handleOpenModal}
+                        onClick={() => openApplyModal(data._id)}
                         sx={{
                           "&:hover": { bgcolor: "#2e7d32", color: "white" },
                         }}
@@ -314,12 +310,6 @@ const UserJobs = () => {
                           <AddRounded />
                         </CustomToolTip>
                       </IconButton>
-                      <UserApplyJobModal
-                        modalOpen={isModalOpen}
-                        modalClose={handleCloseModal}
-                        jobId={data._id}
-                        updatedJobs={fetchData}
-                      />
                     </Box>
                   </Box>
                 </CardContent>
@@ -327,6 +317,19 @@ const UserJobs = () => {
             </Grid>
           ))}
         </Grid>
+
+        <UserViewSingleModal
+          modalOpen={isSingleModalOpen}
+          modalClose={closeSingleModal}
+          updatedJobs={fetchData}
+          singleJobId={singleJobId}
+        />
+        <UserApplyJobModal
+          modalOpen={isApplyModalOpen}
+          modalClose={closeApplyModal}
+          jobId={applyJobId}
+          updatedJobs={fetchData}
+        />
       </Box>
       <Footer />
     </>
