@@ -68,6 +68,7 @@ exports.myApplicants = async (req, res) => {
 
 exports.acceptOrRejectApplicant = async (req, res) => {
   const { applicantId } = req.body;
+  console.log(req.body);
   let applicant;
   if (req.body.status === "accepted") {
     applicant = await appliedJobModel.findByIdAndUpdate(
