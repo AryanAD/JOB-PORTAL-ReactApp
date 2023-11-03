@@ -55,6 +55,7 @@ const UserJobs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [singleModalOpen, setSingleModalOpen] = useState(false);
   const [jobData, setJobData] = useState([]);
+  const [jobId, setJobId] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -78,7 +79,9 @@ const UserJobs = () => {
     setIsModalOpen(false);
   };
 
-  const viewModalOpen = (jobId) => {
+  const viewModalOpen = (Id) => {
+    setJobId(Id);
+    console.log(jobId);
     setSingleModalOpen(true);
   };
 
