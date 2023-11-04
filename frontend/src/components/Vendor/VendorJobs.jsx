@@ -94,7 +94,7 @@ const VendorJobs = () => {
   useEffect(() => {
     fetchData();
     fetchCategory();
-  }, []);
+  }, [fetchCategory, fetchData]);
 
   const openAddModal = () => {
     setIsAddModalOpen(true);

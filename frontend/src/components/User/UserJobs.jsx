@@ -24,7 +24,7 @@ import {
   LocationOnRounded,
   PersonRounded,
 } from "@mui/icons-material";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UserApplyJobModal from "./UserApplyJobModal";
 import { apiText } from "../../global/API";
 import UserViewSingleModal from "./UserViewSingleModal";
@@ -58,19 +58,19 @@ const UserJobs = () => {
   const [singleJobId, setSingleJobId] = useState([]);
   const [applyJobId, setApplyJobId] = useState([]);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
       const response = await apiText.get(`/user/jobs`);
       setJobData(response.data.jobs);
-      console.log(jobData, "job data");
+      console.log(response.data.jobs, "job data");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
-  }, [jobData]);
+  };
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const openApplyModal = (Id) => {
     setApplyJobId(Id);
