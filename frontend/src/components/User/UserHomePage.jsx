@@ -6,23 +6,15 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { Card, AspectRatio, CardContent, Chip } from "@mui/joy";
+import { Card, AspectRatio } from "@mui/joy";
 import { Link } from "react-router-dom";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import VendorImg from "./assets/vendor.png";
 import Banner from "./assets/Advertising.png";
 import Footer from "../../layout/Footer.jsx";
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8];
-
-// const limitLength = (text, maxLength) => {
-// 	const words = text.trim().split(/\s+/);
-// 	if (words.length <= maxLength) {
-// 		return text;
-// 	}
-// 	const truncatedText = words.slice(0, maxLength).join(" ");
-// 	return `${truncatedText}...`;
-// };
+import { useCallback, useEffect, useState } from "react";
+import { apiText } from "../../global/API.jsx";
+import UserSingleCategory from "./UserSingleCategory.jsx";
 
 const goToTop = () => {
   window.scrollTo({
@@ -32,236 +24,277 @@ const goToTop = () => {
 };
 
 const UserHomePage = () => {
+  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
+  const [categoryData, setCategoryData] = useState([]);
+  const [singleJobId, setSingleJobId] = useState();
+
+  const fetchCategory = useCallback(async () => {
+    try {
+      const response = await apiText.get(`admin/category`);
+      setCategoryData(response.data.categories);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCategory();
+  }, [fetchCategory]);
+
+  const openSingleModal = (id) => {
+    setSingleJobId(id);
+    console.log(singleJobId, "view category ID");
+    setIsSingleModalOpen(true);
+  };
+
+  const closeSingleModal = () => {
+    setIsSingleModalOpen(false);
+  };
+
   return (
-    <Box
-      sx={{
-        bgcolor: "#fafafa",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <>
       <Box
         sx={{
-          height: "1040px",
-          width: "1920px",
-          flexGrow: 1,
+          bgcolor: "#fafafa",
           display: "flex",
-          justifyContent: "flex-end",
+          flexDirection: "column",
           alignItems: "center",
-          backgroundImage: `url(${Banner})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          justifyContent: "center",
         }}
       >
-        <Box
-          sx={{
-            height: "400px",
-            width: "1120px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Link to="/user/jobs">
-            <Button
-              fullwidth
-              sx={{
-                "&:hover": { bgcolor: "#277aff", color: "white" },
-                scale: "2",
-              }}
-              size="large"
-              variant="outlined"
-            >
-              Find a Job
-            </Button>
-          </Link>
-        </Box>
         <Box
           sx={{
             height: "1040px",
-            width: "800px",
-          }}
-        ></Box>
-      </Box>
-      <Divider
-        sx={{
-          mt: 4,
-          mb: 8,
-        }}
-        variant="inset"
-        textAlign="left"
-      >
-        <Typography
-          sx={{
-            color: "black",
-            fontFamily: "nunito",
-            letterSpacing: "6px",
-            marginBottom: "5px",
-            fontWeight: "bold",
-            textAlign: "left",
-          }}
-          variant="h4"
-        >
-          Jobs By Catergories
-        </Typography>
-        <Divider variant="middle" />
-        <Divider variant="middle" />
-        <Divider variant="middle" />
-        <Divider variant="middle" />
-      </Divider>
-      <Grid
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          maxWidth: "80vw",
-          margin: 5,
-        }}
-        container
-        spacing={4}
-      >
-        {cards.map((card) => (
-          <Grid item key={card} xs={7} sm={7} md={4}>
-            <Card
-              variant="outlined"
-              orientation="horizontal"
-              sx={{
-                width: 320,
-                "&:hover": {
-                  boxShadow: "md",
-                  borderColor: "neutral.outlinedHoverBorder",
-                },
-              }}
-            >
-              <AspectRatio ratio="1" sx={{ width: 90 }}>
-                <img
-                  src="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90"
-                  srcSet="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90&dpr=2 2x"
-                  loading="lazy"
-                  alt=""
-                />
-              </AspectRatio>
-              <CardContent>
-                <Typography level="title-lg" id="card-description">
-                  Yosemite Park
-                </Typography>
-                <Typography
-                  level="body-sm"
-                  aria-describedby="card-description"
-                  mb={1}
-                ></Typography>
-                <Chip
-                  variant="outlined"
-                  color="primary"
-                  size="sm"
-                  sx={{ pointerEvents: "none" }}
-                >
-                  Cool weather all day long
-                </Chip>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-      <Link to="/user/jobs">
-        <Button
-          sx={{
-            mt: 10,
-            scale: "2",
-            bgcolor: "#7ed957",
-            "&:hover": { bgcolor: "#00bf63" },
-          }}
-          size="small"
-          variant="contained"
-        >
-          More Jobs
-        </Button>
-      </Link>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          mt: 10,
-          width: "1920px",
-          height: "620px",
-          backgroundImage: `url(${VendorImg})`,
-        }}
-      >
-        <Box sx={{ width: "900px", height: "620px" }} />
-        <Box
-          sx={{
-            height: "500px",
+            width: "1920px",
+            flexGrow: 1,
             display: "flex",
-            flexDirection: "column",
+            justifyContent: "flex-end",
             alignItems: "center",
-            justifyContent: "space-around",
+            backgroundImage: `url(${Banner})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         >
-          <Box sx={{ display: "flex" }}>
-            <Typography
-              sx={{
-                color: "orangered",
-                fontFamily: "nunito",
-                letterSpacing: "6px",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-              variant="h1"
-            >
-              Need a Freelancer?
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex" }}>
-            <Typography
-              variant="h4"
-              sx={{
-                color: "black",
-                fontFamily: "nunito",
-                letterSpacing: "6px",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Become a Vendor Today!
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Link to="/user/new-vendor">
+          <Box
+            sx={{
+              height: "400px",
+              width: "1120px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Link to="/user/jobs">
               <Button
-                sx={{ fontSize: 28 }}
-                color="secondary"
-                variant="contained"
+                fullwidth
+                sx={{
+                  "&:hover": { bgcolor: "#277aff", color: "white" },
+                  scale: "2",
+                }}
+                size="large"
+                variant="outlined"
               >
-                Apply for Vendor
+                Find a Job
               </Button>
             </Link>
           </Box>
+          <Box
+            sx={{
+              height: "1040px",
+              width: "800px",
+            }}
+          ></Box>
         </Box>
-      </Box>
-      <Link to="#" onClick={goToTop}>
-        <IconButton
+        <Divider
           sx={{
-            width: 40,
-            height: 40,
-            right: 30,
-            bottom: 30,
-            position: "fixed",
-            zIndex: 1000,
-            bgcolor: "transparent",
+            mt: 4,
+            mb: 8,
           }}
+          variant="inset"
+          textAlign="left"
         >
-          <ArrowUpwardRoundedIcon
+          <Typography
             sx={{
               color: "black",
+              fontFamily: "nunito",
+              letterSpacing: "6px",
+              marginBottom: "5px",
+              fontWeight: "bold",
+              textAlign: "left",
             }}
-          />
-        </IconButton>
-      </Link>
-      <Footer />
-    </Box>
+            variant="h4"
+          >
+            Jobs By Catergories
+          </Typography>
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+        </Divider>
+        <Grid
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            maxWidth: "80vw",
+            margin: 5,
+          }}
+          container
+          spacing={4}
+        >
+          {categoryData?.map((category, i) => (
+            <Grid item key={i} xs={7} sm={7} md={2}>
+              <Card
+                variant="soft"
+                orientation="vertical"
+                sx={{
+                  maxWidth: 225,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  "&:hover": {
+                    bgcolor: "#7DB5E7",
+                    boxShadow: "md",
+                    borderColor: "neutral.outlinedHoverBorder",
+                  },
+                }}
+              >
+                <AspectRatio
+                  ratio="1"
+                  sx={{ width: 90, border: "1px solid #7DB5E7" }}
+                >
+                  <img
+                    src={category?.image}
+                    loading="lazy"
+                    alt={category.category}
+                  />
+                </AspectRatio>
+                <Button
+                  variant="text"
+                  size="small"
+                  fullWidth
+                  sx={{
+                    fontFamily: "monospace",
+                  }}
+                  onClick={() => openSingleModal(category._id)}
+                >
+                  <Typography
+                    variant="h5"
+                    component="h1"
+                    color="gray"
+                    fontFamily="monospace"
+                    sx={{ "&:hover": { color: "white" } }}
+                  >
+                    {category.category}
+                  </Typography>
+                </Button>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+        <Link to="/user/jobs">
+          <Button
+            sx={{
+              mt: 10,
+              scale: "2",
+              bgcolor: "#7ed957",
+              "&:hover": { bgcolor: "#00bf63" },
+            }}
+            size="small"
+            variant="contained"
+          >
+            More Jobs
+          </Button>
+        </Link>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mt: 10,
+            width: "1920px",
+            height: "620px",
+            backgroundImage: `url(${VendorImg})`,
+          }}
+        >
+          <Box sx={{ width: "900px", height: "620px" }} />
+          <Box
+            sx={{
+              height: "500px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+          >
+            <Box sx={{ display: "flex" }}>
+              <Typography
+                sx={{
+                  color: "orangered",
+                  fontFamily: "nunito",
+                  letterSpacing: "6px",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+                variant="h1"
+              >
+                Need a Freelancer?
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex" }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: "black",
+                  fontFamily: "nunito",
+                  letterSpacing: "6px",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Become a Vendor Today!
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Link to="/user/new-vendor">
+                <Button
+                  sx={{ fontSize: 28 }}
+                  color="secondary"
+                  variant="contained"
+                >
+                  Apply for Vendor
+                </Button>
+              </Link>
+            </Box>
+          </Box>
+        </Box>
+        <Link to="#" onClick={goToTop}>
+          <IconButton
+            sx={{
+              width: 40,
+              height: 40,
+              right: 30,
+              bottom: 30,
+              position: "fixed",
+              zIndex: 1000,
+              bgcolor: "transparent",
+            }}
+          >
+            <ArrowUpwardRoundedIcon
+              sx={{
+                color: "black",
+              }}
+            />
+          </IconButton>
+        </Link>
+        <Footer />
+      </Box>
+      <UserSingleCategory
+        modalOpen={isSingleModalOpen}
+        modalClose={closeSingleModal}
+        id={singleJobId}
+      />
+    </>
   );
 };
 
