@@ -1,22 +1,17 @@
 import {
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
   Divider,
   Grid,
   IconButton,
-  Rating,
   Typography,
 } from "@mui/material";
+import { Card, AspectRatio, CardContent, Chip } from "@mui/joy";
 import { Link } from "react-router-dom";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
-import UserFooter from "./UserFooter";
 import VendorImg from "./assets/vendor.png";
 import Banner from "./assets/Advertising.png";
-import { StarRounded } from "@mui/icons-material";
+import Footer from "../../layout/Footer.jsx";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -29,19 +24,6 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8];
 // 	return `${truncatedText}...`;
 // };
 
-const labels = {
-  0.5: "Useless",
-  1: "Useless+",
-  1.5: "Poor",
-  2: "Poor+",
-  2.5: "Ok",
-  3: "Ok+",
-  3.5: "Good",
-  4: "Good+",
-  4.5: "Excellent",
-  5: "Excellent+",
-};
-
 const goToTop = () => {
   window.scrollTo({
     top: 0,
@@ -50,7 +32,6 @@ const goToTop = () => {
 };
 
 const UserHomePage = () => {
-  const value = 3.5;
   return (
     <Box
       sx={{
@@ -145,105 +126,41 @@ const UserHomePage = () => {
         {cards.map((card) => (
           <Grid item key={card} xs={7} sm={7} md={4}>
             <Card
+              variant="outlined"
+              orientation="horizontal"
               sx={{
-                height: "100%",
-                maxWidth: "24vw",
-                display: "flex",
-                bgcolor: "#e9e9e9",
-                boxShadow: 24,
-                border: "1px solid #d8d8d8",
-                borderRadius: 3,
+                width: 320,
+                "&:hover": {
+                  boxShadow: "md",
+                  borderColor: "neutral.outlinedHoverBorder",
+                },
               }}
             >
-              <CardContent
-                sx={{
-                  gap: 2,
-                  flexGrow: 1,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Box>
-                  <CardMedia
-                    gutterBottom
-                    sx={{
-                      // 16:9
-                      width: "90px",
-                      height: "90px",
-                      border: "4px inset #277aff",
-                      borderRadius: "13px",
-                    }}
-                    image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    height: "100%",
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "space-between",
-                  }}
+              <AspectRatio ratio="1" sx={{ width: 90 }}>
+                <img
+                  src="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90"
+                  srcSet="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90&dpr=2 2x"
+                  loading="lazy"
+                  alt=""
+                />
+              </AspectRatio>
+              <CardContent>
+                <Typography level="title-lg" id="card-description">
+                  Yosemite Park
+                </Typography>
+                <Typography
+                  level="body-sm"
+                  aria-describedby="card-description"
+                  mb={1}
+                ></Typography>
+                <Chip
+                  variant="outlined"
+                  color="primary"
+                  size="sm"
+                  sx={{ pointerEvents: "none" }}
                 >
-                  <Typography
-                    gutterBottom={false}
-                    variant="h4"
-                    sx={{
-                      mb: 0,
-                      pb: 0,
-                      fontWeight: "bolder",
-                      color: "#444",
-                      fontFamily: "monospace",
-                    }}
-                    component="h2"
-                  >
-                    Job Name
-                  </Typography>
-                  <Box
-                    sx={{
-                      width: 200,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Rating
-                      name="text-feedback"
-                      value={value}
-                      readOnly
-                      precision={0.5}
-                      emptyIcon={
-                        <StarRounded
-                          style={{ opacity: 0.55 }}
-                          fontSize="inherit"
-                        />
-                      }
-                    />
-                    <Box sx={{ ml: 2 }}>{labels[value]}</Box>
-                  </Box>
-                  <CardActions>
-                    <Link
-                      style={{
-                        width: "100%",
-                      }}
-                      to="/user/jobs"
-                    >
-                      <Button
-                        sx={{
-                          my: 0.5,
-                          color: "black",
-                          "&:hover": { bgcolor: "#277aff", color: "white" },
-                        }}
-                        fullWidth
-                        variant="outlined"
-                        size="medium"
-                      >
-                        More Info
-                      </Button>
-                    </Link>
-                  </CardActions>
-                </Box>
+                  Cool weather all day long
+                </Chip>
               </CardContent>
             </Card>
           </Grid>
@@ -343,7 +260,7 @@ const UserHomePage = () => {
           />
         </IconButton>
       </Link>
-      <UserFooter />
+      <Footer />
     </Box>
   );
 };
