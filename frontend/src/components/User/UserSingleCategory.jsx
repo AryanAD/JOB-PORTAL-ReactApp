@@ -47,7 +47,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1400,
+  width: "auto",
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "11px",
@@ -57,14 +57,15 @@ const style = {
 };
 const UserSingleCategory = ({ modalOpen, modalClose, id }) => {
   console.log(id, "modal ID");
-  const [singleCategory, setSingleCategory] = useState([]);
+  const [singleCategory, setSingleCategory] = useState({});
   const fetchSingleCategory = useCallback(async () => {
-    try {
-      const res = await apiText.get(`user/jobs/category/${id}`);
-      setSingleCategory(res.data.jobs);
-      console.log(res.data.jobs, "SingleCategoryModal");
-    } catch (err) {
-      console.log(`Error: ${err.message}`);
+    if (id !== undefined) {
+      try {
+        const res = await apiText.get(`user/jobs/category/${id}`);
+        setSingleCategory(res.data.jobs);
+      } catch (err) {
+        console.log(`Error: ${err.message}`);
+      }
     }
   }, [id]);
 
@@ -90,20 +91,27 @@ const UserSingleCategory = ({ modalOpen, modalClose, id }) => {
       >
         <Fade in={modalOpen}>
           <Box sx={style}>
-            {singleCategory?.map((data, i) => {
-              <Box key={i}>
-                <img src={data.category.image} alt={data.category.category} />
-
-                <Typography
-                  sx={{ mt: 2 }}
-                  variant="h5"
-                  component="h1"
-                  color="gray"
-                >
-                  {data.category.category}
-                </Typography>
-              </Box>;
-            })}
+            <Box>
+              <img
+                style={{
+                  display: "block",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  width: "500px",
+                  height: "500px",
+                }}
+                src={singleCategory[0]?.category.image}
+                alt={singleCategory[0]?.category.category}
+              />
+              <Typography
+                sx={{ mt: 2 }}
+                variant="h5"
+                component="h1"
+                color="gray"
+              >
+                {singleCategory[0]?.category.category}
+              </Typography>
+            </Box>
           </Box>
         </Fade>
       </Modal>

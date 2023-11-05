@@ -146,7 +146,7 @@ const UserHomePage = () => {
           {categoryData?.map((category, i) => (
             <Grid item key={i} xs={7} sm={7} md={2}>
               <Card
-                variant="soft"
+                variant="outlined"
                 orientation="vertical"
                 sx={{
                   maxWidth: 225,
@@ -167,7 +167,7 @@ const UserHomePage = () => {
                   <img
                     src={category?.image}
                     loading="lazy"
-                    alt={category.category}
+                    alt={category?.category}
                   />
                 </AspectRatio>
                 <Button
@@ -177,7 +177,7 @@ const UserHomePage = () => {
                   sx={{
                     fontFamily: "monospace",
                   }}
-                  onClick={() => openSingleModal(category._id)}
+                  onClick={() => openSingleModal(category?._id)}
                 >
                   <Typography
                     variant="h5"
@@ -186,7 +186,7 @@ const UserHomePage = () => {
                     fontFamily="monospace"
                     sx={{ "&:hover": { color: "white" } }}
                   >
-                    {category.category}
+                    {category?.category}
                   </Typography>
                 </Button>
               </Card>
