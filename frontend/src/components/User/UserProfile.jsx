@@ -11,8 +11,47 @@ import {
 } from "@mui/material";
 import { SaveRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { apiImage } from "../../global/API";
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
+  const [profileData, setProfileData] = useState([]);
+  // const [updateProfileData, setUpdateProfileData] = useState([]);
+
+  const fetchProfileData = useCallback(async () => {
+    try {
+      let res = await apiImage.get("user/profile");
+      setProfileData(res.data.user);
+      console.log(res.data.user);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  }, []);
+
+  const handleUpdate = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        const data = new FormData(e.currentTarget);
+        let formData = { image: "", user: data.get("user") };
+        let res = await apiImage.patch("user/profile", formData);
+        console.log(formData, "vendormodal");
+        console.log(res, "response");
+        fetchProfileData();
+        toast.success("Successfully created a job!");
+      } catch (err) {
+        console.log(`API request Error: ${err.message}`);
+      }
+    },
+    [fetchProfileData]
+  );
+
+  useEffect(() => {
+    fetchProfileData();
+    handleUpdate();
+  }, [fetchProfileData, handleUpdate]);
+
   return (
     <>
       <Box
@@ -60,8 +99,8 @@ const UserProfile = () => {
               }}
             >
               <Avatar
-                alt="Angus Young"
-                src="https://i.discogs.com/SITk5YC38UEY6SIcDrveDUW4kOcbKk1tk15ZjnI7fK0/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTI3MzU0/NC0xNjExOTYyNzEx/LTg3NjguanBlZw.jpeg"
+                alt={profileData.name}
+                src={profileData.image}
                 sx={{ width: 190, height: 190, border: "2px solid #333" }}
               />
               <Typography
@@ -72,7 +111,7 @@ const UserProfile = () => {
                 }}
                 variant="h4"
               >
-                Angus Young
+                {profileData.name}
               </Typography>
             </Box>
             <Box
@@ -183,11 +222,10 @@ const UserProfile = () => {
                     mt: 2,
                     mx: 3,
                     mb: 1,
-                    width: "55vw",
                   }}
                 >
                   <Typography sx={{ fontFamily: "monospace" }} variant="h3">
-                    My Profile
+                    Edit Profile
                   </Typography>
                   <Link to="/user">
                     <Button
@@ -223,7 +261,6 @@ const UserProfile = () => {
                 />
                 <Box
                   sx={{
-                    width: "55vw",
                     display: "flex",
                     justifyContent: "space-between",
                     mt: 4,
@@ -252,7 +289,7 @@ const UserProfile = () => {
                         boxShadow: 3,
                       }}
                       variant="outlined"
-                      value="Angus Young"
+                      value={profileData.name}
                     ></TextField>
                   </Box>
                   <Box
@@ -276,72 +313,20 @@ const UserProfile = () => {
                         boxShadow: 3,
                       }}
                       variant="outlined"
-                      value="acangusdcyoung@gmail.com"
+                      value={profileData.email}
                     ></TextField>
                   </Box>
                 </Box>
                 <Box
                   sx={{
-                    width: "55vw",
                     display: "flex",
                     justifyContent: "space-between",
                     mt: 4,
                     mx: 3,
                   }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      width: "25vw",
-                    }}
-                  >
-                    <label
-                      style={{
-                        padding: 2,
-                        fontFamily: "monospace",
-                        color: "#555",
-                      }}
-                    >
-                      Password:
-                    </label>
-                    <TextField
-                      sx={{
-                        boxShadow: 3,
-                      }}
-                      variant="outlined"
-                      value="AC/DC@angusy0un6"
-                    ></TextField>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      width: "25vw",
-                    }}
-                  >
-                    <label
-                      style={{
-                        padding: 2,
-                        fontFamily: "monospace",
-                        color: "#555",
-                      }}
-                    >
-                      Confirm Password:
-                    </label>
-                    <TextField
-                      sx={{
-                        boxShadow: 3,
-                      }}
-                      variant="outlined"
-                      value="AC/DC@angusy0un6"
-                    ></TextField>
-                  </Box>
-                </Box>
-
+                ></Box>
                 <Box
                   sx={{
-                    width: "55vw",
                     display: "flex",
                     justifyContent: "space-between",
                     flexDirection: "column",
@@ -366,11 +351,10 @@ const UserProfile = () => {
                     accept="image/*"
                   />
                 </Box>
-
                 <Box
                   sx={{
                     mt: 10,
-                    width: "55vw",
+
                     display: "flex",
                     flexGrow: 1,
                     justifyContent: "space-around",
@@ -383,7 +367,7 @@ const UserProfile = () => {
                       fullWidth
                       sx={{
                         bgcolor: "#06e406",
-                        color: "#000",
+                        color: "#333",
                         "&:hover": {
                           bgcolor: "#1cc21c",
                         },
@@ -393,6 +377,8 @@ const UserProfile = () => {
                     </Button>
                   </Box>
                 </Box>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                veniam excepturi eligendi?
               </Box>
             </Box>
           </Box>
