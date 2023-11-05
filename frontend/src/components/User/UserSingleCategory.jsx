@@ -7,6 +7,7 @@ import { useSpring, animated } from "@react-spring/web";
 import { apiText } from "../../global/API";
 import { useEffect } from "react";
 import { useCallback } from "react";
+import { useState } from "react";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { children, in: open, onClick, onEnter, onExited, ...other } = props;
@@ -56,12 +57,12 @@ const style = {
 };
 const UserSingleCategory = ({ modalOpen, modalClose, id }) => {
   console.log(id, "modal ID");
-  const [singleCategory, setSingleCategory] = React.useState([]);
+  const [singleCategory, setSingleCategory] = useState([]);
   const fetchSingleCategory = useCallback(async () => {
     try {
       const res = await apiText.get(`user/jobs/category/${id}`);
-      setSingleCategory(res);
-      //   console.log(res, "SingleCategoryModal");
+      setSingleCategory(res.data.jobs);
+      console.log(res.data.jobs, "SingleCategoryModal");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
@@ -89,7 +90,20 @@ const UserSingleCategory = ({ modalOpen, modalClose, id }) => {
       >
         <Fade in={modalOpen}>
           <Box sx={style}>
-            <Typography>Hello World</Typography>
+            {singleCategory?.map((data, i) => {
+              <Box key={i}>
+                <img src={data.category.image} alt={data.category.category} />
+
+                <Typography
+                  sx={{ mt: 2 }}
+                  variant="h5"
+                  component="h1"
+                  color="gray"
+                >
+                  {data.category.category}
+                </Typography>
+              </Box>;
+            })}
           </Box>
         </Fade>
       </Modal>
