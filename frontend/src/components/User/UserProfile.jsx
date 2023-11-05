@@ -66,11 +66,10 @@ const UserProfile = () => {
       >
         <Box
           sx={{
+            margin: 2,
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "80vw",
-            height: "100vh",
+            width: "80%",
+            height: "100%",
           }}
         >
           {/* left */}
@@ -80,7 +79,7 @@ const UserProfile = () => {
               flexDirection: "column",
               alignItems: "center",
               width: "20vw",
-              height: "100vh",
+              height: "100%",
               gap: 4,
               padding: 4,
             }}
@@ -93,9 +92,9 @@ const UserProfile = () => {
                 justifyContent: "space-around",
                 borderRadius: "11px",
                 width: "18vw",
-                height: "36vh",
-                boxShadow: "9",
-                pt: 4,
+                height: "40vh",
+                boxShadow: "11",
+                pt: 2,
               }}
             >
               <Avatar
@@ -116,80 +115,145 @@ const UserProfile = () => {
             </Box>
             <Box
               sx={{
-                // boxShadow: "9",
                 display: "flex",
-                borderRadius: "11px",
+                flexDirection: "column",
                 width: "18vw",
-                height: "56vh",
+                height: "50vh",
                 margin: 0,
                 padding: 0,
+                borderRadius: "11px",
+                boxShadow: "11",
               }}
             >
-              <List
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-around",
-                }}
-              >
-                <ListItem>
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "#000",
-                      width: "100%",
-                    }}
-                    to="/user/jobs"
-                  >
-                    <ListItemButton
-                      sx={{
-                        bgcolor: "#1CC21C",
-                        boxShadow: 10,
-                        borderRadius: "8px",
-                        justifyContent: "center",
-                        fontFamily: "monospace",
-                        fontSize: "16px",
-                        py: 2,
-                        "&:hover": {
-                          bgcolor: "#06E406",
-                        },
-                      }}
-                    >
-                      Apply For Job
-                    </ListItemButton>
-                  </Link>
-                </ListItem>
+              <Box sx={{ pt: 3 }}>
+                <Divider>
+                  <Divider>
+                    <Divider>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          fontFamily: "monospace",
+                          fontWeight: "bolder",
+                          color: "#555",
+                        }}
+                      >
+                        Profile Actions
+                      </Typography>
+                    </Divider>
+                  </Divider>
+                </Divider>
 
-                <ListItem>
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      width: "100%",
-                    }}
-                    to="/user/new-vendor"
-                  >
-                    <ListItemButton
-                      sx={{
-                        bgcolor: "#7250CE",
-                        boxShadow: 10,
-                        color: "white",
-                        borderRadius: "8px",
-                        justifyContent: "center",
-                        fontFamily: "monospace",
-                        fontSize: "16px",
-                        py: 2,
-                        "&:hover": {
-                          bgcolor: "#7e5ed4",
-                        },
+                <List>
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
                       }}
+                      to="/user/jobs"
                     >
-                      Apply For Vendor
-                    </ListItemButton>
-                  </Link>
-                </ListItem>
-              </List>
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Edit Profile
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
+                      }}
+                      to="/user/new-vendor"
+                    >
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Applied Jobs
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+                </List>
+              </Box>
+
+              <Box sx={{ pt: 3 }}>
+                <Divider>
+                  <Divider>
+                    <Divider>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          fontFamily: "monospace",
+                          fontWeight: "bolder",
+                          color: "#555",
+                        }}
+                      >
+                        Quick Links
+                      </Typography>
+                    </Divider>
+                  </Divider>
+                </Divider>
+
+                <List>
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
+                      }}
+                      to="/user/jobs"
+                    >
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Apply For Job
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
+                      }}
+                      to="/user/new-vendor"
+                    >
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Apply For Vendor
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+                </List>
+              </Box>
             </Box>
           </Box>
           {/* right */}
