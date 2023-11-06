@@ -2,14 +2,17 @@ import {
   Avatar,
   Box,
   Button,
+  Card,
+  CardContent,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemButton,
   TextField,
   Typography,
 } from "@mui/material";
-import { SaveRounded } from "@mui/icons-material";
+import { HomeRounded, SaveRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { apiImage } from "../../global/API";
@@ -190,7 +193,7 @@ const UserProfile = () => {
                 </List>
               </Box>
 
-              <Box sx={{ pt: 3 }}>
+              <Box sx={{ pt: 5 }}>
                 <Divider>
                   <Divider>
                     <Divider>
@@ -261,7 +264,7 @@ const UserProfile = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              // alignItems: "center",
               width: "60vw",
               height: "100vh",
             }}
@@ -271,21 +274,28 @@ const UserProfile = () => {
                 display: "flex",
                 margin: 5,
                 borderRadius: "11px",
-                width: "58vw",
-                boxShadow: "9",
+                width: "57vw",
+                padding: 2,
+                boxShadow: 9,
                 height: "100vh",
+                bgcolor: "yellow",
               }}
             >
-              <Box>
+              <Box
+                sx={{
+                  width: "100%",
+                }}
+              >
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    alignItems: "space-between",
+                    alignItems: "center",
                     mt: 2,
                     mx: 3,
                     mb: 1,
+                    flexGrow: 2,
                   }}
                 >
                   <Typography sx={{ fontFamily: "monospace" }} variant="h3">
@@ -294,7 +304,6 @@ const UserProfile = () => {
                   <Link to="/user">
                     <Button
                       sx={{
-                        height: "35px",
                         "&:hover": {
                           bgcolor: "#1976D2",
                           color: "white",
@@ -302,119 +311,63 @@ const UserProfile = () => {
                       }}
                       variant="outlined"
                       size="large"
+                      startIcon={<HomeRounded />}
                     >
-                      Back
+                      Home
                     </Button>
                   </Link>
                 </Box>
-                <Divider
-                  variant="inset"
-                  sx={{ bgcolor: "#1976D2", width: "920px" }}
-                />
-                <Divider
-                  variant="inset"
-                  sx={{ bgcolor: "#1976D2", width: "920px" }}
-                />
-                <Divider
-                  variant="inset"
-                  sx={{ bgcolor: "#1976D2", width: "920px" }}
-                />
-                <Divider
-                  variant="inset"
-                  sx={{ bgcolor: "#1976D2", width: "920px" }}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mt: 4,
-                    mx: 3,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      width: "25vw",
-                    }}
-                  >
-                    <label
-                      style={{
-                        padding: 2,
-                        fontFamily: "monospace",
-                        color: "#555",
-                      }}
-                    >
-                      Full Name:
-                    </label>
-
-                    <TextField
-                      sx={{
-                        boxShadow: 3,
-                      }}
-                      variant="outlined"
-                      value={profileData.name}
-                    ></TextField>
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
+                <Grid container spacing={4}>
+                  <Box sx={{ width: "100%", py: 3, px: 6 }}>
+                    <Grid item xs={5}>
+                      <Card sx={{ maxWidth: 400, maxHeight: 100 }}>
+                        <CardContent>
+                          <input
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              outline: "none",
+                              border: "none",
+                              fontSize: "22px",
+                              fontFamily: "monospace",
+                            }}
+                            type="text"
+                            placeholder={profileData.name}
+                          />
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Card sx={{ maxWidth: 400, maxHeight: 100 }}>
+                        <CardContent>
+                          <input
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              outline: "none",
+                              border: "none",
+                              fontSize: "22px",
+                              fontFamily: "monospace",
+                            }}
+                            type="text"
+                            placeholder={profileData.name}
+                          />
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <input
+                        style={{ paddingTop: 10 }}
+                        type="file"
+                        accept="image/*"
+                      />
+                    </Grid>
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      width: "25vw",
-                    }}
-                  >
-                    <label
-                      style={{
-                        padding: 2,
-                        fontFamily: "monospace",
-                        color: "#555",
-                      }}
-                    >
-                      Email:
-                    </label>
-                    <TextField
-                      sx={{
-                        boxShadow: 3,
-                      }}
-                      variant="outlined"
-                      value={profileData.email}
-                    ></TextField>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mt: 4,
-                    mx: 3,
-                  }}
-                ></Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    flexDirection: "column",
-                    mt: 4,
-                    mx: 50,
-                  }}
-                >
-                  <label
-                    style={{
-                      padding: 2,
-                      fontFamily: "monospace",
-                      color: "#555",
-                      width: "190px",
-                      borderBottom: "2px solid #333",
-                    }}
-                  >
-                    Update Profile Picture:
-                  </label>
-                  <input
-                    style={{ paddingTop: 10 }}
-                    type="file"
-                    accept="image/*"
-                  />
-                </Box>
+                </Grid>
                 <Box
                   sx={{
                     mt: 10,
