@@ -18,6 +18,8 @@ import UserHomePage from "./components/User/UserHomePage";
 import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import UserSingleJob from "./components/User/UserSingleJob";
 import AdminHomepage from "./components/Admin/AdminHomepage";
+import ProfileDetails from "./components/User/ProfileDetails";
+import AppliedJobs from "./components/User/AppliedJobs";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -86,6 +88,22 @@ function App() {
           <Route
             path="/user/profile"
             element={<UserNavBar anotherItem={<UserProfile />} />}
+          />
+          <Route
+            path="/user/profile/edit-profile"
+            element={
+              <UserNavBar
+                anotherItem={<UserProfile childItem={<ProfileDetails />} />}
+              />
+            }
+          />
+          <Route
+            path="/user/profile/applied-jobs"
+            element={
+              <UserNavBar
+                anotherItem={<UserProfile childItem={<AppliedJobs />} />}
+              />
+            }
           />
           <Route
             path="/user/new-vendor"

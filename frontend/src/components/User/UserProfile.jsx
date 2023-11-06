@@ -1,24 +1,19 @@
+/* eslint-disable react/prop-types */
 import {
   Avatar,
   Box,
-  Button,
-  Card,
-  CardContent,
   Divider,
-  Grid,
   List,
   ListItem,
   ListItemButton,
-  TextField,
   Typography,
 } from "@mui/material";
-import { HomeRounded, SaveRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { apiImage } from "../../global/API";
 import { toast } from "react-toastify";
 
-const UserProfile = () => {
+const UserProfile = ({ childItem }) => {
   const [profileData, setProfileData] = useState([]);
   // const [updateProfileData, setUpdateProfileData] = useState([]);
 
@@ -156,7 +151,7 @@ const UserProfile = () => {
                         color: "#000",
                         width: "100%",
                       }}
-                      to="/user/jobs"
+                      to="/user/profile/edit-profile"
                     >
                       <ListItemButton
                         sx={{
@@ -164,6 +159,7 @@ const UserProfile = () => {
                           fontSize: "18px",
                           py: 2,
                         }}
+                        // onClick={() => {}}
                       >
                         Edit Profile
                       </ListItemButton>
@@ -177,7 +173,7 @@ const UserProfile = () => {
                         color: "#000",
                         width: "100%",
                       }}
-                      to="/user/new-vendor"
+                      to="/user/profile/applied-jobs"
                     >
                       <ListItemButton
                         sx={{
@@ -278,125 +274,9 @@ const UserProfile = () => {
                 padding: 2,
                 boxShadow: 9,
                 height: "100vh",
-                bgcolor: "yellow",
               }}
             >
-              <Box
-                sx={{
-                  width: "100%",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    mt: 2,
-                    mx: 3,
-                    mb: 1,
-                    flexGrow: 2,
-                  }}
-                >
-                  <Typography sx={{ fontFamily: "monospace" }} variant="h3">
-                    Edit Profile
-                  </Typography>
-                  <Link to="/user">
-                    <Button
-                      sx={{
-                        "&:hover": {
-                          bgcolor: "#1976D2",
-                          color: "white",
-                        },
-                      }}
-                      variant="outlined"
-                      size="large"
-                      startIcon={<HomeRounded />}
-                    >
-                      Home
-                    </Button>
-                  </Link>
-                </Box>
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Divider variant="inset" sx={{ bgcolor: "#1976D2" }} />
-                <Grid container spacing={4}>
-                  <Box sx={{ width: "100%", py: 3, px: 6 }}>
-                    <Grid item xs={5}>
-                      <Card sx={{ maxWidth: 400, maxHeight: 100 }}>
-                        <CardContent>
-                          <input
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              outline: "none",
-                              border: "none",
-                              fontSize: "22px",
-                              fontFamily: "monospace",
-                            }}
-                            type="text"
-                            placeholder={profileData.name}
-                          />
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <Card sx={{ maxWidth: 400, maxHeight: 100 }}>
-                        <CardContent>
-                          <input
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              outline: "none",
-                              border: "none",
-                              fontSize: "22px",
-                              fontFamily: "monospace",
-                            }}
-                            type="text"
-                            placeholder={profileData.name}
-                          />
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <input
-                        style={{ paddingTop: 10 }}
-                        type="file"
-                        accept="image/*"
-                      />
-                    </Grid>
-                  </Box>
-                </Grid>
-                <Box
-                  sx={{
-                    mt: 10,
-
-                    display: "flex",
-                    flexGrow: 1,
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Box>
-                    <Button
-                      startIcon={<SaveRounded />}
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        bgcolor: "#06e406",
-                        color: "#333",
-                        "&:hover": {
-                          bgcolor: "#1cc21c",
-                        },
-                      }}
-                    >
-                      Save Changes
-                    </Button>
-                  </Box>
-                </Box>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                veniam excepturi eligendi?
-              </Box>
+              {childItem}
             </Box>
           </Box>
         </Box>
