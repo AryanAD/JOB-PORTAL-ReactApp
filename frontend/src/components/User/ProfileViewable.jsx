@@ -1,5 +1,6 @@
 import { HomeRounded } from "@mui/icons-material";
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -57,13 +58,40 @@ const ProfileViewable = () => {
         <Box
           sx={{
             width: "100%",
-            py: 3,
+            py: 5,
             px: 6,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Grid container spacing={4}>
-            <Grid item xs={5} md={10}>
-              <Card sx={{ maxWidth: 400 }}>
+          <Avatar
+            variant="rounded"
+            src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
+            sx={{
+              width: 200,
+              height: 200,
+              border: "2px solid gray",
+              mb: 3,
+            }}
+          />
+          <Typography variant="body2" color={"gray"} fontFamily={"monospace"}>
+            Status:
+          </Typography>
+          <Chip
+            size="medium"
+            color="success"
+            sx={{
+              fontFamily: "monospace",
+              letterSpacing: 4,
+              fontSize: 20,
+              width: 100,
+            }}
+            label="User"
+          />
+          <Grid sx={{ mt: 4 }} container spacing={3}>
+            <Grid item sm={6}>
+              <Card>
                 <CardContent>
                   <Typography
                     variant="body2"
@@ -74,6 +102,7 @@ const ProfileViewable = () => {
                   </Typography>
                   <Typography
                     variant="h5"
+                    maxWidth={200}
                     sx={{
                       fontFamily: "monospace",
                       fontSize: "22px",
@@ -85,8 +114,9 @@ const ProfileViewable = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={5} md={10}>
-              <Card sx={{ maxWidth: 400, maxHeight: 100 }}>
+
+            <Grid item sm={6}>
+              <Card>
                 <CardContent>
                   <Typography
                     variant="body2"
@@ -107,28 +137,6 @@ const ProfileViewable = () => {
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
-            <Grid item xs={4} md={6}>
-              <CardContent>
-                <Typography
-                  variant="body2"
-                  color={"gray"}
-                  fontFamily={"monospace"}
-                >
-                  Status:
-                </Typography>
-                <Chip
-                  color="success"
-                  variant="elevated"
-                  label="user"
-                  size="medium"
-                  sx={{
-                    fontSize: "18px",
-                    fontFamily: "monospace",
-                    letterSpacing: 2,
-                  }}
-                />
-              </CardContent>
             </Grid>
           </Grid>
         </Box>
