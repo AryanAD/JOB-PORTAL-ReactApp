@@ -11,7 +11,7 @@ import {
 import Chip from "@mui/material-next/Chip";
 import { Link } from "react-router-dom";
 
-const ProfileDetails = () => {
+const ProfileEditable = () => {
   return (
     <Box
       sx={{
@@ -31,7 +31,7 @@ const ProfileDetails = () => {
         }}
       >
         <Typography sx={{ fontFamily: "monospace" }} variant="h3">
-          Profile Details
+          Edit Profile
         </Typography>
         <Link to="/user">
           <Button
@@ -135,4 +135,4 @@ const ProfileDetails = () => {
   );
 };
 
-export default ProfileDetails;
+export default ProfileEditable;
