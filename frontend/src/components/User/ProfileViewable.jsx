@@ -10,9 +10,26 @@ import {
   Typography,
 } from "@mui/material";
 import Chip from "@mui/material-next/Chip";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiText } from "../../global/API";
 
 const ProfileViewable = () => {
+  const [profileData, setProfileData] = useState([]);
+
+  const fetchProfileData = useCallback(async () => {
+    try {
+      let res = await apiText.get("user/profile");
+      setProfileData(res.data.user);
+      console.log(res.data.user, "inside Profile");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProfileData();
+  }, [fetchProfileData]);
   return (
     <>
       <Box
@@ -67,7 +84,8 @@ const ProfileViewable = () => {
         >
           <Avatar
             variant="rounded"
-            src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
+            alt={profileData?.name}
+            src={profileData?.image}
             sx={{
               width: 200,
               height: 200,
@@ -87,7 +105,7 @@ const ProfileViewable = () => {
               fontSize: 20,
               width: 100,
             }}
-            label="User"
+            label={profileData?.role}
           />
           <Grid sx={{ mt: 4 }} container spacing={3}>
             <Grid item sm={6}>
@@ -109,7 +127,7 @@ const ProfileViewable = () => {
                       letterSpacing: 2,
                     }}
                   >
-                    USERNAME
+                    {profileData?.name}
                   </Typography>
                 </CardContent>
               </Card>
@@ -133,7 +151,7 @@ const ProfileViewable = () => {
                       letterSpacing: 2,
                     }}
                   >
-                    USER@EMAIL.COM
+                    {profileData?.email}
                   </Typography>
                 </CardContent>
               </Card>
