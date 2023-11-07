@@ -4,15 +4,58 @@ import {
   Box,
   Button,
   Card,
-  CardContent,
   Divider,
   Grid,
   Typography,
 } from "@mui/material";
 import Chip from "@mui/material-next/Chip";
 import { Link } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { apiImage } from "../../global/API";
+import { toast } from "react-toastify";
 
 const ProfileEditable = () => {
+  const [image, setImage] = useState();
+  const [fileData, setFileData] = useState();
+  const [profileData, setProfileData] = useState([]);
+
+  const fetchProfileData = useCallback(async () => {
+    try {
+      let res = await apiImage.get("user/profile");
+      setProfileData(res.data.user);
+      console.log(res.data.user, "inside Profile");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProfileData();
+  }, [fetchProfileData]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = new FormData(e.target.value);
+      let formData = {
+        fileData,
+        userId: data.get(profileData._id),
+      };
+      const res = await apiImage.patch(`user/profile`, formData);
+      console.log(res);
+      toast.success("Successfully Updated Profile!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const imagePreview = (e) => {
+    console.log(e.target.files);
+    setFileData(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <>
       <Box
@@ -87,58 +130,107 @@ const ProfileEditable = () => {
               fontSize: 20,
               width: 100,
             }}
-            label="User"
+            label={profileData.role}
           />
-          <Grid sx={{ mt: 4 }} container spacing={3}>
-            <Grid item sm={6}>
-              <Card>
-                <CardContent>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <Grid sx={{ mt: 4 }} container spacing={3}>
+              <Grid item sm={6}>
+                <Card>
+                  {/* <CardContent> */}
                   <Typography
                     variant="body2"
                     color={"gray"}
                     fontFamily={"monospace"}
+                    sx={{
+                      margin: "16px auto 0 16px",
+                    }}
                   >
                     Full Name:
                   </Typography>
-                  <Typography
-                    variant="h5"
-                    maxWidth={200}
-                    sx={{
+                  <input
+                    type="text"
+                    placeholder={profileData.name}
+                    style={{
                       fontFamily: "monospace",
                       fontSize: "22px",
                       letterSpacing: 2,
+                      width: "100%",
+                      height: "100%",
+                      padding: "5px 10px 24px 16px",
+                      border: "none",
+                      outline: "none",
                     }}
-                  >
-                    USERNAME
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+                  />
+                  {/* </CardContent> */}
+                </Card>
+              </Grid>
 
-            <Grid item sm={6}>
-              <Card>
-                <CardContent>
+              <Grid item sm={6}>
+                <Card>
+                  {/* <CardContent> */}
                   <Typography
                     variant="body2"
                     color={"gray"}
                     fontFamily={"monospace"}
+                    sx={{
+                      margin: "16px auto 0 16px",
+                    }}
                   >
                     Email:
                   </Typography>
-                  <Typography
-                    variant="h5"
-                    sx={{
+                  <input
+                    placeholder={profileData.email}
+                    type="email"
+                    style={{
                       fontFamily: "monospace",
                       fontSize: "22px",
                       letterSpacing: 2,
+                      width: "100%",
+                      height: "100%",
+                      padding: "5px 10px 24px 16px",
+                      border: "none",
+                      outline: "none",
                     }}
-                  >
-                    USER@EMAIL.COM
-                  </Typography>
-                </CardContent>
-              </Card>
+                  />
+                  {/* </CardContent> */}
+                </Card>
+              </Grid>
+              <Grid item sm={12}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexGrow: 2,
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                    pt: 5,
+                    pb: 2,
+                  }}
+                >
+                  {/* <CardContent> */}
+
+                  <input type="file" accept="image/*" onChange={imagePreview} />
+                  {!image ? null : (
+                    <Avatar
+                      variant="rounded"
+                      sx={{ width: 80, height: 80, mt: 4 }}
+                      src={image}
+                    />
+                  )}
+                  {/* </CardContent> */}
+                </Box>
+              </Grid>
+              <Grid
+                sx={{ display: "flex", justifyContent: "center" }}
+                item
+                sm={12}
+              >
+                <Button type="submit" color="success" variant="contained">
+                  Save Change
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          </form>
         </Box>
       </Box>
     </>
