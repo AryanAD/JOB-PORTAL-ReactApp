@@ -113,7 +113,7 @@ const ProfileEditable = () => {
         >
           <Avatar
             variant="circular"
-            src={profileData.image}
+            src={profileData?.image}
             sx={{
               width: 200,
               height: 200,
@@ -133,7 +133,7 @@ const ProfileEditable = () => {
               fontSize: 20,
               width: 100,
             }}
-            label={profileData.role}
+            label={profileData?.role}
           />
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             <Grid sx={{ mt: 4 }} container spacing={3}>
@@ -151,7 +151,7 @@ const ProfileEditable = () => {
                   </Typography>
                   <input
                     type="text"
-                    placeholder={profileData.name}
+                    placeholder={profileData?.name}
                     style={{
                       fontFamily: "monospace",
                       fontSize: "22px",
@@ -180,7 +180,7 @@ const ProfileEditable = () => {
                     Email:
                   </Typography>
                   <input
-                    placeholder={profileData.email}
+                    placeholder={profileData?.email}
                     type="email"
                     style={{
                       fontFamily: "monospace",

@@ -239,7 +239,6 @@ const UserProfile = ({ childItem }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              // alignItems: "center",
               width: "60vw",
               height: "100vh",
             }}

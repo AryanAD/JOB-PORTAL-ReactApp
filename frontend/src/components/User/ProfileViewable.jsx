@@ -83,7 +83,7 @@ const ProfileViewable = () => {
           }}
         >
           <Avatar
-            variant="rounded"
+            variant="circular"
             alt={profileData?.name}
             src={profileData?.image}
             sx={{
