@@ -1,4 +1,3 @@
-import { RiArrowGoBackFill } from "react-icons/ri";
 import {
   Avatar,
   Box,
@@ -13,11 +12,15 @@ import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { apiImage } from "../../global/API";
 import { toast } from "react-toastify";
+import { IoSave } from "react-icons/io5";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const ProfileEditable = () => {
   const [image, setImage] = useState();
   const [fileData, setFileData] = useState();
   const [profileData, setProfileData] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const fetchProfileData = useCallback(async () => {
     try {
@@ -37,11 +40,10 @@ const ProfileEditable = () => {
     e.preventDefault();
 
     try {
-      const data = new FormData(e.target.value);
-      let formData = {
-        fileData,
-        userId: data.get(profileData._id),
-      };
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("image", fileData);
       const res = await apiImage.patch(`user/profile`, formData);
       console.log(res);
       toast.success("Successfully Updated Profile!");
@@ -136,7 +138,6 @@ const ProfileEditable = () => {
             <Grid sx={{ mt: 4 }} container spacing={3}>
               <Grid item sm={6}>
                 <Card>
-                  {/* <CardContent> */}
                   <Typography
                     variant="body2"
                     color={"gray"}
@@ -160,14 +161,13 @@ const ProfileEditable = () => {
                       border: "none",
                       outline: "none",
                     }}
+                    onChange={(e) => setName(e.target.value)}
                   />
-                  {/* </CardContent> */}
                 </Card>
               </Grid>
 
               <Grid item sm={6}>
                 <Card>
-                  {/* <CardContent> */}
                   <Typography
                     variant="body2"
                     color={"gray"}
@@ -191,8 +191,8 @@ const ProfileEditable = () => {
                       border: "none",
                       outline: "none",
                     }}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  {/* </CardContent> */}
                 </Card>
               </Grid>
               <Grid item sm={12}>
@@ -207,8 +207,6 @@ const ProfileEditable = () => {
                     pb: 2,
                   }}
                 >
-                  {/* <CardContent> */}
-
                   <input type="file" accept="image/*" onChange={imagePreview} />
                   {!image ? null : (
                     <Avatar
@@ -217,7 +215,6 @@ const ProfileEditable = () => {
                       src={image}
                     />
                   )}
-                  {/* </CardContent> */}
                 </Box>
               </Grid>
               <Grid
@@ -225,8 +222,13 @@ const ProfileEditable = () => {
                 item
                 sm={12}
               >
-                <Button type="submit" color="success" variant="contained">
-                  Save Change
+                <Button
+                  type="submit"
+                  color="success"
+                  variant="contained"
+                  startIcon={<IoSave />}
+                >
+                  Save Changes
                 </Button>
               </Grid>
             </Grid>
