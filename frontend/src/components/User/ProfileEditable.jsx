@@ -46,6 +46,7 @@ const ProfileEditable = () => {
       formData.append("image", fileData);
       const res = await apiImage.patch(`user/profile`, formData);
       console.log(res);
+      fetchProfileData();
       toast.success("Successfully Updated Profile!");
     } catch (error) {
       console.error(error);
@@ -111,8 +112,8 @@ const ProfileEditable = () => {
           }}
         >
           <Avatar
-            variant="rounded"
-            src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
+            variant="circular"
+            src={profileData.image}
             sx={{
               width: 200,
               height: 200,

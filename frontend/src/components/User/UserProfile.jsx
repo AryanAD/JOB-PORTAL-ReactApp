@@ -11,11 +11,9 @@ import {
 import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { apiImage } from "../../global/API";
-import { toast } from "react-toastify";
 
 const UserProfile = ({ childItem }) => {
   const [profileData, setProfileData] = useState([]);
-  // const [updateProfileData, setUpdateProfileData] = useState([]);
 
   const fetchProfileData = useCallback(async () => {
     try {
@@ -27,28 +25,9 @@ const UserProfile = ({ childItem }) => {
     }
   }, []);
 
-  const handleUpdate = useCallback(
-    async (e) => {
-      e.preventDefault();
-      try {
-        const data = new FormData(e.currentTarget);
-        let formData = { image: "", user: data.get("user") };
-        let res = await apiImage.patch("user/profile", formData);
-        console.log(formData, "vendormodal");
-        console.log(res, "response");
-        fetchProfileData();
-        toast.success("Successfully created a job!");
-      } catch (err) {
-        console.log(`API request Error: ${err.message}`);
-      }
-    },
-    [fetchProfileData]
-  );
-
   useEffect(() => {
     fetchProfileData();
-    handleUpdate();
-  }, [fetchProfileData, handleUpdate]);
+  }, [fetchProfileData]);
 
   return (
     <>
