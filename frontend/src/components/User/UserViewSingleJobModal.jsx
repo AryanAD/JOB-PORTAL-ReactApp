@@ -6,9 +6,7 @@ import Divider from "@mui/material-next/Divider";
 
 import { useSpring, animated } from "@react-spring/web";
 import { apiText } from "../../global/API";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   AttachMoneyRounded,
   CalendarMonthRounded,
@@ -17,16 +15,7 @@ import {
 } from "@mui/icons-material";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
-  const {
-    children,
-    in: open,
-    onClick,
-    onEnter,
-    onExited,
-    // eslint-disable-next-line no-unused-vars
-    ownerState,
-    ...other
-  } = props;
+  const { children, in: open, onClick, onEnter, onExited, ...other } = props;
   const style = useSpring({
     from: { opacity: 0 },
     to: { opacity: open ? 1 : 0 },
@@ -71,6 +60,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
 };
+
 const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
   console.log(singleJobId, "modal ID");
   const [singleJob, setSingleJob] = useState([]);
