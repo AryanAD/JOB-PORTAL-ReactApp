@@ -26,7 +26,7 @@ const AppliedJobs = () => {
           sx={{ maxWidth: "100%", bgcolor: "yellowgreen" }}
         >
           <CardContent>
-            <Typography>{jobsData[0]?.jobId.title}</Typography>
+            <Typography>aaa{jobsData[0]?.jobId.title}</Typography>
           </CardContent>
         </Box>
       </Box>
