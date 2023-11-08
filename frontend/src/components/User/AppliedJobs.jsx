@@ -2,7 +2,9 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { apiText } from "../../global/API";
 import Chip from "@mui/material-next/Chip";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot, FaDollarSign } from "react-icons/fa6";
+import { BsFillPersonFill } from "react-icons/bs";
+import { BiCalendar } from "react-icons/bi";
 
 const AppliedJobs = () => {
   const [jobsData, setJobsData] = useState([]);
@@ -37,9 +39,10 @@ const AppliedJobs = () => {
           elevation={false}
           sx={{
             width: "100%",
+            borderRadius: "15px",
             borderLeft: "6px solid #999",
             "&:hover": {
-              borderColor: "orangered",
+              borderColor: "indianred",
             },
           }}
         >
@@ -61,14 +64,30 @@ const AppliedJobs = () => {
               sx={{
                 display: "flex",
                 gap: 2,
-                width: "90%",
+                width: "75%",
                 justifyContent: "space-around",
               }}
             >
-              <Chip icon={<FaLocationDot />} />
-              <Chip icon={<FaLocationDot />} />
-              <Chip icon={<FaLocationDot />} />
-              <Chip icon={<FaLocationDot />} />
+              <Chip
+                color="info"
+                icon={<FaLocationDot />}
+                label={jobsData[0]?.jobId.location}
+              />
+              <Chip
+                color="success"
+                icon={<FaDollarSign />}
+                label={jobsData[0]?.jobId.salary}
+              />
+              <Chip
+                color="error"
+                icon={<BiCalendar />}
+                label={jobsData[0]?.jobId.deadline.slice(0, 10)}
+              />
+              <Chip
+                color="primary"
+                icon={<BsFillPersonFill />}
+                label={jobsData[0]?.jobId.postedBy.name}
+              />
             </Box>
           </CardContent>
         </Card>
