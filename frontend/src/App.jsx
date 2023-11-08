@@ -21,6 +21,7 @@ import AdminHomepage from "./components/Admin/AdminHomepage";
 import ProfileEditable from "./components/User/ProfileEditable";
 import UserAppliedJobs from "./components/User/UserAppliedJobs";
 import ProfileViewable from "./components/User/ProfileViewable";
+import UserRateVendor from "./components/User/UserRateVendor";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -113,6 +114,10 @@ function App() {
           <Route
             path="/user/new-vendor"
             element={<UserNavBar anotherItem={<UserNewVendor />} />}
+          />
+          <Route
+            path="/user/rate-vendor"
+            element={<UserNavBar anotherItem={<UserRateVendor />} />}
           />
         </>
 

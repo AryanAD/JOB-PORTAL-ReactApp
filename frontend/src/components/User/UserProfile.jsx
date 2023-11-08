@@ -237,7 +237,7 @@ const UserProfile = ({ childItem }) => {
                       color: "#000",
                       width: "100%",
                     }}
-                    to="/user/new-vendor"
+                    to="/user/rate-vendor"
                   >
                     <ListItemButton
                       sx={{
