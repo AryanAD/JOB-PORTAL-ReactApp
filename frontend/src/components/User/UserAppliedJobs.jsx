@@ -14,9 +14,12 @@ import { FaLocationDot, FaDollarSign } from "react-icons/fa6";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
+import UserAppliedJobsModal from "./UserAppliedJobsModal";
 
 const UserAppliedJobs = () => {
   const [jobsData, setJobsData] = useState([]);
+  const [isAppliedJobModalOpen, setIsAppliedJobModalOpen] = useState(false);
+  const [appliedJobId, setAppliedJobId] = useState([]);
 
   const fetchJobsData = useCallback(async () => {
     try {
@@ -31,6 +34,17 @@ const UserAppliedJobs = () => {
   useEffect(() => {
     fetchJobsData();
   }, [fetchJobsData]);
+
+  const openAppliedJobModal = (Id) => {
+    setAppliedJobId(Id);
+    console.log(appliedJobId, "view job ID");
+    setIsAppliedJobModalOpen(true);
+  };
+
+  const closeAppliedJobModal = () => {
+    setIsAppliedJobModalOpen(false);
+  };
+
   return (
     <>
       <Box
@@ -166,6 +180,7 @@ const UserAppliedJobs = () => {
                         color="info"
                         variant="outlined"
                         endIcon={<FaExternalLinkAlt />}
+                        onClick={() => openAppliedJobModal(data._id)}
                       >
                         View
                       </Button>
@@ -177,6 +192,12 @@ const UserAppliedJobs = () => {
           })
         )}
       </Box>
+      <UserAppliedJobsModal
+        modalOpen={isAppliedJobModalOpen}
+        modalClose={closeAppliedJobModal}
+        updatedJobs={fetchJobsData}
+        singleJobId={appliedJobId}
+      />
     </>
   );
 };

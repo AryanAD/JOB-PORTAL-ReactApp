@@ -71,7 +71,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
 };
-const UserViewSingleModal = ({ modalOpen, modalClose, singleJobId }) => {
+const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
   console.log(singleJobId, "modal ID");
   const [singleJob, setSingleJob] = useState([]);
   const fetchSingleJob = useCallback(async () => {
@@ -172,4 +172,4 @@ const UserViewSingleModal = ({ modalOpen, modalClose, singleJobId }) => {
   );
 };
 
-export default UserViewSingleModal;
+export default UserViewSingleJobModal;

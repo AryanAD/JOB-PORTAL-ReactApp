@@ -27,7 +27,7 @@ import {
 import { useEffect, useState } from "react";
 import UserApplyJobModal from "./UserApplyJobModal";
 import { apiText } from "../../global/API";
-import UserViewSingleModal from "./UserViewSingleModal";
+import UserViewSingleJobModal from "./UserViewSingleJobModal";
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -52,10 +52,10 @@ const CustomToolTip = styled(({ className, ...props }) => (
 }));
 
 const UserJobs = () => {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
   const [jobData, setJobData] = useState([]);
+  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
   const [singleJobId, setSingleJobId] = useState([]);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [applyJobId, setApplyJobId] = useState([]);
 
   const fetchData = async () => {
@@ -318,7 +318,7 @@ const UserJobs = () => {
           ))}
         </Grid>
 
-        <UserViewSingleModal
+        <UserViewSingleJobModal
           modalOpen={isSingleModalOpen}
           modalClose={closeSingleModal}
           updatedJobs={fetchData}
