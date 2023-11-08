@@ -2,6 +2,7 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { apiText } from "../../global/API";
 import Chip from "@mui/material-next/Chip";
+import { FaLocationDot } from "react-icons/fa6";
 
 const AppliedJobs = () => {
   const [jobsData, setJobsData] = useState([]);
@@ -54,7 +55,7 @@ const AppliedJobs = () => {
               variant="body2"
               sx={{ fontFamily: "monospace", color: "gray", mb: 2 }}
             >
-              {jobsData[0]?.jobId.title}
+              {jobsData[0]?.jobId.description.slice(0, 455).concat("...")}
             </Typography>
             <Box
               sx={{
@@ -64,10 +65,10 @@ const AppliedJobs = () => {
                 justifyContent: "space-around",
               }}
             >
-              <Chip />
-              <Chip />
-              <Chip />
-              <Chip />
+              <Chip icon={<FaLocationDot />} />
+              <Chip icon={<FaLocationDot />} />
+              <Chip icon={<FaLocationDot />} />
+              <Chip icon={<FaLocationDot />} />
             </Box>
           </CardContent>
         </Card>
