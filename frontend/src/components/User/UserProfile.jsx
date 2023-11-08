@@ -64,45 +64,16 @@ const UserProfile = ({ childItem }) => {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                justifyContent: "space-around",
-                borderRadius: "11px",
-                width: "18vw",
-                height: "40vh",
-                boxShadow: "11",
-                pt: 2,
-              }}
-            >
-              <Avatar
-                alt={profileData.name}
-                src={profileData.image}
-                sx={{ width: 190, height: 190, border: "2px solid #333" }}
-              />
-              <Typography
-                sx={{
-                  fontFamily: "monospace",
-                  fontWeight: "bolder",
-                  color: "#555",
-                }}
-                variant="h4"
-              >
-                {profileData.name}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
                 flexDirection: "column",
                 width: "18vw",
-                height: "50vh",
+                height: "100%",
                 margin: 0,
                 padding: 0,
                 borderRadius: "11px",
                 boxShadow: "11",
               }}
             >
-              <Box sx={{ pt: 3 }}>
+              <Box sx={{ pt: 3, my: "auto", mt: 0 }}>
                 <Divider>
                   <Divider>
                     <Divider>
@@ -165,10 +136,32 @@ const UserProfile = ({ childItem }) => {
                       </ListItemButton>
                     </Link>
                   </ListItem>
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
+                      }}
+                      to="/user/profile/applied-jobs"
+                    >
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Applied Jobs
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
                 </List>
               </Box>
 
-              <Box sx={{ pt: 5 }}>
+              <Divider variant="fullWidth" />
+
+              <Box sx={{ my: "auto" }}>
                 <Divider>
                   <Divider>
                     <Divider>
@@ -227,6 +220,48 @@ const UserProfile = ({ childItem }) => {
                         }}
                       >
                         Apply For Vendor
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
+                      }}
+                      to="/user/new-vendor"
+                    >
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Rate A Vendor
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        width: "100%",
+                      }}
+                      to="/user/new-vendor"
+                    >
+                      <ListItemButton
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "18px",
+                          py: 2,
+                        }}
+                      >
+                        Job Categories
                       </ListItemButton>
                     </Link>
                   </ListItem>
