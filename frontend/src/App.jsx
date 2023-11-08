@@ -19,7 +19,7 @@ import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import UserSingleJob from "./components/User/UserSingleJob";
 import AdminHomepage from "./components/Admin/AdminHomepage";
 import ProfileEditable from "./components/User/ProfileEditable";
-import AppliedJobs from "./components/User/AppliedJobs";
+import UserAppliedJobs from "./components/User/UserAppliedJobs";
 import ProfileViewable from "./components/User/ProfileViewable";
 
 function App() {
@@ -106,7 +106,7 @@ function App() {
             path="/user/profile/applied-jobs"
             element={
               <UserNavBar
-                anotherItem={<UserProfile childItem={<AppliedJobs />} />}
+                anotherItem={<UserProfile childItem={<UserAppliedJobs />} />}
               />
             }
           />

@@ -15,7 +15,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
 
-const AppliedJobs = () => {
+const UserAppliedJobs = () => {
   const [jobsData, setJobsData] = useState([]);
 
   const fetchJobsData = useCallback(async () => {
@@ -65,20 +65,6 @@ const AppliedJobs = () => {
         </Box>
 
         {jobsData.length === 0 ? (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography variant="h3" fontFamily={"monospace"} color={"gray"}>
-              No Data Found
-            </Typography>
-          </Box>
-        ) : jobsData === null ? (
           <Box
             sx={{
               width: "100%",
@@ -195,4 +181,4 @@ const AppliedJobs = () => {
   );
 };
 
-export default AppliedJobs;
+export default UserAppliedJobs;
