@@ -15,6 +15,7 @@ import {
   InventoryRounded,
   LocationOnRounded,
 } from "@mui/icons-material";
+import { BsFillPersonFill } from "react-icons/bs";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -63,7 +64,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1400,
+  width: 1000,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "11px",
@@ -71,22 +72,24 @@ const style = {
   display: "flex",
   flexDirection: "column",
 };
-const UserAppliedJobsModal = ({ modalOpen, modalClose, singleJobId }) => {
-  console.log(singleJobId, "modal ID");
-  const [singleJob, setSingleJob] = useState([]);
-  const fetchSingleJob = useCallback(async () => {
-    try {
-      const res = await apiText.get(`user/jobs/${singleJobId}`);
-      setSingleJob(res.data.jobs);
-      console.log(res.data.jobs, "singleJobModal");
-    } catch (err) {
-      console.log(`Error: ${err.message}`);
+const UserAppliedJobsModal = ({ modalOpen, modalClose, appliedJobId }) => {
+  console.log(appliedJobId, "modal ID");
+  const [appliedJob, setAppliedJob] = useState([]);
+  const fetchAppliedJob = useCallback(async () => {
+    if (appliedJobId !== null) {
+      try {
+        const res = await apiText.get(`user/appliedJobs/${appliedJobId}`);
+        setAppliedJob(res.data.jobs);
+        console.log(res.data.jobs, "appliedJobModal");
+      } catch (err) {
+        console.log(`Error: ${err.message}`);
+      }
     }
-  }, [singleJobId]);
+  }, [appliedJobId]);
 
   useEffect(() => {
-    fetchSingleJob(singleJobId);
-  }, [fetchSingleJob, singleJobId]);
+    fetchAppliedJob(appliedJobId);
+  }, [fetchAppliedJob, appliedJobId]);
 
   return (
     <>
@@ -114,7 +117,7 @@ const UserAppliedJobsModal = ({ modalOpen, modalClose, singleJobId }) => {
               variant="h4"
               component="h1"
             >
-              {singleJob?.title}
+              {appliedJob?.jobId?.title}
             </Typography>
 
             <Divider sx={{ bgcolor: "#1976d2" }} />
@@ -122,11 +125,11 @@ const UserAppliedJobsModal = ({ modalOpen, modalClose, singleJobId }) => {
             <Divider variant="middle" sx={{ bgcolor: "#1976d2" }} />
 
             <Typography
-              sx={{ mt: 1, display: "flex", flexGrow: 2, color: "black" }}
+              sx={{ mt: 2, display: "flex", flexGrow: 2, color: "black" }}
               variant="body2"
               component="body"
             >
-              {singleJob?.description}
+              {appliedJob?.jobId?.description}
             </Typography>
             <Box
               sx={{
@@ -139,30 +142,72 @@ const UserAppliedJobsModal = ({ modalOpen, modalClose, singleJobId }) => {
                 borderRadius: "12px",
               }}
             >
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+              <Typography
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: "black",
+                  gap: "4px",
+                }}
+              >
                 <LocationOnRounded />
-                {singleJob?.location}
+                {appliedJob?.jobId?.location}
               </Typography>
 
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
 
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+              <Typography
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: "black",
+                  gap: "4px",
+                }}
+              >
                 <AttachMoneyRounded />
-                {singleJob?.salary}
+                {appliedJob?.jobId?.salary}
               </Typography>
 
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
 
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+              <Typography
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: "black",
+                  gap: "4px",
+                }}
+              >
                 <CalendarMonthRounded />
-                {singleJob?.deadline?.slice(0, 10)}
+                {appliedJob?.jobId?.deadline?.slice(0, 10)}
               </Typography>
 
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
 
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
+              <Typography
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: "black",
+                  gap: "4px",
+                }}
+              >
                 <InventoryRounded />
-                {singleJob?.category?.category}
+                {appliedJob?.jobId?.category?.category}
+              </Typography>
+
+              <Divider sx={{ bgcolor: "gray", width: 2 }} />
+
+              <Typography
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: "black",
+                  gap: "4px",
+                }}
+              >
+                <BsFillPersonFill />
+                {appliedJob?.jobId?.postedBy?.name}
               </Typography>
             </Box>
           </Box>

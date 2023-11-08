@@ -196,7 +196,7 @@ const UserAppliedJobs = () => {
         modalOpen={isAppliedJobModalOpen}
         modalClose={closeAppliedJobModal}
         updatedJobs={fetchJobsData}
-        singleJobId={appliedJobId}
+        appliedJobId={appliedJobId}
       />
     </>
   );
