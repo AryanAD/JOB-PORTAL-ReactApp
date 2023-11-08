@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import {
-  Avatar,
   Box,
   Divider,
   List,
@@ -9,26 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
-import { apiImage } from "../../global/API";
 
 const UserProfile = ({ childItem }) => {
-  const [profileData, setProfileData] = useState([]);
-
-  const fetchProfileData = useCallback(async () => {
-    try {
-      let res = await apiImage.get("user/profile");
-      setProfileData(res.data.user);
-      console.log(res.data.user);
-    } catch (err) {
-      console.log(`Error: ${err.message}`);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchProfileData();
-  }, [fetchProfileData]);
-
   return (
     <>
       <Box
@@ -67,13 +48,19 @@ const UserProfile = ({ childItem }) => {
                 flexDirection: "column",
                 width: "18vw",
                 height: "100%",
-                margin: 0,
-                padding: 0,
                 borderRadius: "11px",
                 boxShadow: "11",
               }}
             >
-              <Box sx={{ pt: 3, my: "auto", mt: 0 }}>
+              <Box
+                sx={{
+                  pt: 3,
+                  pb: 2,
+                  width: "100%",
+                  bgcolor: "#44a4e0",
+                  borderRadius: "11px 11px 0 0",
+                }}
+              >
                 <Divider>
                   <Divider>
                     <Divider>
@@ -84,7 +71,7 @@ const UserProfile = ({ childItem }) => {
                           justifyContent: "flex-start",
                           fontFamily: "monospace",
                           fontWeight: "bolder",
-                          color: "#555",
+                          color: "white",
                         }}
                       >
                         Profile Actions
@@ -92,76 +79,94 @@ const UserProfile = ({ childItem }) => {
                     </Divider>
                   </Divider>
                 </Divider>
-
-                <List>
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/profile/edit-profile"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                        // onClick={() => {}}
-                      >
-                        Edit Profile
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/profile/applied-jobs"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                      >
-                        Applied Jobs
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/profile/applied-jobs"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                      >
-                        Applied Jobs
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-                </List>
               </Box>
 
-              <Divider variant="fullWidth" />
+              <List>
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/profile"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        py: 2,
+                      }}
+                    >
+                      View Profile
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
 
-              <Box sx={{ my: "auto" }}>
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/profile/edit-profile"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        py: 2,
+                      }}
+                    >
+                      Edit Profile
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/profile/applied-jobs"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        py: 2,
+                        // "&:hover": {},
+                      }}
+                    >
+                      Applied Jobs
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+              </List>
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "18vw",
+                height: "100%",
+                borderRadius: "11px",
+                boxShadow: "11",
+              }}
+            >
+              <Box
+                sx={{
+                  pt: 3,
+                  pb: 2,
+                  width: "100%",
+                  bgcolor: "#44a4e0",
+                  borderRadius: "11px 11px 0 0",
+                }}
+              >
                 <Divider>
                   <Divider>
                     <Divider>
@@ -172,7 +177,7 @@ const UserProfile = ({ childItem }) => {
                           justifyContent: "flex-start",
                           fontFamily: "monospace",
                           fontWeight: "bolder",
-                          color: "#555",
+                          color: "white",
                         }}
                       >
                         Quick Links
@@ -180,95 +185,96 @@ const UserProfile = ({ childItem }) => {
                     </Divider>
                   </Divider>
                 </Divider>
-
-                <List>
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/jobs"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                      >
-                        Apply For Job
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/new-vendor"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                      >
-                        Apply For Vendor
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/new-vendor"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                      >
-                        Rate A Vendor
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "#000",
-                        width: "100%",
-                      }}
-                      to="/user/new-vendor"
-                    >
-                      <ListItemButton
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "18px",
-                          py: 2,
-                        }}
-                      >
-                        Job Categories
-                      </ListItemButton>
-                    </Link>
-                  </ListItem>
-                </List>
               </Box>
+
+              <List>
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/jobs"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        pb: 2,
+                      }}
+                    >
+                      Apply For Job
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/new-vendor"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        py: 2,
+                      }}
+                    >
+                      Apply For Vendor
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/new-vendor"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        py: 2,
+                      }}
+                    >
+                      Rate A Vendor
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      width: "100%",
+                    }}
+                    to="/user/new-vendor"
+                  >
+                    <ListItemButton
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "18px",
+                        py: 2,
+                      }}
+                    >
+                      Job Categories
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+              </List>
             </Box>
           </Box>
+
           {/* right */}
           <Box
             sx={{
@@ -281,11 +287,11 @@ const UserProfile = ({ childItem }) => {
             <Box
               sx={{
                 display: "flex",
-                margin: 5,
+                margin: 4,
                 borderRadius: "11px",
                 width: "57vw",
                 padding: 2,
-                boxShadow: 9,
+                boxShadow: 11,
                 height: "100vh",
               }}
             >
