@@ -347,7 +347,7 @@ const UserJobs = () => {
         <UserRateVendorModal
           modalOpen={isRateModalOpen}
           modalClose={closeRateModal}
-          updatedJobs={fetchData}
+          fetchJobs={fetchData}
           rateModalId={rateModalId}
         />
         <UserApplyJobModal

@@ -1,16 +1,22 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Backdrop, Box, Modal, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  Modal,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Divider from "@mui/material-next/Divider";
 
 import { useSpring, animated } from "@react-spring/web";
-import {
-  AttachMoneyRounded,
-  CalendarMonthRounded,
-  InventoryRounded,
-  LocationOnRounded,
-} from "@mui/icons-material";
+
+import { apiText } from "../../global/API";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { children, in: open, onClick, onEnter, onExited, ...other } = props;
@@ -50,17 +56,42 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1400,
+  width: 400,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "11px",
   p: 4,
-  display: "flex",
-  flexDirection: "column",
 };
 
-const UserRateVendorModal = ({ modalOpen, modalClose, rateModalId }) => {
+const UserRateVendorModal = ({
+  modalOpen,
+  modalClose,
+  rateModalId,
+  fetchJobs,
+}) => {
   console.log(rateModalId, "modal ID");
+
+  const [value, setValue] = useState();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = new FormData(e.currentTarget);
+      let formData = {
+        message: data.get("message"),
+        rating: value,
+      };
+
+      const response = await apiText.post(`user/rate/${rateModalId}`, formData);
+      console.log(formData, "rateUser");
+      console.log(response, "re");
+      fetchJobs();
+      toast.success("Successfully Rated a Vendor!");
+    } catch (error) {
+      console.error("API request failed: ", error);
+    }
+  };
 
   return (
     <>
@@ -79,58 +110,52 @@ const UserRateVendorModal = ({ modalOpen, modalClose, rateModalId }) => {
       >
         <Fade in={modalOpen}>
           <Box sx={style}>
-            <Typography
-              sx={{
-                fontFamily: "monospace",
-                fontWeight: "bold",
-                color: "black",
-              }}
-              variant="h4"
-              component="h1"
-            ></Typography>
-
-            <Divider sx={{ bgcolor: "#1976d2" }} />
-            <Divider sx={{ bgcolor: "#1976d2" }} />
-            <Divider variant="middle" sx={{ bgcolor: "#1976d2" }} />
-
-            <Typography
-              sx={{ mt: 1, display: "flex", flexGrow: 2, color: "black" }}
-              variant="body2"
-              component="body"
-            ></Typography>
-            <Box
-              sx={{
-                mt: 2,
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                border: "1px solid whitesmoke",
-                bgcolor: "whitesmoke",
-                borderRadius: "12px",
-              }}
-            >
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
-                <LocationOnRounded />
-              </Typography>
-
-              <Divider sx={{ bgcolor: "gray", width: 2 }} />
-
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
-                <AttachMoneyRounded />
-              </Typography>
-
-              <Divider sx={{ bgcolor: "gray", width: 2 }} />
-
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
-                <CalendarMonthRounded />
-              </Typography>
-
-              <Divider sx={{ bgcolor: "gray", width: 2 }} />
-
-              <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
-                <InventoryRounded />
-              </Typography>
-            </Box>
+            <form onSubmit={handleSubmit}>
+              <Box></Box>
+              <Divider>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  sx={{
+                    color: "#000",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  Rate Vendor
+                </Typography>
+              </Divider>
+              <TextField
+                sx={{ my: 2 }}
+                fullWidth
+                multiline
+                minRows={4}
+                maxRows={4}
+                label="Message to the Vendor"
+                name="message"
+              />
+              <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+                <Rating
+                  size="large"
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </Box>
+              <Button
+                fullWidth
+                variant="outlined"
+                type="submit"
+                sx={{
+                  "&:hover": {
+                    bgcolor: "#c2d7fe",
+                  },
+                }}
+              >
+                Submit
+              </Button>
+            </form>
           </Box>
         </Fade>
       </Modal>
