@@ -23,11 +23,12 @@ import {
   InventoryRounded,
   LocationOnRounded,
   PersonRounded,
+  StarRounded,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import UserApplyJobModal from "./UserApplyJobModal";
 import { apiText } from "../../global/API";
-import UserViewSingleJobModal from "./UserViewSingleJobModal";
+import UserRateVendorModal from "./UserRateVendorModal";
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -53,8 +54,8 @@ const CustomToolTip = styled(({ className, ...props }) => (
 
 const UserJobs = () => {
   const [jobData, setJobData] = useState([]);
-  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
-  const [singleJobId, setSingleJobId] = useState([]);
+  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
+  const [rateModalId, setRateModalId] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [applyJobId, setApplyJobId] = useState([]);
 
@@ -82,14 +83,14 @@ const UserJobs = () => {
     setIsApplyModalOpen(false);
   };
 
-  const openSingleModal = (Id) => {
-    setSingleJobId(Id);
-    console.log(singleJobId, "view job ID");
-    setIsSingleModalOpen(true);
+  const openRateModal = (Id) => {
+    setRateModalId(Id);
+    console.log(rateModalId, "view job ID");
+    setIsRateModalOpen(true);
   };
 
-  const closeSingleModal = () => {
-    setIsSingleModalOpen(false);
+  const closeRateModal = () => {
+    setIsRateModalOpen(false);
   };
   return (
     <>
@@ -289,13 +290,12 @@ const UserJobs = () => {
                       }}
                     >
                       <IconButton
-                        onClick={() => openSingleModal(data._id)}
                         sx={{
                           "&:hover": { bgcolor: "#1976d2", color: "white" },
                         }}
                         color="primary"
                       >
-                        <CustomToolTip title="View" placement="left">
+                        <CustomToolTip title="View" placement="top">
                           <OpenInNewRounded />
                         </CustomToolTip>
                       </IconButton>
@@ -310,6 +310,17 @@ const UserJobs = () => {
                           <AddRounded />
                         </CustomToolTip>
                       </IconButton>
+                      <IconButton
+                        onClick={() => openRateModal(data._id)}
+                        sx={{
+                          "&:hover": { bgcolor: "#ec7a1c", color: "white" },
+                        }}
+                        color="warning"
+                      >
+                        <CustomToolTip title="Rate" placement="bottom">
+                          <StarRounded />
+                        </CustomToolTip>
+                      </IconButton>
                     </Box>
                   </Box>
                 </CardContent>
@@ -318,11 +329,11 @@ const UserJobs = () => {
           ))}
         </Grid>
 
-        <UserViewSingleJobModal
-          modalOpen={isSingleModalOpen}
-          modalClose={closeSingleModal}
+        <UserRateVendorModal
+          modalOpen={isRateModalOpen}
+          modalClose={closeRateModal}
           updatedJobs={fetchData}
-          singleJobId={singleJobId}
+          rateModalId={rateModalId}
         />
         <UserApplyJobModal
           modalOpen={isApplyModalOpen}

@@ -61,22 +61,8 @@ const style = {
   flexDirection: "column",
 };
 
-const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
-  console.log(singleJobId, "modal ID");
-  const [singleJob, setSingleJob] = useState([]);
-  const fetchSingleJob = useCallback(async () => {
-    try {
-      const res = await apiText.get(`user/jobs/${singleJobId}`);
-      setSingleJob(res.data.jobs);
-      console.log(res.data.jobs, "singleJobModal");
-    } catch (err) {
-      console.log(`Error: ${err.message}`);
-    }
-  }, [singleJobId]);
-
-  useEffect(() => {
-    fetchSingleJob(singleJobId);
-  }, [fetchSingleJob, singleJobId]);
+const UserRateVendorModal = ({ modalOpen, modalClose, rateModalId }) => {
+  console.log(rateModalId, "modal ID");
 
   return (
     <>
@@ -103,9 +89,7 @@ const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
               }}
               variant="h4"
               component="h1"
-            >
-              {singleJob?.title}
-            </Typography>
+            ></Typography>
 
             <Divider sx={{ bgcolor: "#1976d2" }} />
             <Divider sx={{ bgcolor: "#1976d2" }} />
@@ -115,9 +99,7 @@ const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
               sx={{ mt: 1, display: "flex", flexGrow: 2, color: "black" }}
               variant="body2"
               component="body"
-            >
-              {singleJob?.description}
-            </Typography>
+            ></Typography>
             <Box
               sx={{
                 mt: 2,
@@ -131,28 +113,24 @@ const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
             >
               <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
                 <LocationOnRounded />
-                {singleJob?.location}
               </Typography>
 
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
 
               <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
                 <AttachMoneyRounded />
-                {singleJob?.salary}
               </Typography>
 
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
 
               <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
                 <CalendarMonthRounded />
-                {singleJob?.deadline?.slice(0, 10)}
               </Typography>
 
               <Divider sx={{ bgcolor: "gray", width: 2 }} />
 
               <Typography sx={{ display: "flex", color: "black", gap: "4px" }}>
                 <InventoryRounded />
-                {singleJob?.category?.category}
               </Typography>
             </Box>
           </Box>
@@ -162,4 +140,4 @@ const UserViewSingleJobModal = ({ modalOpen, modalClose, singleJobId }) => {
   );
 };
 
-export default UserViewSingleJobModal;
+export default UserRateVendorModal;
