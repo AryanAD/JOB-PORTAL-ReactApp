@@ -17,9 +17,9 @@ import ViewerNavBar from "./components/Viewer/ViewerNavBar";
 import UserHomePage from "./components/User/UserHomePage";
 import ViewerHomePage from "./components/Viewer/ViewerHomePage";
 import AdminHomepage from "./components/Admin/AdminHomepage";
-import ProfileEditable from "./components/User/ProfileEditable";
+import UserProfileEditable from "./components/User/UserProfileEditable";
 import UserAppliedJobs from "./components/User/UserAppliedJobs";
-import ProfileViewable from "./components/User/ProfileViewable";
+import UserProfileViewable from "./components/User/UserProfileViewable";
 import UserRateVendor from "./components/User/UserRateVendor";
 
 function App() {
@@ -86,7 +86,9 @@ function App() {
             path="/user/profile"
             element={
               <UserNavBar
-                anotherItem={<UserProfile childItem={<ProfileViewable />} />}
+                anotherItem={
+                  <UserProfile childItem={<UserProfileViewable />} />
+                }
               />
             }
           />
@@ -94,7 +96,9 @@ function App() {
             path="/user/profile/edit-profile"
             element={
               <UserNavBar
-                anotherItem={<UserProfile childItem={<ProfileEditable />} />}
+                anotherItem={
+                  <UserProfile childItem={<UserProfileEditable />} />
+                }
               />
             }
           />
