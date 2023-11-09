@@ -208,20 +208,40 @@ const UserJobs = () => {
                         alignItems: "space-between",
                       }}
                     >
-                      <Typography
-                        gutterBottom={false}
-                        variant="h4"
+                      <Box
                         sx={{
-                          mb: 0,
-                          pb: 0,
-                          fontWeight: "bolder",
-                          color: "#444",
-                          fontFamily: "monospace",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          width: "100%",
                         }}
-                        component="h2"
                       >
-                        {data.title}
-                      </Typography>
+                        <Typography
+                          gutterBottom={false}
+                          variant="h4"
+                          sx={{
+                            mb: 0,
+                            pb: 0,
+                            fontWeight: "bolder",
+                            color: "#444",
+                            fontFamily: "monospace",
+                          }}
+                          component="h2"
+                        >
+                          {data.title}
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          color={"coral"}
+                          fontWeight={"bolder"}
+                          fontFamily={"tr larabiefont"}
+                          display={"flex"}
+                          alignItems={"center"}
+                          gap={1}
+                        >
+                          <StarRounded /> RATING HERE <StarRounded />
+                        </Typography>
+                      </Box>
                       <Divider sx={{ bgcolor: "#1976d2" }} />
                       <Divider sx={{ bgcolor: "#1976d2" }} />
                       <Divider sx={{ bgcolor: "#1976d2" }} />
