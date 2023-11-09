@@ -6,6 +6,7 @@ import {
   Divider,
   Grid,
   IconButton,
+  Rating,
   Tooltip,
   Typography,
   styled,
@@ -230,17 +231,11 @@ const UserJobs = () => {
                         >
                           {data.title}
                         </Typography>
-                        <Typography
-                          variant="h6"
-                          color={"coral"}
-                          fontWeight={"bolder"}
-                          fontFamily={"tr larabiefont"}
-                          display={"flex"}
-                          alignItems={"center"}
-                          gap={1}
-                        >
-                          <StarRounded /> RATING HERE <StarRounded />
-                        </Typography>
+                        <Rating
+                          name="read-only"
+                          value={console.log(data.postedBy.reviews.rating)}
+                          readOnly
+                        />
                       </Box>
                       <Divider sx={{ bgcolor: "#1976d2" }} />
                       <Divider sx={{ bgcolor: "#1976d2" }} />
