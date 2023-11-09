@@ -5,8 +5,6 @@ import { Backdrop, Box, Modal, Typography } from "@mui/material";
 import Divider from "@mui/material-next/Divider";
 
 import { useSpring, animated } from "@react-spring/web";
-import { apiText } from "../../global/API";
-import { useEffect, useState, useCallback } from "react";
 import {
   AttachMoneyRounded,
   CalendarMonthRounded,
