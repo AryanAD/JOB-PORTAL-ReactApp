@@ -56,7 +56,7 @@ const CustomToolTip = styled(({ className, ...props }) => (
 const UserJobs = () => {
   const [jobData, setJobData] = useState([]);
   const [isRateModalOpen, setIsRateModalOpen] = useState(false);
-  const [rateModalId, setRateModalId] = useState([]);
+  const [rateModalId, setRateModalId] = useState("");
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [applyJobId, setApplyJobId] = useState([]);
 
@@ -326,7 +326,7 @@ const UserJobs = () => {
                         </CustomToolTip>
                       </IconButton>
                       <IconButton
-                        onClick={() => openRateModal(data._id)}
+                        onClick={() => openRateModal(data.postedBy._id)}
                         sx={{
                           "&:hover": { bgcolor: "#ec7a1c", color: "white" },
                         }}
