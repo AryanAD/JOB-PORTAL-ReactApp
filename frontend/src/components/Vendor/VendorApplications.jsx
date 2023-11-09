@@ -208,26 +208,11 @@ const VendorApplications = () => {
               </TableHead>
               <TableBody>
                 {myData.length === 0 ? (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "100%",
-                      height: "20vh",
-                    }}
-                  >
-                    <CircularProgress
-                      color="primary"
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: 80,
-                        height: 80,
-                      }}
-                    />
-                  </Box>
+                  <TableRow>
+                    <TableCell colSpan={6} height={500} align="center">
+                      <CircularProgress color="primary" size={60} />
+                    </TableCell>
+                  </TableRow>
                 ) : myData === null ? (
                   <Box
                     sx={{
