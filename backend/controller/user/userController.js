@@ -240,6 +240,7 @@ exports.rateVendor = async (req, res) => {
     review.author = req.userId;
     review.message = req.body.message;
     review.rating = req.body.rating;
+    console.log(review);
     user.reviews.push(review);
     await review.save();
     await user.save();
