@@ -55,10 +55,11 @@ const CustomToolTip = styled(({ className, ...props }) => (
 
 const UserJobs = () => {
   const [jobData, setJobData] = useState([]);
-  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
   const [rateModalId, setRateModalId] = useState("");
+  const [applyJobId, setApplyJobId] = useState("");
+  const [singleJobId, setSingleJobId] = useState("");
+  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-  const [applyJobId, setApplyJobId] = useState([]);
 
   const fetchData = async () => {
     try {
