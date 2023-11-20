@@ -57,7 +57,6 @@ const UserJobs = () => {
   const [jobData, setJobData] = useState([]);
   const [rateModalId, setRateModalId] = useState("");
   const [applyJobId, setApplyJobId] = useState("");
-  const [singleJobId, setSingleJobId] = useState("");
   const [isRateModalOpen, setIsRateModalOpen] = useState(false);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
 
@@ -74,6 +73,8 @@ const UserJobs = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // console.log(jobData[1].postedBy.reviews[0].rating);
 
   const openApplyModal = (Id) => {
     setApplyJobId(Id);
@@ -173,176 +174,189 @@ const UserJobs = () => {
           container
           spacing={4}
         >
-          {jobData?.map((data, i) => (
-            <Grid item key={i} xs={7} sm={3} md={6}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
-                  border: "1px solid whitesmoke",
-                  borderRadius: 3,
-                }}
-              >
-                <CardContent
+          {jobData?.map((data, i) => {
+            let rating = data.postedBy.reviews.reduce((total, data) => {
+              const avgRating = data.rating;
+              return total.rating + avgRating;
+            });
+            rating = rating / data.postedBy.reviews.length;
+            console.log(rating);
+
+            return (
+              <Grid item key={i} xs={7} sm={3} md={6}>
+                <Card
                   sx={{
-                    gap: 2,
-                    flexGrow: 1,
+                    height: "100%",
                     display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                    border: "1px solid whitesmoke",
+                    borderRadius: 3,
                   }}
                 >
-                  <Box
+                  <CardContent
                     sx={{
-                      display: "flex",
-                      flexGrow: 1,
-                      alignItems: "center",
                       gap: 2,
+                      flexGrow: 1,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
                     <Box
                       sx={{
-                        height: "100%",
-                        width: "100%",
                         display: "flex",
-                        flexDirection: "column",
-                        alignItems: "space-between",
+                        flexGrow: 1,
+                        alignItems: "center",
+                        gap: 2,
                       }}
                     >
                       <Box
                         sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-between",
+                          height: "100%",
                           width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "space-between",
                         }}
                       >
-                        <Typography
-                          gutterBottom={false}
-                          variant="h4"
+                        <Box
                           sx={{
-                            mb: 0,
-                            pb: 0,
-                            fontWeight: "bolder",
-                            color: "#444",
-                            fontFamily: "monospace",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            width: "100%",
                           }}
-                          component="h2"
                         >
-                          {data.title}
-                        </Typography>
-                        <Rating
-                          name="read-only"
-                          value={console.log(data.postedBy.reviews.rating)}
-                          readOnly
-                        />
-                      </Box>
-                      <Divider sx={{ bgcolor: "#1976d2" }} />
-                      <Divider sx={{ bgcolor: "#1976d2" }} />
-                      <Divider sx={{ bgcolor: "#1976d2" }} />
-                      <Box sx={{ pt: 1 }}>
-                        <Typography variant="body2">
-                          {limitLength(data.description, 23)}
-                        </Typography>
-                      </Box>
+                          <Typography
+                            gutterBottom={false}
+                            variant="h4"
+                            sx={{
+                              mb: 0,
+                              pb: 0,
+                              fontWeight: "bolder",
+                              color: "#444",
+                              fontFamily: "monospace",
+                            }}
+                            component="h2"
+                          >
+                            {data.title}
+                          </Typography>
+                          <Rating
+                            key={i}
+                            name="simple-controlled"
+                            value={rating}
+                            readOnly
+                            size="small"
+                          />
+                        </Box>
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Box sx={{ pt: 1 }}>
+                          <Typography variant="body2">
+                            {limitLength(data.description, 23)}
+                          </Typography>
+                        </Box>
 
+                        <Box
+                          sx={{
+                            gap: 2,
+                            pt: 1,
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Chip
+                            icon={<LocationOnRounded />}
+                            color="tertiary"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.location}
+                          />
+                          <Chip
+                            icon={<AttachMoneyRounded />}
+                            color="success"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.salary}
+                          />
+                          <Chip
+                            icon={<CalendarMonthRounded />}
+                            color="error"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.deadline.slice(0, 10)}
+                          />
+                          <Chip
+                            icon={<PersonRounded />}
+                            color="warning"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.postedBy.name}
+                          />
+                          <Chip
+                            icon={<InventoryRounded />}
+                            color="info"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.category.category}
+                          />
+                        </Box>
+                      </Box>
                       <Box
                         sx={{
-                          gap: 2,
-                          pt: 1,
-                          width: "100%",
                           display: "flex",
-                          justifyContent: "space-evenly",
-                          alignItems: "center",
+                          flexDirection: "column",
                         }}
                       >
-                        <Chip
-                          icon={<LocationOnRounded />}
-                          color="tertiary"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label={data.location}
-                        />
-                        <Chip
-                          icon={<AttachMoneyRounded />}
+                        <Link to={`/user/single-job/${data._id}`}>
+                          <IconButton
+                            sx={{
+                              "&:hover": { bgcolor: "#1976d2", color: "white" },
+                            }}
+                            color="primary"
+                          >
+                            <CustomToolTip title="View" placement="top">
+                              <OpenInNewRounded />
+                            </CustomToolTip>
+                          </IconButton>
+                        </Link>
+                        <IconButton
+                          onClick={() => openApplyModal(data._id)}
+                          sx={{
+                            "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                          }}
                           color="success"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label={data.salary}
-                        />
-                        <Chip
-                          icon={<CalendarMonthRounded />}
-                          color="error"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label={data.deadline.slice(0, 10)}
-                        />
-                        <Chip
-                          icon={<PersonRounded />}
+                        >
+                          <CustomToolTip title="Apply" placement="right">
+                            <AddRounded />
+                          </CustomToolTip>
+                        </IconButton>
+                        <IconButton
+                          onClick={() => openRateModal(data.postedBy._id)}
+                          sx={{
+                            "&:hover": { bgcolor: "#ec7a1c", color: "white" },
+                          }}
                           color="warning"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label={data.postedBy.name}
-                        />
-                        <Chip
-                          icon={<InventoryRounded />}
-                          color="info"
-                          disabled={false}
-                          size="small"
-                          variant="filled"
-                          label={data.category.category}
-                        />
+                        >
+                          <CustomToolTip title="Rate" placement="bottom">
+                            <StarRounded />
+                          </CustomToolTip>
+                        </IconButton>
                       </Box>
                     </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <IconButton
-                        sx={{
-                          "&:hover": { bgcolor: "#1976d2", color: "white" },
-                        }}
-                        color="primary"
-                      >
-                        <CustomToolTip title="View" placement="top">
-                          <OpenInNewRounded />
-                        </CustomToolTip>
-                      </IconButton>
-                      <IconButton
-                        onClick={() => openApplyModal(data._id)}
-                        sx={{
-                          "&:hover": { bgcolor: "#2e7d32", color: "white" },
-                        }}
-                        color="success"
-                      >
-                        <CustomToolTip title="Apply" placement="right">
-                          <AddRounded />
-                        </CustomToolTip>
-                      </IconButton>
-                      <IconButton
-                        onClick={() => openRateModal(data.postedBy._id)}
-                        sx={{
-                          "&:hover": { bgcolor: "#ec7a1c", color: "white" },
-                        }}
-                        color="warning"
-                      >
-                        <CustomToolTip title="Rate" placement="bottom">
-                          <StarRounded />
-                        </CustomToolTip>
-                      </IconButton>
-                    </Box>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
 
         <UserRateVendorModal

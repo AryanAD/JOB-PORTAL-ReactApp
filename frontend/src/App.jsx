@@ -115,7 +115,7 @@ function App() {
             element={<UserNavBar anotherItem={<UserNewVendor />} />}
           />
           <Route
-            path="/user/single-job"
+            path="/user/single-job/:id"
             element={<UserNavBar anotherItem={<UserViewSingleJob />} />}
           />
         </>
