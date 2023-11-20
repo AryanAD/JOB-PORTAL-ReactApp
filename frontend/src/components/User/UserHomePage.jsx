@@ -14,7 +14,6 @@ import Banner from "./assets/Advertising.png";
 import Footer from "../../layout/Footer.jsx";
 import { useCallback, useEffect, useState } from "react";
 import { apiText } from "../../global/API.jsx";
-import UserSingleCategory from "./UserSingleCategory.jsx";
 
 const goToTop = () => {
   window.scrollTo({
@@ -24,9 +23,7 @@ const goToTop = () => {
 };
 
 const UserHomePage = () => {
-  const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
   const [categoryData, setCategoryData] = useState([]);
-  const [singleJobId, setSingleJobId] = useState();
 
   const fetchCategory = useCallback(async () => {
     try {
@@ -40,16 +37,6 @@ const UserHomePage = () => {
   useEffect(() => {
     fetchCategory();
   }, [fetchCategory]);
-
-  const openSingleModal = (id) => {
-    setSingleJobId(id);
-    console.log(singleJobId, "view category ID");
-    setIsSingleModalOpen(true);
-  };
-
-  const closeSingleModal = () => {
-    setIsSingleModalOpen(false);
-  };
 
   return (
     <>
@@ -145,41 +132,50 @@ const UserHomePage = () => {
         >
           {categoryData?.map((category, i) => (
             <Grid item key={i} xs={7} sm={7} md={2}>
-              <Card
-                variant="outlined"
-                orientation="vertical"
-                sx={{
-                  maxWidth: 225,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
-                  "&:hover": {
-                    bgcolor: "#7DB5E7",
-                    boxShadow: "md",
-                    borderColor: "neutral.outlinedHoverBorder",
-                  },
+              <Link
+                to={`/user/jobs/category/${category?._id}`}
+                style={{
+                  textDecoration: "none",
                 }}
               >
-                <AspectRatio
-                  ratio="1"
-                  sx={{ width: 90, border: "1px solid #7DB5E7" }}
+                {/* {console.log(category._id)} */}
+                <Card
+                  variant="outlined"
+                  orientation="vertical"
+                  sx={{
+                    maxWidth: 225,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                    "&:hover": {
+                      cursor: "pointer",
+                      bgcolor: "#7DB5E7",
+                      boxShadow: "md",
+                      borderColor: "neutral.outlinedHoverBorder",
+                    },
+                  }}
                 >
-                  <img
-                    src={category?.image}
-                    loading="lazy"
-                    alt={category?.category}
-                  />
-                </AspectRatio>
+                  <AspectRatio
+                    ratio="1"
+                    sx={{ width: 90, border: "1px solid #7DB5E7" }}
+                  >
+                    <img
+                      src={category?.image}
+                      loading="lazy"
+                      alt={category?.category}
+                    />
+                  </AspectRatio>
 
-                <Typography
-                  variant="h5"
-                  component="h1"
-                  color="gray"
-                  fontFamily="monospace"
-                >
-                  {category?.category}
-                </Typography>
-              </Card>
+                  <Typography
+                    variant="h5"
+                    component="h1"
+                    color="gray"
+                    fontFamily="monospace"
+                  >
+                    {category?.category}
+                  </Typography>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>
@@ -279,11 +275,6 @@ const UserHomePage = () => {
         </Link>
         <Footer />
       </Box>
-      <UserSingleCategory
-        modalOpen={isSingleModalOpen}
-        modalClose={closeSingleModal}
-        id={singleJobId}
-      />
     </>
   );
 };

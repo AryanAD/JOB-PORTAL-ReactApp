@@ -1,120 +1,385 @@
-/* eslint-disable react/prop-types */
-import * as React from "react";
-import PropTypes from "prop-types";
-import { Backdrop, Box, Modal, Typography } from "@mui/material";
-
-import { useSpring, animated } from "@react-spring/web";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { apiText } from "../../global/API";
-import { useEffect } from "react";
-import { useCallback } from "react";
-import { useState } from "react";
+import Footer from "../../layout/Footer";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  IconButton,
+  Rating,
+  Tooltip,
+  Typography,
+  styled,
+  tooltipClasses,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import {
+  AddRounded,
+  AttachMoneyRounded,
+  CalendarMonthRounded,
+  HomeRounded,
+  InventoryRounded,
+  LocationOnRounded,
+  OpenInNewRounded,
+  PersonRounded,
+  StarRounded,
+} from "@mui/icons-material";
+import UserRateVendorModal from "./UserRateVendorModal";
+import UserApplyJobModal from "./UserApplyJobModal";
+import Chip from "@mui/material-next/Chip";
 
-const Fade = React.forwardRef(function Fade(props, ref) {
-  const { children, in: open, onClick, onEnter, onExited, ...other } = props;
-  const style = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: open ? 1 : 0 },
-    onStart: () => {
-      if (open && onEnter) {
-        onEnter(null, true);
-      }
-    },
-    onRest: () => {
-      if (!open && onExited) {
-        onExited(null, true);
-      }
-    },
-  });
-
-  return (
-    <animated.div ref={ref} style={style} {...other}>
-      {React.cloneElement(children, { onClick })}
-    </animated.div>
-  );
-});
-
-Fade.propTypes = {
-  children: PropTypes.element.isRequired,
-  in: PropTypes.bool,
-  onClick: PropTypes.any,
-  onEnter: PropTypes.func,
-  onExited: PropTypes.func,
-  ownerState: PropTypes.any,
+const limitLength = (text, maxLength) => {
+  const words = text.split(" ");
+  if (words.length <= maxLength) {
+    return text;
+  }
+  const truncatedText = words.slice(0, maxLength).join(" ");
+  return `${truncatedText}...`;
 };
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "auto",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  borderRadius: "11px",
-  p: 4,
-  display: "flex",
-  flexDirection: "column",
-};
-const UserSingleCategory = ({ modalOpen, modalClose, id }) => {
-  console.log(id, "modal ID");
-  const [singleCategory, setSingleCategory] = useState({});
-  const fetchSingleCategory = useCallback(async () => {
-    if (id !== undefined) {
-      try {
-        const res = await apiText.get(`user/jobs/category/${id}`);
-        setSingleCategory(res.data.jobs);
-      } catch (err) {
-        console.log(`Error: ${err.message}`);
-      }
+const CustomToolTip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "gray",
+    color: "white",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(18),
+    border: "1px solid #dadde9",
+    borderRadius: "7px",
+  },
+}));
+
+const UserSingleCategory = () => {
+  const { id } = useParams();
+  const [rateModalId, setRateModalId] = useState("");
+  const [applyJobId, setApplyJobId] = useState("");
+  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+
+  const [jobsData, setJobsData] = useState([]);
+
+  const fetchJobs = useCallback(async () => {
+    try {
+      const response = await apiText.get(`/user/jobs/category/${id}`);
+      setJobsData(response.data.jobs);
+      console.log(response.data.jobs, "single job Data");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
     }
   }, [id]);
 
   useEffect(() => {
-    fetchSingleCategory(id);
-  }, [fetchSingleCategory, id]);
+    fetchJobs();
+  }, [fetchJobs]);
 
-  console.log(singleCategory);
+  const openApplyModal = (Id) => {
+    setApplyJobId(Id);
+    console.log(applyJobId, "apply job ID");
+    setIsApplyModalOpen(true);
+  };
+
+  const closeApplyModal = () => {
+    setIsApplyModalOpen(false);
+  };
+
+  const openRateModal = (Id) => {
+    setRateModalId(Id);
+    console.log(rateModalId, "view job ID");
+    setIsRateModalOpen(true);
+  };
+
+  const closeRateModal = () => {
+    setIsRateModalOpen(false);
+  };
+
   return (
     <>
-      <Modal
-        aria-labelledby="spring-modal-title"
-        aria-describedby="spring-modal-description"
-        open={modalOpen}
-        onClose={modalClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            TransitionComponent: Fade,
-          },
+      <Box
+        sx={{
+          pb: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          maxHeight: "100%",
         }}
       >
-        <Fade in={modalOpen}>
-          <Box sx={style}>
-            <Box>
-              <img
-                style={{
-                  display: "block",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  width: "500px",
-                  height: "500px",
+        <Divider
+          sx={{
+            mt: 4,
+            mb: 8,
+          }}
+          variant="inset"
+          textAlign="left"
+        >
+          <Typography
+            sx={{
+              color: "black",
+              fontFamily: "nunito",
+              letterSpacing: "6px",
+              marginBottom: "5px",
+              fontWeight: "bold",
+              textAlign: "left",
+            }}
+            variant="h4"
+          >
+            Jobs Available Today
+          </Typography>
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+        </Divider>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              width: "7%",
+              height: "100%",
+              mx: 10,
+            }}
+          >
+            <Link to="/user">
+              <Button
+                fullWidth
+                startIcon={<HomeRounded />}
+                // variant="outlined"
+                sx={{
+                  "&:hover": { color: "1976d2", bgcolor: "#c2d7fe" },
                 }}
-                src={singleCategory[0]?.category.image}
-                alt={singleCategory[0]?.category.category}
-              />
-              <Typography
-                sx={{ mt: 2 }}
-                variant="h5"
-                component="h1"
-                color="gray"
               >
-                {singleCategory[0]?.category.category}
-              </Typography>
-            </Box>
+                Home
+              </Button>
+            </Link>
           </Box>
-        </Fade>
-      </Modal>
+        </Box>
+        <Grid
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            maxWidth: "85vw",
+            margin: 5,
+          }}
+          container
+          spacing={4}
+        >
+          {jobsData?.map((data, i) => {
+            console.log(data);
+            let rating = data.postedBy.reviews.reduce((total, data) => {
+              const avgRating = parseInt(data.rating);
+              console.log(total);
+              if (!isNaN(avgRating)) return total + avgRating;
+            }, 0);
+
+            console.log(rating);
+            rating = rating / data?.postedBy?.reviews?.length;
+            console.log(rating);
+
+            return (
+              <Grid item key={i} xs={7} sm={3} md={6}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                    border: "1px solid whitesmoke",
+                    borderRadius: 3,
+                  }}
+                >
+                  <CardContent
+                    sx={{
+                      gap: 2,
+                      flexGrow: 1,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexGrow: 1,
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          height: "100%",
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "space-between",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            width: "100%",
+                          }}
+                        >
+                          <Typography
+                            gutterBottom={false}
+                            variant="h4"
+                            sx={{
+                              mb: 0,
+                              pb: 0,
+                              fontWeight: "bolder",
+                              color: "#444",
+                              fontFamily: "monospace",
+                            }}
+                            component="h2"
+                          >
+                            {data.title}
+                          </Typography>
+                          <Rating
+                            precision={0.5}
+                            key={i}
+                            name="simple-controlled"
+                            value={rating}
+                            readOnly
+                            size="small"
+                          />
+                        </Box>
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Divider sx={{ bgcolor: "#1976d2" }} />
+                        <Box sx={{ pt: 1 }}>
+                          <Typography variant="body2">
+                            {limitLength(data.description, 23)}
+                          </Typography>
+                        </Box>
+
+                        <Box
+                          sx={{
+                            gap: 2,
+                            pt: 1,
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Chip
+                            icon={<LocationOnRounded />}
+                            color="tertiary"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.location}
+                          />
+                          <Chip
+                            icon={<AttachMoneyRounded />}
+                            color="success"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.salary}
+                          />
+                          <Chip
+                            icon={<CalendarMonthRounded />}
+                            color="error"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.deadline.slice(0, 10)}
+                          />
+                          <Chip
+                            icon={<PersonRounded />}
+                            color="warning"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.postedBy.name}
+                          />
+                          <Chip
+                            icon={<InventoryRounded />}
+                            color="info"
+                            disabled={false}
+                            size="small"
+                            variant="filled"
+                            label={data.category.category}
+                          />
+                        </Box>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <Link to={`/user/single-job/${data._id}`}>
+                          <IconButton
+                            sx={{
+                              "&:hover": { bgcolor: "#1976d2", color: "white" },
+                            }}
+                            color="primary"
+                          >
+                            <CustomToolTip title="View" placement="top">
+                              <OpenInNewRounded />
+                            </CustomToolTip>
+                          </IconButton>
+                        </Link>
+                        <IconButton
+                          onClick={() => openApplyModal(data._id)}
+                          sx={{
+                            "&:hover": { bgcolor: "#2e7d32", color: "white" },
+                          }}
+                          color="success"
+                        >
+                          <CustomToolTip title="Apply" placement="right">
+                            <AddRounded />
+                          </CustomToolTip>
+                        </IconButton>
+                        <IconButton
+                          onClick={() => openRateModal(data.postedBy._id)}
+                          sx={{
+                            "&:hover": { bgcolor: "#ec7a1c", color: "white" },
+                          }}
+                          color="warning"
+                        >
+                          <CustomToolTip title="Rate" placement="bottom">
+                            <StarRounded />
+                          </CustomToolTip>
+                        </IconButton>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
+
+        <UserRateVendorModal
+          modalOpen={isRateModalOpen}
+          modalClose={closeRateModal}
+          fetchJobs={fetchJobs}
+          rateModalId={rateModalId}
+        />
+        <UserApplyJobModal
+          modalOpen={isApplyModalOpen}
+          modalClose={closeApplyModal}
+          jobId={applyJobId}
+          updatedJobs={fetchJobs}
+        />
+      </Box>
+      <Footer />
     </>
   );
 };

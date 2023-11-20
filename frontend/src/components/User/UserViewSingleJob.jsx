@@ -104,7 +104,7 @@ const UserViewSingleJob = () => {
                   <Box
                     sx={{
                       display: "flex",
-                      minHeight: "83vh",
+                      minHeight: "60vh",
                       flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "space-between",
