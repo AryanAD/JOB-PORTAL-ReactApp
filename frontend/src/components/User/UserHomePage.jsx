@@ -170,25 +170,15 @@ const UserHomePage = () => {
                     alt={category?.category}
                   />
                 </AspectRatio>
-                <Button
-                  variant="text"
-                  size="small"
-                  fullWidth
-                  sx={{
-                    fontFamily: "monospace",
-                  }}
-                  onClick={() => openSingleModal(category?._id)}
+
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  color="gray"
+                  fontFamily="monospace"
                 >
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    color="gray"
-                    fontFamily="monospace"
-                    sx={{ "&:hover": { color: "white" } }}
-                  >
-                    {category?.category}
-                  </Typography>
-                </Button>
+                  {category?.category}
+                </Typography>
               </Card>
             </Grid>
           ))}

@@ -176,10 +176,13 @@ const UserJobs = () => {
         >
           {jobData?.map((data, i) => {
             let rating = data.postedBy.reviews.reduce((total, data) => {
-              const avgRating = data.rating;
-              return total.rating + avgRating;
-            });
-            rating = rating / data.postedBy.reviews.length;
+              const avgRating = parseInt(data.rating);
+              console.log(total);
+              if (!isNaN(avgRating)) return total + avgRating;
+            }, 0);
+
+            console.log(rating);
+            rating = rating / data?.postedBy?.reviews?.length;
             console.log(rating);
 
             return (
@@ -242,6 +245,7 @@ const UserJobs = () => {
                             {data.title}
                           </Typography>
                           <Rating
+                            precision={0.5}
                             key={i}
                             name="simple-controlled"
                             value={rating}

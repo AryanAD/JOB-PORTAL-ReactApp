@@ -135,6 +135,7 @@ const UserRateVendorModal = ({
               />
               <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
                 <Rating
+                  precision={0.5}
                   size="large"
                   name="simple-controlled"
                   value={value}
