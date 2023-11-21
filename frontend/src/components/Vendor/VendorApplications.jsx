@@ -14,6 +14,7 @@ import {
   Typography,
   styled,
   tooltipClasses,
+  TablePagination,
 } from "@mui/material";
 import { CloseRounded, DoneRounded } from "@mui/icons-material";
 import { useCallback, useEffect, useState } from "react";
@@ -45,6 +46,8 @@ const CustomToolTip = styled(({ className, ...props }) => (
 
 const VendorApplications = () => {
   const [myData, setMyData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(8);
 
   const fetchData = useCallback(async () => {
     try {
@@ -90,6 +93,15 @@ const VendorApplications = () => {
     fetchData();
   }, [fetchData]);
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return (
     <>
       <Divider variant="inset" textAlign="left">
@@ -104,7 +116,7 @@ const VendorApplications = () => {
           }}
           variant="h4"
         >
-          Applications
+          Applicants
         </Typography>
       </Divider>
       <Box
@@ -235,76 +247,89 @@ const VendorApplications = () => {
                     />
                   </Box>
                 ) : (
-                  myData?.map((applicant, i) => {
-                    return (
-                      <StyledTableRow key={i}>
-                        <TableCell component="th" align="left">
-                          {applicant.userId.name}
-                        </TableCell>
-                        <TableCell align="right">
-                          <Chip
-                            color={
-                              applicant.status === "accepted"
-                                ? "success"
-                                : applicant.status === "rejected"
-                                ? "error"
-                                : "warning"
-                            }
-                            disabled={false}
-                            size="small"
-                            variant="filled"
-                            label={applicant.status}
-                          />
-                        </TableCell>
-                        <TableCell align="right">
-                          {applicant.location}
-                        </TableCell>
-                        <TableCell align="right">{applicant.contact}</TableCell>
-                        <TableCell align="right">
-                          <a download>{applicant.cv}</a>
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
-                          align="right"
-                        >
-                          <CustomToolTip title="Approve" placement="left">
-                            <IconButton
-                              onClick={() => handleAccept(applicant._id)}
-                              sx={{
-                                "&:hover": {
-                                  bgcolor: "#2e7d32",
-                                  color: "white",
-                                },
-                              }}
-                              color="success"
-                            >
-                              <DoneRounded />
-                            </IconButton>
-                          </CustomToolTip>
-                          <CustomToolTip title="Reject" placement="right">
-                            <IconButton
-                              onClick={() => handleReject(applicant._id)}
-                              sx={{
-                                "&:hover": {
-                                  bgcolor: "#d74747",
-                                  color: "white",
-                                },
-                              }}
-                              color="error"
-                            >
-                              <CloseRounded />
-                            </IconButton>
-                          </CustomToolTip>
-                        </TableCell>
-                      </StyledTableRow>
-                    );
-                  })
+                  myData
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((applicant, i) => {
+                      return (
+                        <StyledTableRow key={i}>
+                          <TableCell component="th" align="left">
+                            {applicant.userId.name}
+                          </TableCell>
+                          <TableCell align="right">
+                            <Chip
+                              color={
+                                applicant.status === "accepted"
+                                  ? "success"
+                                  : applicant.status === "rejected"
+                                  ? "error"
+                                  : "warning"
+                              }
+                              disabled={false}
+                              size="small"
+                              variant="filled"
+                              label={applicant.status}
+                            />
+                          </TableCell>
+                          <TableCell align="right">
+                            {applicant.location}
+                          </TableCell>
+                          <TableCell align="right">
+                            {applicant.contact}
+                          </TableCell>
+                          <TableCell align="right">
+                            <a download>{applicant.cv}</a>
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                            }}
+                            align="right"
+                          >
+                            <CustomToolTip title="Approve" placement="left">
+                              <IconButton
+                                onClick={() => handleAccept(applicant._id)}
+                                sx={{
+                                  "&:hover": {
+                                    bgcolor: "#2e7d32",
+                                    color: "white",
+                                  },
+                                }}
+                                color="success"
+                              >
+                                <DoneRounded />
+                              </IconButton>
+                            </CustomToolTip>
+                            <CustomToolTip title="Reject" placement="right">
+                              <IconButton
+                                onClick={() => handleReject(applicant._id)}
+                                sx={{
+                                  "&:hover": {
+                                    bgcolor: "#d74747",
+                                    color: "white",
+                                  },
+                                }}
+                                color="error"
+                              >
+                                <CloseRounded />
+                              </IconButton>
+                            </CustomToolTip>
+                          </TableCell>
+                        </StyledTableRow>
+                      );
+                    })
                 )}
               </TableBody>
+              <TablePagination
+                rowsPerPageOptions={[8, 16, 24]} // Customize as needed
+                component="div"
+                count={myData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
             </Table>
           </TableContainer>
         </Box>
