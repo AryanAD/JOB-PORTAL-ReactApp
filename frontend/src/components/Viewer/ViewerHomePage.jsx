@@ -10,10 +10,7 @@ import {
   IconButton,
   Rating,
   Stack,
-  Tooltip,
   Typography,
-  styled,
-  tooltipClasses,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Image from "./assets/job_banner.jpg";
@@ -21,13 +18,12 @@ import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import { useEffect, useState } from "react";
 import { apiText } from "../../global/API";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
-import { FaHandsHelping } from "react-icons/fa";
+import { TbListDetails } from "react-icons/tb";
 import {
   AttachMoneyRounded,
   CalendarMonthRounded,
   InventoryRounded,
   LocationOnRounded,
-  OpenInNewRounded,
   PersonRounded,
 } from "@mui/icons-material";
 import Chip from "@mui/material-next/Chip";
@@ -47,19 +43,6 @@ const limitLength = (text, maxLength) => {
   const truncatedText = words.slice(0, maxLength).join(" ");
   return `${truncatedText}...`;
 };
-
-const CustomToolTip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "gray",
-    color: "white",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(18),
-    border: "1px solid #dadde9",
-    borderRadius: "7px",
-  },
-}));
 
 const ViewerHomePage = () => {
   const [jobData, setJobData] = useState([]);
@@ -301,21 +284,6 @@ const ViewerHomePage = () => {
                             <Typography variant="body2">
                               {limitLength(data.description, 23)}
                             </Typography>
-                            <Link to={`/user/single-job/${data._id}`}>
-                              <IconButton
-                                sx={{
-                                  "&:hover": {
-                                    bgcolor: "#1976d2",
-                                    color: "white",
-                                  },
-                                }}
-                                color="primary"
-                              >
-                                <CustomToolTip title="View" placement="right">
-                                  <OpenInNewRounded />
-                                </CustomToolTip>
-                              </IconButton>
-                            </Link>
                           </Box>
 
                           <Box
@@ -411,8 +379,8 @@ const ViewerHomePage = () => {
         </Box>
         <Link to="/signup">
           <Box sx={{ mt: 3 }}>
-            <Button startIcon={<FaHandsHelping />} variant="contained">
-              Join Us Today
+            <Button startIcon={<TbListDetails />} variant="contained">
+              More Details
             </Button>
           </Box>
         </Link>
