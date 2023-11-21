@@ -20,6 +20,8 @@ const UserAppliedJobs = () => {
   const [jobsData, setJobsData] = useState([]);
   const [isAppliedJobModalOpen, setIsAppliedJobModalOpen] = useState(false);
   const [appliedJobId, setAppliedJobId] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   const fetchJobsData = useCallback(async () => {
     try {
@@ -44,6 +46,17 @@ const UserAppliedJobs = () => {
   const closeAppliedJobModal = () => {
     setIsAppliedJobModalOpen(false);
   };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  // Calculate the start and end index of the jobs to display based on the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Extract the jobs to display for the current page
+  const displayedJobs = jobsData.slice(startIndex, endIndex);
 
   return (
     <>
@@ -78,7 +91,7 @@ const UserAppliedJobs = () => {
           </Divider>
         </Box>
 
-        {jobsData?.length === 0 ? (
+        {displayedJobs?.length === 0 ? (
           <Box
             sx={{
               width: "100%",
@@ -95,7 +108,7 @@ const UserAppliedJobs = () => {
             </Typography>
           </Box>
         ) : (
-          jobsData?.map((data, i) => {
+          displayedJobs?.map((data, i) => {
             return (
               <Card
                 key={i}
@@ -191,6 +204,27 @@ const UserAppliedJobs = () => {
             );
           })
         )}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 2,
+          }}
+        >
+          <Button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous Page
+          </Button>
+          <Typography sx={{ marginX: 2 }}>{currentPage}</Typography>
+          <Button
+            disabled={endIndex >= jobsData.length}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next Page
+          </Button>
+        </Box>
       </Box>
       <UserAppliedJobsModal
         modalOpen={isAppliedJobModalOpen}

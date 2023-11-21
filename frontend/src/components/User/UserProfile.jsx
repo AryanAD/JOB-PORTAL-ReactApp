@@ -237,7 +237,7 @@ const UserProfile = ({ childItem }) => {
                       color: "#000",
                       width: "100%",
                     }}
-                    to="/user/rate-vendor"
+                    to="/user/jobs"
                   >
                     <ListItemButton
                       sx={{
@@ -247,27 +247,6 @@ const UserProfile = ({ childItem }) => {
                       }}
                     >
                       Rate A Vendor
-                    </ListItemButton>
-                  </Link>
-                </ListItem>
-
-                <ListItem>
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "#000",
-                      width: "100%",
-                    }}
-                    to="/user/new-vendor"
-                  >
-                    <ListItemButton
-                      sx={{
-                        fontFamily: "monospace",
-                        fontSize: "18px",
-                        py: 2,
-                      }}
-                    >
-                      Job Categories
                     </ListItemButton>
                   </Link>
                 </ListItem>
