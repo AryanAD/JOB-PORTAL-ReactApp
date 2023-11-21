@@ -82,19 +82,25 @@ const UserRateVendorModal = ({
         message: data.get("message"),
         rating: value,
       };
-
-      const response = await apiText.post(`user/rate/${rateModalId}`, formData);
-      console.log(formData, "rateUser");
-      console.log(response, "re");
-      fetchJobs();
-      toast.success("Successfully Rated a Vendor!");
+      if (formData.message.length !== 0 && formData.rating.length !== 0) {
+        const response = await apiText.post(
+          `user/rate/${rateModalId}`,
+          formData
+        );
+        console.log(formData, "rateUser");
+        console.log(response, "re");
+        fetchJobs();
+        toast.success("Successfully Rated a Vendor!");
+      } else {
+        toast.error("Rating cannot be empty!");
+      }
     } catch (error) {
       console.error("API request failed: ", error);
     }
   };
 
   return (
-    <>
+    <Box>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -111,7 +117,6 @@ const UserRateVendorModal = ({
         <Fade in={modalOpen}>
           <Box sx={style}>
             <form onSubmit={handleSubmit}>
-              <Box></Box>
               <Divider>
                 <Typography
                   gutterBottom
@@ -148,6 +153,7 @@ const UserRateVendorModal = ({
                 fullWidth
                 variant="outlined"
                 type="submit"
+                onClick={modalClose}
                 sx={{
                   "&:hover": {
                     bgcolor: "#c2d7fe",
@@ -160,7 +166,7 @@ const UserRateVendorModal = ({
           </Box>
         </Fade>
       </Modal>
-    </>
+    </Box>
   );
 };
 

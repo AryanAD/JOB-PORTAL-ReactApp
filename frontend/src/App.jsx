@@ -21,7 +21,7 @@ import UserProfileEditable from "./components/User/UserProfileEditable";
 import UserAppliedJobs from "./components/User/UserAppliedJobs";
 import UserProfileViewable from "./components/User/UserProfileViewable";
 import UserViewSingleJob from "./components/User/UserViewSingleJob";
-import UserSingleCategory from "./components/User/UserSingleCategory";
+import UserJobsByCategory from "./components/User/UserJobsByCategory";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -85,7 +85,7 @@ function App() {
           />
           <Route
             path="/user/jobs/category/:id"
-            element={<UserNavBar anotherItem={<UserSingleCategory />} />}
+            element={<UserNavBar anotherItem={<UserJobsByCategory />} />}
           />
           <Route
             path="/user/profile"

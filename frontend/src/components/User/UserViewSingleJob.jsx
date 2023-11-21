@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CircularProgress,
@@ -13,10 +14,14 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { apiText } from "../../global/API";
 import { useParams } from "react-router";
+import { StarRounded } from "@mui/icons-material";
+import UserRateVendorModal from "./UserRateVendorModal";
 
 const UserViewSingleJob = () => {
   const { id } = useParams();
   const [jobData, setJobData] = useState([]);
+  const [modalId, setModalId] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -31,6 +36,16 @@ const UserViewSingleJob = () => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const openModal = (Id) => {
+    setModalId(Id);
+    console.log(modalId, "view job ID");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -104,69 +119,101 @@ const UserViewSingleJob = () => {
                   <Box
                     sx={{
                       display: "flex",
-                      minHeight: "60vh",
-                      flexDirection: "column",
-                      alignItems: "center",
+                      flexDirection: "row",
                       justifyContent: "space-between",
-                      flexGrow: 2,
-                      my: 2,
+                      alignItems: "flex-end",
                     }}
                   >
-                    <Typography
-                      variant="body1"
+                    <Box
                       sx={{
-                        fontFamily: "monospace",
-                        color: "gray",
+                        display: "flex",
+                        minHeight: "60vh",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexGrow: 2,
+                        my: 2,
                       }}
                     >
-                      {jobData.description}
-                    </Typography>
-                    <List
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          fontFamily: "monospace",
+                          color: "gray",
+                        }}
+                      >
+                        {jobData.description}
+                      </Typography>
+                      <List
+                        sx={{
+                          width: "100%",
+                          mt: 8,
+                          // display: "flex",
+                          // alignItems: "flex-end",
+                        }}
+                      >
+                        <ListItem
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Location of Job: {jobData.location}
+                        </ListItem>
+                        <ListItem
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Offered Salary: {jobData.salary}
+                        </ListItem>
+                        <ListItem
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Job Deadline:{" "}
+                          {new Date(jobData?.deadline).toDateString()}
+                        </ListItem>
+                        <ListItem
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Category: {jobData?.category?.category}
+                        </ListItem>
+                      </List>
+                    </Box>
+                    <Box
                       sx={{
-                        width: "100%",
-                        mt: 8,
-                        // display: "flex",
-                        // alignItems: "flex-end",
+                        pb: 8,
+                        pr: 2,
+                        minWidth: "10vw",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                     >
-                      <ListItem
+                      <Button
+                        onClick={() => openModal(jobData.postedBy._id)}
                         sx={{
-                          fontFamily: "monospace",
-                          fontSize: "16px",
-                          fontWeight: "bold",
+                          bgcolor: "goldenrod",
+                          "&:hover": {
+                            bgcolor: "orange",
+                          },
                         }}
+                        startIcon={<StarRounded />}
+                        variant="contained"
                       >
-                        Location of Job: {jobData.location}
-                      </ListItem>
-                      <ListItem
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Offered Salary: {jobData.salary}
-                      </ListItem>
-                      <ListItem
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Job Deadline:{" "}
-                        {new Date(jobData?.deadline).toDateString()}
-                      </ListItem>
-                      <ListItem
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Category: {jobData?.category?.category}
-                      </ListItem>
-                    </List>
+                        Rate Vendor
+                      </Button>
+                    </Box>
                   </Box>
                   <Divider sx={{ bgcolor: "#1976D2" }} />
                   <Divider sx={{ bgcolor: "#1976D2" }} />
@@ -247,6 +294,12 @@ const UserViewSingleJob = () => {
           </Box>
         </Box>
       </Box>
+      <UserRateVendorModal
+        modalOpen={isModalOpen}
+        modalClose={closeModal}
+        fetchJobs={fetchData}
+        rateModalId={modalId}
+      />
     </>
   );
 };
