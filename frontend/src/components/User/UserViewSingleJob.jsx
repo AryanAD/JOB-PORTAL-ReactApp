@@ -17,6 +17,10 @@ import { Link, useParams } from "react-router-dom";
 import { StarRounded } from "@mui/icons-material";
 import UserRateVendorModal from "./UserRateVendorModal";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { FaLocationDot, FaDollarSign } from "react-icons/fa6";
+import { BsFillPersonFill } from "react-icons/bs";
+import { BiCalendar } from "react-icons/bi";
+import Chip from "@mui/material-next/Chip";
 
 const UserViewSingleJob = () => {
   const { id } = useParams();
@@ -176,7 +180,12 @@ const UserViewSingleJob = () => {
                             fontWeight: "bold",
                           }}
                         >
-                          Location of Job: {jobData.location}
+                          <Chip
+                            color="info"
+                            icon={<FaLocationDot />}
+                            label={"Location of Job"}
+                          />
+                          : {jobData.location}
                         </ListItem>
                         <ListItem
                           sx={{
@@ -185,7 +194,12 @@ const UserViewSingleJob = () => {
                             fontWeight: "bold",
                           }}
                         >
-                          Offered Salary: {jobData.salary}
+                          <Chip
+                            color="success"
+                            icon={<FaDollarSign />}
+                            label={"Offered Salary"}
+                          />
+                          : {jobData.salary}
                         </ListItem>
                         <ListItem
                           sx={{
@@ -194,8 +208,12 @@ const UserViewSingleJob = () => {
                             fontWeight: "bold",
                           }}
                         >
-                          Job Deadline:{" "}
-                          {new Date(jobData?.deadline).toDateString()}
+                          <Chip
+                            color="error"
+                            icon={<BiCalendar />}
+                            label={"Job Deadline"}
+                          />
+                          : {new Date(jobData?.deadline).toDateString()}
                         </ListItem>
                         <ListItem
                           sx={{
@@ -204,7 +222,12 @@ const UserViewSingleJob = () => {
                             fontWeight: "bold",
                           }}
                         >
-                          Category: {jobData?.category?.category}
+                          <Chip
+                            color="primary"
+                            icon={<BsFillPersonFill />}
+                            label={"Category"}
+                          />
+                          : {jobData?.category?.category}
                         </ListItem>
                       </List>
                     </Box>

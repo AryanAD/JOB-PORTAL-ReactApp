@@ -78,7 +78,7 @@ const UserAppliedJobs = () => {
           </Divider>
         </Box>
 
-        {jobsData.length === 0 ? (
+        {jobsData?.length === 0 ? (
           <Box
             sx={{
               width: "100%",
@@ -121,13 +121,13 @@ const UserAppliedJobs = () => {
                     variant="h5"
                     sx={{ fontFamily: "monospace" }}
                   >
-                    {data?.jobId.title}
+                    {data?.jobId?.title}
                   </Typography>
                   <Typography
                     variant="body2"
                     sx={{ fontFamily: "monospace", color: "gray", mb: 2 }}
                   >
-                    {data?.jobId.description.slice(0, 455).concat("...")}
+                    {data?.jobId?.description?.slice(0, 455).concat("...")}
                   </Typography>
                   <Box sx={{ display: "flex", justifyContent: "space-around" }}>
                     <Box
@@ -141,22 +141,22 @@ const UserAppliedJobs = () => {
                       <Chip
                         color="info"
                         icon={<FaLocationDot />}
-                        label={data?.jobId.location}
+                        label={data?.jobId?.location}
                       />
                       <Chip
                         color="success"
                         icon={<FaDollarSign />}
-                        label={data?.jobId.salary}
+                        label={data?.jobId?.salary}
                       />
                       <Chip
                         color="error"
                         icon={<BiCalendar />}
-                        label={data?.jobId.deadline.slice(0, 10)}
+                        label={data?.jobId?.deadline?.slice(0, 10)}
                       />
                       <Chip
                         color="primary"
                         icon={<BsFillPersonFill />}
-                        label={data?.jobId.postedBy.name}
+                        label={data?.jobId?.postedBy?.name}
                       />
                     </Box>
                     <Box
