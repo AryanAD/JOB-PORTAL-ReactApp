@@ -32,6 +32,7 @@ import UserRateVendorModal from "./UserRateVendorModal";
 import UserApplyJobModal from "./UserApplyJobModal";
 import Chip from "@mui/material-next/Chip";
 import Image from "../User/assets/page-not-found.png";
+import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -61,6 +62,8 @@ const UserJobsByCategory = () => {
   const [applyJobId, setApplyJobId] = useState("");
   const [isRateModalOpen, setIsRateModalOpen] = useState(false);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const [jobsData, setJobsData] = useState([]);
 
@@ -97,6 +100,17 @@ const UserJobsByCategory = () => {
   const closeRateModal = () => {
     setIsRateModalOpen(false);
   };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  // Calculate the start and end index of the jobs to display based on the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Extract the jobs to display for the current page
+  const displayedJobs = jobsData.slice(startIndex, endIndex);
 
   return (
     <>
@@ -177,7 +191,7 @@ const UserJobsByCategory = () => {
           container
           spacing={4}
         >
-          {jobsData.length === 0 ? (
+          {displayedJobs.length === 0 ? (
             <>
               <Box
                 sx={{
@@ -212,7 +226,7 @@ const UserJobsByCategory = () => {
               </Link>
             </>
           ) : (
-            jobsData?.map((data, i) => {
+            displayedJobs?.map((data, i) => {
               console.log(data);
               let rating = data.postedBy.reviews.reduce((total, data) => {
                 const avgRating = parseInt(data.rating);
@@ -405,6 +419,31 @@ const UserJobsByCategory = () => {
             })
           )}
         </Grid>
+
+        {/* PAGINATION */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 5,
+          }}
+        >
+          <IconButton
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            <GrFormPreviousLink />
+          </IconButton>
+          <IconButton disabled sx={{ marginX: 2, width: 50, height: 50 }}>
+            {currentPage}
+          </IconButton>
+          <IconButton
+            disabled={endIndex >= jobsData.length}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            <GrFormNextLink />
+          </IconButton>
+        </Box>
 
         <UserRateVendorModal
           modalOpen={isRateModalOpen}

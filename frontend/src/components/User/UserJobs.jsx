@@ -99,6 +99,7 @@ const UserJobs = () => {
   const closeRateModal = () => {
     setIsRateModalOpen(false);
   };
+
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
