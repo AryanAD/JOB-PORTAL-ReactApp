@@ -6,15 +6,31 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import HailRoundedIcon from "@mui/icons-material/HailRounded";
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { LogoutRounded, MenuRounded } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { apiText } from "../../global/API";
 
 const UserNavBar = ({ anotherItem }) => {
   const nav = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [profileData, setProfileData] = useState([]);
+
+  const fetchProfileData = useCallback(async () => {
+    try {
+      let res = await apiText.get("user/profile");
+      setProfileData(res.data.user);
+      console.log(res.data.user, "inside Profile");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProfileData();
+  }, [fetchProfileData]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -25,6 +41,10 @@ const UserNavBar = ({ anotherItem }) => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   const handleLogout = () => {
@@ -121,10 +141,7 @@ const UserNavBar = ({ anotherItem }) => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt="Dummy User"
-                    src="https://mui.com/static/images/avatar/2.jpg"
-                  />
+                  <Avatar alt={profileData?.name} src={profileData?.image} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -141,11 +158,12 @@ const UserNavBar = ({ anotherItem }) => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseNavMenu}
+                onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={handleCloseNavMenu}>
+                <MenuItem>
                   <Link
                     to="/user/profile"
+                    onClick={handleCloseUserMenu}
                     style={{
                       color: "black",
                       textDecoration: "none",
