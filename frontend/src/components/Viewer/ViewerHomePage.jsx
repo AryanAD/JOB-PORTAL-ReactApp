@@ -2,30 +2,31 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
-  CardMedia,
+  CircularProgress,
   Container,
   Divider,
   Grid,
   IconButton,
+  Rating,
   Stack,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Image from "./assets/job_banner.jpg";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const limitLength = (text, maxLength) => {
-  const words = text.trim().split(/\s+/);
-  if (words.length <= maxLength) {
-    return text;
-  }
-  const truncatedText = words.slice(0, maxLength).join(" ");
-  return `${truncatedText}...`;
-};
+import { useEffect, useState } from "react";
+import { apiText } from "../../global/API";
+import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
+import { FaHandsHelping } from "react-icons/fa";
+import {
+  AttachMoneyRounded,
+  CalendarMonthRounded,
+  InventoryRounded,
+  LocationOnRounded,
+  PersonRounded,
+} from "@mui/icons-material";
+import Chip from "@mui/material-next/Chip";
 
 const goToTop = () => {
   window.scrollTo({
@@ -34,7 +35,46 @@ const goToTop = () => {
   });
 };
 
+const limitLength = (text, maxLength) => {
+  const words = text.split(" ");
+  if (words.length <= maxLength) {
+    return text;
+  }
+  const truncatedText = words.slice(0, maxLength).join(" ");
+  return `${truncatedText}...`;
+};
+
 const ViewerHomePage = () => {
+  const [jobData, setJobData] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const fetchData = async () => {
+    try {
+      const response = await apiText.get(`/user/jobs`);
+      setJobData(response.data.jobs);
+      console.log(response.data.jobs, "job data");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  // Calculate the start and end index of the jobs to display based on the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Extract the jobs to display for the current page
+  const displayedJobs = jobData.slice(startIndex, endIndex);
+
   return (
     <>
       <Box
@@ -91,75 +131,254 @@ const ViewerHomePage = () => {
           </Stack>
         </Container>
       </Box>
-      <Divider
+      <Box
         sx={{
-          mt: 4,
+          pb: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          maxHeight: "100%",
         }}
-        variant="inset"
-        textAlign="left"
       >
-        <Typography
+        <Divider
           sx={{
-            color: "black",
-            fontFamily: "nunito",
-            letterSpacing: "6px",
-            marginBottom: "5px",
-            fontWeight: "bold",
-            textAlign: "center",
+            mt: 4,
+            mb: 8,
           }}
-          variant="h4"
+          variant="inset"
+          textAlign="left"
         >
-          Currently Available Jobs
-        </Typography>
-      </Divider>
-      <Grid
-        style={{
-          width: "95vw",
-          margin: 5,
-        }}
-        container
-        spacing={4}
-      >
-        {cards.map((card) => (
-          <Grid item key={card} xs={10} sm={10} md={3}>
-            <Card
-              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+          <Typography
+            sx={{
+              color: "black",
+              fontFamily: "nunito",
+              letterSpacing: "6px",
+              marginBottom: "5px",
+              fontWeight: "bold",
+              textAlign: "left",
+            }}
+            variant="h4"
+          >
+            Jobs Available Today
+          </Typography>
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+          <Divider variant="middle" />
+        </Divider>
+
+        <Grid
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            maxWidth: "85vw",
+            margin: 5,
+            mb: 0,
+          }}
+          container
+          spacing={4}
+        >
+          {displayedJobs.length === 0 ? (
+            <Box
+              sx={{
+                height: "63vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <CardMedia
-                component="div"
-                sx={{
-                  // 16:9
-                  pt: "56.25%",
-                }}
-                image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-              />
-              <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Job Name
-                </Typography>
-                <Typography>
-                  {`${limitLength(
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nihil in eaque ut dolorem praesentium fugit adipisci! Recusandae, modi quidem ipsa non magni consectetur! Nihil ut facilis dicta sequi soluta",
-                    8
-                  )}`}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link
-                  style={{
-                    width: "100%",
-                  }}
-                  to="/signup"
-                >
-                  <Button fullWidth variant="contained" size="small">
-                    Join us
-                  </Button>
-                </Link>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              <CircularProgress size={50} />
+              <Typography variant="h4">Loading...</Typography>
+            </Box>
+          ) : (
+            displayedJobs?.map((data, i) => {
+              let rating = data.postedBy.reviews.reduce((total, data) => {
+                const avgRating = parseInt(data.rating);
+                console.log(total);
+                if (!isNaN(avgRating)) return total + avgRating;
+              }, 0);
+
+              console.log(rating);
+              rating = rating / data?.postedBy?.reviews?.length;
+              console.log(rating);
+
+              return (
+                <Grid item key={i} xs={7} sm={3} md={6}>
+                  <Card
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      boxShadow: "20px 20px 20px rgba(150, 150, 150, 0.1)",
+                      border: "1px solid whitesmoke",
+                      borderRadius: 3,
+                    }}
+                  >
+                    <CardContent
+                      sx={{
+                        gap: 2,
+                        flexGrow: 1,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexGrow: 1,
+                          alignItems: "center",
+                          gap: 2,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            height: "100%",
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "space-between",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              width: "100%",
+                            }}
+                          >
+                            <Typography
+                              gutterBottom={false}
+                              variant="h4"
+                              sx={{
+                                mb: 0,
+                                pb: 0,
+                                fontWeight: "bolder",
+                                color: "#444",
+                                fontFamily: "monospace",
+                              }}
+                              component="h2"
+                            >
+                              {data.title}
+                            </Typography>
+                            <Rating
+                              precision={0.5}
+                              key={i}
+                              name="simple-controlled"
+                              value={rating}
+                              readOnly
+                              size="small"
+                            />
+                          </Box>
+                          <Divider sx={{ bgcolor: "#1976d2" }} />
+                          <Divider sx={{ bgcolor: "#1976d2" }} />
+                          <Divider sx={{ bgcolor: "#1976d2" }} />
+                          <Box sx={{ pt: 1 }}>
+                            <Typography variant="body2">
+                              {limitLength(data.description, 23)}
+                            </Typography>
+                          </Box>
+
+                          <Box
+                            sx={{
+                              gap: 2,
+                              pt: 1,
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-evenly",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Chip
+                              icon={<LocationOnRounded />}
+                              color="tertiary"
+                              disabled={false}
+                              size="small"
+                              variant="filled"
+                              label={data.location}
+                            />
+                            <Chip
+                              icon={<AttachMoneyRounded />}
+                              color="success"
+                              disabled={false}
+                              size="small"
+                              variant="filled"
+                              label={data.salary}
+                            />
+                            <Chip
+                              icon={<CalendarMonthRounded />}
+                              color="error"
+                              disabled={false}
+                              size="small"
+                              variant="filled"
+                              label={data.deadline.slice(0, 10)}
+                            />
+                            <Chip
+                              icon={<PersonRounded />}
+                              color="warning"
+                              disabled={false}
+                              size="small"
+                              variant="filled"
+                              label={data.postedBy.name}
+                            />
+                            <Chip
+                              icon={<InventoryRounded />}
+                              color="info"
+                              disabled={false}
+                              size="small"
+                              variant="filled"
+                              label={data.category.category}
+                            />
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        ></Box>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              );
+            })
+          )}
+        </Grid>
+
+        {/* PAGINATION */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 5,
+          }}
+        >
+          <IconButton
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            <GrFormPreviousLink />
+          </IconButton>
+          <IconButton disabled sx={{ marginX: 2, width: 50, height: 50 }}>
+            {currentPage}
+          </IconButton>
+          <IconButton
+            disabled={endIndex >= jobData.length}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            <GrFormNextLink />
+          </IconButton>
+        </Box>
+        <Link to="/signup">
+          <Box sx={{ mt: 3 }}>
+            <Button startIcon={<FaHandsHelping />} variant="contained">
+              Join Us Today
+            </Button>
+          </Box>
+        </Link>
+      </Box>
       <Link to="#" onClick={goToTop}>
         <IconButton
           sx={{
