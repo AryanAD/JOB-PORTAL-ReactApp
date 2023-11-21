@@ -16,7 +16,7 @@ import {
   tooltipClasses,
 } from "@mui/material";
 import { CloseRounded, DoneRounded } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { apiImage, apiText } from "../../global/API";
 import Chip from "@mui/material-next/Chip";
 import { toast } from "react-toastify";
@@ -46,15 +46,15 @@ const CustomToolTip = styled(({ className, ...props }) => (
 const VendorApplications = () => {
   const [myData, setMyData] = useState([]);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await apiImage.get("vendor/applicants");
       setMyData(response.data.applicants);
-      console.log(myData, "applicants");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
-  };
+  }, []);
+  console.log(myData, "applicants");
 
   const handleAccept = async (applicantId) => {
     console.log(applicantId, "handleAcceptApplication");
@@ -88,7 +88,7 @@ const VendorApplications = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <>
