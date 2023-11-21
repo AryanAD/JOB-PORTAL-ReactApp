@@ -10,7 +10,10 @@ import {
   IconButton,
   Rating,
   Stack,
+  Tooltip,
   Typography,
+  styled,
+  tooltipClasses,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Image from "./assets/job_banner.jpg";
@@ -24,6 +27,7 @@ import {
   CalendarMonthRounded,
   InventoryRounded,
   LocationOnRounded,
+  OpenInNewRounded,
   PersonRounded,
 } from "@mui/icons-material";
 import Chip from "@mui/material-next/Chip";
@@ -43,6 +47,19 @@ const limitLength = (text, maxLength) => {
   const truncatedText = words.slice(0, maxLength).join(" ");
   return `${truncatedText}...`;
 };
+
+const CustomToolTip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "gray",
+    color: "white",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(18),
+    border: "1px solid #dadde9",
+    borderRadius: "7px",
+  },
+}));
 
 const ViewerHomePage = () => {
   const [jobData, setJobData] = useState([]);
@@ -274,10 +291,31 @@ const ViewerHomePage = () => {
                           <Divider sx={{ bgcolor: "#1976d2" }} />
                           <Divider sx={{ bgcolor: "#1976d2" }} />
                           <Divider sx={{ bgcolor: "#1976d2" }} />
-                          <Box sx={{ pt: 1 }}>
+                          <Box
+                            sx={{
+                              pt: 1,
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
                             <Typography variant="body2">
                               {limitLength(data.description, 23)}
                             </Typography>
+                            <Link to={`/user/single-job/${data._id}`}>
+                              <IconButton
+                                sx={{
+                                  "&:hover": {
+                                    bgcolor: "#1976d2",
+                                    color: "white",
+                                  },
+                                }}
+                                color="primary"
+                              >
+                                <CustomToolTip title="View" placement="right">
+                                  <OpenInNewRounded />
+                                </CustomToolTip>
+                              </IconButton>
+                            </Link>
                           </Box>
 
                           <Box
