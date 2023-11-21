@@ -13,9 +13,10 @@ import {
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { apiText } from "../../global/API";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import { StarRounded } from "@mui/icons-material";
 import UserRateVendorModal from "./UserRateVendorModal";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 const UserViewSingleJob = () => {
   const { id } = useParams();
@@ -86,15 +87,31 @@ const UserViewSingleJob = () => {
                 <Box sx={{ height: "100%" }}>
                   {/* TITLE */}
                   <Box marginTop={2}>
-                    <Typography
-                      variant="h4"
+                    <Box
                       sx={{
-                        fontFamily: "monospace",
-                        fontWeight: "bolder",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        mb: 1,
                       }}
                     >
-                      {jobData.title}
-                    </Typography>
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontFamily: "monospace",
+                          fontWeight: "bolder",
+                        }}
+                      >
+                        {jobData.title}
+                      </Typography>
+                      <Link to="/user">
+                        <Button
+                          startIcon={<IoArrowBackCircle />}
+                          variant="contained"
+                        >
+                          Back to Home
+                        </Button>
+                      </Link>
+                    </Box>
                     <Divider
                       variant="fullWidth"
                       sx={{
