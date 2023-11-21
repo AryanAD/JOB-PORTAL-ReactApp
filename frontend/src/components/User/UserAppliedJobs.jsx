@@ -5,6 +5,7 @@ import {
   CardContent,
   CircularProgress,
   Divider,
+  IconButton,
   Typography,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
@@ -15,6 +16,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
 import UserAppliedJobsModal from "./UserAppliedJobsModal";
+import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 
 const UserAppliedJobs = () => {
   const [jobsData, setJobsData] = useState([]);
@@ -69,7 +71,8 @@ const UserAppliedJobs = () => {
           height: "100%",
           width: "100%",
           overflow: "hidden",
-          gap: 5,
+          flexGrow: 2,
+          gap: 3,
         }}
       >
         <Box width={"100%"}>
@@ -77,6 +80,7 @@ const UserAppliedJobs = () => {
             <Divider>
               <Divider>
                 <Typography
+                  position={"relative"}
                   sx={{
                     fontFamily: "monospace",
                     color: "#1976d2",
@@ -211,19 +215,21 @@ const UserAppliedJobs = () => {
             marginTop: 2,
           }}
         >
-          <Button
+          <IconButton
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}
           >
-            Previous Page
-          </Button>
-          <Typography sx={{ marginX: 2 }}>{currentPage}</Typography>
-          <Button
+            <GrFormPreviousLink />
+          </IconButton>
+          <IconButton disabled sx={{ marginX: 2, width: 50, height: 50 }}>
+            {currentPage}
+          </IconButton>
+          <IconButton
             disabled={endIndex >= jobsData.length}
             onClick={() => handlePageChange(currentPage + 1)}
           >
-            Next Page
-          </Button>
+            <GrFormNextLink />
+          </IconButton>
         </Box>
       </Box>
       <UserAppliedJobsModal
