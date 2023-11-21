@@ -84,8 +84,19 @@ const UserViewSingleJob = () => {
               padding: 2,
             }}
           >
-            {!jobData ? (
-              <CircularProgress />
+            {jobData.length === 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                  gap: "12px",
+                }}
+              >
+                <CircularProgress size={50} />
+                <Typography variant="h4">Loading...</Typography>
+              </Box>
             ) : (
               <>
                 <Box sx={{ height: "100%" }}>
