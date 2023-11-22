@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { CloseRounded, DoneRounded } from "@mui/icons-material";
 import { useCallback, useEffect, useState } from "react";
-import { apiImage, apiText } from "../../global/API";
+import { apiText } from "../../global/API";
 import Chip from "@mui/material-next/Chip";
 import { toast } from "react-toastify";
 
@@ -51,13 +51,17 @@ const VendorApplications = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await apiImage.get("vendor/applicants");
-      setMyData(response.data.applicants);
+      let res = await apiText.get("vendor/applicants");
+      setMyData(res.data.applicants);
+      console.log(res.data.applicants, "inside ");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
   }, []);
-  console.log(myData, "applicants");
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleAccept = async (applicantId) => {
     console.log(applicantId, "handleAcceptApplication");
@@ -88,10 +92,6 @@ const VendorApplications = () => {
       console.error("API request failed: ", error);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
