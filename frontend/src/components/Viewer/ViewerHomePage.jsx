@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import Image from "./assets/job_banner.jpg";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { apiText } from "../../global/API";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 import {
@@ -45,10 +45,21 @@ const limitLength = (text, maxLength) => {
 
 const ViewerHomePage = () => {
   const [jobData, setJobData] = useState([]);
+  // const [bannerData, setBannerData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const fetchData = async () => {
+  // const fetchBanner = useCallback(async () => {
+  //   try {
+  //     const res = await apiText.get("/admin/banner");
+  //     setBannerData(res.data.banners);
+  //     console.log(res.data.banners);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
+
+  const fetchData = useCallback(async () => {
     try {
       const response = await apiText.get(`/user/jobs`);
       setJobData(response.data.jobs);
@@ -56,11 +67,15 @@ const ViewerHomePage = () => {
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    // fetchBanner();
     fetchData();
-  }, []);
+  }, [
+    // fetchBanner,
+    fetchData,
+  ]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
