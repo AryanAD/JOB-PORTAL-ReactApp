@@ -12,42 +12,42 @@ import {
 } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { AddRounded } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminBannerModal from "./AdminBannerModal";
-import axios from "axios";
 import { toast } from "react-toastify";
+import Pagination from "@mui/material/Pagination";
+import { apiText } from "../../global/API";
+
+const ITEMS_PER_PAGE = 8;
 
 const AdminBanners = () => {
-  const token = localStorage.getItem("token");
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [myData, setMyData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchMyData = async () => {
+  const fetchMyData = useCallback(async () => {
     try {
-      let response = await axios.get(`http://localhost:3000/api/admin/banner`);
-      setMyData(response.data.banners);
-      console.log(myData);
+      let res = await apiText.get("/admin/banner");
+      setMyData(res.data.banners);
+      console.log(res.data.banners, "inside admin category");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
-  };
+  }, []);
+
   useEffect(() => {
     fetchMyData();
-  }, []);
+  }, [fetchMyData]);
 
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:3000/api/admin/banner/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(`Deleted category with ID ${id}.`);
+      await apiText.delete(`/admin/banner/${id}`);
+      console.log(`Deleted banner with ID ${id}.`);
       toast.success("Successfully deleted banner");
       fetchMyData();
-    } catch (error) {
-      console.error(`Error deleting category with ID ${id}.`, error);
+    } catch (err) {
+      console.error(`Error deletung banner with ID ${id}.`, err);
     }
   };
 
@@ -58,6 +58,15 @@ const AdminBanners = () => {
   const closeAddModal = () => {
     setAddModalOpen(false);
   };
+
+  const totalItems = myData.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const visibleBanners = myData.slice(startIndex, endIndex);
+
   return (
     <>
       <Box>
@@ -95,7 +104,7 @@ const AdminBanners = () => {
             container
             spacing={2}
           >
-            {myData.length === 0 ? (
+            {visibleBanners.length === 0 ? (
               <Box
                 sx={{
                   display: "flex",
@@ -108,7 +117,7 @@ const AdminBanners = () => {
                 <CircularProgress size={80} color="info" />
               </Box>
             ) : (
-              myData.map((banner, i) => {
+              visibleBanners.map((banner, i) => {
                 return (
                   <Grid item key={i} xs={3} sm={5} md={3}>
                     <Card
@@ -158,11 +167,27 @@ const AdminBanners = () => {
       </Box>
       <Box
         sx={{
+          mt: 2,
+          display: "flex",
           width: "100%",
-          position: "absolute",
-          left: "45%",
-          right: "50%",
-          bottom: 30,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={(event, page) => setCurrentPage(page)}
+          color="primary"
+        />
+      </Box>
+      <Box
+        sx={{
+          mt: 6,
+          display: "flex",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Button
