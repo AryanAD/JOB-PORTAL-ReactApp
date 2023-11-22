@@ -12,45 +12,39 @@ import {
 } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { AddRounded } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminCategoryModal from "./AdminCategoryModal";
-import axios from "axios";
+import { apiText } from "../../global/API";
 import { toast } from "react-toastify";
 
 const AdminCategories = () => {
-  const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [myData, setMyData] = useState([]);
 
-  const fetchMyData = async () => {
+  const fetchMyData = useCallback(async () => {
     try {
-      let response = await axios.get(
-        `http://localhost:3000/api/admin/category`
-      );
-      setMyData(response.data.categories);
-      console.log(myData);
+      let res = await apiText.get("/admin/category");
+      setMyData(res.data.categories);
+      console.log(res.data.categories, "inside admin category");
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
-  };
+  }, []);
+
   useEffect(() => {
     fetchMyData();
-  }, []);
+  }, [fetchMyData]);
 
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:3000/api/admin/category/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await apiText.delete(`/admin/category/${id}`);
       console.log(`Deleted category with ID ${id}.`);
       toast.success("Successfully deleted category");
       fetchMyData();
-    } catch (error) {
-      console.error(`Error deleting category with ID ${id}.`, error);
+    } catch (err) {
+      console.error(`Error deletung category with ID ${id}.`, err);
     }
   };
 
@@ -98,7 +92,7 @@ const AdminCategories = () => {
           container
           spacing={2}
         >
-          {myData.length === 0 ? (
+          {myData?.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -111,7 +105,7 @@ const AdminCategories = () => {
               <CircularProgress size={80} color="info" />
             </Box>
           ) : (
-            myData.map((category, i) => {
+            myData?.map((category, i) => {
               return (
                 <Grid item key={i} xs={3} sm={5} md={3}>
                   <Card
