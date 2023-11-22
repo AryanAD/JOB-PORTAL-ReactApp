@@ -10,6 +10,7 @@ import {
   tooltipClasses,
   styled,
   Button,
+  Pagination,
 } from "@mui/material";
 import {
   DeleteRounded,
@@ -26,6 +27,8 @@ import Chip from "@mui/material-next/Chip";
 import { apiText } from "../../global/API";
 import { toast } from "react-toastify";
 import VendorSingleJobModal from "./VendorSingleJobModal";
+
+const ITEMS_PER_PAGE = 6;
 
 const limitLength = (text, maxLength) => {
   const words = text.split(" ");
@@ -55,6 +58,7 @@ const VendorJobs = () => {
   const [isSingleModalOpen, setIsSingleModalOpen] = useState(false);
   const [myCategory, setMyCategory] = useState([]);
   const [singleJobId, setSingleJobId] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchData = useCallback(async () => {
     try {
@@ -126,6 +130,14 @@ const VendorJobs = () => {
     }
   };
 
+  const totalItems = filteredJobs.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const visibleJobs = filteredJobs.slice(startIndex, endIndex);
+
   return (
     <>
       <Divider variant="inset" textAlign="left">
@@ -166,7 +178,7 @@ const VendorJobs = () => {
           container
           spacing={4}
         >
-          {filteredJobs?.length === 0 ? (
+          {visibleJobs?.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -178,7 +190,7 @@ const VendorJobs = () => {
             >
               <Typography variant="h4">No Jobs Found</Typography>
             </Box>
-          ) : filteredJobs === null ? (
+          ) : visibleJobs === null ? (
             <Box
               sx={{
                 display: "flex",
@@ -191,7 +203,7 @@ const VendorJobs = () => {
               <Typography variant="h4">No Jobs Found</Typography>
             </Box>
           ) : (
-            filteredJobs?.map((jobs, i) => (
+            visibleJobs?.map((jobs, i) => (
               <Grid item key={i} xs={7} sm={3} md={6}>
                 <Card
                   sx={{
@@ -335,6 +347,14 @@ const VendorJobs = () => {
             ))
           )}
         </Grid>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={(event, page) => setCurrentPage(page)}
+            color="primary"
+          />
+        </Box>
         <Button
           variant="outlined"
           color="success"
