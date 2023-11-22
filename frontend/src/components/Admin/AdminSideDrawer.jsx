@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -253,7 +254,8 @@ const AdminSideDrawer = ({ anotherItem }) => {
             <ListItemButton
               sx={{
                 "&:hover": {
-                  backgroundColor: "rgb(220, 20, 60, 0.6)",
+                  backgroundColor: "#fff",
+                  cursor: "default",
                 },
               }}
               onClick={handleLogout}
@@ -265,7 +267,8 @@ const AdminSideDrawer = ({ anotherItem }) => {
                       fontSize: "30px",
                       color: "red",
                       "&:hover": {
-                        color: "white",
+                        color: "black",
+                        cursor: "pointer",
                       },
                     }}
                   />
