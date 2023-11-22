@@ -321,17 +321,17 @@ const VendorApplications = () => {
                     })
                 )}
               </TableBody>
-              <TablePagination
-                rowsPerPageOptions={[8, 16, 24]} // Customize as needed
-                component="div"
-                count={myData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
             </Table>
           </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={10} // Customize as needed
+            component="div"
+            count={myData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </Box>
       </Box>
     </>
