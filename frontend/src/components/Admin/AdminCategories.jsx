@@ -16,11 +16,14 @@ import { useCallback, useEffect, useState } from "react";
 import AdminCategoryModal from "./AdminCategoryModal";
 import { apiText } from "../../global/API";
 import { toast } from "react-toastify";
+import Pagination from "@mui/material/Pagination";
+
+const ITEMS_PER_PAGE = 8;
 
 const AdminCategories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [myData, setMyData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchMyData = useCallback(async () => {
     try {
@@ -55,6 +58,14 @@ const AdminCategories = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const totalItems = myData.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const visibleCategories = myData.slice(startIndex, endIndex);
 
   return (
     <>
@@ -92,7 +103,7 @@ const AdminCategories = () => {
           container
           spacing={2}
         >
-          {myData?.length === 0 ? (
+          {visibleCategories?.length === 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -105,7 +116,7 @@ const AdminCategories = () => {
               <CircularProgress size={80} color="info" />
             </Box>
           ) : (
-            myData?.map((category, i) => {
+            visibleCategories?.map((category, i) => {
               return (
                 <Grid item key={i} xs={3} sm={5} md={3}>
                   <Card
@@ -161,11 +172,27 @@ const AdminCategories = () => {
         </Grid>
         <Box
           sx={{
+            mt: 2,
+            display: "flex",
             width: "100%",
-            position: "fixed",
-            left: "45%",
-            right: "50%",
-            bottom: 30,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={(event, page) => setCurrentPage(page)}
+            color="primary"
+          />
+        </Box>
+        <Box
+          sx={{
+            mt: 6,
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Button
