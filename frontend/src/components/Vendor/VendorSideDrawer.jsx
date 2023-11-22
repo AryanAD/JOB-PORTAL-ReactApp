@@ -236,6 +236,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
               sx={{
                 "&:hover": {
                   backgroundColor: "#FFFFFF",
+                  cursor: "default",
                 },
               }}
               onClick={handleLogout}
@@ -248,6 +249,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
                       color: "red",
                       "&:hover": {
                         color: "black",
+                        cursor: "pointer",
                       },
                     }}
                   />
