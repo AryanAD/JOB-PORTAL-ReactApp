@@ -45,7 +45,6 @@ const limitLength = (text, maxLength) => {
 
 const ViewerHomePage = () => {
   const [jobData, setJobData] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
