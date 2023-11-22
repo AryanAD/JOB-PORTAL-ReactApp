@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -234,7 +235,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
             <ListItemButton
               sx={{
                 "&:hover": {
-                  backgroundColor: "rgb(220, 20, 60, 0.6)",
+                  backgroundColor: "#FFFFFF",
                 },
               }}
               onClick={handleLogout}
@@ -246,7 +247,7 @@ const VendorSideDrawer = ({ anotherItem }) => {
                       fontSize: "30px",
                       color: "red",
                       "&:hover": {
-                        color: "white",
+                        color: "black",
                       },
                     }}
                   />
