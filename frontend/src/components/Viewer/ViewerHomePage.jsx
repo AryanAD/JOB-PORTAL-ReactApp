@@ -18,7 +18,6 @@ import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import { useEffect, useState } from "react";
 import { apiText } from "../../global/API";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
-import { TbListDetails } from "react-icons/tb";
 import {
   AttachMoneyRounded,
   CalendarMonthRounded,
@@ -377,13 +376,6 @@ const ViewerHomePage = () => {
             <GrFormNextLink />
           </IconButton>
         </Box>
-        <Link to="/signup">
-          <Box sx={{ mt: 3 }}>
-            <Button startIcon={<TbListDetails />} variant="contained">
-              More Details
-            </Button>
-          </Box>
-        </Link>
       </Box>
       <Link to="#" onClick={goToTop}>
         <IconButton
